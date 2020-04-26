@@ -16,8 +16,24 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from .user import InscrireUser
-from .personnes import Personne, Candidat, ResponsableLegal
-from .formation import Etablissement, Formation
-from .parcoursup import ParcoursupUserManager, ParcoursupUser, \
-        ParcoursupMessageRecuLog, ParcoursupMessageEnvoyeLog
+from django.contrib.auth.models import AbstractUser
+
+class InscrireUser(AbstractUser):
+    """
+    Utilisateurs de ScripSup
+
+    Il peut s'agir des personnels du lycée, des candidats qui veulent
+    s'inscrire, ou de Parcoursup via son API.
+
+    Au lieu d'utiliser un nom d'utilisateur, ce que fait Django par
+    défaut, on identifie plutôt les utilisateurs par leur adresse
+    e-mail.
+    """
+    USERNAME_FIELD = 'email'
+
+    email = models.EmailField(
+            verbose_name='adresse e-mail',
+            max_length=255,
+            unique=True,
+    )
+    username = None
