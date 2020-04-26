@@ -16,8 +16,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from .user import InscrireUser
-from .personnes import Personne, Candidat, ResponsableLegal
-from .formation import Etablissement, Formation
-from .parcoursup import ParcoursupUserManager, ParcoursupUser, \
-        ParcoursupMessageRecuLog, ParcoursupMessageEnvoyeLog
+from django.urls import path
+
+from inscrire import views
+
+urlpatterns = [
+    path('', views.home),
+]

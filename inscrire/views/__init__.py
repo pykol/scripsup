@@ -1,7 +1,7 @@
-# -*- coding:utf8 -*-
+# -*- coding: utf8 -*-
 
-# pyKol - Gestion de colles en CPGE
-# Copyright (c) 2018 Florian Hatat
+# scripsup - Inscription en ligne en CPGE
+# Copyright (c) 2020 Florian Hatat
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -15,3 +15,5 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+from .home import home
