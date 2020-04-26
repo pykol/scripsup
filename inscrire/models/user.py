@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class InscrireUser(AbstractUser):
@@ -30,6 +31,7 @@ class InscrireUser(AbstractUser):
     e-mail.
     """
     USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
     email = models.EmailField(
             verbose_name='adresse e-mail',
