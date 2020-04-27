@@ -17,8 +17,13 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from django.db import models
+from django.conf import settings
 
 class Personne(models.Model):
+    """
+    Classe abstraite qui regroupe les champs communs décrivant une
+    personne (candidat ou responsable légal) dans Parcoursup.
+    """
     class Meta:
         abstract = True
 
@@ -29,10 +34,9 @@ class Personne(models.Model):
             (GENRE_FEMME, "femme"),
         )
     genre = models.PositiveSmallIntegerField(choices=GENRE_CHOICES)
-    nom = models.CharField(max_length=100)
-    prenom = models.CharField(verbose_name="prénom", max_length=100)
+    last_name = models.CharField(max_length=100)
+    first_name = models.CharField(verbose_name="prénom", max_length=100)
     adresse = models.TextField()
-    email = models.EmailField(blank=True, null=False)
     telephone = models.CharField(verbose_name="téléphone",
             max_length=20, blank=True, null=False)
     telephone_mobile = models.CharField(verbose_name="téléphone mobile",
@@ -40,14 +44,23 @@ class Personne(models.Model):
     adresse = models.TextField(blank=True, null=False)
 
 class Candidat(Personne):
-    num_psup = models.IntegerField(verbose_name="numéro Parcoursup",
+    """
+    Candidat
+
+    Les données sont normalement obtenues via l'API Parcoursup
+    """
+    dossier_parcoursup = models.IntegerField(verbose_name="numéro Parcoursup",
             primary_key=True)
     date_naissance = models.DateField(verbose_name="date de naissance",
             blank=True, null=True)
     ine = models.CharField(blank=True, null=True,
             max_length=11, verbose_name="INE (numéro d'étudiant)",
             unique=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 class ResponsableLegal(Personne):
+    """
+    Coordonnées du responsable légal d'un candidat
+    """
     candidat = models.ForeignKey(Candidat, related_name='responsables',
             on_delete=models.CASCADE)
