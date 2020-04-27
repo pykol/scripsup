@@ -94,3 +94,38 @@ class ParcoursupMessageEnvoyeLog(models.Model):
     Journal des messages envoyés à Parcoursup
     """
     date = models.DateTimeField()
+
+class EtatVoeu(models.Model):
+    """
+    Base pour un modèle qui stocke l'état (la réponse du candidat) à un
+    vœu.
+    """
+    class Meta:
+        abstract = True
+
+    ETAT_ATTENTE = 0
+    ETAT_ACCEPTE_AUTRES = 1
+    ETAT_ACCEPTE_DEFINITIF = 2
+    ETAT_REFUSE = 3
+    ETAT_CHOICES = (
+        (ETAT_ATTENTE, "en liste d'attente"),
+        (ETAT_ACCEPTE_AUTRES, "accepté avec autres vœux en attente"),
+        (ETAT_ACCEPTE_DEFINITIF, "accepté définitivement"),
+        (ETAT_REFUSE, "refusé par le candidat"),
+    )
+    etat = models.PositiveSmallIntegerField(choices=ETAT_CHOICES)
+
+class Voeu(EtatVoeu):
+    """
+    Vœu d'un candidat dans Parcoursup
+    """
+    candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
+    formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
+    internat = models.BooleanField()
+
+class HistoriqueVoeu(EtatVoeu):
+    """
+    Historique des réponses d'un candidat à un vœu donné
+    """
+    voeu = models.ForeignKey(Voeu, on_delete=models.CASCADE)
+    date = models.DateTimeField()
