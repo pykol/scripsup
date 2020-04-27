@@ -17,7 +17,10 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from django.db import models
-from .formation import Etablissement
+from django.conf import settings
+
+from .personnes import Candidat
+from .formation import Etablissement, Formation
 
 class ParcoursupUserManager(models.Manager):
     def authenticate(self, username, password):
@@ -41,8 +44,17 @@ class ParcoursupUser(models.Model):
     """
     etablissement = models.ForeignKey(Etablissement,
             on_delete=models.CASCADE)
-    username = models.CharField(max_length=50)
-    password = models.CharField(max_length=128)
+
+    # Identifiants qui permettent à Parcoursup de se connecter à notre
+    # servie pour envoyer les admis.
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    # Identifiants que l'on doit utiliser pour envoyer des données à
+    # Parcoursup. Le mot de passe est stocké en clair, c'est ainsi qu'on
+    # doit l'envoyer à Parcoursup dans les requêtes.
+    adresse_api = models.URLField(max_length=300)
+    remontee_username = models.CharField(max_length=50)
+    remontee_password = models.CharField(max_length=128)
 
     objects = ParcoursupUserManager()
 
