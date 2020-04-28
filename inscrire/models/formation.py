@@ -22,7 +22,9 @@ class Etablissement(models.Model):
     """
     Établissement scolaire
     """
-    pass
+    numero_uai = Lettre23Field(length=8, unique=True,
+            verbose_name="UAI", primary_key=True)
+    nom = models.CharField(max_length=200)
 
 class Formation(models.Model):
     """
