@@ -20,6 +20,13 @@ from django.urls import path
 
 from inscrire import views
 
+rest_parcoursup_urlpatterns = [
+	path('admissionCandidat', views.parcoursup.AdmissionView),
+	# Blague de Parcoursup qui ne respectait pas toujours la spec en # 2010
+	path('admissionCandidat/admissionCandidat', views.parcoursup.AdmissionView),
+]
+
 urlpatterns = [
 	path('', views.home),
+	path('/parcoursup', include(rest_parcoursup_urlpatterns)),
 ]
