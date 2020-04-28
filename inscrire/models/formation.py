@@ -18,21 +18,23 @@
 
 from django.db import models
 
+from .fields import Lettre23Field
+
 class Etablissement(models.Model):
-    """
-    Établissement scolaire
-    """
-    numero_uai = Lettre23Field(length=8, unique=True,
-            verbose_name="UAI", primary_key=True)
-    nom = models.CharField(max_length=200)
+	"""
+	Établissement scolaire
+	"""
+	numero_uai = Lettre23Field(length=8, unique=True,
+			verbose_name="UAI", primary_key=True)
+	nom = models.CharField(max_length=200)
 
 class Formation(models.Model):
-    """
-    Description d'une formation dispensée dans l'établissement
-    """
-    nom = models.CharField(max_length=100)
-    code_parcoursup = models.SmallIntegerField(unique=True)
-    groupe_parcoursup = models.SmallIntegerField()
-    etablissement = models.ForeignKey(Etablissement,
-            on_delete=models.CASCADE)
-    slug = models.SlugField(unique=True)
+	"""
+	Description d'une formation dispensée dans l'établissement
+	"""
+	nom = models.CharField(max_length=100)
+	code_parcoursup = models.SmallIntegerField(unique=True)
+	groupe_parcoursup = models.SmallIntegerField()
+	etablissement = models.ForeignKey(Etablissement,
+			on_delete=models.CASCADE)
+	slug = models.SlugField(unique=True)

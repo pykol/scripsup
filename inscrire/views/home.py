@@ -1,2 +1,2 @@
 def home(request):
-    pass
+	pass

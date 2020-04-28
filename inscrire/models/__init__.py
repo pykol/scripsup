@@ -20,4 +20,4 @@ from .user import InscrireUser
 from .personnes import Personne, Candidat, ResponsableLegal
 from .formation import Etablissement, Formation
 from .parcoursup import ParcoursupUserManager, ParcoursupUser, \
-        ParcoursupMessageRecuLog, ParcoursupMessageEnvoyeLog
+		ParcoursupMessageRecuLog, ParcoursupMessageEnvoyeLog
