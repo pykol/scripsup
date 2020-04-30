@@ -43,6 +43,9 @@ class Personne(models.Model):
 			max_length=20, blank=True, null=False)
 	adresse = models.TextField(blank=True, null=False)
 
+	def __str__(self):
+		return "{} {}".format(self.first_name, self.last_name)
+
 class Candidat(Personne):
 	"""
 	Candidat

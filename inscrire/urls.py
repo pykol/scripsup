@@ -21,5 +21,8 @@ from django.urls import path
 from inscrire import views
 
 urlpatterns = [
-	path('', views.home),
+	path('', views.home, name='home'),
+	path('deconnexion', views.deconnexion),
+	path('candidat', views.Candidat.as_view()),
+	path('responsablelegal/<int:pk>', views.ResponsableLegal.as_view()),
 ]
