@@ -7,11 +7,8 @@ from django.shortcuts import redirect
 from inscrire.models import ResponsableLegal
 USER = get_user_model()
 
-@method_decorator(login_required, name='dispatch')
-class Candidat(TemplateView):
-    """Affiche les informations personnelles d'un candidat"""
-
-    template_name = "candidat.html"
+def set_candidat(_dispatch):
+    """décorateur de dispatch; vérifie que l'utilisateur est un candidat et renseigne self.candidat"""
 
     def dispatch(self, request, *args, **kwargs):
         user = request.user
@@ -20,6 +17,18 @@ class Candidat(TemplateView):
             self.candidat = candidat
         except USER.candidat.RelatedObjectDoesNotExist:
             return redirect("/")
+        return _dispatch(self, request,*args, **kwargs)
+    return dispatch
+
+
+@method_decorator(login_required, name='dispatch')
+class CandidatDetail(TemplateView):
+    """Affiche les informations personnelles d'un candidat"""
+
+    template_name = "candidat.html"
+
+    @set_candidat
+    def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
@@ -37,15 +46,10 @@ class ResponsableLegal(DetailView):
     template_name = "responsablelegal.html"
     context_object_name = "responsablelegal"
 
+    @set_candidat
     def dispatch(self, request, *args, **kwargs):
-        """On vérifie que le responsable à afficher est lié au candidat connecté"""
-        user = request.user
-        try:
-            candidat = user.candidat
-            self.candidat = candidat
-        except USER.candidat.RelatedObjectDoesNotExist:
-            return redirect("/")
-        pk_responsables = candidat.responsables.values_list("pk", flat = True)
+        """Vérifie que le responsable à afficher est lié au candidat connecté"""
+        pk_responsables = self.candidat.responsables.values_list("pk", flat = True)
         if not kwargs["pk"] in pk_responsables:
             return redirect("/")
         return super().dispatch(request, *args, **kwargs)
