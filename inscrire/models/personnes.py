@@ -36,7 +36,6 @@ class Personne(models.Model):
 	genre = models.PositiveSmallIntegerField(choices=GENRE_CHOICES)
 	last_name = models.CharField(max_length=100)
 	first_name = models.CharField(verbose_name="prénom", max_length=100)
-	adresse = models.TextField()
 	telephone = models.CharField(verbose_name="téléphone",
 			max_length=20, blank=True, null=False)
 	telephone_mobile = models.CharField(verbose_name="téléphone mobile",
