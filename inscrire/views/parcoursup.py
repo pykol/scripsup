@@ -32,8 +32,8 @@ import requests
 
 from inscrire.models import ParcoursupUser, ParcoursupMessageRecuLog, \
 		Candidat, ResponsableLegal, Formation
-import parcoursup.utils as utils
-from parcoursup.parcoursup_rest import ParcoursupRest
+import inscrire.lib.utils as utils
+from inscrire.lib.parcoursup_rest import ParcoursupRest
 
 class ParcoursupClientView(View):
 	"""
