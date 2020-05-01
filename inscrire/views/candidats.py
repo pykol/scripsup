@@ -1,10 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, UpdateView
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect
 
-from inscrire.models import ResponsableLegal
+from inscrire.models import ResponsableLegal, Candidat
 USER = get_user_model()
 
 def set_candidat(_dispatch):
@@ -51,5 +51,21 @@ class ResponsableLegal(DetailView):
         """Vérifie que le responsable à afficher est lié au candidat connecté"""
         pk_responsables = self.candidat.responsables.values_list("pk", flat = True)
         if not kwargs["pk"] in pk_responsables:
+            return redirect("/")
+        return super().dispatch(request, *args, **kwargs)
+
+
+class CandidatUpdate(UpdateView):
+    """Permet la modification des informations personnelles"""
+
+    model = Candidat
+    fields = ['adresse', 'telephone', 'telephone_mobile', 'date_naissance', 'genre']
+    template_name = "candidat_update.html"
+    success_url = "/candidat"
+
+    @set_candidat
+    def dispatch(self, request, *args, **kwargs):
+        """compare le numero de dossier appelé et celui du candidat connecté"""
+        if kwargs['pk'] != self.candidat.pk:
             return redirect("/")
         return super().dispatch(request, *args, **kwargs)

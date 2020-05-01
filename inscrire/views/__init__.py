@@ -17,4 +17,4 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from .home import home, deconnexion
-from .candidats import Candidat, ResponsableLegal
+from .candidats import CandidatDetail, CandidatUpdate, ResponsableLegal

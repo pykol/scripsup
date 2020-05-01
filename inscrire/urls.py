@@ -23,6 +23,7 @@ from inscrire import views
 urlpatterns = [
 	path('', views.home, name='home'),
 	path('deconnexion', views.deconnexion),
-	path('candidat', views.Candidat.as_view()),
+	path('candidat', views.CandidatDetail.as_view()),
+	path('candidat/miseajour/<int:pk>', views.CandidatUpdate.as_view()),
 	path('responsablelegal/<int:pk>', views.ResponsableLegal.as_view()),
 ]
