@@ -22,14 +22,13 @@ from inscrire import views
 
 rest_parcoursup_urlpatterns = [
 	path('admissionCandidat', views.parcoursup.AdmissionView),
-	# Blague de Parcoursup qui ne respectait pas toujours la spec en # 2010
+	# Blague de Parcoursup qui ne respectait pas toujours la spec en 2019
 	path('admissionCandidat/admissionCandidat', views.parcoursup.AdmissionView),
 ]
 
 urlpatterns = [
 	path('', views.home, name='home'),
 	path('/parcoursup', include(rest_parcoursup_urlpatterns)),
-	path('deconnexion', views.deconnexion),
 	path('candidat', views.CandidatDetail.as_view()),
 	path('candidat/miseajour/<int:pk>', views.CandidatUpdate.as_view()),
 	path('responsablelegal/<int:pk>', views.ResponsableLegal.as_view()),
