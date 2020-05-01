@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block contenu %}
+<h3>Candidat: {{candidat}}</h3>
+<p>Numéro de dossier: {{candidat.dossier_parcoursup}}</p>
+<p>Email: {{user.email}}</p>
+<p>INE: {{candidat.ine|default_if_none:"Non renseigné"}}</p>
+<form method = "post" action = "">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type = "submit" value = "Enregistrer" class="button"/>
+</form>
+{% endblock %}

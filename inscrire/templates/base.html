@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html  lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <title>{% block titre %}Scripsup{% endblock %}</title>
+  {% block head %}
+  {% endblock %}
+</head>
+<body>
+  {% if user.is_authenticated %}
+    <a href = '/deconnexion'>Déconnexion</a>
+  {% endif %}
+
+  {% block contenu %}
+  {% endblock %}
+</body>
+</html>

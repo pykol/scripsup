@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block contenu %}
+<h3>Responsable légal: {{responsablelegal}}</h3>
+<p>Responsable légal du candidat: <a href = "/candidat">{{responsablelegal.candidat}}</p></a>
+
+{% include "personne.html" with personne=responsablelegal %}
+
+{% endblock %}
