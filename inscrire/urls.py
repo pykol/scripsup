@@ -28,7 +28,7 @@ rest_parcoursup_urlpatterns = [
 
 urlpatterns = [
 	path('', views.home, name='home'),
-	path('/parcoursup', include(rest_parcoursup_urlpatterns)),
+	path('parcoursup', include(rest_parcoursup_urlpatterns)),
 	path('candidat', views.CandidatDetail.as_view()),
 	path('candidat/miseajour/<int:pk>', views.CandidatUpdate.as_view()),
 	path('responsablelegal/<int:pk>', views.ResponsableLegal.as_view()),
