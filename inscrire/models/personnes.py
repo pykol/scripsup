@@ -50,6 +50,23 @@ class Personne(models.Model):
 	def __str__(self):
 		return "{} {}".format(self.first_name, self.last_name)
 
+class CandidatManager(models.Manager):
+	def bienvenue(self, first_name, last_name, email,
+			dossier_parcoursup, **kwargs):
+		"""
+		Crée un candidat la première fois que Parcoursup nous signale
+		son admission dans une formation.
+		"""
+		candidat_user = User(first_name=donnees['prenom'], last_name=donnees['nom'],
+				email=donnes.get('mail'), role=User.ROLE_CANDIDAT)
+		candidat_user.save()
+
+		candidat = Candidat(
+				dossier_parcoursup=donnees['codeCandidat'],
+				user=candidat_user, **kwargs)
+
+		return candidat
+
 class Candidat(Personne):
 	"""
 	Candidat
@@ -64,6 +81,8 @@ class Candidat(Personne):
 			max_length=11, verbose_name="INE (numéro d'étudiant)",
 			unique=True)
 	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+	objects = CandidatManager()
 
 	def email_bienvenue(self):
 		"""
