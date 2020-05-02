@@ -138,3 +138,11 @@ class ResponsableLegal(Personne):
 	"""
 	candidat = models.ForeignKey(Candidat, related_name='responsables',
 			on_delete=models.CASCADE)
+
+class CandidatActionLog(models.Model):
+	"""
+	Journal des actions effectuées sur le compte d'un candidat
+	"""
+	candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
+	message = models.TextField(blank=True, null=False, default="")
+	date = models.DateTimeField()
