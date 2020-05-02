@@ -61,8 +61,11 @@ class CandidatManager(models.Manager):
 		Crée un candidat la première fois que Parcoursup nous signale
 		son admission dans une formation.
 		"""
-		candidat_user = User(first_name=donnees['prenom'], last_name=donnees['nom'],
-				email=donnes.get('mail'), role=User.ROLE_CANDIDAT)
+		candidat_user = User.objects.create_user(
+				username=email,
+				first_name=donnees['prenom'],
+				last_name=donnees['nom'],
+				role=User.ROLE_CANDIDAT)
 		candidat_user.save()
 
 		candidat = Candidat(
