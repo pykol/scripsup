@@ -27,6 +27,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
 from django.utils import timezone
+from django.contrib.auth import get_user_model
 
 import requests
 
@@ -34,6 +35,8 @@ from inscrire.models import ParcoursupUser, ParcoursupMessageRecuLog, \
 		Candidat, ResponsableLegal, Formation
 import inscrire.lib.utils as utils
 from inscrire.lib.parcoursup_rest import ParcoursupRest
+
+User = get_user_model()
 
 class ParcoursupClientView(View):
 	"""
@@ -186,19 +189,29 @@ class AdmissionView(ParcoursupClientView):
 		except:
 			adresse = '(Inconnue)'
 
-		etudiant, _ = Candidat.objects.update_or_create(
-			dossier_parcoursup = donnees['codeCandidat'],
-			defaults={
-				'last_name': donnees['nom'],
-				'first_name': donnees['prenom'],
-				'date_naissance': utils.parse_french_date(donnees['dateNaissance']),
-				'email': donnees.get('mail'),
-				'telephone': donnees.get('telfixe', ''),
-				'telephone_mobile': donnees.get('telmobile', ''),
-				'adresse': adresse,
-				'genre': Candidat.GENRE_HOMME if donnees['sexe'] == 'M' \
+		try:
+			candidat = Candidat.objects.get(dossier_parcoursup=donnees['codeCandidat'])
+		except Candidat.DoesNotExist:
+			# Création du candidat
+			candidat_user = User(first_name=donnees['prenom'], last_name=donnees['nom'],
+					email=donnes.get('mail'), role=User.ROLE_CANDIDAT)
+			# TODO définir son rôle
+			candidat_user.save()
+
+			candidat = Candidat(
+					dossier_parcoursup=donnees['codeCandidat'],
+					user=candidat_user)
+
+		candidat.date_naissance = utils.parse_french_date(donnees['dateNaissance'])
+		candidat.ine = donnees['ine']
+		candidat.last_name = donnees['nom']
+		candidat.first_name = donnees['prenom']
+		candidat.telephone = donnees.get('telfixe', '')
+		candidat.telephone_mobile = donnees.get('telmobile', '')
+		candidat.genre = Candidat.GENRE_HOMME if donnees['sexe'] == 'M' \
 						else Candidat.GENRE_FEMME
-			})
+		candidat.adresse = adresse
+		candidat.save()
 
 		# On détermine la proposition à laquelle fait référence le
 		# message actuel.
