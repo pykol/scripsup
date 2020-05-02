@@ -27,6 +27,7 @@ class Etablissement(models.Model):
 	numero_uai = Lettre23Field(length=8, unique=True,
 			verbose_name="UAI", primary_key=True)
 	nom = models.CharField(max_length=200)
+	email = models.EmailField(verbose_name="adresse e-mail")
 
 class Formation(models.Model):
 	"""
