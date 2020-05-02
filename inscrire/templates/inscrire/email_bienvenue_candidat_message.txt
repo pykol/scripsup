@@ -1,0 +1,32 @@
+Bonjour {{ candidat.civilite }} {{ candidat.first_name }} {{ candidat.last_name }}.
+
+Vous venez d'accepter sur le site Parcoursup la proposition d'admission
+en {{ formation }}. Nous tenons avant tout à vous féliciter pour votre
+admission dans notre établissement.
+
+Il vous reste désormais à effectuer les démarches d'inscription
+administrative. Vous devez les réaliser directement en ligne, sur le
+site d'inscription de l'établissement.
+
+Pour votre première connexion, vous devez activer votre compte
+personnel et choisir un mot de passe. Pour cela, cliquez sur le lien
+suivant :
+
+{{ lien_activation }}
+
+Le site d'inscription vous guidera ensuite pour compléter votre dossier
+administratif et pour nous transmettre toutes les pièces justificatives.
+
+Nous attirons votre attention sur le fait que vous devez réaliser au
+plus vite votre inscription administrative. Si vous n'effectuez pas
+votre inscription dans les délais fixés par Parcoursup, nous serons
+obligés de libérer votre place pour la proposer à un autre candidat
+encore sur liste d'attente.
+
+En cas de souci, qu'il soit d'ordre technique ou administratif, vous
+pouvez contacter le service en charge des inscriptions à l'adresse
+{{ email_secretariat }}, ou simplement répondre au message actuel.
+
+Veuillez agréer nos cordiales salutations.
+-- 
+{{ formation.etablissement }}

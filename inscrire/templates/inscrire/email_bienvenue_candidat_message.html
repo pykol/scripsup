@@ -1,0 +1,34 @@
+<p><strong>Bonjour {{ candidat.civilite }} {{ candidat.first_name }} {{
+  candidat.last_name }}.</strong></p>
+
+<p>Vous venez d'accepter sur le site <a
+  href="https://parcoursup.fr/">Parcoursup</a> la proposition
+d'admission en {{ formation }}. Nous tenons avant tout à vous
+féliciter pour votre admission dans notre établissement.</p>
+
+<p>Il vous reste désormais à effectuer les démarches d'inscription
+administrative. Vous devez les réaliser directement en ligne, sur le
+site d'inscription de l'établissement.</p>
+
+<p>Pour votre première connexion, vous devez activer votre compte
+personnel et choisir un mot de passe. Pour cela, cliquez sur le lien
+suivant :</p>
+<p><a href="{{ lien_activation }}">Accéder au dossier d'inscription</a>
+<br><small>{{ lien_activation }}</small></p>
+
+<p>Le site d'inscription vous guidera ensuite pour compléter votre dossier
+administratif et pour nous transmettre toutes les pièces
+justificatives.</p>
+
+<p>Nous attirons votre attention sur le fait que vous devez réaliser au
+plus vite votre inscription administrative. Si vous n'effectuez pas
+votre inscription dans les délais fixés par Parcoursup, nous serons
+obligés de libérer votre place pour la proposer à un autre candidat
+encore sur liste d'attente.</p>
+
+<p>En cas de souci, qu'il soit d'ordre technique ou administratif, vous
+pouvez contacter le service en charge des inscriptions à l'adresse
+{{ email_secretariat }}, ou simplement répondre au message actuel.</p>
+
+<p>Veuillez agréer nos cordiales salutations.</p>
+<p><emph>{{ formation.etablissement }}</emph></p>

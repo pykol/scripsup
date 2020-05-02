@@ -18,6 +18,11 @@
 
 from django.db import models
 from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.core.email import send_mail
+from django.template.loader import render_to_string
+
+User = get_user_model()
 
 class Personne(models.Model):
 	"""
@@ -59,6 +64,23 @@ class Candidat(Personne):
 			max_length=11, verbose_name="INE (numéro d'étudiant)",
 			unique=True)
 	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+	def email_bienvenue(self):
+		"""
+		Envoyer au candidat l'e-mail de bienvenue qui lui permet
+		d'activer son compte.
+		"""
+		send_mail(
+				render_to_string('inscrire/email_bienvenue_candidat_subject.txt').strip(),
+				render_to_string('inscrire/email_bienvenue_candidat_message.txt').strip(),
+				"{etablissement} <{email}>".format(
+					etablissement=...,
+					email=...,),
+				("{candidat} <{email}>".format(
+					candidat=str(self),
+					email=self.user.email),),
+				html_message=render_to_string('inscrire/email_bienvenue_candidat_message.html').strip(),
+			)
 
 class ResponsableLegal(Personne):
 	"""
