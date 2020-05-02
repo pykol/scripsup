@@ -39,3 +39,20 @@ class InscrireUser(AbstractUser):
 			unique=True,
 	)
 	username = None
+
+	ROLE_DIRECTION = 1
+	ROLE_SECRETARIAT = 2
+	ROLE_PROFESSEUR = 3
+	ROLE_VIESCOLAIRE = 4
+	ROLE_INTENDANCE = 5
+	ROLE_ETUDIANT = 6
+	ROLE_CHOICES = (
+			(ROLE_DIRECTION, "direction"),
+			(ROLE_SECRETARIAT, "secrétariat"),
+			(ROLE_PROFESSEUR, "professeur"),
+			(ROLE_VIESCOLAIRE, "vie scolaire"),
+			(ROLE_INTENDANCE, "intendance"),
+			(ROLE_ETUDIANT, "étudiant"),
+		)
+	role = models.PositiveSmallIntegerField(verbose_name="rôle",
+			choices=ROLE_CHOICES)
