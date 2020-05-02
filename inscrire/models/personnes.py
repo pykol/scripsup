@@ -25,6 +25,7 @@ from django.urls import reverse
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
+from django.utils import timezone
 
 User = get_user_model()
 
@@ -131,6 +132,13 @@ class Candidat(Personne):
 				html_message=render_to_string('inscrire/email_bienvenue_candidat_message.html',
 					context=render_context).strip()
 			)
+		self.log("E-mail d'activation du compte envoyé au candidat")
+
+	def log(self, message, date=None):
+		if date is None:
+			date = timezone.now()
+		CandidatActionLog(candidat=self, message=message,
+				date=date).save()
 
 class ResponsableLegal(Personne):
 	"""
