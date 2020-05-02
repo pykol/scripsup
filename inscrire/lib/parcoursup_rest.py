@@ -52,12 +52,13 @@ class ParcoursupRequest:
 	d'identification.
 	"""
 	def __init__(self, login, password, method_name=None,
-			http_method='POST', data={}):
+			http_method='POST', data={}, endpoint=PARCOURSUP_ENDPOINT):
 		self.login = login
 		self.password = password
 		self.response = None
 		self.method_name = method_name
 		self.http_method = http_method
+		self.endpoint = endpoint
 
 		self.data = data
 		self.data.update({
@@ -72,7 +73,7 @@ class ParcoursupRequest:
 		Construction de l'URL à laquelle il faut poster la requête.
 		"""
 		return '{base}{method}'.format(
-			base=PARCOURSUP_ENDPOINT, method=self.method_name)
+			base=self.endpoint, method=self.method_name)
 
 	def send(self):
 		"""
