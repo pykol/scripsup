@@ -195,7 +195,6 @@ class AdmissionView(ParcoursupClientView):
 			# Création du candidat
 			candidat_user = User(first_name=donnees['prenom'], last_name=donnees['nom'],
 					email=donnes.get('mail'), role=User.ROLE_CANDIDAT)
-			# TODO définir son rôle
 			candidat_user.save()
 
 			candidat = Candidat(
