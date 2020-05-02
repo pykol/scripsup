@@ -27,16 +27,14 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
 from django.utils import timezone
-from django.contrib.auth import get_user_model
 
 import requests
 
 from inscrire.models import ParcoursupUser, ParcoursupMessageRecuLog, \
-		Candidat, ResponsableLegal, Formation
+		Candidat, ResponsableLegal, Formation, EtatVoeu, Voeu, \
+		HistoriqueVoeu
 import inscrire.lib.utils as utils
 from inscrire.lib.parcoursup_rest import ParcoursupRest
-
-User = get_user_model()
 
 class ParcoursupClientView(View):
 	"""
@@ -193,13 +191,12 @@ class AdmissionView(ParcoursupClientView):
 			candidat = Candidat.objects.get(dossier_parcoursup=donnees['codeCandidat'])
 		except Candidat.DoesNotExist:
 			# Création du candidat
-			candidat_user = User(first_name=donnees['prenom'], last_name=donnees['nom'],
-					email=donnes.get('mail'), role=User.ROLE_CANDIDAT)
-			candidat_user.save()
-
-			candidat = Candidat(
-					dossier_parcoursup=donnees['codeCandidat'],
-					user=candidat_user)
+			candidat = Candidats.objects.bienvenue(
+					first_name=donnees['prenom'],
+					last_name=donnees['nom'],
+					email=donnees['mail'],
+					dossier_parcoursup=donnees['codeCandidat'])
+			# TODO envoyer l'e-mail de bienvenue au candidat
 
 		candidat.date_naissance = utils.parse_french_date(donnees['dateNaissance'])
 		candidat.ine = donnees['ine']
@@ -214,46 +211,33 @@ class AdmissionView(ParcoursupClientView):
 
 		# On détermine la proposition à laquelle fait référence le
 		# message actuel.
-		classe = Formation.objects.get(code_parcoursup=donnees['codeFormationPsup'])
+		formation = Formation.objects.get(code_parcoursup=donnees['codeFormationPsup'])
 		date_reponse = utils.parse_datetime(donnees['dateReponse'])
-		proposition = Proposition(
-			etudiant=etudiant,
-			classe=classe,
-			date_proposition=date_reponse,
-			cesure=donnees.get('cesure', '0') == '1',
-			internat=donnees.get('internat', '0') == '1',
-			inscription=donnees.get('etatInscription', '0') == '1',
-		)
 
+		# Déterminer l'état du vœu remonté par Parcoursup
+		etat_voeu = EtatVoeu.ETAT_ATTENTE
 		# Le candidat n'a pas encore répondu
 		if donnees['codeSituation'] == '0':
-			# On n'enregistre dans la base de données que les candidats
-			# qui ont accepté la formation. Ce message provenant de
-			# Parcoursup est donc ignoré. La proposition sera
-			# enregistrée lorsque Parcoursup nous enverra la réponse
-			# positive.
 			pass
-
 		# Proposition acceptée définitivement
-		if donnees['codeSituation'] == '1':
-			proposition.etat = Proposition.ETAT_OUI
-			etudiant.nouvelle_proposition(proposition)
-
+		elif donnees['codeSituation'] == '1':
+			etat_voeu = EtatVoeu.ETAT_ACCEPTE_DEFINITIF
 		# Proposition acceptée avec autres vœux en attente
 		if donnees['codeSituation'] == '2':
-			proposition.etat = Proposition.ETAT_OUIMAIS
-			etudiant.nouvelle_proposition(proposition)
-
+			etat_voeu = EtatVoeu.ETAT_ACCEPTE_AUTRES
 		# Proposition refusée
 		if donnees['codeSituation'] == '3':
-			try:
-				proposition = Proposition.objects.get(
-					etudiant=etudiant, classe=classe,
-					cesure=proposition.cesure,
-					internat=proposition.internat,
-					date_demission__isnull=True)
-				proposition.demission(date_reponse)
-			except Proposition.DoesNotExist:
-				pass
+			etat_voeu = EtatVoeu.ETAT_REFUSE
+
+		try:
+			voeu = Voeu.objects.get(candidat=candidat,
+					formation=formation,
+					internat=donnees.get('internat', '0') == '1')
+		except Voeu.DoesNotExist:
+			voeu = Voeu(candidat=candidat,
+					formation=formation,
+					etat=etat_voeu)
+
+		voeu.save()
 
 		return self.json_response(True, msg_log=msg_log)
