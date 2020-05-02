@@ -21,6 +21,10 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.urls import reverse
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from django.contrib.auth.tokens import default_token_generator
 
 User = get_user_model()
 
@@ -103,7 +107,11 @@ class Candidat(Personne):
 				'candidat': self,
 				'formation': voeu_actuel.formation,
 				'voeu': voeu_actuel,
-				'lien_activation': ..., #TODO générer lien
+				'lien_activation': reverse('password_reset_confirm',
+					args=(
+						urlsafe_base64_encode(force_bytes(self.pk)),
+						default_token_generator.make_token(self)
+					))
 				}
 
 		send_mail(
