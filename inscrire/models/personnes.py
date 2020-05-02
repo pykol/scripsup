@@ -84,21 +84,41 @@ class Candidat(Personne):
 
 	objects = CandidatManager()
 
+	@property
+	def voeu_actuel(self):
+		"""
+		Renvoie le vœu actuellement accepté par le candidat
+		"""
+		from .parcoursup import Voeu # Import ici, sinon dépendance circulaire
+		return self.voeu_set.get(etat__in=(Voeu.ETAT_ACCEPTE_AUTRES,
+			Voeu.ETAT_ACCEPTE_DEFINITIF))
+
 	def email_bienvenue(self):
 		"""
 		Envoyer au candidat l'e-mail de bienvenue qui lui permet
 		d'activer son compte.
 		"""
+		voeu_actuel = self.voeu_actuel
+		render_context = {
+				'candidat': self,
+				'formation': voeu_actuel.formation,
+				'voeu': voeu_actuel,
+				'lien_activation': ..., #TODO générer lien
+				}
+
 		send_mail(
-				render_to_string('inscrire/email_bienvenue_candidat_subject.txt').strip(),
-				render_to_string('inscrire/email_bienvenue_candidat_message.txt').strip(),
+				render_to_string('inscrire/email_bienvenue_candidat_subject.txt',
+					context=render_context).strip(),
+				render_to_string('inscrire/email_bienvenue_candidat_message.txt',
+					context=render_context).strip(),
 				"{etablissement} <{email}>".format(
-					etablissement=...,
-					email=...,),
+					etablissement=voeu_actuel.formation.etablissement,
+					email=voeu_actuel.formation.etablissement.email,
 				("{candidat} <{email}>".format(
 					candidat=str(self),
 					email=self.user.email),),
-				html_message=render_to_string('inscrire/email_bienvenue_candidat_message.html').strip(),
+				html_message=render_to_string('inscrire/email_bienvenue_candidat_message.html',
+					context=render_context).strip(),
 			)
 
 class ResponsableLegal(Personne):

@@ -25,7 +25,8 @@ encore sur liste d'attente.
 
 En cas de souci, qu'il soit d'ordre technique ou administratif, vous
 pouvez contacter le service en charge des inscriptions à l'adresse
-{{ email_secretariat }}, ou simplement répondre au message actuel.
+{{ formation.etablissement.email }}, ou simplement en répondant au message
+actuel.
 
 Veuillez agréer nos cordiales salutations.
 -- 

@@ -189,6 +189,7 @@ class AdmissionView(ParcoursupClientView):
 
 		try:
 			candidat = Candidat.objects.get(dossier_parcoursup=donnees['codeCandidat'])
+			envoyer_email_bienvenue = False
 		except Candidat.DoesNotExist:
 			# Création du candidat
 			candidat = Candidats.objects.bienvenue(
@@ -196,7 +197,7 @@ class AdmissionView(ParcoursupClientView):
 					last_name=donnees['nom'],
 					email=donnees['mail'],
 					dossier_parcoursup=donnees['codeCandidat'])
-			# TODO envoyer l'e-mail de bienvenue au candidat
+			envoyer_email_bienvenue = True
 
 		candidat.date_naissance = utils.parse_french_date(donnees['dateNaissance'])
 		candidat.ine = donnees['ine']
@@ -239,5 +240,8 @@ class AdmissionView(ParcoursupClientView):
 					etat=etat_voeu)
 
 		voeu.save()
+
+		# Envoi de l'e-mail de bienvenue
+		candidat.email_bienvenue()
 
 		return self.json_response(True, msg_log=msg_log)
