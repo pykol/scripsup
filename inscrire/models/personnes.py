@@ -19,7 +19,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.core.email import send_mail
+from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
 User = get_user_model()
@@ -113,12 +113,12 @@ class Candidat(Personne):
 					context=render_context).strip(),
 				"{etablissement} <{email}>".format(
 					etablissement=voeu_actuel.formation.etablissement,
-					email=voeu_actuel.formation.etablissement.email,
+					email=voeu_actuel.formation.etablissement.email)
 				("{candidat} <{email}>".format(
 					candidat=str(self),
 					email=self.user.email),),
 				html_message=render_to_string('inscrire/email_bienvenue_candidat_message.html',
-					context=render_context).strip(),
+					context=render_context).strip()
 			)
 
 class ResponsableLegal(Personne):

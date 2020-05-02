@@ -21,4 +21,4 @@ from .personnes import Personne, Candidat, ResponsableLegal
 from .formation import Etablissement, Formation
 from .parcoursup import ParcoursupUserManager, ParcoursupUser, \
 		ParcoursupMessageRecuLog, ParcoursupMessageEnvoyeLog, \
-		Voeu, HistoriqueVoeu
+		Voeu, HistoriqueVoeu, EtatVoeu
