@@ -1,0 +1,330 @@
+[
+    {
+        "model": "inscrire.Profession",
+        "pk": 56,
+        "fields": {
+            "libelle_court": "Services directs aux particuliers",
+            "libelle_long": "Personnels des services directs aux particuliers"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 53,
+        "fields": {
+            "libelle_court": "Policier/Militaire",
+            "libelle_long": "Policiers et militaires"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 48,
+        "fields": {
+            "libelle_court": "Contrema\u00eetre/Agent de ma\u00eetrise",
+            "libelle_long": "Contrema\u00eetres, agents de ma\u00eetrise"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 45,
+        "fields": {
+            "libelle_court": "Interm\u00e9diaire admin. fonction publique",
+            "libelle_long": "Professions interm\u00e9diaires administratives de la fonction publique"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 44,
+        "fields": {
+            "libelle_court": "Clerg\u00e9/Religieux",
+            "libelle_long": "Clerg\u00e9, religieux"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 38,
+        "fields": {
+            "libelle_court": "Ing\u00e9nieur/Cadre technique d'entreprise",
+            "libelle_long": "Ing\u00e9nieurs et cadres techniques d'entreprise"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 35,
+        "fields": {
+            "libelle_court": "Profession information-arts-spectacles",
+            "libelle_long": "Professions de l'information, des arts et des spectacles"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 99,
+        "fields": {
+            "libelle_court": "Non renseign\u00e9e (inconnue ou sans objet)",
+            "libelle_long": "non renseign\u00e9e (inconnue ou sans objet)"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 81,
+        "fields": {
+            "libelle_court": "Ch\u00f4meur n'ayant jamais travaill\u00e9",
+            "libelle_long": "Ch\u00f4meurs n'ayant jamais travaill\u00e9"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 72,
+        "fields": {
+            "libelle_court": "Retrait\u00e9 artisan-commer\u00e7ant-chef entrepr",
+            "libelle_long": "Retrait\u00e9s artisans, commer\u00e7ants, chefs entreprise"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 71,
+        "fields": {
+            "libelle_court": "Retrait\u00e9 agriculteur exploitant",
+            "libelle_long": "Retrait\u00e9s agriculteurs exploitants"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 55,
+        "fields": {
+            "libelle_court": "Employ\u00e9 de commerce",
+            "libelle_long": "Employ\u00e9s de commerce"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 54,
+        "fields": {
+            "libelle_court": "Employ\u00e9 admin. d'entreprise",
+            "libelle_long": "Employ\u00e9s administratifs d'entreprises"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 52,
+        "fields": {
+            "libelle_court": "Employ\u00e9 civil/Agent fonction publique",
+            "libelle_long": "Employ\u00e9s civils et agents de service de la fonction publique"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 47,
+        "fields": {
+            "libelle_court": "Technicien",
+            "libelle_long": "Techniciens"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 46,
+        "fields": {
+            "libelle_court": "Interm\u00e9diaire admin. commerc. entreprise",
+            "libelle_long": "Professions interm\u00e9diaires administratives commerciales en entreprise"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 43,
+        "fields": {
+            "libelle_court": "Interm\u00e9diaire sant\u00e9 et social",
+            "libelle_long": "Professions interm\u00e9diaires de la sant\u00e9 et du travail social"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 42,
+        "fields": {
+            "libelle_court": "Professeur des \u00e9coles/Instituteur",
+            "libelle_long": "Professeurs des \u00e9coles, instituteurs et assimil\u00e9s"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 37,
+        "fields": {
+            "libelle_court": "Cadre admin./Commercial d'entreprise",
+            "libelle_long": "Cadres administratifs et commerciaux d'entreprise"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 34,
+        "fields": {
+            "libelle_court": "Professeur/Profession scientifique",
+            "libelle_long": "Professeurs, professions scientifiques"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 33,
+        "fields": {
+            "libelle_court": "Cadre fonction publique",
+            "libelle_long": "Cadres de la fonction publique"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 31,
+        "fields": {
+            "libelle_court": "Profession lib\u00e9rale",
+            "libelle_long": "Professions lib\u00e9rales"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 23,
+        "fields": {
+            "libelle_court": "Chef d'entreprise 10 salari\u00e9s ou plus",
+            "libelle_long": "Chefs d'entreprise de 10 salari\u00e9s ou plus"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 22,
+        "fields": {
+            "libelle_court": "Commer\u00e7ant",
+            "libelle_long": "Commer\u00e7ants et assimil\u00e9s"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 21,
+        "fields": {
+            "libelle_court": "Artisan",
+            "libelle_long": "Artisans"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 69,
+        "fields": {
+            "libelle_court": "Ouvrier agricole",
+            "libelle_long": "Ouvriers agricoles"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 78,
+        "fields": {
+            "libelle_court": "Retrait\u00e9 ouvrier",
+            "libelle_long": "Anciens ouvriers"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 77,
+        "fields": {
+            "libelle_court": "Retrait\u00e9 employ\u00e9",
+            "libelle_long": "Anciens employ\u00e9s"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 75,
+        "fields": {
+            "libelle_court": "Retrait\u00e9 profession interm\u00e9diaire",
+            "libelle_long": "Anciennes professions interm\u00e9diaires"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 74,
+        "fields": {
+            "libelle_court": "Retrait\u00e9 cadre",
+            "libelle_long": "Anciens cadres"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 62,
+        "fields": {
+            "libelle_court": "Ouvrier qualifi\u00e9 dans l'industrie",
+            "libelle_long": "Ouvriers qualifi\u00e9s de type industriel"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 64,
+        "fields": {
+            "libelle_court": "Chauffeur",
+            "libelle_long": "Chauffeurs"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 63,
+        "fields": {
+            "libelle_court": "Ouvrier qualifi\u00e9 dans l'artisanat",
+            "libelle_long": "Ouvriers qualifi\u00e9s de type artisanal"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 84,
+        "fields": {
+            "libelle_court": "El\u00e8ve/Etudiant",
+            "libelle_long": "El\u00e8ves, \u00e9tudiants"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 65,
+        "fields": {
+            "libelle_court": "Ouvrier qualifi\u00e9 manut. magasin. transp.",
+            "libelle_long": "Ouvriers qualifi\u00e9s de la manutention, du magasinage et du transport"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 83,
+        "fields": {
+            "libelle_court": "Militaire du contingent",
+            "libelle_long": "Militaires du contingent"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 68,
+        "fields": {
+            "libelle_court": "Ouvrier non qualifi\u00e9 dans l'artisanat",
+            "libelle_long": "Ouvriers non qualifi\u00e9s de type artisanal"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 86,
+        "fields": {
+            "libelle_court": "Sans profession +60 ans (hors retrait\u00e9)",
+            "libelle_long": "Personnes sans activit\u00e9 professionnelle >= 60 ans (sauf retrait\u00e9s)"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 85,
+        "fields": {
+            "libelle_court": "Sans profession -60 ans (hors retrait\u00e9)",
+            "libelle_long": "Personnes sans activit\u00e9 professionnelle < 60 ans (sauf retrait\u00e9s)"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 67,
+        "fields": {
+            "libelle_court": "Ouvrier non qualifi\u00e9 dans l'industrie",
+            "libelle_long": "Ouvriers non qualifi\u00e9s de type industriel"
+        }
+    },
+    {
+        "model": "inscrire.Profession",
+        "pk": 10,
+        "fields": {
+            "libelle_court": "Agriculteur exploitant",
+            "libelle_long": "Agriculteurs exploitants"
+        }
+    }
+]
