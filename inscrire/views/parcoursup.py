@@ -32,7 +32,7 @@ import requests
 
 from inscrire.models import ParcoursupUser, ParcoursupMessageRecuLog, \
 		Candidat, ResponsableLegal, Formation, EtatVoeu, Voeu, \
-		HistoriqueVoeu
+		HistoriqueVoeu, Commune, Pays
 import inscrire.lib.utils as utils
 from inscrire.lib.parcoursup_rest import ParcoursupRest
 
@@ -182,6 +182,7 @@ class AdmissionView(ParcoursupClientView):
 	def parcoursup(self, msg_log=None):
 		donnees = self.json.get('donneesCandidat', self.json) # Bug 2019 Parcoursup
 
+		# Mise à jour ou création des coordonnées du candidat
 		try:
 			adresse = ParcoursupRest.formate_adresse(donnees)
 		except:
@@ -208,7 +209,31 @@ class AdmissionView(ParcoursupClientView):
 		candidat.genre = Candidat.GENRE_HOMME if donnees['sexe'] == 'M' \
 						else Candidat.GENRE_FEMME
 		candidat.adresse = adresse
+		candidat.commune_naissance = Commune.objects.filter(code_insee=donnees.get('codeCommuneNaissance')).first()
+		candidat.pays_naissance = Pays.objects.filter(code_iso2=donnees.get('codePaysNaissance')).first()
+		candidat.nationalite = Pays.objects.filter(code_iso2=donnees.get('codePaysNationalite')).first()
+
+		# Données concernant le bac
+		try:
+			candidat.bac_date = datetime.date(
+					int(donnees.get('anneeBac')),
+					int(donnees.get('moisBac')),
+					1)
+		except:
+			pass
+		candidat.bac_serie = donnees.get('serieBac')
+		if donnees.get('mentionBac') == 'P':
+			candidat.bac_mention = Candidat.BAC_MENTION_PASSABLE
+		elif donnees.get('mentionBac') == 'AB':
+			candidat.bac_mention = Candidat.BAC_MENTION_ASSEZBIEN
+		elif donnees.get('mentionBac') == 'B':
+			candidat.bac_mention = Candidat.BAC_MENTION_BIEN
+		elif donnees.get('mentionBac') == 'TB':
+			candidat.bac_mention = Candidat.BAC_MENTION_TRESBIEN
+
 		candidat.save()
+
+		# TODO sauvegarde des responsables légaux
 
 		# On détermine la proposition à laquelle fait référence le
 		# message actuel.
@@ -233,15 +258,21 @@ class AdmissionView(ParcoursupClientView):
 		try:
 			voeu = Voeu.objects.get(candidat=candidat,
 					formation=formation,
-					internat=donnees.get('internat', '0') == '1')
+					internat=donnees.get('internat', '0') == '1',
+					cesure=donnees.get('cesure', '0') == '1',
+					)
 		except Voeu.DoesNotExist:
 			voeu = Voeu(candidat=candidat,
 					formation=formation,
-					etat=etat_voeu)
+					etat=etat_voeu
+					internat=donnees.get('internat', '0') == '1',
+					cesure=donnees.get('cesure', '0') == '1',
+					)
 
 		voeu.save()
 
 		# Envoi de l'e-mail de bienvenue
+		# TODO si cela n'a pas déjà été fait
 		candidat.email_bienvenue()
 
 		return self.json_response(True, msg_log=msg_log)
