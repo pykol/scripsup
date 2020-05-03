@@ -33,7 +33,7 @@ class Commune(models.Model):
 	"""
 	Commune française
 	"""
-	code_insee = models.CharField(max_length=5)
+	code_insee = models.CharField(max_length=5, primary_key=True)
 	nom_clair = models.CharField(max_length=200)
 	nom_riche = models.CharField(max_length=200)
 	libelle = models.CharField(max_length=200)
