@@ -122,6 +122,7 @@ class Voeu(EtatVoeu):
 	candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
 	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
 	internat = models.BooleanField()
+	cesure = models.BooleanField()
 
 class HistoriqueVoeu(EtatVoeu):
 	"""
