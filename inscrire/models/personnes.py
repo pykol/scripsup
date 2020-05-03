@@ -115,6 +115,23 @@ class Candidat(Personne):
 			unique=True)
 	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
+	# Informations concernant le baccalauréat
+	bac_date = models.DateField(blank=True,
+			null=True) # Le jour n'est pas significatif, on ne regarde que le mois et l'année
+	bac_serie = models.CharField(max_length=8, blank=True, null=True)
+	BAC_MENTION_PASSABLE = 0
+	BAC_MENTION_ASSEZBIEN = 1
+	BAC_MENTION_BIEN = 2
+	BAC_MENTION_TRESBIEN = 3
+	BAC_MENTION_CHOICES = (
+			(BAC_MENTION_PASSABLE, "passable"),
+			(BAC_MENTION_ASSEZBIEN, "assez bien"),
+			(BAC_MENTION_BIEN, "bien"),
+			(BAC_MENTION_TRESBIEN, "très bien"),
+		)
+	bac_mention = models.PositiveSmallIntegerField(choices=BAC_MENTION_CHOICES,
+			blank=True, null=True)
+
 	objects = CandidatManager()
 
 	@property
