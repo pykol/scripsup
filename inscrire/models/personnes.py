@@ -38,6 +38,9 @@ class Commune(models.Model):
 	nom_riche = models.CharField(max_length=200)
 	libelle = models.CharField(max_length=200)
 
+	def __str__(self):
+		return self.libelle
+
 class Pays(models.Model):
 	"""
 	Pays
@@ -47,6 +50,9 @@ class Pays(models.Model):
 	num_iso = models.PositiveSmallIntegerField(unique=True)
 	libelle = models.CharField(max_length=200)
 
+	def __str__(self):
+		return self.libelle
+
 class Profession(models.Model):
 	"""
 	Catégorie socio-professionnelle
@@ -54,6 +60,9 @@ class Profession(models.Model):
 	code = models.PositiveSmallIntegerField(primary_key=True)
 	libelle_court = models.CharField(max_length=200)
 	libelle_long = models.CharField(max_length=200)
+
+	def __str__(self):
+		return self.libelle_court
 
 class Personne(models.Model):
 	"""
