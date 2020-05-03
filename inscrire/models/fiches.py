@@ -27,6 +27,7 @@ from django.db import models
 from polymorphic.models import PolymorphicModel
 
 from .personnes import Candidat
+from .formation import MefOption, Formation
 
 class Fiche(PolymorphicModel):
 	"""
@@ -59,6 +60,7 @@ class FicheScolarite(Fiche):
 	"""
 	FICHE_LABEL = "Choix des options"
 	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
+	options = models.ManyToManyField(MefOption)
 
 class FicheHebergement(Fiche):
 	"""
