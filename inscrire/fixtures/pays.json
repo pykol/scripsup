@@ -1,0 +1,2540 @@
+[
+    {
+        "model": "inscrire.Pays",
+        "pk": "DK",
+        "fields": {
+            "code_iso3": "DNK",
+            "num_iso": "208",
+            "libelle": "DANEMARK"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "FO",
+        "fields": {
+            "code_iso3": "FRO",
+            "num_iso": "234",
+            "libelle": "FEROE (ILES)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "IS",
+        "fields": {
+            "code_iso3": "ISL",
+            "num_iso": "352",
+            "libelle": "ISLANDE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "NO",
+        "fields": {
+            "code_iso3": "NOR",
+            "num_iso": "578",
+            "libelle": "NORVEGE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BV",
+        "fields": {
+            "code_iso3": "BVT",
+            "num_iso": "074",
+            "libelle": "BOUVET (ILE)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SJ",
+        "fields": {
+            "code_iso3": "SJM",
+            "num_iso": "744",
+            "libelle": "SVALBARD et ILE JAN MAYEN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SE",
+        "fields": {
+            "code_iso3": "SWE",
+            "num_iso": "752",
+            "libelle": "SUEDE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "FI",
+        "fields": {
+            "code_iso3": "FIN",
+            "num_iso": "246",
+            "libelle": "FINLANDE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "EE",
+        "fields": {
+            "code_iso3": "EST",
+            "num_iso": "233",
+            "libelle": "ESTONIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "LV",
+        "fields": {
+            "code_iso3": "LVA",
+            "num_iso": "428",
+            "libelle": "LETTONIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "LT",
+        "fields": {
+            "code_iso3": "LTU",
+            "num_iso": "440",
+            "libelle": "LITUANIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "DE",
+        "fields": {
+            "code_iso3": "DEU",
+            "num_iso": "276",
+            "libelle": "ALLEMAGNE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "AT",
+        "fields": {
+            "code_iso3": "AUT",
+            "num_iso": "040",
+            "libelle": "AUTRICHE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BG",
+        "fields": {
+            "code_iso3": "BGR",
+            "num_iso": "100",
+            "libelle": "BULGARIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "HU",
+        "fields": {
+            "code_iso3": "HUN",
+            "num_iso": "348",
+            "libelle": "HONGRIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "LI",
+        "fields": {
+            "code_iso3": "LIE",
+            "num_iso": "438",
+            "libelle": "LIECHTENSTEIN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "RO",
+        "fields": {
+            "code_iso3": "ROU",
+            "num_iso": "642",
+            "libelle": "ROUMANIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "TCHECOSLOVAQUIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CZ",
+        "fields": {
+            "code_iso3": "CZE",
+            "num_iso": "203",
+            "libelle": "TCHEQUE (REPUBLIQUE)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SK",
+        "fields": {
+            "code_iso3": "SVK",
+            "num_iso": "703",
+            "libelle": "SLOVAQUIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BA",
+        "fields": {
+            "code_iso3": "BIH",
+            "num_iso": "070",
+            "libelle": "BOSNIE-HERZEGOVINE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "HR",
+        "fields": {
+            "code_iso3": "HRV",
+            "num_iso": "191",
+            "libelle": "CROATIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "ME",
+        "fields": {
+            "code_iso3": "MNE",
+            "num_iso": "499",
+            "libelle": "MONTENEGRO"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "RS",
+        "fields": {
+            "code_iso3": "SRB",
+            "num_iso": "688",
+            "libelle": "SERBIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "PL",
+        "fields": {
+            "code_iso3": "POL",
+            "num_iso": "616",
+            "libelle": "POLOGNE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "RU",
+        "fields": {
+            "code_iso3": "RUS",
+            "num_iso": "643",
+            "libelle": "RUSSIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "TURQUIE D'EUROPE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "AL",
+        "fields": {
+            "code_iso3": "ALB",
+            "num_iso": "008",
+            "libelle": "ALBANIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GR",
+        "fields": {
+            "code_iso3": "GRC",
+            "num_iso": "300",
+            "libelle": "GRECE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "IT",
+        "fields": {
+            "code_iso3": "ITA",
+            "num_iso": "380",
+            "libelle": "ITALIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SM",
+        "fields": {
+            "code_iso3": "SMR",
+            "num_iso": "674",
+            "libelle": "SAINT-MARIN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "VA",
+        "fields": {
+            "code_iso3": "VAT",
+            "num_iso": "336",
+            "libelle": "VATICAN, ou SAINT-SIEGE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "AD",
+        "fields": {
+            "code_iso3": "AND",
+            "num_iso": "020",
+            "libelle": "ANDORRE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BE",
+        "fields": {
+            "code_iso3": "BEL",
+            "num_iso": "056",
+            "libelle": "BELGIQUE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GB",
+        "fields": {
+            "code_iso3": "GBR",
+            "num_iso": "826",
+            "libelle": "ROYAUME-UNI"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GG",
+        "fields": {
+            "code_iso3": "GGY",
+            "num_iso": "831",
+            "libelle": "GUERNESEY"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "IM",
+        "fields": {
+            "code_iso3": "IMN",
+            "num_iso": "833",
+            "libelle": "MAN (ILE)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "JE",
+        "fields": {
+            "code_iso3": "JEY",
+            "num_iso": "832",
+            "libelle": "JERSEY"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GI",
+        "fields": {
+            "code_iso3": "GIB",
+            "num_iso": "292",
+            "libelle": "GIBRALTAR"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "ES",
+        "fields": {
+            "code_iso3": "ESP",
+            "num_iso": "724",
+            "libelle": "ESPAGNE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "NL",
+        "fields": {
+            "code_iso3": "NLD",
+            "num_iso": "528",
+            "libelle": "PAYS-BAS"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "AW",
+        "fields": {
+            "code_iso3": "ABW",
+            "num_iso": "533",
+            "libelle": "ARUBA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "IE",
+        "fields": {
+            "code_iso3": "IRL",
+            "num_iso": "372",
+            "libelle": "IRLANDE, ou EIRE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "LU",
+        "fields": {
+            "code_iso3": "LUX",
+            "num_iso": "442",
+            "libelle": "LUXEMBOURG"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MC",
+        "fields": {
+            "code_iso3": "MCO",
+            "num_iso": "492",
+            "libelle": "MONACO"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "PT",
+        "fields": {
+            "code_iso3": "PRT",
+            "num_iso": "620",
+            "libelle": "PORTUGAL"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CH",
+        "fields": {
+            "code_iso3": "CHE",
+            "num_iso": "756",
+            "libelle": "SUISSE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "REPUBLIQUE DEMOCRATIQUE ALLEMANDE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "REPUBLIQUE FEDERALE D'ALLEMAGNE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MT",
+        "fields": {
+            "code_iso3": "MLT",
+            "num_iso": "470",
+            "libelle": "MALTE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SI",
+        "fields": {
+            "code_iso3": "SVN",
+            "num_iso": "705",
+            "libelle": "SLOVENIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BY",
+        "fields": {
+            "code_iso3": "BLR",
+            "num_iso": "112",
+            "libelle": "BIELORUSSIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MD",
+        "fields": {
+            "code_iso3": "MDA",
+            "num_iso": "498",
+            "libelle": "MOLDAVIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "UA",
+        "fields": {
+            "code_iso3": "UKR",
+            "num_iso": "804",
+            "libelle": "UKRAINE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MK",
+        "fields": {
+            "code_iso3": "MKD",
+            "num_iso": "807",
+            "libelle": "MACEDOINE DU NORD"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "XK",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "KOSOVO"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SA",
+        "fields": {
+            "code_iso3": "SAU",
+            "num_iso": "682",
+            "libelle": "ARABIE SAOUDITE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "YEMEN (REPUBLIQUE ARABE DU)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "IQ",
+        "fields": {
+            "code_iso3": "IRQ",
+            "num_iso": "368",
+            "libelle": "IRAQ"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "IR",
+        "fields": {
+            "code_iso3": "IRN",
+            "num_iso": "364",
+            "libelle": "IRAN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "LB",
+        "fields": {
+            "code_iso3": "LBN",
+            "num_iso": "422",
+            "libelle": "LIBAN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SY",
+        "fields": {
+            "code_iso3": "SYR",
+            "num_iso": "760",
+            "libelle": "SYRIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "IL",
+        "fields": {
+            "code_iso3": "ISR",
+            "num_iso": "376",
+            "libelle": "ISRAEL"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TR",
+        "fields": {
+            "code_iso3": "TUR",
+            "num_iso": "792",
+            "libelle": "TURQUIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "SIBERIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "TURKESTAN RUSSE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "KAMTCHATKA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "AF",
+        "fields": {
+            "code_iso3": "AFG",
+            "num_iso": "004",
+            "libelle": "AFGHANISTAN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "PK",
+        "fields": {
+            "code_iso3": "PAK",
+            "num_iso": "586",
+            "libelle": "PAKISTAN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BT",
+        "fields": {
+            "code_iso3": "BTN",
+            "num_iso": "064",
+            "libelle": "BHOUTAN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "NP",
+        "fields": {
+            "code_iso3": "NPL",
+            "num_iso": "524",
+            "libelle": "NEPAL"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CN",
+        "fields": {
+            "code_iso3": "CHN",
+            "num_iso": "156",
+            "libelle": "CHINE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "JP",
+        "fields": {
+            "code_iso3": "JPN",
+            "num_iso": "392",
+            "libelle": "JAPON"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "MANDCHOURIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TH",
+        "fields": {
+            "code_iso3": "THA",
+            "num_iso": "764",
+            "libelle": "THAILANDE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "PH",
+        "fields": {
+            "code_iso3": "PHL",
+            "num_iso": "608",
+            "libelle": "PHILIPPINES"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "POSSESSIONS BRITANNIQUES AU PROCHE-ORIENT"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "JO",
+        "fields": {
+            "code_iso3": "JOR",
+            "num_iso": "400",
+            "libelle": "JORDANIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "IN",
+        "fields": {
+            "code_iso3": "IND",
+            "num_iso": "356",
+            "libelle": "INDE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "GOA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MM",
+        "fields": {
+            "code_iso3": "MMR",
+            "num_iso": "104",
+            "libelle": "BIRMANIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BN",
+        "fields": {
+            "code_iso3": "BRN",
+            "num_iso": "096",
+            "libelle": "BRUNEI"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SG",
+        "fields": {
+            "code_iso3": "SGP",
+            "num_iso": "702",
+            "libelle": "SINGAPOUR"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MY",
+        "fields": {
+            "code_iso3": "MYS",
+            "num_iso": "458",
+            "libelle": "MALAISIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "ETATS MALAIS NON FEDERES"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MV",
+        "fields": {
+            "code_iso3": "MDV",
+            "num_iso": "462",
+            "libelle": "MALDIVES"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "HK",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "HONG-KONG"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "ID",
+        "fields": {
+            "code_iso3": "IDN",
+            "num_iso": "360",
+            "libelle": "INDONESIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MO",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "MACAO"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "YEMEN DEMOCRATIQUE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "KH",
+        "fields": {
+            "code_iso3": "KHM",
+            "num_iso": "116",
+            "libelle": "CAMBODGE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "LK",
+        "fields": {
+            "code_iso3": "LKA",
+            "num_iso": "144",
+            "libelle": "SRI LANKA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TW",
+        "fields": {
+            "code_iso3": "TWN",
+            "num_iso": "158",
+            "libelle": "TAIWAN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "COREE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "KP",
+        "fields": {
+            "code_iso3": "PRK",
+            "num_iso": "408",
+            "libelle": "COREE (REPUBLIQUE POPULAIRE DEMOCRATIQUE DE)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "KR",
+        "fields": {
+            "code_iso3": "KOR",
+            "num_iso": "410",
+            "libelle": "COREE (REPUBLIQUE DE)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "KW",
+        "fields": {
+            "code_iso3": "KWT",
+            "num_iso": "414",
+            "libelle": "KOWEIT"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "LA",
+        "fields": {
+            "code_iso3": "LAO",
+            "num_iso": "418",
+            "libelle": "LAOS"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MN",
+        "fields": {
+            "code_iso3": "MNG",
+            "num_iso": "496",
+            "libelle": "MONGOLIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "VN",
+        "fields": {
+            "code_iso3": "VNM",
+            "num_iso": "704",
+            "libelle": "VIET NAM"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "VIET NAM DU NORD"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "VIET NAM DU SUD"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BD",
+        "fields": {
+            "code_iso3": "BGD",
+            "num_iso": "050",
+            "libelle": "BANGLADESH"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "AE",
+        "fields": {
+            "code_iso3": "ARE",
+            "num_iso": "784",
+            "libelle": "EMIRATS ARABES UNIS"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "QA",
+        "fields": {
+            "code_iso3": "QAT",
+            "num_iso": "634",
+            "libelle": "QATAR"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BH",
+        "fields": {
+            "code_iso3": "BHR",
+            "num_iso": "048",
+            "libelle": "BAHREIN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "OM",
+        "fields": {
+            "code_iso3": "OMN",
+            "num_iso": "512",
+            "libelle": "OMAN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "YE",
+        "fields": {
+            "code_iso3": "YEM",
+            "num_iso": "887",
+            "libelle": "YEMEN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "AM",
+        "fields": {
+            "code_iso3": "ARM",
+            "num_iso": "051",
+            "libelle": "ARMENIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "AZ",
+        "fields": {
+            "code_iso3": "AZE",
+            "num_iso": "031",
+            "libelle": "AZERBAIDJAN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CY",
+        "fields": {
+            "code_iso3": "CYP",
+            "num_iso": "196",
+            "libelle": "CHYPRE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GE",
+        "fields": {
+            "code_iso3": "GEO",
+            "num_iso": "268",
+            "libelle": "GEORGIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "KZ",
+        "fields": {
+            "code_iso3": "KAZ",
+            "num_iso": "398",
+            "libelle": "KAZAKHSTAN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "KG",
+        "fields": {
+            "code_iso3": "KGZ",
+            "num_iso": "417",
+            "libelle": "KIRGHIZISTAN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "UZ",
+        "fields": {
+            "code_iso3": "UZB",
+            "num_iso": "860",
+            "libelle": "OUZBEKISTAN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TJ",
+        "fields": {
+            "code_iso3": "TJK",
+            "num_iso": "762",
+            "libelle": "TADJIKISTAN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TM",
+        "fields": {
+            "code_iso3": "TKM",
+            "num_iso": "795",
+            "libelle": "TURKMENISTAN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "PS",
+        "fields": {
+            "code_iso3": "PSE",
+            "num_iso": "275",
+            "libelle": "PALESTINE (Etat de)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TL",
+        "fields": {
+            "code_iso3": "TLS",
+            "num_iso": "626",
+            "libelle": "TIMOR ORIENTAL"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "EG",
+        "fields": {
+            "code_iso3": "EGY",
+            "num_iso": "818",
+            "libelle": "EGYPTE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "LR",
+        "fields": {
+            "code_iso3": "LBR",
+            "num_iso": "430",
+            "libelle": "LIBERIA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "ZA",
+        "fields": {
+            "code_iso3": "ZAF",
+            "num_iso": "710",
+            "libelle": "AFRIQUE DU SUD"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GM",
+        "fields": {
+            "code_iso3": "GMB",
+            "num_iso": "270",
+            "libelle": "GAMBIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "CAMEROUN ET TOGO"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SH",
+        "fields": {
+            "code_iso3": "SHN",
+            "num_iso": "654",
+            "libelle": "SAINTE HELENE, ASCENSION ET TRISTAN DA CUNHA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "SOUDAN ANGLO-EGYPTIEN, KENYA, OUGANDA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "ZANZIBAR"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "IO",
+        "fields": {
+            "code_iso3": "IOT",
+            "num_iso": "086",
+            "libelle": "OCEAN INDIEN (TERRITOIRE BRITANNIQUE DE L')"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TZ",
+        "fields": {
+            "code_iso3": "TZA",
+            "num_iso": "834",
+            "libelle": "TANZANIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "ZW",
+        "fields": {
+            "code_iso3": "ZWE",
+            "num_iso": "716",
+            "libelle": "ZIMBABWE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "NA",
+        "fields": {
+            "code_iso3": "NAM",
+            "num_iso": "516",
+            "libelle": "NAMIBIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CD",
+        "fields": {
+            "code_iso3": "COD",
+            "num_iso": "180",
+            "libelle": "CONGO (REPUBLIQUE DEMOCRATIQUE)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "CANARIES (ILES)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "PROVINCES ESPAGNOLES D'AFRIQUE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "PRESIDES"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GQ",
+        "fields": {
+            "code_iso3": "GNQ",
+            "num_iso": "226",
+            "libelle": "GUINEE EQUATORIALE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "ET",
+        "fields": {
+            "code_iso3": "ETH",
+            "num_iso": "231",
+            "libelle": "ETHIOPIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "LY",
+        "fields": {
+            "code_iso3": "LBY",
+            "num_iso": "434",
+            "libelle": "LIBYE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "ER",
+        "fields": {
+            "code_iso3": "ERI",
+            "num_iso": "232",
+            "libelle": "ERYTHREE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SO",
+        "fields": {
+            "code_iso3": "SOM",
+            "num_iso": "706",
+            "libelle": "SOMALIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "ACORES, MADERE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "ILES PORTUGAISES DE L'OCEAN INDIEN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BI",
+        "fields": {
+            "code_iso3": "BDI",
+            "num_iso": "108",
+            "libelle": "BURUNDI"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CM",
+        "fields": {
+            "code_iso3": "CMR",
+            "num_iso": "120",
+            "libelle": "CAMEROUN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CF",
+        "fields": {
+            "code_iso3": "CAF",
+            "num_iso": "140",
+            "libelle": "CENTRAFRICAINE (REPUBLIQUE)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CG",
+        "fields": {
+            "code_iso3": "COG",
+            "num_iso": "178",
+            "libelle": "CONGO"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "TANGER"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CI",
+        "fields": {
+            "code_iso3": "CIV",
+            "num_iso": "384",
+            "libelle": "COTE D'IVOIRE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BJ",
+        "fields": {
+            "code_iso3": "BEN",
+            "num_iso": "204",
+            "libelle": "BENIN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GA",
+        "fields": {
+            "code_iso3": "GAB",
+            "num_iso": "266",
+            "libelle": "GABON"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GH",
+        "fields": {
+            "code_iso3": "GHA",
+            "num_iso": "288",
+            "libelle": "GHANA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GN",
+        "fields": {
+            "code_iso3": "GIN",
+            "num_iso": "324",
+            "libelle": "GUINEE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BF",
+        "fields": {
+            "code_iso3": "BFA",
+            "num_iso": "854",
+            "libelle": "BURKINA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "KE",
+        "fields": {
+            "code_iso3": "KEN",
+            "num_iso": "404",
+            "libelle": "KENYA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MG",
+        "fields": {
+            "code_iso3": "MDG",
+            "num_iso": "450",
+            "libelle": "MADAGASCAR"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MW",
+        "fields": {
+            "code_iso3": "MWI",
+            "num_iso": "454",
+            "libelle": "MALAWI"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "ML",
+        "fields": {
+            "code_iso3": "MLI",
+            "num_iso": "466",
+            "libelle": "MALI"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MR",
+        "fields": {
+            "code_iso3": "MRT",
+            "num_iso": "478",
+            "libelle": "MAURITANIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "NE",
+        "fields": {
+            "code_iso3": "NER",
+            "num_iso": "562",
+            "libelle": "NIGER"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "NG",
+        "fields": {
+            "code_iso3": "NGA",
+            "num_iso": "566",
+            "libelle": "NIGERIA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "UG",
+        "fields": {
+            "code_iso3": "UGA",
+            "num_iso": "800",
+            "libelle": "OUGANDA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "RW",
+        "fields": {
+            "code_iso3": "RWA",
+            "num_iso": "646",
+            "libelle": "RWANDA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SN",
+        "fields": {
+            "code_iso3": "SEN",
+            "num_iso": "686",
+            "libelle": "SENEGAL"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SL",
+        "fields": {
+            "code_iso3": "SLE",
+            "num_iso": "694",
+            "libelle": "SIERRA LEONE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SD",
+        "fields": {
+            "code_iso3": "SDN",
+            "num_iso": "729",
+            "libelle": "SOUDAN"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TD",
+        "fields": {
+            "code_iso3": "TCD",
+            "num_iso": "148",
+            "libelle": "TCHAD"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TG",
+        "fields": {
+            "code_iso3": "TGO",
+            "num_iso": "768",
+            "libelle": "TOGO"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "ZM",
+        "fields": {
+            "code_iso3": "ZMB",
+            "num_iso": "894",
+            "libelle": "ZAMBIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BW",
+        "fields": {
+            "code_iso3": "BWA",
+            "num_iso": "072",
+            "libelle": "BOTSWANA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "LS",
+        "fields": {
+            "code_iso3": "LSO",
+            "num_iso": "426",
+            "libelle": "LESOTHO"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SS",
+        "fields": {
+            "code_iso3": "SSD",
+            "num_iso": "728",
+            "libelle": "SOUDAN DU SUD"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MA",
+        "fields": {
+            "code_iso3": "MAR",
+            "num_iso": "504",
+            "libelle": "MAROC"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TN",
+        "fields": {
+            "code_iso3": "TUN",
+            "num_iso": "788",
+            "libelle": "TUNISIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "DZ",
+        "fields": {
+            "code_iso3": "DZA",
+            "num_iso": "012",
+            "libelle": "ALGERIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "EH",
+        "fields": {
+            "code_iso3": "ESH",
+            "num_iso": "732",
+            "libelle": "SAHARA OCCIDENTAL"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MU",
+        "fields": {
+            "code_iso3": "MUS",
+            "num_iso": "480",
+            "libelle": "MAURICE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SZ",
+        "fields": {
+            "code_iso3": "SWZ",
+            "num_iso": "748",
+            "libelle": "ESWATINI"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GW",
+        "fields": {
+            "code_iso3": "GNB",
+            "num_iso": "624",
+            "libelle": "GUINEE-BISSAU"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MZ",
+        "fields": {
+            "code_iso3": "MOZ",
+            "num_iso": "508",
+            "libelle": "MOZAMBIQUE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "ST",
+        "fields": {
+            "code_iso3": "STP",
+            "num_iso": "678",
+            "libelle": "SAO TOME-ET-PRINCIPE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "AO",
+        "fields": {
+            "code_iso3": "AGO",
+            "num_iso": "024",
+            "libelle": "ANGOLA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CV",
+        "fields": {
+            "code_iso3": "CPV",
+            "num_iso": "132",
+            "libelle": "CAP-VERT"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "KM",
+        "fields": {
+            "code_iso3": "COM",
+            "num_iso": "174",
+            "libelle": "COMORES"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SC",
+        "fields": {
+            "code_iso3": "SYC",
+            "num_iso": "690",
+            "libelle": "SEYCHELLES"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "DJ",
+        "fields": {
+            "code_iso3": "DJI",
+            "num_iso": "262",
+            "libelle": "DJIBOUTI"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CA",
+        "fields": {
+            "code_iso3": "CAN",
+            "num_iso": "124",
+            "libelle": "CANADA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "TERRE-NEUVE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "LABRADOR"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "US",
+        "fields": {
+            "code_iso3": "USA",
+            "num_iso": "840",
+            "libelle": "ETATS-UNIS"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "ALASKA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MX",
+        "fields": {
+            "code_iso3": "MEX",
+            "num_iso": "484",
+            "libelle": "MEXIQUE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CR",
+        "fields": {
+            "code_iso3": "CRI",
+            "num_iso": "188",
+            "libelle": "COSTA RICA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CU",
+        "fields": {
+            "code_iso3": "CUB",
+            "num_iso": "192",
+            "libelle": "CUBA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "DO",
+        "fields": {
+            "code_iso3": "DOM",
+            "num_iso": "214",
+            "libelle": "DOMINICAINE (REPUBLIQUE)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GT",
+        "fields": {
+            "code_iso3": "GTM",
+            "num_iso": "320",
+            "libelle": "GUATEMALA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "HT",
+        "fields": {
+            "code_iso3": "HTI",
+            "num_iso": "332",
+            "libelle": "HAITI"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "HN",
+        "fields": {
+            "code_iso3": "HND",
+            "num_iso": "340",
+            "libelle": "HONDURAS"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "NI",
+        "fields": {
+            "code_iso3": "NIC",
+            "num_iso": "558",
+            "libelle": "NICARAGUA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "PA",
+        "fields": {
+            "code_iso3": "PAN",
+            "num_iso": "591",
+            "libelle": "PANAMA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SV",
+        "fields": {
+            "code_iso3": "SLV",
+            "num_iso": "222",
+            "libelle": "EL SALVADOR"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "AR",
+        "fields": {
+            "code_iso3": "ARG",
+            "num_iso": "032",
+            "libelle": "ARGENTINE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BR",
+        "fields": {
+            "code_iso3": "BRA",
+            "num_iso": "076",
+            "libelle": "BRESIL"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CL",
+        "fields": {
+            "code_iso3": "CHL",
+            "num_iso": "152",
+            "libelle": "CHILI"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BO",
+        "fields": {
+            "code_iso3": "BOL",
+            "num_iso": "068",
+            "libelle": "BOLIVIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CO",
+        "fields": {
+            "code_iso3": "COL",
+            "num_iso": "170",
+            "libelle": "COLOMBIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "EC",
+        "fields": {
+            "code_iso3": "ECU",
+            "num_iso": "218",
+            "libelle": "EQUATEUR"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "PY",
+        "fields": {
+            "code_iso3": "PRY",
+            "num_iso": "600",
+            "libelle": "PARAGUAY"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "PE",
+        "fields": {
+            "code_iso3": "PER",
+            "num_iso": "604",
+            "libelle": "PEROU"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "UY",
+        "fields": {
+            "code_iso3": "URY",
+            "num_iso": "858",
+            "libelle": "URUGUAY"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "VE",
+        "fields": {
+            "code_iso3": "VEN",
+            "num_iso": "862",
+            "libelle": "VENEZUELA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BM",
+        "fields": {
+            "code_iso3": "BMU",
+            "num_iso": "060",
+            "libelle": "BERMUDES"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "KY",
+        "fields": {
+            "code_iso3": "CYM",
+            "num_iso": "136",
+            "libelle": "CAIMANES (ILES)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MS",
+        "fields": {
+            "code_iso3": "MSR",
+            "num_iso": "500",
+            "libelle": "MONTSERRAT"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "TERRITOIRES DU ROYAUME-UNI AUX ANTILLES"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TC",
+        "fields": {
+            "code_iso3": "TCA",
+            "num_iso": "796",
+            "libelle": "TURKS ET CAIQUES (ILES)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "VG",
+        "fields": {
+            "code_iso3": "VGB",
+            "num_iso": "092",
+            "libelle": "VIERGES BRITANNIQUES (ILES)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "AI",
+        "fields": {
+            "code_iso3": "AIA",
+            "num_iso": "660",
+            "libelle": "ANGUILLA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "JM",
+        "fields": {
+            "code_iso3": "JAM",
+            "num_iso": "388",
+            "libelle": "JAMAIQUE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "TERR. DU ROYAUME-UNI DANS L'ATLANTIQUE SUD"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GS",
+        "fields": {
+            "code_iso3": "SGS",
+            "num_iso": "239",
+            "libelle": "GEORGIE DU SUD ET LES ILES SANDWICH DU SUD"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "FK",
+        "fields": {
+            "code_iso3": "FLK",
+            "num_iso": "238",
+            "libelle": "MALOUINES, OU FALKLAND (ILES)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GY",
+        "fields": {
+            "code_iso3": "GUY",
+            "num_iso": "328",
+            "libelle": "GUYANA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BZ",
+        "fields": {
+            "code_iso3": "BLZ",
+            "num_iso": "084",
+            "libelle": "BELIZE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GL",
+        "fields": {
+            "code_iso3": "GRL",
+            "num_iso": "304",
+            "libelle": "GROENLAND"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "AN",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "ANTILLES NEERLANDAISES"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "PR",
+        "fields": {
+            "code_iso3": "PRI",
+            "num_iso": "630",
+            "libelle": "PORTO RICO"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "TERR. DES ETATS-UNIS D'AMERIQUE EN AMERIQUE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "VI",
+        "fields": {
+            "code_iso3": "VIR",
+            "num_iso": "850",
+            "libelle": "VIERGES DES ETATS-UNIS (ILES)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TT",
+        "fields": {
+            "code_iso3": "TTO",
+            "num_iso": "780",
+            "libelle": "TRINITE-ET-TOBAGO"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BB",
+        "fields": {
+            "code_iso3": "BRB",
+            "num_iso": "052",
+            "libelle": "BARBADE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GD",
+        "fields": {
+            "code_iso3": "GRD",
+            "num_iso": "308",
+            "libelle": "GRENADE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BS",
+        "fields": {
+            "code_iso3": "BHS",
+            "num_iso": "044",
+            "libelle": "BAHAMAS"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SR",
+        "fields": {
+            "code_iso3": "SUR",
+            "num_iso": "740",
+            "libelle": "SURINAME"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "DM",
+        "fields": {
+            "code_iso3": "DMA",
+            "num_iso": "212",
+            "libelle": "DOMINIQUE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "LC",
+        "fields": {
+            "code_iso3": "LCA",
+            "num_iso": "662",
+            "libelle": "SAINTE-LUCIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "VC",
+        "fields": {
+            "code_iso3": "VCT",
+            "num_iso": "670",
+            "libelle": "SAINT-VINCENT-ET-LES GRENADINES"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "AG",
+        "fields": {
+            "code_iso3": "ATG",
+            "num_iso": "028",
+            "libelle": "ANTIGUA-ET-BARBUDA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "KN",
+        "fields": {
+            "code_iso3": "KNA",
+            "num_iso": "659",
+            "libelle": "SAINT-CHRISTOPHE-ET-NIEVES"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BQ",
+        "fields": {
+            "code_iso3": "BES",
+            "num_iso": "535",
+            "libelle": "BONAIRE, SAINT EUSTACHE ET SABA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CW",
+        "fields": {
+            "code_iso3": "CUW",
+            "num_iso": "531",
+            "libelle": "CURA\u00c7AO"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SX",
+        "fields": {
+            "code_iso3": "SXM",
+            "num_iso": "534",
+            "libelle": "SAINT-MARTIN (PARTIE NEERLANDAISE)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "AU",
+        "fields": {
+            "code_iso3": "AUS",
+            "num_iso": "036",
+            "libelle": "AUSTRALIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "HM",
+        "fields": {
+            "code_iso3": "HMD",
+            "num_iso": "334",
+            "libelle": "HEARD ET MACDONALD (ILES)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CX",
+        "fields": {
+            "code_iso3": "CXR",
+            "num_iso": "162",
+            "libelle": "CHRISTMAS (ILE)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CC",
+        "fields": {
+            "code_iso3": "CCK",
+            "num_iso": "166",
+            "libelle": "COCOS ou KEELING (ILES)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "NF",
+        "fields": {
+            "code_iso3": "NFK",
+            "num_iso": "574",
+            "libelle": "NORFOLK (ILE)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "NZ",
+        "fields": {
+            "code_iso3": "NZL",
+            "num_iso": "554",
+            "libelle": "NOUVELLE-ZELANDE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "NU",
+        "fields": {
+            "code_iso3": "NIU",
+            "num_iso": "570",
+            "libelle": "NIUE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TK",
+        "fields": {
+            "code_iso3": "TKL",
+            "num_iso": "772",
+            "libelle": "TOKELAU"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "CK",
+        "fields": {
+            "code_iso3": "COK",
+            "num_iso": "184",
+            "libelle": "COOK (ILES)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "PN",
+        "fields": {
+            "code_iso3": "PCN",
+            "num_iso": "612",
+            "libelle": "PITCAIRN (ILE)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "HAWAII (ILES)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "TERR. DES ETATS-UNIS D'AMERIQUE EN OCEANIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MP",
+        "fields": {
+            "code_iso3": "MNP",
+            "num_iso": "580",
+            "libelle": "MARIANNES DU NORD (ILES)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "AS",
+        "fields": {
+            "code_iso3": "ASM",
+            "num_iso": "016",
+            "libelle": "SAMOA AMERICAINES"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GU",
+        "fields": {
+            "code_iso3": "GUM",
+            "num_iso": "316",
+            "libelle": "GUAM"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "WS",
+        "fields": {
+            "code_iso3": "WSM",
+            "num_iso": "882",
+            "libelle": "SAMOA OCCIDENTALES"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "NR",
+        "fields": {
+            "code_iso3": "NRU",
+            "num_iso": "520",
+            "libelle": "NAURU"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "FJ",
+        "fields": {
+            "code_iso3": "FJI",
+            "num_iso": "242",
+            "libelle": "FIDJI"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TO",
+        "fields": {
+            "code_iso3": "TON",
+            "num_iso": "776",
+            "libelle": "TONGA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "PG",
+        "fields": {
+            "code_iso3": "PNG",
+            "num_iso": "598",
+            "libelle": "PAPOUASIE-NOUVELLE-GUINEE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TV",
+        "fields": {
+            "code_iso3": "TUV",
+            "num_iso": "798",
+            "libelle": "TUVALU"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "SB",
+        "fields": {
+            "code_iso3": "SLB",
+            "num_iso": "090",
+            "libelle": "SALOMON (ILES)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "KI",
+        "fields": {
+            "code_iso3": "KIR",
+            "num_iso": "296",
+            "libelle": "KIRIBATI"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "VU",
+        "fields": {
+            "code_iso3": "VUT",
+            "num_iso": "548",
+            "libelle": "VANUATU"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MH",
+        "fields": {
+            "code_iso3": "MHL",
+            "num_iso": "584",
+            "libelle": "MARSHALL (ILES)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "FM",
+        "fields": {
+            "code_iso3": "FSM",
+            "num_iso": "583",
+            "libelle": "MICRONESIE (ETATS FEDERES DE)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "PW",
+        "fields": {
+            "code_iso3": "PLW",
+            "num_iso": "585",
+            "libelle": "PALAOS (ILES)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "FR",
+        "fields": {
+            "code_iso3": "FRA",
+            "num_iso": "250",
+            "libelle": "FRANCE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "RE",
+        "fields": {
+            "code_iso3": "REU",
+            "num_iso": "638",
+            "libelle": "LA REUNION"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "PF",
+        "fields": {
+            "code_iso3": "PYF",
+            "num_iso": "258",
+            "libelle": "POLYNESIE FRANCAISE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GP",
+        "fields": {
+            "code_iso3": "GLP",
+            "num_iso": "312",
+            "libelle": "GUADELOUPE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "PM",
+        "fields": {
+            "code_iso3": "SPM",
+            "num_iso": "666",
+            "libelle": "SAINT-PIERRE-ET-MIQUELON"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "TF",
+        "fields": {
+            "code_iso3": "ATF",
+            "num_iso": "260",
+            "libelle": "TERRES AUSTRALES FRANCAISES"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "WF",
+        "fields": {
+            "code_iso3": "WLF",
+            "num_iso": "876",
+            "libelle": "WALLIS-ET-FUTUNA"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "YT",
+        "fields": {
+            "code_iso3": "MYT",
+            "num_iso": "175",
+            "libelle": "MAYOTTE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "",
+        "fields": {
+            "code_iso3": "",
+            "num_iso": "",
+            "libelle": "CLIPPERTON (ILE)"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "NC",
+        "fields": {
+            "code_iso3": "NCL",
+            "num_iso": "540",
+            "libelle": "NOUVELLE-CALEDONIE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MQ",
+        "fields": {
+            "code_iso3": "MTQ",
+            "num_iso": "474",
+            "libelle": "MARTINIQUE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "GF",
+        "fields": {
+            "code_iso3": "GUF",
+            "num_iso": "254",
+            "libelle": "GUYANE"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "BL",
+        "fields": {
+            "code_iso3": "BLM",
+            "num_iso": "652",
+            "libelle": "SAINT-BARTHELEMY"
+        }
+    },
+    {
+        "model": "inscrire.Pays",
+        "pk": "MF",
+        "fields": {
+            "code_iso3": "MAF",
+            "num_iso": "663",
+            "libelle": "SAINT-MARTIN"
+        }
+    }
+]
