@@ -47,6 +47,14 @@ class Pays(models.Model):
 	num_iso = models.PositiveSmallIntegerField()
 	libelle = models.CharField(max_length=200)
 
+class Profession(models.Model):
+	"""
+	Catégorie socio-professionnelle
+	"""
+	code = models.PositiveSmallIntegerField(primary_key=True)
+	libelle_court = models.CharField(max_length=200)
+	libelle_long = models.CharField(max_length=200)
+
 class Personne(models.Model):
 	"""
 	Classe abstraite qui regroupe les champs communs décrivant une
@@ -188,6 +196,9 @@ class ResponsableLegal(Personne):
 	"""
 	candidat = models.ForeignKey(Candidat, related_name='responsables',
 			on_delete=models.CASCADE)
+	profession = models.ForeignKey(Profession,
+			on_delete=models.SET_DEFAULT,
+			default=99)
 
 class CandidatActionLog(models.Model):
 	"""

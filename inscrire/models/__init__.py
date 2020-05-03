@@ -18,7 +18,7 @@
 
 from .user import InscrireUser
 from .personnes import Personne, Candidat, ResponsableLegal, \
-		CandidatActionLog, Commune, Pays
+		CandidatActionLog, Commune, Pays, Profession
 from .formation import Etablissement, Formation
 from .parcoursup import ParcoursupUserManager, ParcoursupUser, \
 		ParcoursupMessageRecuLog, ParcoursupMessageEnvoyeLog, \
