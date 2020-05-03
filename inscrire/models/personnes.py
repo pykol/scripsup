@@ -29,6 +29,24 @@ from django.utils import timezone
 
 User = get_user_model()
 
+class Commune(models.Model):
+	"""
+	Commune française
+	"""
+	code_insee = models.CharField(max_length=5)
+	nom_clair = models.CharField(max_length=200)
+	nom_riche = models.CharField(max_length=200)
+	libelle = models.CharField(max_length=200)
+
+class Pays(models.Model):
+	"""
+	Pays
+	"""
+	code_iso2 = models.CharField(max_length=2)
+	code_iso3 = models.CharField(max_length=3)
+	num_iso = models.PositiveSmallIntegerField()
+	libelle = models.CharField(max_length=200)
+
 class Personne(models.Model):
 	"""
 	Classe abstraite qui regroupe les champs communs décrivant une
@@ -85,6 +103,13 @@ class Candidat(Personne):
 			primary_key=True)
 	date_naissance = models.DateField(verbose_name="date de naissance",
 			blank=True, null=True)
+	commune_naissance = models.ForeignKey(Commune,
+			on_delete=models.SET_NULL, blank=True, null=True)
+	pays_naissance = models.ForeignKey(Pays, on_delete=models.SET_NULL,
+			blank=True, null=True, related_name='candidats_naissance')
+	nationalite = models.ForeignKey(Pays, on_delete=models.SET_NULL,
+			blank=True, null=True, related_name='candidats_nationalite')
+
 	ine = models.CharField(blank=True, null=True,
 			max_length=11, verbose_name="INE (numéro d'étudiant)",
 			unique=True)
