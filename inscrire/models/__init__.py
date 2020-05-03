@@ -17,8 +17,11 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from .user import InscrireUser
-from .personnes import Personne, Candidat, ResponsableLegal, CandidatActionLog
+from .personnes import Personne, Candidat, ResponsableLegal, \
+		CandidatActionLog
 from .formation import Etablissement, Formation
 from .parcoursup import ParcoursupUserManager, ParcoursupUser, \
 		ParcoursupMessageRecuLog, ParcoursupMessageEnvoyeLog, \
 		Voeu, HistoriqueVoeu, EtatVoeu
+from .fiches import Fiche, FicheIdentite, FicheScolarite, \
+		FicheHebergement
