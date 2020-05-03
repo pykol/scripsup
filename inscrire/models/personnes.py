@@ -42,9 +42,9 @@ class Pays(models.Model):
 	"""
 	Pays
 	"""
-	code_iso2 = models.CharField(max_length=2)
-	code_iso3 = models.CharField(max_length=3)
-	num_iso = models.PositiveSmallIntegerField()
+	code_iso2 = models.CharField(max_length=2, primary_key=True)
+	code_iso3 = models.CharField(max_length=3, unique=True)
+	num_iso = models.PositiveSmallIntegerField(unique=True)
 	libelle = models.CharField(max_length=200)
 
 class Profession(models.Model):
