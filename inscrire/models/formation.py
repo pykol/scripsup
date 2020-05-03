@@ -39,3 +39,33 @@ class Formation(models.Model):
 	etablissement = models.ForeignKey(Etablissement,
 			on_delete=models.CASCADE)
 	slug = models.SlugField(unique=True)
+
+	# Code du module élémentaire de formation correspondant dans la
+	# nomenclature éducation nationale.
+	code_mef = models.CharField(max_length=11)
+
+class MefMatiere(models.Model):
+	"""
+	Matière
+	"""
+	code = models.CharField(max_length=6, primary_key=True)
+	code_gestion = models.CharField(max_length=10)
+	libelle_court = models.CharField(max_length=100)
+	libelle_long = models.CharField(max_length=100)
+	libelle_edition = models.CharField(max_length=100)
+
+class MefOption(models.Model):
+	"""
+	Option ouverte dans un module élémentaire de formation
+	"""
+	MODALITE_OBLIGATOIRE = 1
+	MODALITE_FACULTATIVE = 2
+	MODALITE_CHOICES = (
+			(MODALITE_OBLIGATOIRE, "obligatoire"),
+			(MODALITE_FACULTATIVE, "facultative"),
+		)
+	modalite = models.PositiveSmallIntegerField(verbose_name="modalité",
+			choices=MODALITE_CHOICES)
+	rang = models.PositiveSmallIntegerField()
+	matiere = models.ForeignKey(MefMatiere, on_delete=models.CASCADE)
+	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
