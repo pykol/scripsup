@@ -19,3 +19,4 @@
 from .home import home
 from .candidats import CandidatDetail, CandidatUpdate, ResponsableLegal
 from . import parcoursup
+from . import auth

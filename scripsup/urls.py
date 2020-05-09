@@ -16,8 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+import inscrire.views.auth
+
+auth_urlpatterns = [
+	path('login', inscrire.views.auth.LoginView.as_view, name='login'),
+	path('bienvenue', inscrire.views.auth.envoi_bienvenue, name='envoi_bienvenue'),
+	path('', include('django.contrib.auth.urls')),
+]
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include(auth_urlpatterns)),
     path('', include('inscrire.urls')),
 ]
