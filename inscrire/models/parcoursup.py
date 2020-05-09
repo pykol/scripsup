@@ -42,11 +42,11 @@ class ParcoursupUser(models.Model):
 	Identifiants utilisés pour recevoir et envoyer des messages via
 	l'API Parcoursup
 	"""
-	etablissement = models.ForeignKey(Etablissement,
-			on_delete=models.CASCADE)
+	etablissement = models.OneToOneField(Etablissement,
+			on_delete=models.CASCADE, primary_key=True)
 
 	# Identifiants qui permettent à Parcoursup de se connecter à notre
-	# servie pour envoyer les admis.
+	# service pour envoyer les admis.
 	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 	# Identifiants que l'on doit utiliser pour envoyer des données à
@@ -74,6 +74,31 @@ class ParcoursupUser(models.Model):
 			return False
 
 		return True
+
+	def get_candidats_admis(self):
+		"""
+		Renvoie la liste de tous les candidats admis dans
+		l'établissement.
+		"""
+		pass
+
+	def get_candidat_admis(self, code_candidat):
+		"""
+		Renvoie les informations concernant un candidat admis.
+		"""
+		pass
+
+	def set_inscription(self, candidat):
+		"""
+		Envoie à Parcoursup l'état d'inscription
+		"""
+		pass
+
+	def envoi_candidat_test(self):
+		"""
+		Active les push de Parcoursup en envoyant un candidat de test.
+		"""
+		pass
 
 class ParcoursupMessageRecuLog(models.Model):
 	"""
