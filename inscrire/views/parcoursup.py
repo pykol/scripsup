@@ -264,7 +264,7 @@ class AdmissionView(ParcoursupClientView):
 		except Voeu.DoesNotExist:
 			voeu = Voeu(candidat=candidat,
 					formation=formation,
-					etat=etat_voeu
+					etat=etat_voeu,
 					internat=donnees.get('internat', '0') == '1',
 					cesure=donnees.get('cesure', '0') == '1',
 					)
