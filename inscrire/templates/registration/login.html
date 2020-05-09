@@ -1,10 +1,41 @@
 {% extends 'base.html' %}
 
 {% block contenu %}
+<h2>Inscription en classe préparatoire</h2>
+<p>
+Bienvenue sur le service d'inscription en ligne en classe préparatoire.
+Pour vous connecter, nous vous invitons à entrer vos identifiants
+personnels (adresse électronique et mot de passe), afin d'accéder à
+votre dossier.</p>
 <form method = "post" action = "">
     {% csrf_token %}
     {{form.as_p}}
     <input type = "submit" value = "Connexion" class="button"/>
 </form>
+<p>Vous avez oublié votre mot de passe ? Ce n'est pas grave,
+<a href="{% url 'password_reset' %}">réinitialisez-le en suivant ce
+  lien</a>.</p>
+
+<h3>Première connexion</h3>
+
+<p>Lorsque vous acceptez sur Parcoursup une proposition d'admission dans
+notre établissement, nous vous envoyons automatiquement un courrier
+électronique. Ce courrier est envoyé à votre adresse personnelle,
+indiquée dans votre dossier Parcoursup. Il contient un lien qui vous
+permet de choisir un mot de passe pour vous connecter à ce serveur
+d'inscription.</p>
+
+<p>Si vous n'avez pas reçu ce courrier, nous pouvons vous l'envoyer de
+nouveau. Pour cela, indiquez-nous votre numéro de dossier Parcoursup. Le
+courrier électronique vous sera envoyé habituellement en quelques
+minutes.</p>
+<form method="post" action="{% url 'envoi_bienvenue' %}">
+  {{ bienvenue_form.as_p }}
+  <p><input type="submit" value="Renvoyer le courrier d'activation"></p>
+</form>
+
+<p>Ceci ne fonctionne que si vous avez accepté définitivement la
+proposition d'admission sur Parcoursup, et qu'il ne vous reste pas
+d'autre vœu en attente.</p>
 
 {% endblock %}
