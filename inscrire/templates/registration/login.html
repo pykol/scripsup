@@ -30,6 +30,7 @@ nouveau. Pour cela, indiquez-nous votre numéro de dossier Parcoursup. Le
 courrier électronique vous sera envoyé habituellement en quelques
 minutes.</p>
 <form method="post" action="{% url 'envoi_bienvenue' %}">
+  {% csrf_token %}
   {{ bienvenue_form.as_p }}
   <p><input type="submit" value="Renvoyer le courrier d'activation"></p>
 </form>

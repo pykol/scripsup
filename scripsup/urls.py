@@ -19,8 +19,9 @@ from django.urls import path, include
 import inscrire.views.auth
 
 auth_urlpatterns = [
-	path('login', inscrire.views.auth.LoginView.as_view, name='login'),
-	path('bienvenue', inscrire.views.auth.envoi_bienvenue, name='envoi_bienvenue'),
+	path('login', inscrire.views.auth.LoginView.as_view(), name='login'),
+	path('bienvenue', inscrire.views.auth.EnvoiBienvenue.as_view(), name='envoi_bienvenue'),
+	path('bienvenue/confirm', inscrire.views.auth.EnvoiBienvenueConfirm.as_view(), name='envoi_bienvenue_confirm'),
 	path('', include('django.contrib.auth.urls')),
 ]
 urlpatterns = [

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block contenu %}
+<h2>Envoi du courrier d'activation</h2>
+
+<p>Lorsque vous avez accepté sur Parcoursup à titre définitif la
+proposition d'admission dans notre établissement, nous vous avons envoyé
+un courrier électronique contenant les instructions d'accès à votre
+espace personnel.</p>
+
+<p>Si vous n'avez pas reçu ce courrier ou bien si vous l'avez égaré,
+nous pouvons vous le renvoyer. Pour cela, renseignez votre numéro de
+dossier Parcoursup.</p>
+
+<form method="post" action="{% url 'envoi_bienvenue' %}">
+  {% csrf_token %}
+  {{ bienvenue_form.as_p }}
+  <p><input type="submit" value="Renvoyer le courrier d'activation"></p>
+</form>
+
+{% endblock %}
