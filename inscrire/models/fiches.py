@@ -24,11 +24,91 @@ informations spécifiques à un service donné.
 """
 
 from django.db import models
-from polymorphic.models import PolymorphicModel
+from polymorphic.models import PolymorphicModel, PolymorphicManager
 import localflavor.generic.models as lfmodels
 
 from .personnes import Candidat, Commune, Pays
 from .formation import MefOption, Formation, Etablissement
+
+class FicheManager(PolymorphicManager):
+	"""
+	Manager qui permet la création rapide de toutes les fiches pour un
+	candidat.
+	"""
+	def create_applicable(self, voeu, **kwargs):
+		"""
+		Méthode qui crée toutes les classes héritées de Fiche, parmi
+		celles listées dans all_fiche (défini ci-dessous), qui sont
+		applicables au voeu donné (vérifié avec la méthode de classe
+		applicable).
+		"""
+		fiches = []
+		for fiche_kls in filter(lambda kls: kls.est_applicable(voeu),
+				all_fiche):
+			fiche = fiche_kls(candidat=voeu.candidat, **kwargs)
+			fiche.save()
+			fiches.append(fiche)
+		return fiches
+
+	def create_or_update_applicable(self, voeu, **kwargs):
+		"""
+		Méthode qui crée les fiches, selon les mêmes critères que
+		create_applicable, mais qui tente de recycler d'anciennes fiches
+		qui existaient éventuellement auparavant.
+
+		Ceci permet à un candidat de retrouver des données qu'il aurait
+		saisies précédemment en cas de modification reçue depuis
+		Parcoursup. Parcoursup n'envoie normalement que les candidats
+		admis à titre définitif mais des changements peuvent malgré
+		tout avoir lieu, par exemple lorsqu'un candidat démissionne par
+		erreur (et le lycée d'accueil rétablit son vœu), ou bien si un
+		candidat disparait puis revient suite à des vœux en procédure
+		complémentaire.
+
+		Renvoie une liste de couples (fiche, created) formés chacun
+		d'une instance d'une classe héritée de Fiche et d'un booléen qui
+		vaut True quand la fiche est nouvelle et False quand elle a
+		juste été mise à jour.
+		"""
+		fiches = []
+		fiches_applicables = dict([(kls, None)
+			for kls in filter(lambda kls: kls.est_applicable(voeu), all_fiche)])
+
+		# On commence par recycler les fiches existantes
+		for fiche in Fiche.objects.filter(candidat=voeu.candidat):
+			if type(fiche) in fiches_applicables:
+				if fiche.recyclable(voeu):
+					fiches_applicables[type(fiche)] = fiche
+
+					# On remet la fiche en mode édition
+					if fiche.etat in (Fiche.ETAT_CONFIRMEE,
+							Fiche.ETAT_ANNULEE):
+						fiche.etat = Fiche.ETAT_EDITION
+						fiche.save()
+
+					fiches.append((fiche, False))
+				else:
+					# L'ancienne fiche ne peut pas servir, on en créera
+					# une nouvelle à la fin de la fonction. Pour
+					# l'instant, on marque l'actuelle comme étant
+					# annulée.
+					fiche.etat = Fiche.ETAT_ANNULEE
+					fiche.save()
+			else:
+				# Il existe une fiche qui n'est pas applicable, on
+				# l'annule.
+				fiche.etat = Fiche.ETAT_ANNULEE
+				fiche.save()
+
+		# On crée enfin les instances manquantes
+		for fiche_kls in fiches_applicables:
+			if fiches_applicables[fiche_kls] is None:
+				fiche = type(fiche)(candidat=voeu.candidat, **kwargs)
+				fiche.save()
+				fiches.append((fiche, True))
+
+		return fiches
+
 
 class Fiche(PolymorphicModel):
 	"""
@@ -42,7 +122,7 @@ class Fiche(PolymorphicModel):
 	utilisateur.
 	"""
 	FICHE_LABEL = "Données d'inscription"
-	valide = models.BooleanField()
+	valide = models.BooleanField(default=False)
 	candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
 
 	ETAT_EDITION = 1
@@ -58,8 +138,10 @@ class Fiche(PolymorphicModel):
 	etat = models.PositiveSmallIntegerField(verbose_name="état",
 			choices=ETAT_CHOICES, default=ETAT_EDITION)
 
+	objects = FicheManager()
+
 	@classmethod
-	def fiche_applicable(kls, voeu):
+	def applicable(kls, voeu):
 		"""
 		Méthode qui indique si une fiche est applicable à un vœu donné.
 
@@ -67,6 +149,14 @@ class Fiche(PolymorphicModel):
 		pour l'inscription d'un candidat étant donné le vœu qu'il a
 		accepté. L'implémentation de base renvoie toujours True. Cette
 		méthode devrait être surchargée.
+		"""
+		return True
+
+	def recyclable(self, voeu):
+		"""
+		Méthode qui indique si une fiche peut être réutilisée pour le
+		nouveau vœu passé en paramètre, alors qu'elle avait été créée
+		potentiellement à partir d'un autre vœu.
 		"""
 		return True
 
@@ -173,6 +263,9 @@ class FicheScolarite(Fiche):
 	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
 	options = models.ManyToManyField(MefOption)
 
+	def recyclable(self, voeu):
+		return voeu.formation == self.formation
+
 class FicheHebergement(Fiche):
 	"""
 	Choix du mode d'hébergement
@@ -208,7 +301,7 @@ class FicheInternat(Fiche):
 			default="", blank=True, null=False)
 
 	@classmethod
-	def fiche_applicable(kls, voeu):
+	def applicable(kls, voeu):
 		return voeu.internat
 
 class FicheCesure(Fiche):
@@ -218,7 +311,7 @@ class FicheCesure(Fiche):
 	FICHE_LABEL = "Demande de césure"
 
 	@classmethod
-	def fiche_applicable(kls, voeu):
+	def applicable(kls, voeu):
 		return voeu.cesure
 
 # Liste de toutes les fiches à essayer lors de la création d'un dossier.
