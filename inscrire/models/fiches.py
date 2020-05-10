@@ -78,15 +78,20 @@ class FicheIdentite(Fiche):
 	photo = models.ImageField(upload_to=lambda instance, filename:
 			"photo/{psup}/{filename}".format(
 				psup=instance.candidat.numero_parcoursup,
-				filename=filename))
+				filename=filename),
+			blank=True, null=True)
 	piece_identite = models.FileField(
 			upload_to=lambda instance, filename: "piece_identite/{psup}/{filename}".format(
 				psup=instance.candidat.numero_parcoursup,
-				filename=filename))
+				filename=filename),
+			blank=True, null=True)
 	commune_naissance = models.ForeignKey(Commune,
-			on_delete=models.PROTECT)
-	commune_naissance_etranger = models.CharField(max_length=200)
-	pays_naissance = models.ForeignKey(Pays, on_delete=models.PROTECT)
+			on_delete=models.PROTECT,
+			blank=True, null=True)
+	commune_naissance_etranger = models.CharField(max_length=200,
+			blank=True, null=False, default="")
+	pays_naissance = models.ForeignKey(Pays, on_delete=models.PROTECT,
+			blank=True, null=True)
 
 class FicheScolariteAnterieure(Fiche):
 	"""
@@ -94,13 +99,17 @@ class FicheScolariteAnterieure(Fiche):
 	"""
 	FICHE_LABEL = "Scolarité antérieure"
 	etablissement = models.ForeignKey(Etablissement,
-			on_delete=models.PROTECT)
+			on_delete=models.PROTECT,
+			blank=True, null=True)
 	classe_terminale = models.CharField(max_length=20,
-			verbose_name="classe de terminale suivie")
+			verbose_name="classe de terminale suivie",
+			blank=True, null=False, default="")
 	specialite_terminale = models.CharField(max_length=100,
-			verbose_name="spécialité en terminale")
+			verbose_name="spécialité en terminale",
+			blank=True, null=False, default="")
 	autre_formation = models.CharField(max_length=200,
-			verbose_name="autre formation")
+			verbose_name="autre formation",
+			blank=True, null=False, default="")
 
 class BulletinScolaire(models.Model):
 	"""
@@ -127,21 +136,24 @@ class FicheBourse(Fiche):
 	Bourse du supérieur
 	"""
 	FICHE_LABEL = "Bourse du supérieur"
-	boursier = models.BooleanField()
+	boursier = models.BooleanField(default=False)
 	echelon = models.PositiveSmallIntegerField(verbose_name="échelon",
 			blank=True, null=True)
 	enfants_charge = models.PositiveSmallIntegerField(
 			verbose_name="nombre d'enfants à charge (y compris l'étudiant)",
 			default=1)
 	enfants_secondaire = models.PositiveSmallIntegerField(
-			verbose_name="nombre d'enfants en lycée ou en collège")
+			verbose_name="nombre d'enfants en lycée ou en collège",
+			default=0)
 	enfants_etablissement = models.PositiveSmallIntegerField(
-			verbose_name="nombre d'enfants dans l'établissement")
+			verbose_name="nombre d'enfants dans l'établissement",
+			default=1)
 	attribution_bourse = models.FileField(
 			verbose_name="copie de l'attestation conditionnelle de bourse",
 			upload_to=lambda instance, filename: "bourse_acb/{psup}/{filename}".format(
 				psup=instance.candidat.numero_parcoursup,
-				filename=filename))
+				filename=filename),
+			blank=True, null=True)
 
 class FicheReglement(Fiche):
 	"""
@@ -149,8 +161,9 @@ class FicheReglement(Fiche):
 	"""
 	FICHE_LABEL = "Règlement intérieur"
 	signature_reglement = models.DateTimeField(
-			verbose_name="signature du règlement intérieur")
-	autorisation_parents_eleves = models.BooleanField()
+			verbose_name="signature du règlement intérieur",
+			blank=True, null=True)
+	autorisation_parents_eleves = models.BooleanField(default=False)
 
 class FicheScolarite(Fiche):
 	"""
@@ -177,10 +190,13 @@ class FicheHebergement(Fiche):
 		(REGIME_INTERNE, "interne"),
 	)
 	regime = models.PositiveSmallIntegerField(verbose_name="régime",
-			choices=REGIME_CHOICES)
-	iban = lfmodels.IBANField(include_countries=('FR',))
-	bic = lfmodels.BICField()
-	titulaire_compte = models.CharField(max_length=200)
+			choices=REGIME_CHOICES,
+			blank=True, null=True)
+	iban = lfmodels.IBANField(include_countries=('FR',),
+			blank=True, null=True)
+	bic = lfmodels.BICField(blank=True, null=True)
+	titulaire_compte = models.CharField(max_length=200, blank=True,
+			null=False, default="")
 
 class FicheInternat(Fiche):
 	"""
