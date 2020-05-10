@@ -19,6 +19,7 @@
 from django.db import models
 from django.conf import settings
 
+from inscrire.lib.parcoursup_rest import ParcoursupCandidat, ParcoursupRest
 from .personnes import Candidat
 from .formation import Etablissement, Formation
 
@@ -75,30 +76,64 @@ class ParcoursupUser(models.Model):
 
 		return True
 
-	def get_candidats_admis(self):
+	_parcoursup_rest = None
+
+	@property
+	def parcoursup_rest(self):
+		if self._parcoursup_rest is None:
+			self._parcoursup_rest = ParcoursupRest(
+					login=self.remontee_username,
+					password=self.remontee_password,
+					code_etablissement=self.etablissement.numero_uai)
+		return self._parcoursup_rest
+
+	def import_candidat(self, candidat_psup):
 		"""
-		Renvoie la liste de tous les candidats admis dans
-		l'établissement.
+		Import des données Parcoursup dans la base de données du serveur
+		d'inscription.
+
+		Renvoie l'instance du modèle Candidat correspondant au candidat.
+
+		Prend en paramètre une instance ParcoursupCandidat.
 		"""
 		pass
 
+	def get_candidats_admis(self):
+		"""
+		Met à jour la liste de tous les candidats admis dans
+		l'établissement.
+		"""
+		return [self.import_candidat(candidat)
+				for candidat in self.parcoursup_rest.get_candidats_admis()]
+
 	def get_candidat_admis(self, code_candidat):
 		"""
+		Met à jour un candidat
 		Renvoie les informations concernant un candidat admis.
 		"""
-		pass
+		return self.import_candidat(
+				self.parcoursup_rest.get_candidat(code_candidat))
 
 	def set_inscription(self, candidat):
 		"""
 		Envoie à Parcoursup l'état d'inscription
 		"""
-		pass
+		psup_candidat = ParcoursupCandidat(
+				code=candidat.dossier_parcoursup,
+				ine=candidat.ine,
+				nom=candidat.last_name,
+				prenom=candidat.first_name,
+				date_naissance=candidat.date_naissance)
+		self.parcoursup_rest.maj_inscription(
+				psup_candidat,
+				candidat.voeu_actuel.formation.code_parcoursup,
+				ParcoursupRest.INSCRIPTION_PRINCIPALE)
 
 	def envoi_candidat_test(self):
 		"""
 		Active les push de Parcoursup en envoyant un candidat de test.
 		"""
-		pass
+		self.parcoursup_rest.requete_test()
 
 class ParcoursupMessageRecuLog(models.Model):
 	"""
