@@ -102,6 +102,26 @@ class FicheScolariteAnterieure(Fiche):
 	autre_formation = models.CharField(max_length=200,
 			verbose_name="autre formation")
 
+class BulletinScolaire(models.Model):
+	"""
+	Copie d'un bulletin scolaire
+	"""
+	fiche_scolarite = models.ForeignKey(FicheScolariteAnterieure,
+			on_delete=models.CASCADE)
+
+	CLASSE_PREMIERE = 1
+	CLASSE_TERMINALE = 2
+	CLASSE_CHOICES = (
+			(CLASSE_PREMIERE, "bulletin de première"),
+			(CLASSE_TERMINALE, "bulletin de terminale"),
+		)
+	classe = models.PositiveSmallIntegerField(choices=CLASSE_CHOICES)
+
+	bulletin = models.FileField(
+			upload_to=lambda instance, filename: "bulletin/{psup}/{filename}".format(
+				psup=instance.candidat.numero_parcoursup,
+				filename=filename))
+
 class FicheBourse(Fiche):
 	"""
 	Bourse du supérieur
