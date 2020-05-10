@@ -25,9 +25,10 @@ informations spécifiques à un service donné.
 
 from django.db import models
 from polymorphic.models import PolymorphicModel
+import localflavor.generic.models as lfmodels
 
-from .personnes import Candidat
-from .formation import MefOption, Formation
+from .personnes import Candidat, Commune, Pays
+from .formation import MefOption, Formation, Etablissement
 
 class Fiche(PolymorphicModel):
 	"""
@@ -44,6 +45,31 @@ class Fiche(PolymorphicModel):
 	valide = models.BooleanField()
 	candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
 
+	ETAT_EDITION = 1
+	ETAT_CONFIRMEE = 2
+	ETAT_TERMINEE = 3
+	ETAT_ANNULEE = 4
+	ETAT_CHOICES = (
+		(ETAT_EDITION, "fiche à compléter"),
+		(ETAT_CONFIRMEE, "fiche confirmée"),
+		(ETAT_TERMINEE, "validée par le gestionnaire"),
+		(ETAT_ANNULEE, "annulée")
+	)
+	etat = models.PositiveSmallIntegerField(verbose_name="état",
+			choices=ETAT_CHOICES, default=ETAT_EDITION)
+
+	@classmethod
+	def fiche_applicable(kls, voeu):
+		"""
+		Méthode qui indique si une fiche est applicable à un vœu donné.
+
+		Cette méthode renvoie un booléen si cette fiche est demandée
+		pour l'inscription d'un candidat étant donné le vœu qu'il a
+		accepté. L'implémentation de base renvoie toujours True. Cette
+		méthode devrait être surchargée.
+		"""
+		return True
+
 class FicheIdentite(Fiche):
 	"""
 	Informations concernant l'identité du candidat
@@ -53,6 +79,58 @@ class FicheIdentite(Fiche):
 			"photo/{psup}/{filename}".format(
 				psup=instance.candidat.numero_parcoursup,
 				filename=filename))
+	piece_identite = models.FileField(
+			upload_to=lambda instance, filename: "piece_identite/{psup}/{filename}".format(
+				psup=instance.candidat.numero_parcoursup,
+				filename=filename))
+	commune_naissance = models.ForeignKey(Commune,
+			on_delete=models.PROTECT)
+	commune_naissance_etranger = models.CharField(max_length=200)
+	pays_naissance = models.ForeignKey(Pays, on_delete=models.PROTECT)
+
+class FicheScolariteAnterieure(Fiche):
+	"""
+	Scolarité antérieure
+	"""
+	FICHE_LABEL = "Scolarité antérieure"
+	etablissement = models.ForeignKey(Etablissement,
+			on_delete=models.PROTECT)
+	classe_terminale = models.CharField(max_length=20,
+			verbose_name="classe de terminale suivie")
+	specialite_terminale = models.CharField(max_length=100,
+			verbose_name="spécialité en terminale")
+	autre_formation = models.CharField(max_length=200,
+			verbose_name="autre formation")
+
+class FicheBourse(Fiche):
+	"""
+	Bourse du supérieur
+	"""
+	FICHE_LABEL = "Bourse du supérieur"
+	boursier = models.BooleanField()
+	echelon = models.PositiveSmallIntegerField(verbose_name="échelon",
+			blank=True, null=True)
+	enfants_charge = models.PositiveSmallIntegerField(
+			verbose_name="nombre d'enfants à charge (y compris l'étudiant)",
+			default=1)
+	enfants_secondaire = models.PositiveSmallIntegerField(
+			verbose_name="nombre d'enfants en lycée ou en collège")
+	enfants_etablissement = models.PositiveSmallIntegerField(
+			verbose_name="nombre d'enfants dans l'établissement")
+	attribution_bourse = models.FileField(
+			verbose_name="copie de l'attestation conditionnelle de bourse",
+			upload_to=lambda instance, filename: "bourse_acb/{psup}/{filename}".format(
+				psup=instance.candidat.numero_parcoursup,
+				filename=filename))
+
+class FicheReglement(Fiche):
+	"""
+	Règlement intérieur
+	"""
+	FICHE_LABEL = "Règlement intérieur"
+	signature_reglement = models.DateTimeField(
+			verbose_name="signature du règlement intérieur")
+	autorisation_parents_eleves = models.BooleanField()
 
 class FicheScolarite(Fiche):
 	"""
@@ -80,5 +158,33 @@ class FicheHebergement(Fiche):
 	)
 	regime = models.PositiveSmallIntegerField(verbose_name="régime",
 			choices=REGIME_CHOICES)
+	iban = lfmodels.IBANField(include_countries=('FR',))
+	bic = lfmodels.BICField()
+	titulaire_compte = models.CharField(max_length=200)
+
+class FicheInternat(Fiche):
+	"""
+	Renseignements spécifiques à l'internat
+	"""
+	FICHE_LABEL = "Internat"
+
 	message = models.TextField(verbose_name="demandes particulières",
 			default="", blank=True, null=False)
+
+	@classmethod
+	def fiche_applicable(kls, voeu):
+		return voeu.internat
+
+class FicheCesure(Fiche):
+	"""
+	Données à remplir en cas de demande de césure
+	"""
+	FICHE_LABEL = "Demande de césure"
+
+	@classmethod
+	def fiche_applicable(kls, voeu):
+		return voeu.cesure
+
+# Liste de toutes les fiches à essayer lors de la création d'un dossier.
+all_fiche = [FicheIdentite, FicheScolarite, FicheHebergement,
+		FicheInternat, FicheCesure, FicheReglement]
