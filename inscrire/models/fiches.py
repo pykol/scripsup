@@ -165,15 +165,19 @@ class FicheIdentite(Fiche):
 	Informations concernant l'identité du candidat
 	"""
 	FICHE_LABEL = "Identité"
-	photo = models.ImageField(upload_to=lambda instance, filename:
-			"photo/{psup}/{filename}".format(
+
+	def _photo_upload_to(instance, filename):
+		return "photo/{psup}/{filename}".format(
 				psup=instance.candidat.numero_parcoursup,
-				filename=filename),
+				filename=filename)
+	photo = models.ImageField(upload_to=_photo_upload_to,
 			blank=True, null=True)
-	piece_identite = models.FileField(
-			upload_to=lambda instance, filename: "piece_identite/{psup}/{filename}".format(
+
+	def _piece_identite_upload_to(instance, filename):
+		return "piece_identite/{psup}/{filename}".format(
 				psup=instance.candidat.numero_parcoursup,
-				filename=filename),
+				filename=filename)
+	piece_identite = models.FileField(upload_to=_piece_identite_upload_to,
 			blank=True, null=True)
 	commune_naissance = models.ForeignKey(Commune,
 			on_delete=models.PROTECT,
@@ -216,10 +220,11 @@ class BulletinScolaire(models.Model):
 		)
 	classe = models.PositiveSmallIntegerField(choices=CLASSE_CHOICES)
 
-	bulletin = models.FileField(
-			upload_to=lambda instance, filename: "bulletin/{psup}/{filename}".format(
+	def _bulletin_upload_to(instance, filename):
+		return "bulletin/{psup}/{filename}".format(
 				psup=instance.candidat.numero_parcoursup,
-				filename=filename))
+				filename=filename)
+	bulletin = models.FileField(upload_to=_bulletin_upload_to)
 
 class FicheBourse(Fiche):
 	"""
@@ -238,11 +243,14 @@ class FicheBourse(Fiche):
 	enfants_etablissement = models.PositiveSmallIntegerField(
 			verbose_name="nombre d'enfants dans l'établissement",
 			default=1)
+
+	def _attribution_bourse_upload_to(instance, filename):
+		return "bourse_acb/{psup}/{filename}".format(
+				psup=instance.candidat.numero_parcoursup,
+				filename=filename)
 	attribution_bourse = models.FileField(
 			verbose_name="copie de l'attestation conditionnelle de bourse",
-			upload_to=lambda instance, filename: "bourse_acb/{psup}/{filename}".format(
-				psup=instance.candidat.numero_parcoursup,
-				filename=filename),
+			upload_to=_attribution_bourse_upload_to,
 			blank=True, null=True)
 
 class FicheReglement(Fiche):
