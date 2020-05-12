@@ -4,7 +4,7 @@
         "pk": "DK",
         "fields": {
             "code_iso3": "DNK",
-            "num_iso": "208",
+            "num_iso": 208,
             "libelle": "DANEMARK"
         }
     },
@@ -13,7 +13,7 @@
         "pk": "FO",
         "fields": {
             "code_iso3": "FRO",
-            "num_iso": "234",
+            "num_iso": 234,
             "libelle": "FEROE (ILES)"
         }
     },
@@ -22,7 +22,7 @@
         "pk": "IS",
         "fields": {
             "code_iso3": "ISL",
-            "num_iso": "352",
+            "num_iso": 352,
             "libelle": "ISLANDE"
         }
     },
@@ -31,7 +31,7 @@
         "pk": "NO",
         "fields": {
             "code_iso3": "NOR",
-            "num_iso": "578",
+            "num_iso": 578,
             "libelle": "NORVEGE"
         }
     },
@@ -40,7 +40,7 @@
         "pk": "BV",
         "fields": {
             "code_iso3": "BVT",
-            "num_iso": "074",
+            "num_iso": 74,
             "libelle": "BOUVET (ILE)"
         }
     },
@@ -49,7 +49,7 @@
         "pk": "SJ",
         "fields": {
             "code_iso3": "SJM",
-            "num_iso": "744",
+            "num_iso": 744,
             "libelle": "SVALBARD et ILE JAN MAYEN"
         }
     },
@@ -58,7 +58,7 @@
         "pk": "SE",
         "fields": {
             "code_iso3": "SWE",
-            "num_iso": "752",
+            "num_iso": 752,
             "libelle": "SUEDE"
         }
     },
@@ -67,7 +67,7 @@
         "pk": "FI",
         "fields": {
             "code_iso3": "FIN",
-            "num_iso": "246",
+            "num_iso": 246,
             "libelle": "FINLANDE"
         }
     },
@@ -76,7 +76,7 @@
         "pk": "EE",
         "fields": {
             "code_iso3": "EST",
-            "num_iso": "233",
+            "num_iso": 233,
             "libelle": "ESTONIE"
         }
     },
@@ -85,7 +85,7 @@
         "pk": "LV",
         "fields": {
             "code_iso3": "LVA",
-            "num_iso": "428",
+            "num_iso": 428,
             "libelle": "LETTONIE"
         }
     },
@@ -94,7 +94,7 @@
         "pk": "LT",
         "fields": {
             "code_iso3": "LTU",
-            "num_iso": "440",
+            "num_iso": 440,
             "libelle": "LITUANIE"
         }
     },
@@ -103,7 +103,7 @@
         "pk": "DE",
         "fields": {
             "code_iso3": "DEU",
-            "num_iso": "276",
+            "num_iso": 276,
             "libelle": "ALLEMAGNE"
         }
     },
@@ -112,7 +112,7 @@
         "pk": "AT",
         "fields": {
             "code_iso3": "AUT",
-            "num_iso": "040",
+            "num_iso": 40,
             "libelle": "AUTRICHE"
         }
     },
@@ -121,7 +121,7 @@
         "pk": "BG",
         "fields": {
             "code_iso3": "BGR",
-            "num_iso": "100",
+            "num_iso": 100,
             "libelle": "BULGARIE"
         }
     },
@@ -130,7 +130,7 @@
         "pk": "HU",
         "fields": {
             "code_iso3": "HUN",
-            "num_iso": "348",
+            "num_iso": 348,
             "libelle": "HONGRIE"
         }
     },
@@ -139,7 +139,7 @@
         "pk": "LI",
         "fields": {
             "code_iso3": "LIE",
-            "num_iso": "438",
+            "num_iso": 438,
             "libelle": "LIECHTENSTEIN"
         }
     },
@@ -148,16 +148,16 @@
         "pk": "RO",
         "fields": {
             "code_iso3": "ROU",
-            "num_iso": "642",
+            "num_iso": 642,
             "libelle": "ROUMANIE"
         }
     },
     {
         "model": "inscrire.Pays",
-        "pk": "",
+        "pk": "CS",
         "fields": {
-            "code_iso3": "",
-            "num_iso": "",
+            "code_iso3": "CSK",
+            "num_iso": 200,
             "libelle": "TCHECOSLOVAQUIE"
         }
     },
@@ -166,7 +166,7 @@
         "pk": "CZ",
         "fields": {
             "code_iso3": "CZE",
-            "num_iso": "203",
+            "num_iso": 203,
             "libelle": "TCHEQUE (REPUBLIQUE)"
         }
     },
@@ -175,7 +175,7 @@
         "pk": "SK",
         "fields": {
             "code_iso3": "SVK",
-            "num_iso": "703",
+            "num_iso": 703,
             "libelle": "SLOVAQUIE"
         }
     },
@@ -184,7 +184,7 @@
         "pk": "BA",
         "fields": {
             "code_iso3": "BIH",
-            "num_iso": "070",
+            "num_iso": 70,
             "libelle": "BOSNIE-HERZEGOVINE"
         }
     },
@@ -193,7 +193,7 @@
         "pk": "HR",
         "fields": {
             "code_iso3": "HRV",
-            "num_iso": "191",
+            "num_iso": 191,
             "libelle": "CROATIE"
         }
     },
@@ -202,7 +202,7 @@
         "pk": "ME",
         "fields": {
             "code_iso3": "MNE",
-            "num_iso": "499",
+            "num_iso": 499,
             "libelle": "MONTENEGRO"
         }
     },
@@ -211,7 +211,7 @@
         "pk": "RS",
         "fields": {
             "code_iso3": "SRB",
-            "num_iso": "688",
+            "num_iso": 688,
             "libelle": "SERBIE"
         }
     },
@@ -220,7 +220,7 @@
         "pk": "PL",
         "fields": {
             "code_iso3": "POL",
-            "num_iso": "616",
+            "num_iso": 616,
             "libelle": "POLOGNE"
         }
     },
@@ -229,17 +229,8 @@
         "pk": "RU",
         "fields": {
             "code_iso3": "RUS",
-            "num_iso": "643",
+            "num_iso": 643,
             "libelle": "RUSSIE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TURQUIE D'EUROPE"
         }
     },
     {
@@ -247,7 +238,7 @@
         "pk": "AL",
         "fields": {
             "code_iso3": "ALB",
-            "num_iso": "008",
+            "num_iso": 8,
             "libelle": "ALBANIE"
         }
     },
@@ -256,7 +247,7 @@
         "pk": "GR",
         "fields": {
             "code_iso3": "GRC",
-            "num_iso": "300",
+            "num_iso": 300,
             "libelle": "GRECE"
         }
     },
@@ -265,7 +256,7 @@
         "pk": "IT",
         "fields": {
             "code_iso3": "ITA",
-            "num_iso": "380",
+            "num_iso": 380,
             "libelle": "ITALIE"
         }
     },
@@ -274,7 +265,7 @@
         "pk": "SM",
         "fields": {
             "code_iso3": "SMR",
-            "num_iso": "674",
+            "num_iso": 674,
             "libelle": "SAINT-MARIN"
         }
     },
@@ -283,7 +274,7 @@
         "pk": "VA",
         "fields": {
             "code_iso3": "VAT",
-            "num_iso": "336",
+            "num_iso": 336,
             "libelle": "VATICAN, ou SAINT-SIEGE"
         }
     },
@@ -292,7 +283,7 @@
         "pk": "AD",
         "fields": {
             "code_iso3": "AND",
-            "num_iso": "020",
+            "num_iso": 20,
             "libelle": "ANDORRE"
         }
     },
@@ -301,7 +292,7 @@
         "pk": "BE",
         "fields": {
             "code_iso3": "BEL",
-            "num_iso": "056",
+            "num_iso": 56,
             "libelle": "BELGIQUE"
         }
     },
@@ -310,7 +301,7 @@
         "pk": "GB",
         "fields": {
             "code_iso3": "GBR",
-            "num_iso": "826",
+            "num_iso": 826,
             "libelle": "ROYAUME-UNI"
         }
     },
@@ -319,7 +310,7 @@
         "pk": "GG",
         "fields": {
             "code_iso3": "GGY",
-            "num_iso": "831",
+            "num_iso": 831,
             "libelle": "GUERNESEY"
         }
     },
@@ -328,7 +319,7 @@
         "pk": "IM",
         "fields": {
             "code_iso3": "IMN",
-            "num_iso": "833",
+            "num_iso": 833,
             "libelle": "MAN (ILE)"
         }
     },
@@ -337,7 +328,7 @@
         "pk": "JE",
         "fields": {
             "code_iso3": "JEY",
-            "num_iso": "832",
+            "num_iso": 832,
             "libelle": "JERSEY"
         }
     },
@@ -346,7 +337,7 @@
         "pk": "GI",
         "fields": {
             "code_iso3": "GIB",
-            "num_iso": "292",
+            "num_iso": 292,
             "libelle": "GIBRALTAR"
         }
     },
@@ -355,7 +346,7 @@
         "pk": "ES",
         "fields": {
             "code_iso3": "ESP",
-            "num_iso": "724",
+            "num_iso": 724,
             "libelle": "ESPAGNE"
         }
     },
@@ -364,7 +355,7 @@
         "pk": "NL",
         "fields": {
             "code_iso3": "NLD",
-            "num_iso": "528",
+            "num_iso": 528,
             "libelle": "PAYS-BAS"
         }
     },
@@ -373,7 +364,7 @@
         "pk": "AW",
         "fields": {
             "code_iso3": "ABW",
-            "num_iso": "533",
+            "num_iso": 533,
             "libelle": "ARUBA"
         }
     },
@@ -382,7 +373,7 @@
         "pk": "IE",
         "fields": {
             "code_iso3": "IRL",
-            "num_iso": "372",
+            "num_iso": 372,
             "libelle": "IRLANDE, ou EIRE"
         }
     },
@@ -391,7 +382,7 @@
         "pk": "LU",
         "fields": {
             "code_iso3": "LUX",
-            "num_iso": "442",
+            "num_iso": 442,
             "libelle": "LUXEMBOURG"
         }
     },
@@ -400,7 +391,7 @@
         "pk": "MC",
         "fields": {
             "code_iso3": "MCO",
-            "num_iso": "492",
+            "num_iso": 492,
             "libelle": "MONACO"
         }
     },
@@ -409,7 +400,7 @@
         "pk": "PT",
         "fields": {
             "code_iso3": "PRT",
-            "num_iso": "620",
+            "num_iso": 620,
             "libelle": "PORTUGAL"
         }
     },
@@ -418,26 +409,8 @@
         "pk": "CH",
         "fields": {
             "code_iso3": "CHE",
-            "num_iso": "756",
+            "num_iso": 756,
             "libelle": "SUISSE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "REPUBLIQUE DEMOCRATIQUE ALLEMANDE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "REPUBLIQUE FEDERALE D'ALLEMAGNE"
         }
     },
     {
@@ -445,7 +418,7 @@
         "pk": "MT",
         "fields": {
             "code_iso3": "MLT",
-            "num_iso": "470",
+            "num_iso": 470,
             "libelle": "MALTE"
         }
     },
@@ -454,7 +427,7 @@
         "pk": "SI",
         "fields": {
             "code_iso3": "SVN",
-            "num_iso": "705",
+            "num_iso": 705,
             "libelle": "SLOVENIE"
         }
     },
@@ -463,7 +436,7 @@
         "pk": "BY",
         "fields": {
             "code_iso3": "BLR",
-            "num_iso": "112",
+            "num_iso": 112,
             "libelle": "BIELORUSSIE"
         }
     },
@@ -472,7 +445,7 @@
         "pk": "MD",
         "fields": {
             "code_iso3": "MDA",
-            "num_iso": "498",
+            "num_iso": 498,
             "libelle": "MOLDAVIE"
         }
     },
@@ -481,7 +454,7 @@
         "pk": "UA",
         "fields": {
             "code_iso3": "UKR",
-            "num_iso": "804",
+            "num_iso": 804,
             "libelle": "UKRAINE"
         }
     },
@@ -490,17 +463,8 @@
         "pk": "MK",
         "fields": {
             "code_iso3": "MKD",
-            "num_iso": "807",
+            "num_iso": 807,
             "libelle": "MACEDOINE DU NORD"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "XK",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "KOSOVO"
         }
     },
     {
@@ -508,17 +472,8 @@
         "pk": "SA",
         "fields": {
             "code_iso3": "SAU",
-            "num_iso": "682",
+            "num_iso": 682,
             "libelle": "ARABIE SAOUDITE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "YEMEN (REPUBLIQUE ARABE DU)"
         }
     },
     {
@@ -526,7 +481,7 @@
         "pk": "IQ",
         "fields": {
             "code_iso3": "IRQ",
-            "num_iso": "368",
+            "num_iso": 368,
             "libelle": "IRAQ"
         }
     },
@@ -535,7 +490,7 @@
         "pk": "IR",
         "fields": {
             "code_iso3": "IRN",
-            "num_iso": "364",
+            "num_iso": 364,
             "libelle": "IRAN"
         }
     },
@@ -544,7 +499,7 @@
         "pk": "LB",
         "fields": {
             "code_iso3": "LBN",
-            "num_iso": "422",
+            "num_iso": 422,
             "libelle": "LIBAN"
         }
     },
@@ -553,7 +508,7 @@
         "pk": "SY",
         "fields": {
             "code_iso3": "SYR",
-            "num_iso": "760",
+            "num_iso": 760,
             "libelle": "SYRIE"
         }
     },
@@ -562,7 +517,7 @@
         "pk": "IL",
         "fields": {
             "code_iso3": "ISR",
-            "num_iso": "376",
+            "num_iso": 376,
             "libelle": "ISRAEL"
         }
     },
@@ -571,35 +526,8 @@
         "pk": "TR",
         "fields": {
             "code_iso3": "TUR",
-            "num_iso": "792",
+            "num_iso": 792,
             "libelle": "TURQUIE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "SIBERIE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TURKESTAN RUSSE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "KAMTCHATKA"
         }
     },
     {
@@ -607,7 +535,7 @@
         "pk": "AF",
         "fields": {
             "code_iso3": "AFG",
-            "num_iso": "004",
+            "num_iso": 4,
             "libelle": "AFGHANISTAN"
         }
     },
@@ -616,7 +544,7 @@
         "pk": "PK",
         "fields": {
             "code_iso3": "PAK",
-            "num_iso": "586",
+            "num_iso": 586,
             "libelle": "PAKISTAN"
         }
     },
@@ -625,7 +553,7 @@
         "pk": "BT",
         "fields": {
             "code_iso3": "BTN",
-            "num_iso": "064",
+            "num_iso": 64,
             "libelle": "BHOUTAN"
         }
     },
@@ -634,7 +562,7 @@
         "pk": "NP",
         "fields": {
             "code_iso3": "NPL",
-            "num_iso": "524",
+            "num_iso": 524,
             "libelle": "NEPAL"
         }
     },
@@ -643,7 +571,7 @@
         "pk": "CN",
         "fields": {
             "code_iso3": "CHN",
-            "num_iso": "156",
+            "num_iso": 156,
             "libelle": "CHINE"
         }
     },
@@ -652,17 +580,8 @@
         "pk": "JP",
         "fields": {
             "code_iso3": "JPN",
-            "num_iso": "392",
+            "num_iso": 392,
             "libelle": "JAPON"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "MANDCHOURIE"
         }
     },
     {
@@ -670,7 +589,7 @@
         "pk": "TH",
         "fields": {
             "code_iso3": "THA",
-            "num_iso": "764",
+            "num_iso": 764,
             "libelle": "THAILANDE"
         }
     },
@@ -679,17 +598,8 @@
         "pk": "PH",
         "fields": {
             "code_iso3": "PHL",
-            "num_iso": "608",
+            "num_iso": 608,
             "libelle": "PHILIPPINES"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "POSSESSIONS BRITANNIQUES AU PROCHE-ORIENT"
         }
     },
     {
@@ -697,7 +607,7 @@
         "pk": "JO",
         "fields": {
             "code_iso3": "JOR",
-            "num_iso": "400",
+            "num_iso": 400,
             "libelle": "JORDANIE"
         }
     },
@@ -706,17 +616,8 @@
         "pk": "IN",
         "fields": {
             "code_iso3": "IND",
-            "num_iso": "356",
+            "num_iso": 356,
             "libelle": "INDE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "GOA"
         }
     },
     {
@@ -724,7 +625,7 @@
         "pk": "MM",
         "fields": {
             "code_iso3": "MMR",
-            "num_iso": "104",
+            "num_iso": 104,
             "libelle": "BIRMANIE"
         }
     },
@@ -733,7 +634,7 @@
         "pk": "BN",
         "fields": {
             "code_iso3": "BRN",
-            "num_iso": "096",
+            "num_iso": 96,
             "libelle": "BRUNEI"
         }
     },
@@ -742,7 +643,7 @@
         "pk": "SG",
         "fields": {
             "code_iso3": "SGP",
-            "num_iso": "702",
+            "num_iso": 702,
             "libelle": "SINGAPOUR"
         }
     },
@@ -751,17 +652,8 @@
         "pk": "MY",
         "fields": {
             "code_iso3": "MYS",
-            "num_iso": "458",
+            "num_iso": 458,
             "libelle": "MALAISIE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "ETATS MALAIS NON FEDERES"
         }
     },
     {
@@ -769,17 +661,8 @@
         "pk": "MV",
         "fields": {
             "code_iso3": "MDV",
-            "num_iso": "462",
+            "num_iso": 462,
             "libelle": "MALDIVES"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "HK",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "HONG-KONG"
         }
     },
     {
@@ -787,26 +670,8 @@
         "pk": "ID",
         "fields": {
             "code_iso3": "IDN",
-            "num_iso": "360",
+            "num_iso": 360,
             "libelle": "INDONESIE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "MO",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "MACAO"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "YEMEN DEMOCRATIQUE"
         }
     },
     {
@@ -814,7 +679,7 @@
         "pk": "KH",
         "fields": {
             "code_iso3": "KHM",
-            "num_iso": "116",
+            "num_iso": 116,
             "libelle": "CAMBODGE"
         }
     },
@@ -823,7 +688,7 @@
         "pk": "LK",
         "fields": {
             "code_iso3": "LKA",
-            "num_iso": "144",
+            "num_iso": 144,
             "libelle": "SRI LANKA"
         }
     },
@@ -832,17 +697,8 @@
         "pk": "TW",
         "fields": {
             "code_iso3": "TWN",
-            "num_iso": "158",
+            "num_iso": 158,
             "libelle": "TAIWAN"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "COREE"
         }
     },
     {
@@ -850,7 +706,7 @@
         "pk": "KP",
         "fields": {
             "code_iso3": "PRK",
-            "num_iso": "408",
+            "num_iso": 408,
             "libelle": "COREE (REPUBLIQUE POPULAIRE DEMOCRATIQUE DE)"
         }
     },
@@ -859,7 +715,7 @@
         "pk": "KR",
         "fields": {
             "code_iso3": "KOR",
-            "num_iso": "410",
+            "num_iso": 410,
             "libelle": "COREE (REPUBLIQUE DE)"
         }
     },
@@ -868,7 +724,7 @@
         "pk": "KW",
         "fields": {
             "code_iso3": "KWT",
-            "num_iso": "414",
+            "num_iso": 414,
             "libelle": "KOWEIT"
         }
     },
@@ -877,7 +733,7 @@
         "pk": "LA",
         "fields": {
             "code_iso3": "LAO",
-            "num_iso": "418",
+            "num_iso": 418,
             "libelle": "LAOS"
         }
     },
@@ -886,7 +742,7 @@
         "pk": "MN",
         "fields": {
             "code_iso3": "MNG",
-            "num_iso": "496",
+            "num_iso": 496,
             "libelle": "MONGOLIE"
         }
     },
@@ -895,26 +751,8 @@
         "pk": "VN",
         "fields": {
             "code_iso3": "VNM",
-            "num_iso": "704",
+            "num_iso": 704,
             "libelle": "VIET NAM"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "VIET NAM DU NORD"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "VIET NAM DU SUD"
         }
     },
     {
@@ -922,7 +760,7 @@
         "pk": "BD",
         "fields": {
             "code_iso3": "BGD",
-            "num_iso": "050",
+            "num_iso": 50,
             "libelle": "BANGLADESH"
         }
     },
@@ -931,7 +769,7 @@
         "pk": "AE",
         "fields": {
             "code_iso3": "ARE",
-            "num_iso": "784",
+            "num_iso": 784,
             "libelle": "EMIRATS ARABES UNIS"
         }
     },
@@ -940,7 +778,7 @@
         "pk": "QA",
         "fields": {
             "code_iso3": "QAT",
-            "num_iso": "634",
+            "num_iso": 634,
             "libelle": "QATAR"
         }
     },
@@ -949,7 +787,7 @@
         "pk": "BH",
         "fields": {
             "code_iso3": "BHR",
-            "num_iso": "048",
+            "num_iso": 48,
             "libelle": "BAHREIN"
         }
     },
@@ -958,7 +796,7 @@
         "pk": "OM",
         "fields": {
             "code_iso3": "OMN",
-            "num_iso": "512",
+            "num_iso": 512,
             "libelle": "OMAN"
         }
     },
@@ -967,7 +805,7 @@
         "pk": "YE",
         "fields": {
             "code_iso3": "YEM",
-            "num_iso": "887",
+            "num_iso": 887,
             "libelle": "YEMEN"
         }
     },
@@ -976,7 +814,7 @@
         "pk": "AM",
         "fields": {
             "code_iso3": "ARM",
-            "num_iso": "051",
+            "num_iso": 51,
             "libelle": "ARMENIE"
         }
     },
@@ -985,7 +823,7 @@
         "pk": "AZ",
         "fields": {
             "code_iso3": "AZE",
-            "num_iso": "031",
+            "num_iso": 31,
             "libelle": "AZERBAIDJAN"
         }
     },
@@ -994,7 +832,7 @@
         "pk": "CY",
         "fields": {
             "code_iso3": "CYP",
-            "num_iso": "196",
+            "num_iso": 196,
             "libelle": "CHYPRE"
         }
     },
@@ -1003,7 +841,7 @@
         "pk": "GE",
         "fields": {
             "code_iso3": "GEO",
-            "num_iso": "268",
+            "num_iso": 268,
             "libelle": "GEORGIE"
         }
     },
@@ -1012,7 +850,7 @@
         "pk": "KZ",
         "fields": {
             "code_iso3": "KAZ",
-            "num_iso": "398",
+            "num_iso": 398,
             "libelle": "KAZAKHSTAN"
         }
     },
@@ -1021,7 +859,7 @@
         "pk": "KG",
         "fields": {
             "code_iso3": "KGZ",
-            "num_iso": "417",
+            "num_iso": 417,
             "libelle": "KIRGHIZISTAN"
         }
     },
@@ -1030,7 +868,7 @@
         "pk": "UZ",
         "fields": {
             "code_iso3": "UZB",
-            "num_iso": "860",
+            "num_iso": 860,
             "libelle": "OUZBEKISTAN"
         }
     },
@@ -1039,7 +877,7 @@
         "pk": "TJ",
         "fields": {
             "code_iso3": "TJK",
-            "num_iso": "762",
+            "num_iso": 762,
             "libelle": "TADJIKISTAN"
         }
     },
@@ -1048,7 +886,7 @@
         "pk": "TM",
         "fields": {
             "code_iso3": "TKM",
-            "num_iso": "795",
+            "num_iso": 795,
             "libelle": "TURKMENISTAN"
         }
     },
@@ -1057,7 +895,7 @@
         "pk": "PS",
         "fields": {
             "code_iso3": "PSE",
-            "num_iso": "275",
+            "num_iso": 275,
             "libelle": "PALESTINE (Etat de)"
         }
     },
@@ -1066,7 +904,7 @@
         "pk": "TL",
         "fields": {
             "code_iso3": "TLS",
-            "num_iso": "626",
+            "num_iso": 626,
             "libelle": "TIMOR ORIENTAL"
         }
     },
@@ -1075,7 +913,7 @@
         "pk": "EG",
         "fields": {
             "code_iso3": "EGY",
-            "num_iso": "818",
+            "num_iso": 818,
             "libelle": "EGYPTE"
         }
     },
@@ -1084,7 +922,7 @@
         "pk": "LR",
         "fields": {
             "code_iso3": "LBR",
-            "num_iso": "430",
+            "num_iso": 430,
             "libelle": "LIBERIA"
         }
     },
@@ -1093,7 +931,7 @@
         "pk": "ZA",
         "fields": {
             "code_iso3": "ZAF",
-            "num_iso": "710",
+            "num_iso": 710,
             "libelle": "AFRIQUE DU SUD"
         }
     },
@@ -1102,17 +940,8 @@
         "pk": "GM",
         "fields": {
             "code_iso3": "GMB",
-            "num_iso": "270",
+            "num_iso": 270,
             "libelle": "GAMBIE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "CAMEROUN ET TOGO"
         }
     },
     {
@@ -1120,26 +949,8 @@
         "pk": "SH",
         "fields": {
             "code_iso3": "SHN",
-            "num_iso": "654",
+            "num_iso": 654,
             "libelle": "SAINTE HELENE, ASCENSION ET TRISTAN DA CUNHA"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "SOUDAN ANGLO-EGYPTIEN, KENYA, OUGANDA"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "ZANZIBAR"
         }
     },
     {
@@ -1147,7 +958,7 @@
         "pk": "IO",
         "fields": {
             "code_iso3": "IOT",
-            "num_iso": "086",
+            "num_iso": 86,
             "libelle": "OCEAN INDIEN (TERRITOIRE BRITANNIQUE DE L')"
         }
     },
@@ -1156,7 +967,7 @@
         "pk": "TZ",
         "fields": {
             "code_iso3": "TZA",
-            "num_iso": "834",
+            "num_iso": 834,
             "libelle": "TANZANIE"
         }
     },
@@ -1165,7 +976,7 @@
         "pk": "ZW",
         "fields": {
             "code_iso3": "ZWE",
-            "num_iso": "716",
+            "num_iso": 716,
             "libelle": "ZIMBABWE"
         }
     },
@@ -1174,7 +985,7 @@
         "pk": "NA",
         "fields": {
             "code_iso3": "NAM",
-            "num_iso": "516",
+            "num_iso": 516,
             "libelle": "NAMIBIE"
         }
     },
@@ -1183,35 +994,8 @@
         "pk": "CD",
         "fields": {
             "code_iso3": "COD",
-            "num_iso": "180",
+            "num_iso": 180,
             "libelle": "CONGO (REPUBLIQUE DEMOCRATIQUE)"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "CANARIES (ILES)"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "PROVINCES ESPAGNOLES D'AFRIQUE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "PRESIDES"
         }
     },
     {
@@ -1219,7 +1003,7 @@
         "pk": "GQ",
         "fields": {
             "code_iso3": "GNQ",
-            "num_iso": "226",
+            "num_iso": 226,
             "libelle": "GUINEE EQUATORIALE"
         }
     },
@@ -1228,7 +1012,7 @@
         "pk": "ET",
         "fields": {
             "code_iso3": "ETH",
-            "num_iso": "231",
+            "num_iso": 231,
             "libelle": "ETHIOPIE"
         }
     },
@@ -1237,7 +1021,7 @@
         "pk": "LY",
         "fields": {
             "code_iso3": "LBY",
-            "num_iso": "434",
+            "num_iso": 434,
             "libelle": "LIBYE"
         }
     },
@@ -1246,7 +1030,7 @@
         "pk": "ER",
         "fields": {
             "code_iso3": "ERI",
-            "num_iso": "232",
+            "num_iso": 232,
             "libelle": "ERYTHREE"
         }
     },
@@ -1255,26 +1039,8 @@
         "pk": "SO",
         "fields": {
             "code_iso3": "SOM",
-            "num_iso": "706",
+            "num_iso": 706,
             "libelle": "SOMALIE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "ACORES, MADERE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "ILES PORTUGAISES DE L'OCEAN INDIEN"
         }
     },
     {
@@ -1282,7 +1048,7 @@
         "pk": "BI",
         "fields": {
             "code_iso3": "BDI",
-            "num_iso": "108",
+            "num_iso": 108,
             "libelle": "BURUNDI"
         }
     },
@@ -1291,7 +1057,7 @@
         "pk": "CM",
         "fields": {
             "code_iso3": "CMR",
-            "num_iso": "120",
+            "num_iso": 120,
             "libelle": "CAMEROUN"
         }
     },
@@ -1300,7 +1066,7 @@
         "pk": "CF",
         "fields": {
             "code_iso3": "CAF",
-            "num_iso": "140",
+            "num_iso": 140,
             "libelle": "CENTRAFRICAINE (REPUBLIQUE)"
         }
     },
@@ -1309,17 +1075,8 @@
         "pk": "CG",
         "fields": {
             "code_iso3": "COG",
-            "num_iso": "178",
+            "num_iso": 178,
             "libelle": "CONGO"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TANGER"
         }
     },
     {
@@ -1327,7 +1084,7 @@
         "pk": "CI",
         "fields": {
             "code_iso3": "CIV",
-            "num_iso": "384",
+            "num_iso": 384,
             "libelle": "COTE D'IVOIRE"
         }
     },
@@ -1336,7 +1093,7 @@
         "pk": "BJ",
         "fields": {
             "code_iso3": "BEN",
-            "num_iso": "204",
+            "num_iso": 204,
             "libelle": "BENIN"
         }
     },
@@ -1345,7 +1102,7 @@
         "pk": "GA",
         "fields": {
             "code_iso3": "GAB",
-            "num_iso": "266",
+            "num_iso": 266,
             "libelle": "GABON"
         }
     },
@@ -1354,7 +1111,7 @@
         "pk": "GH",
         "fields": {
             "code_iso3": "GHA",
-            "num_iso": "288",
+            "num_iso": 288,
             "libelle": "GHANA"
         }
     },
@@ -1363,7 +1120,7 @@
         "pk": "GN",
         "fields": {
             "code_iso3": "GIN",
-            "num_iso": "324",
+            "num_iso": 324,
             "libelle": "GUINEE"
         }
     },
@@ -1372,7 +1129,7 @@
         "pk": "BF",
         "fields": {
             "code_iso3": "BFA",
-            "num_iso": "854",
+            "num_iso": 854,
             "libelle": "BURKINA"
         }
     },
@@ -1381,7 +1138,7 @@
         "pk": "KE",
         "fields": {
             "code_iso3": "KEN",
-            "num_iso": "404",
+            "num_iso": 404,
             "libelle": "KENYA"
         }
     },
@@ -1390,7 +1147,7 @@
         "pk": "MG",
         "fields": {
             "code_iso3": "MDG",
-            "num_iso": "450",
+            "num_iso": 450,
             "libelle": "MADAGASCAR"
         }
     },
@@ -1399,7 +1156,7 @@
         "pk": "MW",
         "fields": {
             "code_iso3": "MWI",
-            "num_iso": "454",
+            "num_iso": 454,
             "libelle": "MALAWI"
         }
     },
@@ -1408,7 +1165,7 @@
         "pk": "ML",
         "fields": {
             "code_iso3": "MLI",
-            "num_iso": "466",
+            "num_iso": 466,
             "libelle": "MALI"
         }
     },
@@ -1417,7 +1174,7 @@
         "pk": "MR",
         "fields": {
             "code_iso3": "MRT",
-            "num_iso": "478",
+            "num_iso": 478,
             "libelle": "MAURITANIE"
         }
     },
@@ -1426,7 +1183,7 @@
         "pk": "NE",
         "fields": {
             "code_iso3": "NER",
-            "num_iso": "562",
+            "num_iso": 562,
             "libelle": "NIGER"
         }
     },
@@ -1435,7 +1192,7 @@
         "pk": "NG",
         "fields": {
             "code_iso3": "NGA",
-            "num_iso": "566",
+            "num_iso": 566,
             "libelle": "NIGERIA"
         }
     },
@@ -1444,7 +1201,7 @@
         "pk": "UG",
         "fields": {
             "code_iso3": "UGA",
-            "num_iso": "800",
+            "num_iso": 800,
             "libelle": "OUGANDA"
         }
     },
@@ -1453,7 +1210,7 @@
         "pk": "RW",
         "fields": {
             "code_iso3": "RWA",
-            "num_iso": "646",
+            "num_iso": 646,
             "libelle": "RWANDA"
         }
     },
@@ -1462,7 +1219,7 @@
         "pk": "SN",
         "fields": {
             "code_iso3": "SEN",
-            "num_iso": "686",
+            "num_iso": 686,
             "libelle": "SENEGAL"
         }
     },
@@ -1471,7 +1228,7 @@
         "pk": "SL",
         "fields": {
             "code_iso3": "SLE",
-            "num_iso": "694",
+            "num_iso": 694,
             "libelle": "SIERRA LEONE"
         }
     },
@@ -1480,7 +1237,7 @@
         "pk": "SD",
         "fields": {
             "code_iso3": "SDN",
-            "num_iso": "729",
+            "num_iso": 729,
             "libelle": "SOUDAN"
         }
     },
@@ -1489,7 +1246,7 @@
         "pk": "TD",
         "fields": {
             "code_iso3": "TCD",
-            "num_iso": "148",
+            "num_iso": 148,
             "libelle": "TCHAD"
         }
     },
@@ -1498,7 +1255,7 @@
         "pk": "TG",
         "fields": {
             "code_iso3": "TGO",
-            "num_iso": "768",
+            "num_iso": 768,
             "libelle": "TOGO"
         }
     },
@@ -1507,7 +1264,7 @@
         "pk": "ZM",
         "fields": {
             "code_iso3": "ZMB",
-            "num_iso": "894",
+            "num_iso": 894,
             "libelle": "ZAMBIE"
         }
     },
@@ -1516,7 +1273,7 @@
         "pk": "BW",
         "fields": {
             "code_iso3": "BWA",
-            "num_iso": "072",
+            "num_iso": 72,
             "libelle": "BOTSWANA"
         }
     },
@@ -1525,7 +1282,7 @@
         "pk": "LS",
         "fields": {
             "code_iso3": "LSO",
-            "num_iso": "426",
+            "num_iso": 426,
             "libelle": "LESOTHO"
         }
     },
@@ -1534,7 +1291,7 @@
         "pk": "SS",
         "fields": {
             "code_iso3": "SSD",
-            "num_iso": "728",
+            "num_iso": 728,
             "libelle": "SOUDAN DU SUD"
         }
     },
@@ -1543,7 +1300,7 @@
         "pk": "MA",
         "fields": {
             "code_iso3": "MAR",
-            "num_iso": "504",
+            "num_iso": 504,
             "libelle": "MAROC"
         }
     },
@@ -1552,7 +1309,7 @@
         "pk": "TN",
         "fields": {
             "code_iso3": "TUN",
-            "num_iso": "788",
+            "num_iso": 788,
             "libelle": "TUNISIE"
         }
     },
@@ -1561,7 +1318,7 @@
         "pk": "DZ",
         "fields": {
             "code_iso3": "DZA",
-            "num_iso": "012",
+            "num_iso": 12,
             "libelle": "ALGERIE"
         }
     },
@@ -1570,7 +1327,7 @@
         "pk": "EH",
         "fields": {
             "code_iso3": "ESH",
-            "num_iso": "732",
+            "num_iso": 732,
             "libelle": "SAHARA OCCIDENTAL"
         }
     },
@@ -1579,7 +1336,7 @@
         "pk": "MU",
         "fields": {
             "code_iso3": "MUS",
-            "num_iso": "480",
+            "num_iso": 480,
             "libelle": "MAURICE"
         }
     },
@@ -1588,7 +1345,7 @@
         "pk": "SZ",
         "fields": {
             "code_iso3": "SWZ",
-            "num_iso": "748",
+            "num_iso": 748,
             "libelle": "ESWATINI"
         }
     },
@@ -1597,7 +1354,7 @@
         "pk": "GW",
         "fields": {
             "code_iso3": "GNB",
-            "num_iso": "624",
+            "num_iso": 624,
             "libelle": "GUINEE-BISSAU"
         }
     },
@@ -1606,7 +1363,7 @@
         "pk": "MZ",
         "fields": {
             "code_iso3": "MOZ",
-            "num_iso": "508",
+            "num_iso": 508,
             "libelle": "MOZAMBIQUE"
         }
     },
@@ -1615,7 +1372,7 @@
         "pk": "ST",
         "fields": {
             "code_iso3": "STP",
-            "num_iso": "678",
+            "num_iso": 678,
             "libelle": "SAO TOME-ET-PRINCIPE"
         }
     },
@@ -1624,7 +1381,7 @@
         "pk": "AO",
         "fields": {
             "code_iso3": "AGO",
-            "num_iso": "024",
+            "num_iso": 24,
             "libelle": "ANGOLA"
         }
     },
@@ -1633,7 +1390,7 @@
         "pk": "CV",
         "fields": {
             "code_iso3": "CPV",
-            "num_iso": "132",
+            "num_iso": 132,
             "libelle": "CAP-VERT"
         }
     },
@@ -1642,7 +1399,7 @@
         "pk": "KM",
         "fields": {
             "code_iso3": "COM",
-            "num_iso": "174",
+            "num_iso": 174,
             "libelle": "COMORES"
         }
     },
@@ -1651,7 +1408,7 @@
         "pk": "SC",
         "fields": {
             "code_iso3": "SYC",
-            "num_iso": "690",
+            "num_iso": 690,
             "libelle": "SEYCHELLES"
         }
     },
@@ -1660,7 +1417,7 @@
         "pk": "DJ",
         "fields": {
             "code_iso3": "DJI",
-            "num_iso": "262",
+            "num_iso": 262,
             "libelle": "DJIBOUTI"
         }
     },
@@ -1669,26 +1426,8 @@
         "pk": "CA",
         "fields": {
             "code_iso3": "CAN",
-            "num_iso": "124",
+            "num_iso": 124,
             "libelle": "CANADA"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TERRE-NEUVE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "LABRADOR"
         }
     },
     {
@@ -1696,17 +1435,8 @@
         "pk": "US",
         "fields": {
             "code_iso3": "USA",
-            "num_iso": "840",
+            "num_iso": 840,
             "libelle": "ETATS-UNIS"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "ALASKA"
         }
     },
     {
@@ -1714,7 +1444,7 @@
         "pk": "MX",
         "fields": {
             "code_iso3": "MEX",
-            "num_iso": "484",
+            "num_iso": 484,
             "libelle": "MEXIQUE"
         }
     },
@@ -1723,7 +1453,7 @@
         "pk": "CR",
         "fields": {
             "code_iso3": "CRI",
-            "num_iso": "188",
+            "num_iso": 188,
             "libelle": "COSTA RICA"
         }
     },
@@ -1732,7 +1462,7 @@
         "pk": "CU",
         "fields": {
             "code_iso3": "CUB",
-            "num_iso": "192",
+            "num_iso": 192,
             "libelle": "CUBA"
         }
     },
@@ -1741,7 +1471,7 @@
         "pk": "DO",
         "fields": {
             "code_iso3": "DOM",
-            "num_iso": "214",
+            "num_iso": 214,
             "libelle": "DOMINICAINE (REPUBLIQUE)"
         }
     },
@@ -1750,7 +1480,7 @@
         "pk": "GT",
         "fields": {
             "code_iso3": "GTM",
-            "num_iso": "320",
+            "num_iso": 320,
             "libelle": "GUATEMALA"
         }
     },
@@ -1759,7 +1489,7 @@
         "pk": "HT",
         "fields": {
             "code_iso3": "HTI",
-            "num_iso": "332",
+            "num_iso": 332,
             "libelle": "HAITI"
         }
     },
@@ -1768,7 +1498,7 @@
         "pk": "HN",
         "fields": {
             "code_iso3": "HND",
-            "num_iso": "340",
+            "num_iso": 340,
             "libelle": "HONDURAS"
         }
     },
@@ -1777,7 +1507,7 @@
         "pk": "NI",
         "fields": {
             "code_iso3": "NIC",
-            "num_iso": "558",
+            "num_iso": 558,
             "libelle": "NICARAGUA"
         }
     },
@@ -1786,7 +1516,7 @@
         "pk": "PA",
         "fields": {
             "code_iso3": "PAN",
-            "num_iso": "591",
+            "num_iso": 591,
             "libelle": "PANAMA"
         }
     },
@@ -1795,7 +1525,7 @@
         "pk": "SV",
         "fields": {
             "code_iso3": "SLV",
-            "num_iso": "222",
+            "num_iso": 222,
             "libelle": "EL SALVADOR"
         }
     },
@@ -1804,7 +1534,7 @@
         "pk": "AR",
         "fields": {
             "code_iso3": "ARG",
-            "num_iso": "032",
+            "num_iso": 32,
             "libelle": "ARGENTINE"
         }
     },
@@ -1813,7 +1543,7 @@
         "pk": "BR",
         "fields": {
             "code_iso3": "BRA",
-            "num_iso": "076",
+            "num_iso": 76,
             "libelle": "BRESIL"
         }
     },
@@ -1822,7 +1552,7 @@
         "pk": "CL",
         "fields": {
             "code_iso3": "CHL",
-            "num_iso": "152",
+            "num_iso": 152,
             "libelle": "CHILI"
         }
     },
@@ -1831,7 +1561,7 @@
         "pk": "BO",
         "fields": {
             "code_iso3": "BOL",
-            "num_iso": "068",
+            "num_iso": 68,
             "libelle": "BOLIVIE"
         }
     },
@@ -1840,7 +1570,7 @@
         "pk": "CO",
         "fields": {
             "code_iso3": "COL",
-            "num_iso": "170",
+            "num_iso": 170,
             "libelle": "COLOMBIE"
         }
     },
@@ -1849,7 +1579,7 @@
         "pk": "EC",
         "fields": {
             "code_iso3": "ECU",
-            "num_iso": "218",
+            "num_iso": 218,
             "libelle": "EQUATEUR"
         }
     },
@@ -1858,7 +1588,7 @@
         "pk": "PY",
         "fields": {
             "code_iso3": "PRY",
-            "num_iso": "600",
+            "num_iso": 600,
             "libelle": "PARAGUAY"
         }
     },
@@ -1867,7 +1597,7 @@
         "pk": "PE",
         "fields": {
             "code_iso3": "PER",
-            "num_iso": "604",
+            "num_iso": 604,
             "libelle": "PEROU"
         }
     },
@@ -1876,7 +1606,7 @@
         "pk": "UY",
         "fields": {
             "code_iso3": "URY",
-            "num_iso": "858",
+            "num_iso": 858,
             "libelle": "URUGUAY"
         }
     },
@@ -1885,7 +1615,7 @@
         "pk": "VE",
         "fields": {
             "code_iso3": "VEN",
-            "num_iso": "862",
+            "num_iso": 862,
             "libelle": "VENEZUELA"
         }
     },
@@ -1894,7 +1624,7 @@
         "pk": "BM",
         "fields": {
             "code_iso3": "BMU",
-            "num_iso": "060",
+            "num_iso": 60,
             "libelle": "BERMUDES"
         }
     },
@@ -1903,7 +1633,7 @@
         "pk": "KY",
         "fields": {
             "code_iso3": "CYM",
-            "num_iso": "136",
+            "num_iso": 136,
             "libelle": "CAIMANES (ILES)"
         }
     },
@@ -1912,17 +1642,8 @@
         "pk": "MS",
         "fields": {
             "code_iso3": "MSR",
-            "num_iso": "500",
+            "num_iso": 500,
             "libelle": "MONTSERRAT"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TERRITOIRES DU ROYAUME-UNI AUX ANTILLES"
         }
     },
     {
@@ -1930,7 +1651,7 @@
         "pk": "TC",
         "fields": {
             "code_iso3": "TCA",
-            "num_iso": "796",
+            "num_iso": 796,
             "libelle": "TURKS ET CAIQUES (ILES)"
         }
     },
@@ -1939,7 +1660,7 @@
         "pk": "VG",
         "fields": {
             "code_iso3": "VGB",
-            "num_iso": "092",
+            "num_iso": 92,
             "libelle": "VIERGES BRITANNIQUES (ILES)"
         }
     },
@@ -1948,7 +1669,7 @@
         "pk": "AI",
         "fields": {
             "code_iso3": "AIA",
-            "num_iso": "660",
+            "num_iso": 660,
             "libelle": "ANGUILLA"
         }
     },
@@ -1957,17 +1678,8 @@
         "pk": "JM",
         "fields": {
             "code_iso3": "JAM",
-            "num_iso": "388",
+            "num_iso": 388,
             "libelle": "JAMAIQUE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TERR. DU ROYAUME-UNI DANS L'ATLANTIQUE SUD"
         }
     },
     {
@@ -1975,7 +1687,7 @@
         "pk": "GS",
         "fields": {
             "code_iso3": "SGS",
-            "num_iso": "239",
+            "num_iso": 239,
             "libelle": "GEORGIE DU SUD ET LES ILES SANDWICH DU SUD"
         }
     },
@@ -1984,7 +1696,7 @@
         "pk": "FK",
         "fields": {
             "code_iso3": "FLK",
-            "num_iso": "238",
+            "num_iso": 238,
             "libelle": "MALOUINES, OU FALKLAND (ILES)"
         }
     },
@@ -1993,7 +1705,7 @@
         "pk": "GY",
         "fields": {
             "code_iso3": "GUY",
-            "num_iso": "328",
+            "num_iso": 328,
             "libelle": "GUYANA"
         }
     },
@@ -2002,7 +1714,7 @@
         "pk": "BZ",
         "fields": {
             "code_iso3": "BLZ",
-            "num_iso": "084",
+            "num_iso": 84,
             "libelle": "BELIZE"
         }
     },
@@ -2011,17 +1723,8 @@
         "pk": "GL",
         "fields": {
             "code_iso3": "GRL",
-            "num_iso": "304",
+            "num_iso": 304,
             "libelle": "GROENLAND"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "AN",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "ANTILLES NEERLANDAISES"
         }
     },
     {
@@ -2029,17 +1732,8 @@
         "pk": "PR",
         "fields": {
             "code_iso3": "PRI",
-            "num_iso": "630",
+            "num_iso": 630,
             "libelle": "PORTO RICO"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TERR. DES ETATS-UNIS D'AMERIQUE EN AMERIQUE"
         }
     },
     {
@@ -2047,7 +1741,7 @@
         "pk": "VI",
         "fields": {
             "code_iso3": "VIR",
-            "num_iso": "850",
+            "num_iso": 850,
             "libelle": "VIERGES DES ETATS-UNIS (ILES)"
         }
     },
@@ -2056,7 +1750,7 @@
         "pk": "TT",
         "fields": {
             "code_iso3": "TTO",
-            "num_iso": "780",
+            "num_iso": 780,
             "libelle": "TRINITE-ET-TOBAGO"
         }
     },
@@ -2065,7 +1759,7 @@
         "pk": "BB",
         "fields": {
             "code_iso3": "BRB",
-            "num_iso": "052",
+            "num_iso": 52,
             "libelle": "BARBADE"
         }
     },
@@ -2074,7 +1768,7 @@
         "pk": "GD",
         "fields": {
             "code_iso3": "GRD",
-            "num_iso": "308",
+            "num_iso": 308,
             "libelle": "GRENADE"
         }
     },
@@ -2083,7 +1777,7 @@
         "pk": "BS",
         "fields": {
             "code_iso3": "BHS",
-            "num_iso": "044",
+            "num_iso": 44,
             "libelle": "BAHAMAS"
         }
     },
@@ -2092,7 +1786,7 @@
         "pk": "SR",
         "fields": {
             "code_iso3": "SUR",
-            "num_iso": "740",
+            "num_iso": 740,
             "libelle": "SURINAME"
         }
     },
@@ -2101,7 +1795,7 @@
         "pk": "DM",
         "fields": {
             "code_iso3": "DMA",
-            "num_iso": "212",
+            "num_iso": 212,
             "libelle": "DOMINIQUE"
         }
     },
@@ -2110,7 +1804,7 @@
         "pk": "LC",
         "fields": {
             "code_iso3": "LCA",
-            "num_iso": "662",
+            "num_iso": 662,
             "libelle": "SAINTE-LUCIE"
         }
     },
@@ -2119,7 +1813,7 @@
         "pk": "VC",
         "fields": {
             "code_iso3": "VCT",
-            "num_iso": "670",
+            "num_iso": 670,
             "libelle": "SAINT-VINCENT-ET-LES GRENADINES"
         }
     },
@@ -2128,7 +1822,7 @@
         "pk": "AG",
         "fields": {
             "code_iso3": "ATG",
-            "num_iso": "028",
+            "num_iso": 28,
             "libelle": "ANTIGUA-ET-BARBUDA"
         }
     },
@@ -2137,7 +1831,7 @@
         "pk": "KN",
         "fields": {
             "code_iso3": "KNA",
-            "num_iso": "659",
+            "num_iso": 659,
             "libelle": "SAINT-CHRISTOPHE-ET-NIEVES"
         }
     },
@@ -2146,7 +1840,7 @@
         "pk": "BQ",
         "fields": {
             "code_iso3": "BES",
-            "num_iso": "535",
+            "num_iso": 535,
             "libelle": "BONAIRE, SAINT EUSTACHE ET SABA"
         }
     },
@@ -2155,7 +1849,7 @@
         "pk": "CW",
         "fields": {
             "code_iso3": "CUW",
-            "num_iso": "531",
+            "num_iso": 531,
             "libelle": "CURA\u00c7AO"
         }
     },
@@ -2164,7 +1858,7 @@
         "pk": "SX",
         "fields": {
             "code_iso3": "SXM",
-            "num_iso": "534",
+            "num_iso": 534,
             "libelle": "SAINT-MARTIN (PARTIE NEERLANDAISE)"
         }
     },
@@ -2173,7 +1867,7 @@
         "pk": "AU",
         "fields": {
             "code_iso3": "AUS",
-            "num_iso": "036",
+            "num_iso": 36,
             "libelle": "AUSTRALIE"
         }
     },
@@ -2182,7 +1876,7 @@
         "pk": "HM",
         "fields": {
             "code_iso3": "HMD",
-            "num_iso": "334",
+            "num_iso": 334,
             "libelle": "HEARD ET MACDONALD (ILES)"
         }
     },
@@ -2191,7 +1885,7 @@
         "pk": "CX",
         "fields": {
             "code_iso3": "CXR",
-            "num_iso": "162",
+            "num_iso": 162,
             "libelle": "CHRISTMAS (ILE)"
         }
     },
@@ -2200,7 +1894,7 @@
         "pk": "CC",
         "fields": {
             "code_iso3": "CCK",
-            "num_iso": "166",
+            "num_iso": 166,
             "libelle": "COCOS ou KEELING (ILES)"
         }
     },
@@ -2209,7 +1903,7 @@
         "pk": "NF",
         "fields": {
             "code_iso3": "NFK",
-            "num_iso": "574",
+            "num_iso": 574,
             "libelle": "NORFOLK (ILE)"
         }
     },
@@ -2218,7 +1912,7 @@
         "pk": "NZ",
         "fields": {
             "code_iso3": "NZL",
-            "num_iso": "554",
+            "num_iso": 554,
             "libelle": "NOUVELLE-ZELANDE"
         }
     },
@@ -2227,7 +1921,7 @@
         "pk": "NU",
         "fields": {
             "code_iso3": "NIU",
-            "num_iso": "570",
+            "num_iso": 570,
             "libelle": "NIUE"
         }
     },
@@ -2236,7 +1930,7 @@
         "pk": "TK",
         "fields": {
             "code_iso3": "TKL",
-            "num_iso": "772",
+            "num_iso": 772,
             "libelle": "TOKELAU"
         }
     },
@@ -2245,7 +1939,7 @@
         "pk": "CK",
         "fields": {
             "code_iso3": "COK",
-            "num_iso": "184",
+            "num_iso": 184,
             "libelle": "COOK (ILES)"
         }
     },
@@ -2254,26 +1948,8 @@
         "pk": "PN",
         "fields": {
             "code_iso3": "PCN",
-            "num_iso": "612",
+            "num_iso": 612,
             "libelle": "PITCAIRN (ILE)"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "HAWAII (ILES)"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TERR. DES ETATS-UNIS D'AMERIQUE EN OCEANIE"
         }
     },
     {
@@ -2281,7 +1957,7 @@
         "pk": "MP",
         "fields": {
             "code_iso3": "MNP",
-            "num_iso": "580",
+            "num_iso": 580,
             "libelle": "MARIANNES DU NORD (ILES)"
         }
     },
@@ -2290,7 +1966,7 @@
         "pk": "AS",
         "fields": {
             "code_iso3": "ASM",
-            "num_iso": "016",
+            "num_iso": 16,
             "libelle": "SAMOA AMERICAINES"
         }
     },
@@ -2299,7 +1975,7 @@
         "pk": "GU",
         "fields": {
             "code_iso3": "GUM",
-            "num_iso": "316",
+            "num_iso": 316,
             "libelle": "GUAM"
         }
     },
@@ -2308,7 +1984,7 @@
         "pk": "WS",
         "fields": {
             "code_iso3": "WSM",
-            "num_iso": "882",
+            "num_iso": 882,
             "libelle": "SAMOA OCCIDENTALES"
         }
     },
@@ -2317,7 +1993,7 @@
         "pk": "NR",
         "fields": {
             "code_iso3": "NRU",
-            "num_iso": "520",
+            "num_iso": 520,
             "libelle": "NAURU"
         }
     },
@@ -2326,7 +2002,7 @@
         "pk": "FJ",
         "fields": {
             "code_iso3": "FJI",
-            "num_iso": "242",
+            "num_iso": 242,
             "libelle": "FIDJI"
         }
     },
@@ -2335,7 +2011,7 @@
         "pk": "TO",
         "fields": {
             "code_iso3": "TON",
-            "num_iso": "776",
+            "num_iso": 776,
             "libelle": "TONGA"
         }
     },
@@ -2344,7 +2020,7 @@
         "pk": "PG",
         "fields": {
             "code_iso3": "PNG",
-            "num_iso": "598",
+            "num_iso": 598,
             "libelle": "PAPOUASIE-NOUVELLE-GUINEE"
         }
     },
@@ -2353,7 +2029,7 @@
         "pk": "TV",
         "fields": {
             "code_iso3": "TUV",
-            "num_iso": "798",
+            "num_iso": 798,
             "libelle": "TUVALU"
         }
     },
@@ -2362,7 +2038,7 @@
         "pk": "SB",
         "fields": {
             "code_iso3": "SLB",
-            "num_iso": "090",
+            "num_iso": 90,
             "libelle": "SALOMON (ILES)"
         }
     },
@@ -2371,7 +2047,7 @@
         "pk": "KI",
         "fields": {
             "code_iso3": "KIR",
-            "num_iso": "296",
+            "num_iso": 296,
             "libelle": "KIRIBATI"
         }
     },
@@ -2380,7 +2056,7 @@
         "pk": "VU",
         "fields": {
             "code_iso3": "VUT",
-            "num_iso": "548",
+            "num_iso": 548,
             "libelle": "VANUATU"
         }
     },
@@ -2389,7 +2065,7 @@
         "pk": "MH",
         "fields": {
             "code_iso3": "MHL",
-            "num_iso": "584",
+            "num_iso": 584,
             "libelle": "MARSHALL (ILES)"
         }
     },
@@ -2398,7 +2074,7 @@
         "pk": "FM",
         "fields": {
             "code_iso3": "FSM",
-            "num_iso": "583",
+            "num_iso": 583,
             "libelle": "MICRONESIE (ETATS FEDERES DE)"
         }
     },
@@ -2407,7 +2083,7 @@
         "pk": "PW",
         "fields": {
             "code_iso3": "PLW",
-            "num_iso": "585",
+            "num_iso": 585,
             "libelle": "PALAOS (ILES)"
         }
     },
@@ -2416,7 +2092,7 @@
         "pk": "FR",
         "fields": {
             "code_iso3": "FRA",
-            "num_iso": "250",
+            "num_iso": 250,
             "libelle": "FRANCE"
         }
     },
@@ -2425,7 +2101,7 @@
         "pk": "RE",
         "fields": {
             "code_iso3": "REU",
-            "num_iso": "638",
+            "num_iso": 638,
             "libelle": "LA REUNION"
         }
     },
@@ -2434,7 +2110,7 @@
         "pk": "PF",
         "fields": {
             "code_iso3": "PYF",
-            "num_iso": "258",
+            "num_iso": 258,
             "libelle": "POLYNESIE FRANCAISE"
         }
     },
@@ -2443,7 +2119,7 @@
         "pk": "GP",
         "fields": {
             "code_iso3": "GLP",
-            "num_iso": "312",
+            "num_iso": 312,
             "libelle": "GUADELOUPE"
         }
     },
@@ -2452,7 +2128,7 @@
         "pk": "PM",
         "fields": {
             "code_iso3": "SPM",
-            "num_iso": "666",
+            "num_iso": 666,
             "libelle": "SAINT-PIERRE-ET-MIQUELON"
         }
     },
@@ -2461,7 +2137,7 @@
         "pk": "TF",
         "fields": {
             "code_iso3": "ATF",
-            "num_iso": "260",
+            "num_iso": 260,
             "libelle": "TERRES AUSTRALES FRANCAISES"
         }
     },
@@ -2470,7 +2146,7 @@
         "pk": "WF",
         "fields": {
             "code_iso3": "WLF",
-            "num_iso": "876",
+            "num_iso": 876,
             "libelle": "WALLIS-ET-FUTUNA"
         }
     },
@@ -2479,17 +2155,8 @@
         "pk": "YT",
         "fields": {
             "code_iso3": "MYT",
-            "num_iso": "175",
+            "num_iso": 175,
             "libelle": "MAYOTTE"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "CLIPPERTON (ILE)"
         }
     },
     {
@@ -2497,7 +2164,7 @@
         "pk": "NC",
         "fields": {
             "code_iso3": "NCL",
-            "num_iso": "540",
+            "num_iso": 540,
             "libelle": "NOUVELLE-CALEDONIE"
         }
     },
@@ -2506,7 +2173,7 @@
         "pk": "MQ",
         "fields": {
             "code_iso3": "MTQ",
-            "num_iso": "474",
+            "num_iso": 474,
             "libelle": "MARTINIQUE"
         }
     },
@@ -2515,7 +2182,7 @@
         "pk": "GF",
         "fields": {
             "code_iso3": "GUF",
-            "num_iso": "254",
+            "num_iso": 254,
             "libelle": "GUYANE"
         }
     },
@@ -2524,7 +2191,7 @@
         "pk": "BL",
         "fields": {
             "code_iso3": "BLM",
-            "num_iso": "652",
+            "num_iso": 652,
             "libelle": "SAINT-BARTHELEMY"
         }
     },
@@ -2533,7 +2200,7 @@
         "pk": "MF",
         "fields": {
             "code_iso3": "MAF",
-            "num_iso": "663",
+            "num_iso": 663,
             "libelle": "SAINT-MARTIN"
         }
     }
