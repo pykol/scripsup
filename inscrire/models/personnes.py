@@ -149,6 +149,10 @@ class Candidat(Personne):
 	bac_mention = models.PositiveSmallIntegerField(choices=BAC_MENTION_CHOICES,
 			blank=True, null=True)
 
+	email_bienvenue_envoye = models.BooleanField(
+			verbose_name="message de bienvenue envoyé",
+			default=False)
+
 	objects = CandidatManager()
 
 	@property
@@ -160,11 +164,14 @@ class Candidat(Personne):
 		return self.voeu_set.get(etat__in=(Voeu.ETAT_ACCEPTE_AUTRES,
 			Voeu.ETAT_ACCEPTE_DEFINITIF))
 
-	def email_bienvenue(self):
+	def email_bienvenue(self, force=False):
 		"""
 		Envoyer au candidat l'e-mail de bienvenue qui lui permet
 		d'activer son compte.
 		"""
+		if not force and self.email_bienvenue_envoye:
+			return
+
 		voeu_actuel = self.voeu_actuel
 		render_context = {
 				'candidat': self,

@@ -120,7 +120,7 @@ class ParcoursupCandidat(ParcoursupPersonne):
 class ParcoursupResponsableLegal(ParcoursupPersonne):
 	def __init__(self, **kwargs):
 		super().__init__(**kwargs)
-		self.candidat = kwargs.get('candidat')
+		#self.candidat = kwargs.get('candidat')
 
 class ParcoursupProposition:
 	ETAT_ATTENTE = 0

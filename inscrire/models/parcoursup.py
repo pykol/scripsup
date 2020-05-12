@@ -87,16 +87,88 @@ class ParcoursupUser(models.Model):
 					code_etablissement=self.etablissement.numero_uai)
 		return self._parcoursup_rest
 
-	def import_candidat(self, candidat_psup):
+	def import_candidat(self, psup):
 		"""
 		Import des données Parcoursup dans la base de données du serveur
 		d'inscription.
 
 		Renvoie l'instance du modèle Candidat correspondant au candidat.
 
-		Prend en paramètre une instance ParcoursupCandidat.
+		Prend en paramètre un dictionnaire renvoyé par
+		ParcoursupRest.parse_parcoursup_admission.
 		"""
-		pass
+		# Création ou mise à jour du candidat
+		try:
+			candidat = Candidat.objects.get(dossier_parcoursup=psup['candidat'].code)
+		except Candidat.DoesNotExist:
+			candidat = Candidat.objects.bienvenue(
+					first_name=psup['candidat'].prenom,
+					last_name=psup['candidat'].nom,
+					email=psup['candidat'].email,
+					dossier_parcoursup=psup['candidat'].code,
+				)
+		candidat.genre = Candidat.GENRE_HOMME \
+				if psup['candidat'].sexe == ParcoursupPersonne.GENRE_HOMME \
+				else Candidat.GENRE_FEMME
+		candidat.telephone = psup['candidat'].telephone_fixe
+		candidat.telephone_mobile = psup['candidat'].telephone_mobile
+		candidat.adresse = psup['candidat'].adresse
+		candidat.date_naissance = psup['candidat'].date_naissance
+		candidat.commune_naissance = ...
+		candidat.pays_naissance = ...
+		candidat.nationalite = ...
+		candidat.ine = psup['candidat'].ine
+		candidat.bac_date = psup['candidat'].bac_date
+		candidat.bac_serie = psup['candidat'].bac_serie
+		candidat.bac_mention = {
+				'P': Candidat.BAC_MENTION_PASSABLE,
+				'AB': Candidat.BAC_MENTION_ASSEZBIEN,
+				'B': Candidat.BAC_MENTION_BIEN,
+				'TB': Candidat.BAC_MENTION_TRESBIEN,
+			}.get(psup['candidat'].bac_mention)
+		candidat.save()
+
+		# Détermination du vœu concerné
+		etat_voeu = {
+				ParcoursupProposition.ETAT_ATTENTE: Voeu.ETAT_ATTENTE,
+				ParcoursupProposition.ETAT_ACCEPTEE_AUTRES_VOEUX: Voeu.ETAT_ACCEPTE_AUTRES,
+				ParcoursupProposition.ETAT_ATTEPTEE: Voeu.ETAT_ACCEPTE_DEFINITIF,
+				ParcoursupProposition.ETAT_REFUSEE: Voeu.ETAT_REFUSE,
+				}.get(psup['proposition'].etat)
+
+		formation = Formation.objects.get(
+				code_parcoursup=psup['proposition'].code_formation,
+				etablissement__numero_uai=psup['proposition'].code_etablissement)
+		voeu, voeu_created = Voeu.objects.get_or_create(
+				candidat=candidat,
+				formation=formation,
+				internat=psup['proposition'].internat,
+				cesure=psup['proposition'].cesure,
+				defaults={'etat': etat_voeu})
+		if voeu.etat != etat_voeu:
+			HistoriqueVoeu(voeu=voeu, etat=etat_voeu,
+					date=timezone.now()).save()
+			voeu.etat = etat_voeu
+			voeu.save()
+
+		# Import des responsables légaux
+		# Aucune clé primaire n'est transmise par Parcoursup. Pour
+		# éviter des doublons, on ne crée les responsables que lors du
+		# premier ajout du candidat. Pour la suite, c'est au candidat
+		# de mettre à jour manuellement les données dans son dossier
+		# d'inscription.
+		if not candidat.responsable.all():
+			ResponsableLegal(
+					candidat=candidat,
+					genre=...,
+					last_name=...,
+					first_name=...,
+					telephone=...,
+					telephone_mobile=...,
+					adresse=...).save()
+
+		# Mise à jour des fiches d'inscription
+		Fiche.objects.create_or_update_applicable(voeu)
 
 	def get_candidats_admis(self):
 		"""
