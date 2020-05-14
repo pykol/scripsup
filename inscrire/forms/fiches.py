@@ -29,12 +29,14 @@ from django import forms
 from inscrire.models import fiches
 
 class IdentiteForm(forms.ModelForm):
+	prefix = 'fiche-identite'
 	class Meta:
 		model = fiches.FicheIdentite
 		fields = ['photo', 'piece_identite', 'commune_naissance',
 				'commune_naissance_etranger', 'pays_naissance']
 
 class ScolariteAnterieureForm(forms.ModelForm):
+	prefix = 'fiche-scolariteanterieure'
 	class Meta:
 		model = fiches.FicheScolariteAnterieure
 		fields = ['etablissement', 'classe_terminale',
@@ -42,6 +44,7 @@ class ScolariteAnterieureForm(forms.ModelForm):
 		# TODO gestion des bulletins
 
 class BourseForm(forms.ModelForm):
+	prefix = 'fiche-bourse'
 	class Meta:
 		model = fiches.FicheBourse
 		fields = ['boursier', 'echelon', 'enfants_charge',
@@ -49,6 +52,7 @@ class BourseForm(forms.ModelForm):
 				'attribution_bourse']
 
 class ReglementForm(forms.ModelForm):
+	prefix = 'fiche-reglement'
 	class Meta:
 		model = fiches.FicheReglement
 		fields = ['signature_reglement', 'autorisation_parents_eleeves']
