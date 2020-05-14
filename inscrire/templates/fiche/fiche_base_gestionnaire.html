@@ -1,0 +1,27 @@
+{% comment %}
+Code de base pour afficher une fiche d'inscription. Ce gabarit n'est pas
+servi directement mais inclus, par exemple par le gabarit de mise à jour
+du candidat.
+
+Si une fiche possède un gabarit personnalisé, celui doit s'appeler
+nomdumodele_candidat.html ou nomdumodele_gestionnaire.html selon le
+profil de l'utilisateur qui affiche la page.
+
+S'il n'y a pas de gabarit personnalisé, c'est fiche_base_candidat.html
+ou fiche_base_gestionnaire.html qui est appelé.
+
+Ce gabarit peut utiliser les paramètres suivants de son contexte :
+* fiche : le modèle hérité de Fiche,
+* fiche_form : le formulaire d'édition correspondant,
+* candidat : l'instance de Candidat (identique à fiche.voeu.candidat),
+* voeu : l'instance du Voeu pour lequel le candidat s'inscrit (identique
+         à fiche.voeu)
+* formation : identique à fiche.voeu.formation
+
+Il n'est pas nécessaire d'ajouter une balise <form>, c'est déjà fait par
+le gabarit qui inclut la fiche.
+{% endcomment %}
+<section class="fiche">
+  <h3>{{ fiche.FICHE_LABEL }}</h3>
+  {{ fiche_form.as_p }}
+</section>
