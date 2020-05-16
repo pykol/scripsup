@@ -38,6 +38,9 @@ class Etablissement(models.Model):
 		verbose_name = "établissement"
 		verbose_name_plural = "établissements"
 
+	def __str__(self):
+		return self.nom
+
 class Formation(models.Model):
 	"""
 	Description d'une formation dispensée dans l'établissement
@@ -57,6 +60,9 @@ class Formation(models.Model):
 		verbose_name = "formation"
 		verbose_name_plural = "formations"
 
+	def __str__(self):
+		return self.nom
+
 class MefMatiere(models.Model):
 	"""
 	Matière
@@ -70,6 +76,9 @@ class MefMatiere(models.Model):
 	class Meta:
 		verbose_name = "matière MEF"
 		verbose_name_plural = "matières MEF"
+
+	def __str__(self):
+		return self.libelle_edition
 
 class MefOption(models.Model):
 	"""
@@ -90,3 +99,11 @@ class MefOption(models.Model):
 	class Meta:
 		verbose_name = "option MEF"
 		verbose_name_plural = "options MEF"
+
+	def __str__(self):
+		if self.modalite == self.MODALITE_OBLIGATOIRE:
+			return "{} ({}, rang {})".format(self.matiere,
+					self.get_modalite_display(), self.rang)
+		else:
+			return "{} ({})".format(self.matiere,
+					self.get_modalite_display())
