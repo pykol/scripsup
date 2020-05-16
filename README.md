@@ -14,6 +14,6 @@ cd scripsup
 
 pip intall -r requirements.txt
 ./manage.py migrate
-./manage.py loaddata communes.json pays.json professions.json
+./manage.py loaddata communes.json pays.json professions.json etablissements.json
 ./manage.py createsuperuser
 ```
