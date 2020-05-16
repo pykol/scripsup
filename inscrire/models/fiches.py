@@ -27,7 +27,7 @@ from django.db import models
 from polymorphic.models import PolymorphicModel, PolymorphicManager
 import localflavor.generic.models as lfmodels
 
-from .personnes import Candidat, Commune, Pays
+from .personnes import Candidat, Commune, Pays, ResponsableLegal
 from .formation import MefOption, Formation, Etablissement
 
 class FicheManager(PolymorphicManager):
@@ -186,6 +186,14 @@ class FicheIdentite(Fiche):
 			blank=True, null=False, default="")
 	pays_naissance = models.ForeignKey(Pays, on_delete=models.PROTECT,
 			blank=True, null=True)
+	responsables = models.ManyToManyField(ResponsableLegal)
+
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		# TODO peupler par défaut les responsables légaux
+		# On les ajoute dans la fiche, en plus du modèle Candidat, afin
+		# de permettre la modification par les candidats, éventuellement
+		# en ajoutant/supprimant des responsables.
 
 class FicheScolariteAnterieure(Fiche):
 	"""

@@ -20,7 +20,7 @@ from django.db import models
 from django.conf import settings
 
 from inscrire.lib.parcoursup_rest import ParcoursupCandidat, ParcoursupRest
-from .personnes import Candidat
+from .personnes import Candidat, Pays, Commune
 from .formation import Etablissement, Formation
 
 class ParcoursupUserManager(models.Manager):
@@ -114,9 +114,9 @@ class ParcoursupUser(models.Model):
 		candidat.telephone_mobile = psup['candidat'].telephone_mobile
 		candidat.adresse = psup['candidat'].adresse
 		candidat.date_naissance = psup['candidat'].date_naissance
-		candidat.commune_naissance = ...
-		candidat.pays_naissance = ...
-		candidat.nationalite = ...
+		candidat.commune_naissance = Commune.objects.filter(code_insee=psup['candidat'].commune_naissance).first()
+		candidat.pays_naissance = Pays.objects.filter(code_iso2=psup['candidat'].pays_naissance).first()
+		candidat.nationalite = Pays.objects.filter(code_iso2=psup['candidat'].nationalite).first()
 		candidat.ine = psup['candidat'].ine
 		candidat.bac_date = psup['candidat'].bac_date
 		candidat.bac_serie = psup['candidat'].bac_serie
@@ -158,17 +158,22 @@ class ParcoursupUser(models.Model):
 		# de mettre à jour manuellement les données dans son dossier
 		# d'inscription.
 		if not candidat.responsable.all():
-			ResponsableLegal(
-					candidat=candidat,
-					genre=...,
-					last_name=...,
-					first_name=...,
-					telephone=...,
-					telephone_mobile=...,
-					adresse=...).save()
+			for psup_resp in psup['responsables']:
+				ResponsableLegal(
+						candidat=candidat,
+						genre=Candidat.GENRE_HOMME \
+								if psup_resp.sexe == ParcoursupPersonne.GENRE_HOMME \
+								else Candidat.GENRE_FEMME,
+						last_name=psup_resp.nom,
+						first_name=psup_resp.prenom,
+						telephone=psup_resp.telephone_fixe,
+						telephone_mobile=psup_resp.telephone_mobile,
+						adresse=psup_resp.adresse).save()
 
 		# Mise à jour des fiches d'inscription
 		Fiche.objects.create_or_update_applicable(voeu)
+
+		return candidat
 
 	def get_candidats_admis(self):
 		"""
