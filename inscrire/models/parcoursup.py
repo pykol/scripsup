@@ -59,6 +59,10 @@ class ParcoursupUser(models.Model):
 
 	objects = ParcoursupUserManager()
 
+	class Meta:
+		verbose_name = "utilisateur Parcoursup"
+		verbose_name_plural = "utilisateurs Parcoursup"
+
 	def check_password(self, raw_password):
 		"""
 		Renvoie True lorsque le mot de passe en clair correspond à celui
@@ -226,11 +230,19 @@ class ParcoursupMessageRecuLog(models.Model):
 	payload = models.BinaryField(verbose_name="données reçues",
 			blank=True, default=b'', null=True)
 
+	class Meta:
+		verbose_name = "message reçu Parcoursup"
+		verbose_name_plural = "messages reçus Parcoursup"
+
 class ParcoursupMessageEnvoyeLog(models.Model):
 	"""
 	Journal des messages envoyés à Parcoursup
 	"""
 	date = models.DateTimeField()
+
+	class Meta:
+		verbose_name = "message envoyé Parcoursup"
+		verbose_name_plural = "messages envoyés Parcoursup"
 
 class EtatVoeu(models.Model):
 	"""
@@ -261,9 +273,17 @@ class Voeu(EtatVoeu):
 	internat = models.BooleanField()
 	cesure = models.BooleanField()
 
+	class Meta:
+		verbose_name = "vœu"
+		verbose_name_plural = "vœux"
+
 class HistoriqueVoeu(EtatVoeu):
 	"""
 	Historique des réponses d'un candidat à un vœu donné
 	"""
 	voeu = models.ForeignKey(Voeu, on_delete=models.CASCADE)
 	date = models.DateTimeField()
+
+	class Meta:
+		verbose_name = "historique de vœu"
+		verbose_name_plural = "historiques de vœu"
