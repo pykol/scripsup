@@ -30,6 +30,7 @@ class LoginView(auth_views.LoginView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['bienvenue_form'] = EnvoiBienvenueForm()
+		return context
 
 class EnvoiBienvenue(FormView):
 	"""
