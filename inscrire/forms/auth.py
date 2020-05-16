@@ -33,7 +33,7 @@ class EnvoiBienvenueForm(forms.Form):
 	etablissement = forms.ModelChoiceField(
 			queryset=Etablissement.objects.filter(inscriptions=True).order_by('numero_uai'),
 			label="établissement",
-			initial=Etablissement.objects.order_by('numero_uai').first)
+			initial=Etablissement.objects.filter(inscriptions=True).order_by('numero_uai').first)
 	numero_dossier = forms.CharField(max_length=10,
 			label="Numéro de dossier Parcoursup",
 			validators=[RegexValidator(regex=r'^\d+$',
