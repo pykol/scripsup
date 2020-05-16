@@ -28,6 +28,13 @@ class Etablissement(models.Model):
 			verbose_name="UAI", primary_key=True)
 	nom = models.CharField(max_length=200)
 	email = models.EmailField(verbose_name="adresse e-mail")
+	inscriptions = models.BooleanField(default=False,
+			help_text="Indique s'il s'agit d'un établissement dont le "
+			"actuel gère les inscriptions")
+
+	class Meta:
+		verbose_name = "établissement"
+		verbose_name_plural = "établissements"
 
 class Formation(models.Model):
 	"""
@@ -44,6 +51,10 @@ class Formation(models.Model):
 	# nomenclature éducation nationale.
 	code_mef = models.CharField(max_length=11)
 
+	class Meta:
+		verbose_name = "formation"
+		verbose_name_plural = "formations"
+
 class MefMatiere(models.Model):
 	"""
 	Matière
@@ -53,6 +64,10 @@ class MefMatiere(models.Model):
 	libelle_court = models.CharField(max_length=100)
 	libelle_long = models.CharField(max_length=100)
 	libelle_edition = models.CharField(max_length=100)
+
+	class Meta:
+		verbose_name = "matière MEF"
+		verbose_name_plural = "matières MEF"
 
 class MefOption(models.Model):
 	"""
@@ -69,3 +84,7 @@ class MefOption(models.Model):
 	rang = models.PositiveSmallIntegerField()
 	matiere = models.ForeignKey(MefMatiere, on_delete=models.CASCADE)
 	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
+
+	class Meta:
+		verbose_name = "option MEF"
+		verbose_name_plural = "options MEF"

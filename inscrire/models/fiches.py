@@ -195,6 +195,10 @@ class FicheIdentite(Fiche):
 		# de permettre la modification par les candidats, éventuellement
 		# en ajoutant/supprimant des responsables.
 
+	class Meta:
+		verbose_name = "fiche identité"
+		verbose_name_plural = "fiches identité"
+
 class FicheScolariteAnterieure(Fiche):
 	"""
 	Scolarité antérieure
@@ -212,6 +216,10 @@ class FicheScolariteAnterieure(Fiche):
 	autre_formation = models.CharField(max_length=200,
 			verbose_name="autre formation",
 			blank=True, null=False, default="")
+
+	class Meta:
+		verbose_name = "fiche scolarité antérieure"
+		verbose_name_plural = "fiches scolarité antérieure"
 
 class BulletinScolaire(models.Model):
 	"""
@@ -233,6 +241,10 @@ class BulletinScolaire(models.Model):
 				psup=instance.candidat.numero_parcoursup,
 				filename=filename)
 	bulletin = models.FileField(upload_to=_bulletin_upload_to)
+
+	class Meta:
+		verbose_name = "bulletin scolaire"
+		verbose_name_plural = "bulletins scolaires"
 
 class FicheBourse(Fiche):
 	"""
@@ -261,6 +273,10 @@ class FicheBourse(Fiche):
 			upload_to=_attribution_bourse_upload_to,
 			blank=True, null=True)
 
+	class Meta:
+		verbose_name = "fiche bourse"
+		verbose_name_plural = "fiches bourse"
+
 class FicheReglement(Fiche):
 	"""
 	Règlement intérieur
@@ -270,6 +286,10 @@ class FicheReglement(Fiche):
 			verbose_name="signature du règlement intérieur",
 			blank=True, null=True)
 	autorisation_parents_eleves = models.BooleanField(default=False)
+
+	class Meta:
+		verbose_name = "fiche règlement intérieur"
+		verbose_name_plural = "fiches règlement intérieur"
 
 class FicheScolarite(Fiche):
 	"""
@@ -281,6 +301,10 @@ class FicheScolarite(Fiche):
 
 	def recyclable(self, voeu):
 		return voeu.formation == self.formation
+
+	class Meta:
+		verbose_name = "fiche scolarité"
+		verbose_name_plural = "fiches scolarité"
 
 class FicheHebergement(Fiche):
 	"""
@@ -307,6 +331,10 @@ class FicheHebergement(Fiche):
 	titulaire_compte = models.CharField(max_length=200, blank=True,
 			null=False, default="")
 
+	class Meta:
+		verbose_name = "fiche hébergement"
+		verbose_name_plural = "fiches hébergement"
+
 class FicheInternat(Fiche):
 	"""
 	Renseignements spécifiques à l'internat
@@ -320,6 +348,10 @@ class FicheInternat(Fiche):
 	def applicable(kls, voeu):
 		return voeu.internat
 
+	class Meta:
+		verbose_name = "fiche internat"
+		verbose_name_plural = "fiches internat"
+
 class FicheCesure(Fiche):
 	"""
 	Données à remplir en cas de demande de césure
@@ -329,6 +361,10 @@ class FicheCesure(Fiche):
 	@classmethod
 	def applicable(kls, voeu):
 		return voeu.cesure
+
+	class Meta:
+		verbose_name = "fiche césure"
+		verbose_name_plural = "fiches césure"
 
 # Liste de toutes les fiches à essayer lors de la création d'un dossier.
 all_fiche = [FicheIdentite, FicheScolarite, FicheHebergement,
