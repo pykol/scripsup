@@ -24,4 +24,5 @@ from .parcoursup import ParcoursupUserManager, ParcoursupUser, \
 		ParcoursupMessageRecuLog, ParcoursupMessageEnvoyeLog, \
 		Voeu, HistoriqueVoeu, EtatVoeu
 from .fiches import Fiche, FicheIdentite, FicheScolarite, \
-		FicheHebergement
+		FicheHebergement, FicheScolariteAnterieure, BulletinScolaire, \
+		FicheBourse, FicheReglement, FicheInternat, FicheCesure
