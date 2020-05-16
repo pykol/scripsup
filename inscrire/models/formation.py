@@ -28,6 +28,9 @@ class Etablissement(models.Model):
 			verbose_name="UAI", primary_key=True)
 	nom = models.CharField(max_length=200)
 	email = models.EmailField(verbose_name="adresse e-mail")
+	inscriptions = models.BooleanField(default=False,
+			help_text="Indique s'il s'agit d'un établissement dont le "
+			"actuel gère les inscriptions")
 
 class Formation(models.Model):
 	"""

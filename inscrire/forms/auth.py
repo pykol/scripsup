@@ -31,7 +31,7 @@ class EnvoiBienvenueForm(forms.Form):
 	Parcoursup
 	"""
 	etablissement = forms.ModelChoiceField(
-			queryset=Etablissement.objects.order_by('numero_uai'),
+			queryset=Etablissement.objects.filter(inscriptions=True).order_by('numero_uai'),
 			label="établissement",
 			initial=Etablissement.objects.order_by('numero_uai').first)
 	numero_dossier = forms.CharField(max_length=10,
