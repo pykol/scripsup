@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block contenu %}
+<h2>Déconnexion</h2>
+<p>Vous êtes désormais déconnecté. Nous vous remercions pour
+le temps que vous avez accordé à ce service.</p>
+
+<p><a href="{% url 'login' %}">Retour à l'écran de connexion</a>.</p>
+{% endblock %}
