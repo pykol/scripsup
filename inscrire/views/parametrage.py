@@ -16,8 +16,19 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from .home import home
-from .candidats import CandidatDetail, CandidatUpdate, ResponsableLegal
-from . import parcoursup
-from . import auth
-from . import parametrage
+"""
+Vues permettant le paramétrage des formations gérées
+"""
+from django.views.generic import FormView, UpdateView
+
+class ImportStructuresView(FormView):
+	"""
+	Import des formations depuis le fichier SIECLE Structures
+	"""
+	pass
+
+class AccesParcoursupView(UpdateView):
+	"""
+	Paramétrage d'un accès à l'interface synchrone de Parcoursup
+	"""
+	pass
