@@ -21,3 +21,4 @@ from .candidats import CandidatDetail, CandidatUpdate, ResponsableLegal
 from . import parcoursup
 from . import auth
 from . import parametrage
+from . import formation
