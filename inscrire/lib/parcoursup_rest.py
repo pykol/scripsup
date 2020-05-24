@@ -28,7 +28,6 @@ from dateutil.tz import gettz
 from django.utils import timezone
 from django.conf import settings
 
-from inscrire.models import Formation, Candidat
 from .utils import parse_french_date
 
 PARCOURSUP_ENDPOINT = "https://ws.parcoursup.fr/ApiRest/"
@@ -105,16 +104,7 @@ class ParcoursupPersonne:
 	def formate_adresse(donnees):
 		CODE_PAYS_FRANCE = '99100'
 		code_pays = donnees.get('codepaysadresse', CODE_PAYS_FRANCE)
-		if code_pays == CODE_PAYS_FRANCE:
-			try:
-				libelle_ville = Commune.objects.get(pk=donnees.get('codecommune')).libelle
-			except Commune.DoesNotExist:
-				libelle_ville = '**** COMMUNE INCONNUE ****'
-				print("Commune {} inconnue".format(donnees.get('codecommune')))
-			libelle_pays = ''
-		else:
-			libelle_ville = donnees.get('commune') or ''
-			libelle_pays = donnees.get('libellepaysadresse') or ''
+		libelle_ville = donnes.get('libellecommune', '')
 
 		raw_adresse = '{adresse1}\n{adresse2}\n{adresse3}\n{code_postal} {ville}\n{pays}'.format(
 			adresse1=donnees.get('adresse1') or '',
