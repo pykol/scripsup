@@ -19,9 +19,11 @@
 from django.db import models
 from django.conf import settings
 
-from inscrire.lib.parcoursup_rest import ParcoursupCandidat, ParcoursupRest
-from .personnes import Candidat, Pays, Commune
+from inscrire.lib.parcoursup_rest import ParcoursupCandidat, \
+		ParcoursupRest, ParcoursupPersonne, ParcoursupProposition
+from .personnes import Candidat, Pays, Commune, ResponsableLegal
 from .formation import Etablissement, Formation
+from .fiches import Fiche
 
 class ParcoursupUserManager(models.Manager):
 	def authenticate(self, username, password):
@@ -32,11 +34,11 @@ class ParcoursupUserManager(models.Manager):
 		Lève l'exception ParcoursupUser.DoesNotExist si l'utilisateur
 		n'existe pas ou si le mot de passe n'est pas correct.
 		"""
-		user = self.get(username=username)
-		if not user.check_password(password):
-			raise user.DoesNotExist
+		parcoursup_user = self.get(username=username)
+		if not parcoursup_user.user.check_password(password):
+			raise parcoursup_user.DoesNotExist
 
-		return user
+		return parcoursup_user
 
 class ParcoursupUser(models.Model):
 	"""
@@ -48,7 +50,9 @@ class ParcoursupUser(models.Model):
 
 	# Identifiants qui permettent à Parcoursup de se connecter à notre
 	# service pour envoyer les admis.
-	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	username = models.CharField(max_length=50)
+	user = models.OneToOneField(settings.AUTH_USER_MODEL,
+			on_delete=models.CASCADE)
 
 	# Identifiants que l'on doit utiliser pour envoyer des données à
 	# Parcoursup. Le mot de passe est stocké en clair, c'est ainsi qu'on
@@ -62,23 +66,6 @@ class ParcoursupUser(models.Model):
 	class Meta:
 		verbose_name = "utilisateur Parcoursup"
 		verbose_name_plural = "utilisateurs Parcoursup"
-
-	def check_password(self, raw_password):
-		"""
-		Renvoie True lorsque le mot de passe en clair correspond à celui
-		de l'utilisateur.
-		"""
-		def setter(raw_password):
-			self.password = make_password(raw_password)
-			self.save(update_fields=["password"])
-
-		if not check_password(raw_password, self.password, setter):
-			# En cas d'échec, on ralentit le retour pour prendre à peu
-			# près le même temps que si setter avait été appelé.
-			make_password(raw_password)
-			return False
-
-		return True
 
 	_parcoursup_rest = None
 
@@ -136,7 +123,7 @@ class ParcoursupUser(models.Model):
 		etat_voeu = {
 				ParcoursupProposition.ETAT_ATTENTE: Voeu.ETAT_ATTENTE,
 				ParcoursupProposition.ETAT_ACCEPTEE_AUTRES_VOEUX: Voeu.ETAT_ACCEPTE_AUTRES,
-				ParcoursupProposition.ETAT_ATTEPTEE: Voeu.ETAT_ACCEPTE_DEFINITIF,
+				ParcoursupProposition.ETAT_ACCEPTEE: Voeu.ETAT_ACCEPTE_DEFINITIF,
 				ParcoursupProposition.ETAT_REFUSEE: Voeu.ETAT_REFUSE,
 				}.get(psup['proposition'].etat)
 
@@ -161,7 +148,7 @@ class ParcoursupUser(models.Model):
 		# premier ajout du candidat. Pour la suite, c'est au candidat
 		# de mettre à jour manuellement les données dans son dossier
 		# d'inscription.
-		if not candidat.responsable.all():
+		if not candidat.responsables.all():
 			for psup_resp in psup['responsables']:
 				ResponsableLegal(
 						candidat=candidat,

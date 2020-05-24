@@ -10,7 +10,7 @@ permettre de compléter en ligne votre dossier d'inscription
 administrative.
 </p>
 
-<form method="post" action="{% url 'candidat_update' %}">
+<form method="post" action="{% url 'candidat_update' candidat.pk %}">
   {% csrf_token %}
 
   {% for fiche in fiches %}

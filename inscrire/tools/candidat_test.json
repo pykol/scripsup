@@ -1,7 +1,7 @@
 {
   "identifiant": {
     "login": "42",
-    "pwd": "secret"
+    "pwd": "secretsecret"
   },
   "donneesCandidat": {
     "session": 2020,
@@ -16,7 +16,7 @@
     "libelleAmenagement": "Pas d'aménagement",
     "dateReponse": "19/05/2020 19:42",
     "libelleFormation": "Libellé de formation",
-    "codeSituation": 2,
+    "codeSituation": 1,
     "codeCandidat": 17,
     "ine": "123456789AB",
     "sexe": "M",
