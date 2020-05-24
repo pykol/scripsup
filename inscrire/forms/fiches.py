@@ -25,6 +25,7 @@ de fiche associent la classe de formulaire à utiliser.
 """
 
 from django import forms
+from dal import autocomplete
 
 from inscrire.models import fiches
 
@@ -34,6 +35,10 @@ class IdentiteForm(forms.ModelForm):
 		model = fiches.FicheIdentite
 		fields = ['photo', 'piece_identite', 'commune_naissance',
 				'commune_naissance_etranger', 'pays_naissance']
+		widgets = {
+			'commune_naissance': autocomplete.ModelSelect2(url='autocomplete-commune'),
+			'pays_naissance': autocomplete.ModelSelect2(url='autocomplete-pays'),
+		}
 
 class ScolariteAnterieureForm(forms.ModelForm):
 	prefix = 'fiche-scolariteanterieure'
@@ -42,6 +47,9 @@ class ScolariteAnterieureForm(forms.ModelForm):
 		fields = ['etablissement', 'classe_terminale',
 				'specialite_terminale', 'autre_formation']
 		# TODO gestion des bulletins
+		widgets = {
+			'etablissement': autocomplete.ModelSelect2(url='autocomplete-etablissement'),
+		}
 
 class BourseForm(forms.ModelForm):
 	prefix = 'fiche-bourse'
