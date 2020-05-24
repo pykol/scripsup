@@ -110,14 +110,16 @@ class CandidatManager(models.Manager):
 		son admission dans une formation.
 		"""
 		candidat_user = User.objects.create_user(
-				username=email,
-				first_name=donnees['prenom'],
-				last_name=donnees['nom'],
-				role=User.ROLE_CANDIDAT)
+				email=email,
+				first_name=first_name,
+				last_name=last_name,
+				role=User.ROLE_ETUDIANT)
 		candidat_user.save()
 
 		candidat = Candidat(
-				dossier_parcoursup=donnees['codeCandidat'],
+				first_name=first_name,
+				last_name=last_name,
+				dossier_parcoursup=dossier_parcoursup,
 				user=candidat_user, **kwargs)
 
 		return candidat
@@ -180,7 +182,7 @@ class Candidat(Personne):
 		return self.voeu_set.get(etat__in=(Voeu.ETAT_ACCEPTE_AUTRES,
 			Voeu.ETAT_ACCEPTE_DEFINITIF))
 
-	def email_bienvenue(self, force=False):
+	def email_bienvenue(self, request, force=False):
 		"""
 		Envoyer au candidat l'e-mail de bienvenue qui lui permet
 		d'activer son compte.
@@ -193,11 +195,11 @@ class Candidat(Personne):
 				'candidat': self,
 				'formation': voeu_actuel.formation,
 				'voeu': voeu_actuel,
-				'lien_activation': reverse('password_reset_confirm',
+				'lien_activation': request.build_absolute_uri(reverse('password_reset_confirm',
 					args=(
-						urlsafe_base64_encode(force_bytes(self.pk)),
-						default_token_generator.make_token(self)
-					))
+						urlsafe_base64_encode(force_bytes(self.user.pk)),
+						default_token_generator.make_token(self.user)
+					)))
 				}
 
 		send_mail(
@@ -205,12 +207,13 @@ class Candidat(Personne):
 					context=render_context).strip(),
 				render_to_string('inscrire/email_bienvenue_candidat_message.txt',
 					context=render_context).strip(),
-				"{etablissement} <{email}>".format(
+				"{email}".format(
 					etablissement=voeu_actuel.formation.etablissement,
-					email=voeu_actuel.formation.etablissement.email)
-				("{candidat} <{email}>".format(
-					candidat=str(self),
-					email=self.user.email),),
+					email=voeu_actuel.formation.etablissement.email),
+				("{candidat_prenom} {candidat_nom} <{email}>".format(
+					candidat_prenom=str(self.user.first_name),
+					candidat_nom=str(self.user.last_name),
+					email=str(self.user.email)),),
 				html_message=render_to_string('inscrire/email_bienvenue_candidat_message.html',
 					context=render_context).strip()
 			)

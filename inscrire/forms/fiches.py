@@ -55,7 +55,7 @@ class ReglementForm(forms.ModelForm):
 	prefix = 'fiche-reglement'
 	class Meta:
 		model = fiches.FicheReglement
-		fields = ['signature_reglement', 'autorisation_parents_eleeves']
+		fields = ['signature_reglement', 'autorisation_parents_eleves']
 
 # Dictionnaire qui à chaque modèle de fiche associe le formulaire
 # d'édition qui doit être présenté aux candidats.

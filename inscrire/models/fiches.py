@@ -43,7 +43,7 @@ class FicheManager(PolymorphicManager):
 		applicable).
 		"""
 		fiches = []
-		for fiche_kls in filter(lambda kls: kls.est_applicable(voeu),
+		for fiche_kls in filter(lambda kls: kls.applicable(voeu),
 				all_fiche):
 			fiche = fiche_kls(candidat=voeu.candidat, **kwargs)
 			fiche.save()
@@ -72,7 +72,7 @@ class FicheManager(PolymorphicManager):
 		"""
 		fiches = []
 		fiches_applicables = dict([(kls, None)
-			for kls in filter(lambda kls: kls.est_applicable(voeu), all_fiche)])
+			for kls in filter(lambda kls: kls.applicable(voeu), all_fiche)])
 
 		# On commence par recycler les fiches existantes
 		for fiche in Fiche.objects.filter(candidat=voeu.candidat):
@@ -103,7 +103,7 @@ class FicheManager(PolymorphicManager):
 		# On crée enfin les instances manquantes
 		for fiche_kls in fiches_applicables:
 			if fiches_applicables[fiche_kls] is None:
-				fiche = type(fiche)(candidat=voeu.candidat, **kwargs)
+				fiche = fiche_kls(candidat=voeu.candidat, **kwargs)
 				fiche.save()
 				fiches.append((fiche, True))
 
@@ -301,6 +301,10 @@ class FicheScolarite(Fiche):
 
 	def recyclable(self, voeu):
 		return voeu.formation == self.formation
+
+	def save(self, *args, **kwargs):
+		self.formation = self.candidat.voeu_actuel.formation
+		super().save(*args, **kwargs)
 
 	class Meta:
 		verbose_name = "fiche scolarité"

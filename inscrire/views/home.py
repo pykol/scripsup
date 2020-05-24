@@ -19,10 +19,11 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
-from django.views.generic import View, TemplateView
+from django.views.generic import View, TemplateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from inscrire.models import InscrireUser
+from inscrire.models import InscrireUser, Candidat
+from .candidats import CandidatFicheMixin
 
 class HomeView(LoginRequiredMixin, View):
 	"""
@@ -54,5 +55,14 @@ class VieScolaireHomeView(TemplateView):
 class IntendanceHomeView(TemplateView):
 	pass
 
-class EtudiantHomeView(TemplateView):
-	pass
+class EtudiantHomeView(CandidatFicheMixin, DetailView):
+	template_name = 'inscrire/home/home_candidat.html'
+	model = Candidat
+
+	def get_object(self, queryset=None):
+		return self.request.user.candidat
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['voeu'] = self.request.user.candidat.voeu_actuel
+		return context

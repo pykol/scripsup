@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.views.generic import TemplateView, DetailView, UpdateView
@@ -7,6 +9,7 @@ from django.template.loader import select_template
 
 from inscrire.models import ResponsableLegal, Candidat
 from inscrire.models.fiches import Fiche
+from inscrire.forms.fiches import candidat_form
 USER = get_user_model()
 
 def set_candidat(_dispatch):
@@ -56,8 +59,33 @@ class ResponsableLegal(DetailView):
 			return redirect("/")
 		return super().dispatch(request, *args, **kwargs)
 
+class CandidatFicheMixin:
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data()
 
-class CandidatUpdate(UpdateView):
+		# Ajout des fiches applicables
+		FicheTpl = namedtuple('FicheTpl', ('fiche', 'form', 'template'))
+		fiches = []
+		for fiche in self.object.fiche_set.exclude(etat=Fiche.ETAT_ANNULEE):
+			try:
+				form = candidat_form[type(fiche)](instance=fiche)
+			except:
+				form = None
+
+			fiches.append(FicheTpl(
+				fiche=fiche,
+				form=form,
+				template=select_template(
+					[
+						'fiche/{}_candidat.html'.format(fiche._meta.model_name),
+						'fiche/fiche_base_candidat.html'
+					])
+				))
+
+		context['fiches'] = fiches
+		return context
+
+class CandidatUpdate(CandidatFicheMixin, UpdateView):
 	"""Permet la modification des informations personnelles"""
 
 	model = Candidat
@@ -71,24 +99,3 @@ class CandidatUpdate(UpdateView):
 		if kwargs['pk'] != self.candidat.pk:
 			return redirect("/")
 		return super().dispatch(request, *args, **kwargs)
-
-	# TODO ceci envoie les formulaires dans le contexte, mais ils ne
-	# sont pour l'instant pas traités par POST
-	def get_context_data(self):
-		context = super().get_context_data()
-
-		# Ajout des fiches applicables
-		FicheTpl = namedtuple('FicheTpl', ('fiche', 'form', 'template'))
-		fiches = []
-		for fiche in self.object.fiche_set.exclude(etat=Fiche.ETAT_ANNULEE):
-			fiches.append(FicheTpl(
-				fiche=fiche,
-				form=forms.fiches[type(fiche)](),
-				template=select_template(
-					[
-						'fiche/{}_candidat.html'.format(fiche._meta.model_name),
-						'fiche/fiche_base_candidat.html'
-					])
-				))
-		context['fiches'] = fiches
-		return context

@@ -53,11 +53,12 @@ formation_urlpatterns = [
 
 urlpatterns = [
 	path('', views.HomeView.as_view(), name='home'),
-	path('accounts', include(auth_urlpatterns)),
-	path('parcoursup', include(rest_parcoursup_urlpatterns)),
-	path('parametrage', include(parametrage_urlpatterns)),
-	path('formation', include(formation_urlpatterns)),
+	path('accounts/', include(auth_urlpatterns)),
+	path('parcoursup/', include(rest_parcoursup_urlpatterns)),
+	path('parametrage/', include(parametrage_urlpatterns)),
+	path('formation/', include(formation_urlpatterns)),
 	path('candidat', views.CandidatDetail.as_view()),
-	path('candidat/miseajour/<int:pk>', views.CandidatUpdate.as_view()),
+	path('candidat/miseajour/<int:pk>', views.CandidatUpdate.as_view(),
+		name='candidat_update'),
 	path('responsablelegal/<int:pk>', views.ResponsableLegal.as_view()),
 ]

@@ -88,8 +88,8 @@ class ParcoursupRequest:
 		self.request = requests.post(self.get_url(), json=self.data)
 
 class ParcoursupPersonne:
-	GENRE_HOMME = Candidat.GENRE_HOMME
-	GENRE_FEMME = Candidat.GENRE_FEMME
+	GENRE_HOMME = 1
+	GENRE_FEMME = 2
 
 	def __init__(self, **kwargs):
 		self.nom = kwargs.get('nom')
@@ -104,7 +104,8 @@ class ParcoursupPersonne:
 	def formate_adresse(donnees):
 		CODE_PAYS_FRANCE = '99100'
 		code_pays = donnees.get('codepaysadresse', CODE_PAYS_FRANCE)
-		libelle_ville = donnes.get('libellecommune', '')
+		libelle_ville = donnees.get('libellecommune', '')
+		libelle_pays = donnees.get('libellePaysadresse', '')
 
 		raw_adresse = '{adresse1}\n{adresse2}\n{adresse3}\n{code_postal} {ville}\n{pays}'.format(
 			adresse1=donnees.get('adresse1') or '',
@@ -154,7 +155,7 @@ class ParcoursupCandidat(ParcoursupPersonne):
 			'telephone_mobile': donnees['telmobile'],
 			'sexe': ParcoursupCandidat.GENRE_HOMME if donnees['sexe'] == 'M'
 				else ParcoursupCandidat.GENRE_FEMME,
-			'commune_naissance': donnees.get('codeCommuneNaissance']),
+			'commune_naissance': donnees.get('codeCommuneNaissance'),
 			'pays_naissance': donnees.get('codePaysNaissance'),
 			'nationalite': donnees.get('codePaysNationalite'),
 			}
@@ -173,7 +174,7 @@ class ParcoursupResponsableLegal(ParcoursupPersonne):
 		super().__init__(**kwargs)
 
 	@classmethod
-	def from_parcoursup_json(kls, psup_json, rang=1):
+	def from_parcoursup_json(kls, donnees, rang=1):
 		"""
 		Création d'une instance à partir des données Parcoursup au
 		format JSON. Le rang du responsable légal peut être choisi en
@@ -182,19 +183,21 @@ class ParcoursupResponsableLegal(ParcoursupPersonne):
 		"""
 		try:
 			return kls(
-				nom=donnees['nomRL{}'.format(i)],
-				prenom=donnees['prenomRL{}'.format(i)],
-				email=donnees['mailRL{}'.format(i)],
-				telephone=donnes['telRL{}'.format(i)],
+				nom=donnees['nomRL{}'.format(rang)],
+				prenom=donnees['prenomRL{}'.format(rang)],
+				email=donnees['mailRL{}'.format(rang)],
+				telephone_fixe=donnees['telRL{}'.format(rang)],
+				telephone_mobile='',
+				adresse='',
 				#TODO adresse
 			)
-		except:
+		except Exception as e:
 			return None
 
 class ParcoursupProposition:
 	ETAT_ATTENTE = 0
 	ETAT_ACCEPTEE = 1
-	ETAT_ACEPTEE_AUTRES_VOEUX = 2
+	ETAT_ACCEPTEE_AUTRES_VOEUX = 2
 	ETAT_REFUSEE = 3
 
 	def __init__(self, **kwargs):
@@ -207,7 +210,7 @@ class ParcoursupProposition:
 		self.date = kwargs.get('date')
 
 	@classmethod
-	def from_parcoursup_json(kls, psup_json):
+	def from_parcoursup_json(kls, donnees):
 		"""
 		Création d'une instance initialisée à partir des données
 		Parcoursup au format JSON.

@@ -97,6 +97,7 @@ class InscrireUser(AbstractUser):
 	ROLE_VIESCOLAIRE = 4
 	ROLE_INTENDANCE = 5
 	ROLE_ETUDIANT = 6
+	ROLE_PARCOURSUP = 7
 	ROLE_CHOICES = (
 			(ROLE_DIRECTION, "direction"),
 			(ROLE_SECRETARIAT, "secrétariat"),
@@ -104,6 +105,7 @@ class InscrireUser(AbstractUser):
 			(ROLE_VIESCOLAIRE, "vie scolaire"),
 			(ROLE_INTENDANCE, "intendance"),
 			(ROLE_ETUDIANT, "étudiant"),
+			(ROLE_PARCOURSUP, "Parcoursup"),
 		)
 	role = models.PositiveSmallIntegerField(verbose_name="rôle",
 			choices=ROLE_CHOICES)
