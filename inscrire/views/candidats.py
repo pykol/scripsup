@@ -83,7 +83,7 @@ class CandidatUpdate(UpdateView):
 		for fiche in self.object.fiche_set.exclude(etat=Fiche.ETAT_ANNULEE):
 			fiches.append(FicheTpl(
 				fiche=fiche,
-				form=forms.fiches[type(fiche)],
+				form=forms.fiches[type(fiche)](),
 				template=select_template(
 					[
 						'fiche/{}_candidat.html'.format(fiche._meta.model_name),
