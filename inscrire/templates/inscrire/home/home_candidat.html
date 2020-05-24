@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block contenu %}
+<h2>Bonjour {{ candidat }}</h2>
+
+<p>
+Bienvenue sur le service d'inscription en ligne. Vous avez accepté une
+proposition d'admission en {{ voeu.formation }}. Ce site va vous
+permettre de compléter en ligne votre dossier d'inscription
+administrative.
+</p>
+
+<form method="post" action="{% url 'candidat_update' %}">
+  {% csrf_token %}
+
+  {% for fiche in fiches %}
+  {% include fiche.template with fiche=fiche.fiche fiche_form=fiche.form candidat=fiche.fiche.voeu.candidat voeu=fiche.fiche.voeu formation=fiche.fiche.voeu.formation %}
+    <input type="submit" value="Enregistrer"/>
+  {% endfor %}
+</form>
+{% endblock %}

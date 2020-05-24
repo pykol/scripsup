@@ -32,7 +32,7 @@ class Etablissement(models.Model):
 			blank=True, null=False, default="")
 	inscriptions = models.BooleanField(default=False,
 			help_text="Indique s'il s'agit d'un établissement dont le "
-			"actuel gère les inscriptions")
+			"site actuel gère les inscriptions")
 
 	class Meta:
 		verbose_name = "établissement"

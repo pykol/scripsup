@@ -20,15 +20,43 @@ from django.urls import path, include
 
 from inscrire import views
 
+parametrage_urlpatterns = [
+	path('import_structures',
+		views.parametrage.ImportStructuresView.as_view(),
+		name='parametrage_import_structures'),
+	path('parcoursup/<int:pk>',
+		views.parametrage.AccesParcoursupView.as_view(),
+		name='parametrage_parcoursup_update'),
+]
+
 rest_parcoursup_urlpatterns = [
-	path('admissionCandidat', views.parcoursup.AdmissionView),
+	path('admissionCandidat', views.parcoursup.AdmissionView.as_view()),
 	# Blague de Parcoursup qui ne respectait pas toujours la spec en 2019
-	path('admissionCandidat/admissionCandidat', views.parcoursup.AdmissionView),
+	path('admissionCandidat/admissionCandidat', views.parcoursup.AdmissionView.as_view()),
+]
+
+auth_urlpatterns = [
+	path('login/', views.auth.LoginView.as_view(), name='login'),
+	path('bienvenue', views.auth.EnvoiBienvenue.as_view(), name='envoi_bienvenue'),
+	path('bienvenue/confirm', views.auth.EnvoiBienvenueConfirm.as_view(), name='envoi_bienvenue_confirm'),
+	path('', include('django.contrib.auth.urls')),
+]
+
+formation_urlpatterns = [
+	path('',
+		views.formation.FormationListView.as_view(),
+		name='formation_list'),
+	path('<slug:slug>',
+		views.formation.FormationDetailView.as_view(),
+		name='formation_detail'),
 ]
 
 urlpatterns = [
-	path('', views.home, name='home'),
+	path('', views.HomeView.as_view(), name='home'),
+	path('accounts', include(auth_urlpatterns)),
 	path('parcoursup', include(rest_parcoursup_urlpatterns)),
+	path('parametrage', include(parametrage_urlpatterns)),
+	path('formation', include(formation_urlpatterns)),
 	path('candidat', views.CandidatDetail.as_view()),
 	path('candidat/miseajour/<int:pk>', views.CandidatUpdate.as_view()),
 	path('responsablelegal/<int:pk>', views.ResponsableLegal.as_view()),

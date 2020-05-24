@@ -22,6 +22,6 @@ Il n'est pas nécessaire d'ajouter une balise <form>, c'est déjà fait par
 le gabarit qui inclut la fiche.
 {% endcomment %}
 <section class="fiche">
-  <h3>{{ fiche.FICHE_LABEL }}</h3>
+  <h3>{{ fiche.FICHE_LABEL }} − {{ fiche.get_etat_display }}</h3>
   {{ fiche_form.as_p }}
 </section>

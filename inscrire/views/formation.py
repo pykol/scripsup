@@ -16,9 +16,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from .home import HomeView
-from .candidats import CandidatDetail, CandidatUpdate, ResponsableLegal
-from . import parcoursup
-from . import auth
-from . import parametrage
-from . import formation
+from django.views.generic import ListView, DetailView
+
+from inscrire.models import Formation
+
+class FormationListView(ListView):
+	model = Formation
+
+class FormationDetailView(DetailView):
+	model = Formation
