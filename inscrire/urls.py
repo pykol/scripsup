@@ -52,7 +52,7 @@ formation_urlpatterns = [
 ]
 
 urlpatterns = [
-	path('', views.home, name='home'),
+	path('', views.HomeView.as_view(), name='home'),
 	path('accounts', include(auth_urlpatterns)),
 	path('parcoursup', include(rest_parcoursup_urlpatterns)),
 	path('parametrage', include(parametrage_urlpatterns)),

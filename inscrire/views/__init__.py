@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from .home import home
+from .home import HomeView
 from .candidats import CandidatDetail, CandidatUpdate, ResponsableLegal
 from . import parcoursup
 from . import auth

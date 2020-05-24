@@ -19,13 +19,40 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+from django.views.generic import View, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-USER = get_user_model()
+from inscrire.models import InscrireUser
 
-@login_required
-def home(request):
-	try:
-		candidat = request.user.candidat
-	except USER.candidat.RelatedObjectDoesNotExist:
-		return render(request, "base.html")
-	return redirect("/candidat")
+class HomeView(LoginRequiredMixin, View):
+	"""
+	Classe qui oriente l'utilisateur vers la vue d'accueil adaptée à son
+	rôle.
+	"""
+	def dispatch(self, request, *args, **kwargs):
+		return {
+			InscrireUser.ROLE_DIRECTION: DirectionHomeView,
+			InscrireUser.ROLE_SECRETARIAT: SecretariatHomeView,
+			InscrireUser.ROLE_PROFESSEUR: ProfesseurHomeView,
+			InscrireUser.ROLE_VIESCOLAIRE: VieScolaireHomeView,
+			InscrireUser.ROLE_INTENDANCE: IntendanceHomeView,
+			InscrireUser.ROLE_ETUDIANT: EtudiantHomeView,
+			}.get(request.user.role).as_view()(request, *args, **kwargs)
+
+class DirectionHomeView(TemplateView):
+	pass
+
+class SecretariatHomeView(TemplateView):
+	pass
+
+class ProfesseurHomeView(TemplateView):
+	pass
+
+class VieScolaireHomeView(TemplateView):
+	pass
+
+class IntendanceHomeView(TemplateView):
+	pass
+
+class EtudiantHomeView(TemplateView):
+	pass
