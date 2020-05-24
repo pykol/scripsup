@@ -20,12 +20,27 @@
 Vues permettant le paramétrage des formations gérées
 """
 from django.views.generic import FormView, UpdateView
+from django.urls import reverse_lazy
+
+import inscrire.forms.parametrage as param_forms
 
 class ImportStructuresView(FormView):
 	"""
-	Import des formations depuis le fichier SIECLE Structures
+	Import des formations depuis les fichiers SIECLE Structures et
+	Nomenclatures.
+
+	Le fichier Structures permet de créer la liste des classes. Le
+	fichier Nomenclatures permet de créer les listes d'options
+	disponibles pour chaque formation.
 	"""
-	pass
+	template_name = 'parametrage/import_structures.html'
+	form_class = param_forms.ImportStructuresForm
+	success_url = reverse_lazy('formation_list')
+
+	def form_valid(self, form):
+		classes = form.lire_structures()
+		options = form.lire_nomenclatures()
+		return super().form_valid(form)
 
 class AccesParcoursupView(UpdateView):
 	"""
