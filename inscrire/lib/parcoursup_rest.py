@@ -101,12 +101,41 @@ class ParcoursupPersonne:
 		self.telephone_mobile = kwargs.get('telephone_mobile')
 		self.sexe = kwargs.get('sexe')
 
+	@staticmethod
+	def formate_adresse(donnees):
+		CODE_PAYS_FRANCE = '99100'
+		code_pays = donnees.get('codepaysadresse', CODE_PAYS_FRANCE)
+		if code_pays == CODE_PAYS_FRANCE:
+			try:
+				libelle_ville = Commune.objects.get(pk=donnees.get('codecommune')).libelle
+			except Commune.DoesNotExist:
+				libelle_ville = '**** COMMUNE INCONNUE ****'
+				print("Commune {} inconnue".format(donnees.get('codecommune')))
+			libelle_pays = ''
+		else:
+			libelle_ville = donnees.get('commune') or ''
+			libelle_pays = donnees.get('libellepaysadresse') or ''
+
+		raw_adresse = '{adresse1}\n{adresse2}\n{adresse3}\n{code_postal} {ville}\n{pays}'.format(
+			adresse1=donnees.get('adresse1') or '',
+			adresse2=donnees.get('adresse2') or '',
+			adresse3=donnees.get('adresse3') or '',
+			# Orthographie affligeante. On teste les deux, pour être
+			# robuste à une future correction qui casse la
+			# compatibilité.
+			code_postal=donnees.get('codepostal', donnees.get('codepostale')) or '',
+			ville=libelle_ville,
+			pays=libelle_pays)
+		return re.sub(r'\n+', '\n', raw_adresse).strip()
+
+
 class ParcoursupCandidat(ParcoursupPersonne):
 	def __init__(self, **kwargs):
 		super().__init__(**kwargs)
-		self.code = kwargs.get('code')
-		self.date_naissance = kwargs.get('date_naissance')
-		self.ine = kwargs.get('ine')
+		for field in ['code', 'date_naissance', 'commune_naissance',
+			'pays_naissance', 'nationalite', 'ine', 'bac_date',
+			'bac_serie', 'bac_mention']:
+			setattr(self, field, kwargs.get(field))
 
 	def to_json(self):
 		return {
@@ -117,10 +146,60 @@ class ParcoursupCandidat(ParcoursupPersonne):
 			'dateNaissance': self.date_naissance.strftime('%d/%m/%Y')
 		}
 
+	@classmethod
+	def from_parcoursup_json(kls, donnees):
+		"""
+		Création d'une instance initialisée à partir des données
+		Parcoursup au format JSON.
+		"""
+		defaults = {
+			'nom': donnees['nom'],
+			'prenom': donnees['prenom'],
+			'email': donnees['mail'],
+			'date_naissance': parse_french_date(donnees['dateNaissance']),
+			'code': donnees['codeCandidat'],
+			'ine': donnees['ine'],
+			'adresse': kls.formate_adresse(donnees),
+			'telephone_fixe': donnees['telfixe'],
+			'telephone_mobile': donnees['telmobile'],
+			'sexe': ParcoursupCandidat.GENRE_HOMME if donnees['sexe'] == 'M'
+				else ParcoursupCandidat.GENRE_FEMME,
+			'commune_naissance': donnees.get('codeCommuneNaissance']),
+			'pays_naissance': donnees.get('codePaysNaissance'),
+			'nationalite': donnees.get('codePaysNationalite'),
+			}
+		try:
+			defaults['bac_date'] = date(int(donnees['anneeBac']),
+				int(donnees['moisBac']), 1)
+			defaults['bac_serie'] = donnees['serieBac']
+			defaults['bac_mention'] = donnees['mentionBac']
+		except KeyError:
+			pass
+
+		return kls(**defaults)
+
 class ParcoursupResponsableLegal(ParcoursupPersonne):
 	def __init__(self, **kwargs):
 		super().__init__(**kwargs)
-		#self.candidat = kwargs.get('candidat')
+
+	@classmethod
+	def from_parcoursup_json(kls, psup_json, rang=1):
+		"""
+		Création d'une instance à partir des données Parcoursup au
+		format JSON. Le rang du responsable légal peut être choisi en
+		paramètre. Si aucun responsable légal de ce rang n'existe, la
+		méthode renvoie None.
+		"""
+		try:
+			return kls(
+				nom=donnees['nomRL{}'.format(i)],
+				prenom=donnees['prenomRL{}'.format(i)],
+				email=donnees['mailRL{}'.format(i)],
+				telephone=donnes['telRL{}'.format(i)],
+				#TODO adresse
+			)
+		except:
+			return None
 
 class ParcoursupProposition:
 	ETAT_ATTENTE = 0
@@ -136,6 +215,21 @@ class ParcoursupProposition:
 		self.internat = kwargs.get('internat')
 		self.etat = kwargs.get('etat')
 		self.date = kwargs.get('date')
+
+	@classmethod
+	def from_parcoursup_json(kls, psup_json):
+		"""
+		Création d'une instance initialisée à partir des données
+		Parcoursup au format JSON.
+		"""
+		return kls(
+			code_formation=int(donnees['codeFormationPsup']),
+			code_etablissement=donnees['codeEtablissementAffectation'],
+			cesure=donnees['cesure'] == "1",
+			internat=donnees['internat'] == "1",
+			date=parse_date_reponse(donnees['dateReponse']),
+			etat=int(donnees['codeSituation']),
+			)
 
 class ParcoursupRest:
 	def __init__(self, login="XXX", password="XXX",
@@ -174,43 +268,22 @@ class ParcoursupRest:
 				method_name='getCandidatsAdmis',
 				data=request_data)
 		request.send()
-		return request
+
+		# Mise en forme de la réponse
+		candidats = []
+		for psup_json in request.json():
+			candidats.append(self.parse_parcoursup_admission(psup_json))
+		return candidats
 
 	def get_candidat(self, code_candidat):
 		"""
 		Recherche des informations sur un candidat admis d'après son
 		numéro de dossier.
 		"""
-		return self.get_candidats_admis(self, code_candidat=code_candidat)
+		return self.get_candidats_admis(self, code_candidat=code_candidat)[0]
 
 	@staticmethod
-	def formate_adresse(donnees):
-		CODE_PAYS_FRANCE = '99100'
-		code_pays = donnees.get('codepaysadresse', CODE_PAYS_FRANCE)
-		if code_pays == CODE_PAYS_FRANCE:
-			try:
-				libelle_ville = Commune.objects.get(pk=donnees.get('codecommune')).libelle
-			except Commune.DoesNotExist:
-				libelle_ville = '**** COMMUNE INCONNUE ****'
-				print("Commune {} inconnue".format(donnees.get('codecommune')))
-			libelle_pays = ''
-		else:
-			libelle_ville = donnees.get('commune') or ''
-			libelle_pays = donnees.get('libellepaysadresse') or ''
-
-		raw_adresse = '{adresse1}\n{adresse2}\n{adresse3}\n{code_postal} {ville}\n{pays}'.format(
-			adresse1=donnees.get('adresse1') or '',
-			adresse2=donnees.get('adresse2') or '',
-			adresse3=donnees.get('adresse3') or '',
-			# Orthographie affligeante. On teste les deux, pour être
-			# robuste à une future correction qui casse la
-			# compatibilité.
-			code_postal=donnees.get('codepostal', donnees.get('codepostale')) or '',
-			ville=libelle_ville,
-			pays=libelle_pays)
-		return re.sub(r'\n+', '\n', raw_adresse).strip()
-
-	def parse_parcoursup_admission(self, psup_json):
+	def parse_parcoursup_admission(psup_json):
 		"""
 		Prend en paramètre le JSON envoyé par l'interface synchrone de
 		Parcoursup et renvoie les informations structurées avec les
@@ -218,39 +291,14 @@ class ParcoursupRest:
 		ParcoursupProposition.
 		"""
 		donnees = requests.utils.CaseInsensitiveDict(data=psup_json)
-		candidat = ParcoursupCandidat(
-			nom=donnees['nom'],
-			prenom=donnees['prenom'],
-			email=donnees['mail'],
-			date_naissance=parse_french_date(donnees['dateNaissance']),
-			code=donnees['codeCandidat'],
-			ine=donnees['ine'],
-			adresse=self.formate_adresse(donnees),
-			telephone_fixe = donnees['telfixe'],
-			telephone_mobile = donnees['telmobile'],
-			sexe=ParcoursupCandidat.GENRE_HOMME if donnees['sexe'] == 'M'
-				else ParcoursupCandidat.GENRE_FEMME,
-		)
-
-		proposition = ParcoursupProposition(
-			code_formation=int(donnees['codeFormationPsup']),
-			code_etablissement=donnees['codeEtablissementAffectation'],
-			cesure=donnees['cesure'] == "1",
-			internat=donnees['internat'] == "1",
-			date=parse_date_reponse(donnees['dateReponse']),
-			etat=int(donnees['codeSituation']),
-		)
-
+		candidat = ParcoursupCandidat.from_parcoursup_json(donnees)
+		proposition = ParcoursupProposition.from_parcoursup_json(donnees)
 		responsables = []
-		for i in (1, 2):
-			try:
-				responsables.append(ParcoursupResponsableLegal(
-					nom=donnees['nomRL{}'.format(i)],
-					prenom=donnees['prenomRL{}'.format(i)],
-					email=donnees['mailRL{}'.format(i)],
-					candidat=candidat))
-			except KeyError:
-				pass
+		for rang in (1, 2):
+			responsable = ParcoursupResponsableLegal.from_parcoursup_json(donnees,
+						rang=rang)
+			if responsable is not None:
+				responsables.append(responsable)
 
 		return {
 			'candidat': candidat,
@@ -298,94 +346,3 @@ class ParcoursupRest:
 		return self.maj_inscription(candidat=candidat,
 			formation=42, code_sise=1,
 			statut_inscription=INSCRIPTION_PRINCIPALE)
-
-
-def unsafe_auto_import_rest():
-	psup = ParcoursupRest(
-		login=settings.PARCOURSUP_REST_LOGIN,
-		password=settings.PARCOURSUP_REST_PASSWORD,
-		code_etablissement=settings.PARCOURSUP_UAI_ETABLISSEMENT,
-	)
-	req = psup.get_candidats_admis()
-	candidats = []
-	for psup_json in req.request.json():
-		candidats.append(psup.parse_parcoursup_admission(psup_json))
-
-	# Liste des codes Parcoursup des candidats admis
-	codes_admis = []
-
-	# Enregistrement des propositions en base de données
-	for candidat in candidats:
-		psup_etudiant = candidat['candidat']
-		psup_prop = candidat['proposition']
-
-		try:
-			etudiant = Etudiant.objects.get(pk=psup_etudiant.code)
-		except Etudiant.DoesNotExist:
-			# On ignore les démissions
-			if psup_prop.etat == ParcoursupProposition.ETAT_REFUSEE:
-				continue
-
-			# On importe l'étudiant qui n'existait pas encore
-			etudiant = Etudiant(dossier_parcoursup=psup_etudiant.code)
-
-		# On enregistre les coordonnées de l'étudiant, elles peuvent
-		# avoir été mises à jour par rapport à ce qui était dans la base
-		# de données.
-		etudiant.nom = psup_etudiant.nom
-		etudiant.prenom = psup_etudiant.prenom
-		etudiant.email = psup_etudiant.email
-		etudiant.adresse = psup_etudiant.adresse
-		etudiant.telephone = psup_etudiant.telephone_fixe or ''
-		etudiant.telephone_mobile = psup_etudiant.telephone_mobile or ''
-		etudiant.sexe = psup_etudiant.sexe
-		etudiant.date_naissance = psup_etudiant.date_naissance
-		etudiant.ine = psup_etudiant.ine
-		etudiant.save()
-
-		# On enregistre la proposition faite à cet étudiant
-		if psup_prop.etat != ParcoursupProposition.ETAT_REFUSEE:
-			try:
-				if psup_prop.etat == ParcoursupProposition.ETAT_ACCEPTEE:
-					etat_prop = Proposition.ETAT_OUI
-				elif psup_prop.etat == ParcoursupProposition.ETAT_ACCEPTEE_AUTRES_VOEUX:
-					etat_prop = Proposition.ETAT_OUIMAIS
-				else:
-					continue
-
-				proposition = Proposition(
-					classe=Classe.objects.get(
-						code_parcoursup=psup_prop.code_formation),
-					etudiant=etudiant,
-					date_proposition=psup_prop.date,
-					internat=psup_prop.internat,
-					cesure=psup_prop.cesure,
-					etat=etat_prop)
-				etudiant.nouvelle_proposition(proposition)
-				codes_admis.append(etudiant.dossier_parcoursup)
-			except Classe.DoesNotExist:
-				pass
-		else:
-			etudiant.demission(psup_prop.date)
-
-	# Les étudiants qui ne sont plus présents dans la liste des
-	# candidats admis sont considérés comme démissionnaires.
-	for etudiant in Etudiant.objects.exclude(
-		dossier_parcoursup__in=codes_admis):
-		etudiant.demission(timezone.now())
-
-def auto_import_rest(mode="XXX"):
-	# Sauvegarde de l'heure de début, pour l'historique
-	date_debut = timezone.now()
-
-	try:
-	    unsafe_auto_import_rest()
-	    resultat = ParcoursupSynchro.RESULTAT_OK
-	except:
-	    resultat = ParcoursupSynchro.RESULTAT_ERREUR
-
-	date_fin = timezone.now()
-
-	ParcoursupSynchro(date_debut=date_debut, date_fin=date_fin,
-	        mode=mode, resultat=resultat,
-			source=ParcoursupSynchro.SOURCE_REST).save()
