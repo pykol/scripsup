@@ -25,3 +25,7 @@ le gabarit qui inclut la fiche.
   <h3>{{ fiche.FICHE_LABEL }} − {{ fiche.get_etat_display }}</h3>
   {{ fiche_form.as_p }}
 </section>
+{% block head %}
+{{ block.super }}
+{{ form.media }}
+{% endblock %}
