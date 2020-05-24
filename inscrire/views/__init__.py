@@ -22,3 +22,4 @@ from . import parcoursup
 from . import auth
 from . import parametrage
 from . import formation
+from . import autocomplete

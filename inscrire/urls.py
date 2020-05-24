@@ -51,6 +51,18 @@ formation_urlpatterns = [
 		name='formation_detail'),
 ]
 
+autocomplete_urlpatterns = [
+	path('pays',
+		views.autocomplete.PaysAutocomplete.as_view(),
+		name='autocomplete-pays'),
+	path('commune',
+		views.autocomplete.CommuneAutocomplete.as_view(),
+		name='autocomplete-commune'),
+	path('etablissement',
+		views.autocomplete.EtablissementAutocomplete.as_view(),
+		name='autocomplete-etablissement'),
+]
+
 urlpatterns = [
 	path('', views.HomeView.as_view(), name='home'),
 	path('accounts/', include(auth_urlpatterns)),
@@ -61,4 +73,5 @@ urlpatterns = [
 	path('candidat/miseajour/<int:pk>', views.CandidatUpdate.as_view(),
 		name='candidat_update'),
 	path('responsablelegal/<int:pk>', views.ResponsableLegal.as_view()),
+	path('autocomplete/', include(autocomplete_urlpatterns)),
 ]
