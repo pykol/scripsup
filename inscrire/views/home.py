@@ -20,17 +20,19 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.views.generic import View, TemplateView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
 
 from inscrire.models import InscrireUser, Candidat
 from .candidats import CandidatFicheMixin
 
-class HomeView(LoginRequiredMixin, View):
+class HomeView(AccessMixin, View):
 	"""
 	Classe qui oriente l'utilisateur vers la vue d'accueil adaptée à son
 	rôle.
 	"""
 	def dispatch(self, request, *args, **kwargs):
+		if not request.user.is_authenticated:
+			return self.handle_no_permission()
 		return {
 			InscrireUser.ROLE_DIRECTION: DirectionHomeView,
 			InscrireUser.ROLE_SECRETARIAT: SecretariatHomeView,
