@@ -22,36 +22,36 @@ from inscrire.models import Pays, Commune, Etablissement
 
 class PaysAutocomplete(autocomplete.Select2QuerySetView):
 	def get_queryset(self):
-		if not self.request.user.is_authenticated():
+		if not self.request.user.is_authenticated:
 			return Pays.objects.none()
 
 		qs = Pays.objects.all()
 
 		if self.q:
-			qs = qs.filter(libelle__istartswith=self.q)
+			qs = qs.filter(libelle__icontains=self.q)
 
 		return qs
 
 class CommuneAutocomplete(autocomplete.Select2QuerySetView):
 	def get_queryset(self):
-		if not self.request.user.is_authenticated():
+		if not self.request.user.is_authenticated:
 			return Commune.objects.none()
 
 		qs = Commune.objects.all()
 
 		if self.q:
-			qs = qs.filter(libelle__istartswith=self.q)
+			qs = qs.filter(libelle__icontains=self.q)
 
 		return qs
 
 class EtablissementAutocomplete(autocomplete.Select2QuerySetView):
 	def get_queryset(self):
-		if not self.request.user.is_authenticated():
+		if not self.request.user.is_authenticated:
 			return Etablissement.objects.none()
 
 		qs = Etablissement.objects.all()
 
 		if self.q:
-			qs = qs.filter(nom__istartswith=self.q)
+			qs = qs.filter(nom__icontains=self.q)
 
 		return qs

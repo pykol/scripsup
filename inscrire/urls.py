@@ -52,14 +52,14 @@ formation_urlpatterns = [
 ]
 
 autocomplete_urlpatterns = [
-	path('pays/',
-		views.autocomplete.PaysAutocomplete.as_view,
+	path('pays',
+		views.autocomplete.PaysAutocomplete.as_view(),
 		name='autocomplete-pays'),
-	path('commune/',
-		views.autocomplete.CommuneAutocomplete.as_view,
+	path('commune',
+		views.autocomplete.CommuneAutocomplete.as_view(),
 		name='autocomplete-commune'),
-	path('etablissement/',
-		views.autocomplete.EtablissementAutocomplete.as_view,
+	path('etablissement',
+		views.autocomplete.EtablissementAutocomplete.as_view(),
 		name='autocomplete-etablissement'),
 ]
 
