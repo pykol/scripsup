@@ -23,6 +23,8 @@ le gabarit qui inclut la fiche.
 {% endcomment %}
 <section class="fiche">
   <h3>{{ fiche.FICHE_LABEL }} − {{ fiche.get_etat_display }}</h3>
+  {% block fiche_content %}
   {{ fiche_form.as_p }}
   {{ fiche_form.media }}
+  {% endblock %}
 </section>
