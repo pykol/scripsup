@@ -58,7 +58,7 @@ class IntendanceHomeView(TemplateView):
 	pass
 
 class EtudiantHomeView(CandidatFicheMixin, DetailView):
-	template_name = 'inscrire/home/home_candidat.html'
+	template_name = 'inscrire/home/candidat.html'
 	model = Candidat
 
 	def get_object(self, queryset=None):
