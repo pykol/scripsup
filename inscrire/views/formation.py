@@ -17,20 +17,15 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from django.views.generic import ListView, DetailView
-from django.contrib.auth.mixins import UserPassesTestMixin
 
-from inscrire.models import Formation, InscrireUser, Candidat, Voeu
+from inscrire.models import Formation, Candidat, Voeu
+from .permissions import AccessDirectionMixin
 
-class FormationListView(UserPassesTestMixin, ListView):
-	model = Formation
-	def test_func(self):
-		return self.request.user.role == InscrireUser.ROLE_DIRECTION
-
-class FormationDetailView(UserPassesTestMixin, DetailView):
+class FormationListView(AccessDirectionMixin, ListView):
 	model = Formation
 
-	def test_func(self):
-		return self.request.user.role == InscrireUser.ROLE_DIRECTION
+class FormationDetailView(AccessDirectionMixin, DetailView):
+	model = Formation
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
