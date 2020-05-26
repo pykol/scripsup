@@ -27,19 +27,14 @@ def set_candidat(_dispatch):
 
 
 @method_decorator(login_required, name='dispatch')
-class CandidatDetail(TemplateView):
+class CandidatDetail(DetailView):
 	"""Affiche les informations personnelles d'un candidat"""
-
-	template_name = "candidat.html"
-
-	@set_candidat
-	def dispatch(self, request, *args, **kwargs):
-		return super().dispatch(request, *args, **kwargs)
+	model = Candidat
 
 	def get_context_data(self, *args, **kwargs):
 		context = super().get_context_data(*args, **kwargs)
-		context["candidat"] = self.candidat
-		context["nombre_responsables"] = self.candidat.responsables.count()
+		context["candidat"] = self.object
+		context["nombre_responsables"] = self.object.responsables.count()
 		return context
 
 

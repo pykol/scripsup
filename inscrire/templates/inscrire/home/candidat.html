@@ -10,6 +10,33 @@ permettre de compléter en ligne votre dossier d'inscription
 administrative.
 </p>
 
+<section id='infos-parcoursup'>
+  <h3>Votre dossier Parcoursup</h3>
+  <p>Ces éléments nous ont été communiqués par Parcoursup. S'ils sont
+  inexacts, nous vous remercions de nous contacter pour les
+  rectifier.</p>
+  <ul>
+    <li>INE : {{ candidat.ine }}</li>
+    <li>Numéro de dossier Parcoursup : {{ candidat.dossier_parcoursup }}</li>
+    <li>Date de naissance : {{ candidat.date_naissance }}</li>
+    {% if candidat.bac_date %}
+    <li>Vous avez obtenu votre baccalauréat en série
+      {{ candidat.bac_serie }} lors de la session de
+      {{ candidat.bac_date|date:"F Y" }}.</li>
+    {% else %}
+    <li>Parcoursup ne nous a pas encore communiqué d'information sur
+      l'obtention de votre baccalauréat.</li>
+    {% endif %}
+    <li>État de votre vœu Parcoursup : {{ candidat.voeu_actuel.get_etat_display }}</li>
+    {% if candidat.voeu_actuel.internat %}
+    <li>Vous êtes admis <em>avec</em> internat.</li>
+    {% endif %}
+    {% if candidat.voeu_actuel.cesure %}
+    <li>Vous avez émis une demande d'année de césure.</li>
+    {% endif %}
+  </ul>
+</section>
+
 <form method="post" action="{% url 'candidat_update' candidat.pk %}">
   {% csrf_token %}
 

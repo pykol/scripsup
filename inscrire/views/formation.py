@@ -17,11 +17,26 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import UserPassesTestMixin
 
-from inscrire.models import Formation
+from inscrire.models import Formation, InscrireUser, Candidat, Voeu
 
-class FormationListView(ListView):
+class FormationListView(UserPassesTestMixin, ListView):
+	model = Formation
+	def test_func(self):
+		return self.request.user.role == InscrireUser.ROLE_DIRECTION
+
+class FormationDetailView(UserPassesTestMixin, DetailView):
 	model = Formation
 
-class FormationDetailView(DetailView):
-	model = Formation
+	def test_func(self):
+		return self.request.user.role == InscrireUser.ROLE_DIRECTION
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['candidat_list'] = Candidat.objects.filter(
+				voeu__etat__in=(Voeu.ETAT_ACCEPTE_AUTRES,
+					Voeu.ETAT_ACCEPTE_DEFINITIF),
+				voeu__formation=self.object,
+			).order_by('last_name', 'first_name')
+		return context

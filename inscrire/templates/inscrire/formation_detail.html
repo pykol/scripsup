@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block contenu %}
+<h2>Détail de la formation {{ object }}</h2>
+<section id='candidat-list'>
+  <h3>Liste des étudiants</h3>
+  {% if candidat_list %}
+  <ul>
+    {% for candidat in candidat_list %}
+    <li><a href="{% url 'candidat_detail' candidat.pk %}">{{ candidat }}</a></li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>Aucun candidat n'a pour le moment été envoyé par Parcoursup.</p>
+  {% endif %}
+</section>
+{% endblock %}
