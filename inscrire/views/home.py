@@ -43,7 +43,12 @@ class HomeView(AccessMixin, View):
 			}.get(request.user.role).as_view()(request, *args, **kwargs)
 
 class DirectionHomeView(TemplateView):
-	pass
+	template_name = 'inscrire/home/direction.html'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['formation_list'] = Formation.objects.all().order_by('etablissement', 'nom')
+		return context
 
 class SecretariatHomeView(TemplateView):
 	pass
