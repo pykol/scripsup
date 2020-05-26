@@ -22,7 +22,7 @@ from django.shortcuts import redirect, render
 from django.views.generic import View, TemplateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
 
-from inscrire.models import InscrireUser, Candidat
+from inscrire.models import InscrireUser, Candidat, Formation
 from .candidats import CandidatFicheMixin
 
 class HomeView(AccessMixin, View):

@@ -17,10 +17,38 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
+from django.utils.translation import gettext, gettext_lazy as _
 
 from inscrire.models import *
 
-admin.site.register(InscrireUser)
+class InscrireUserCreationForm(UserCreationForm):
+	class Meta:
+		model = InscrireUser
+		fields = ('email', 'role')
+
+class InscrireUserAdmin(BaseUserAdmin):
+	add_form = InscrireUserCreationForm
+	add_fieldsets = ((None, {
+			'classes': ('wide',),
+			'fields': ('password1', 'password2', 'email', 'role'),
+			}),)
+	fieldsets = (
+		(None, {'fields': ('password',)}),
+		(_('Personal info'), {'fields': ('first_name', 'last_name',
+			'email')}),
+		(_('Permissions'), {'fields': ('role', 'is_active', 'is_staff', 'is_superuser',
+									   'groups', 'user_permissions')}),
+		(_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+		)
+
+	ordering = ('email',)
+	list_display = ('email', 'first_name', 'last_name', 'get_role_display', 'is_staff')
+	search_fields = ('first_name', 'last_name', 'email')
+admin.site.register(InscrireUser, InscrireUserAdmin)
+
 admin.site.register(Candidat)
 admin.site.register(ResponsableLegal)
 admin.site.register(CandidatActionLog)
