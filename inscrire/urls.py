@@ -69,9 +69,10 @@ urlpatterns = [
 	path('parcoursup/', include(rest_parcoursup_urlpatterns)),
 	path('parametrage/', include(parametrage_urlpatterns)),
 	path('formation/', include(formation_urlpatterns)),
-	path('candidat', views.CandidatDetail.as_view()),
-	path('candidat/miseajour/<int:pk>', views.CandidatUpdate.as_view(),
+	path('candidat/<int:pk>/', views.CandidatDetail.as_view(), name='candidat_detail'),
+	path('candidat/<int:pk>/miseajour/', views.CandidatUpdate.as_view(),
 		name='candidat_update'),
-	path('responsablelegal/<int:pk>', views.ResponsableLegal.as_view()),
+	path('responsablelegal/<int:pk>/', views.ResponsableLegal.as_view(),
+		name='responsablelegal-detail'),
 	path('autocomplete/', include(autocomplete_urlpatterns)),
 ]
