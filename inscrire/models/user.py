@@ -109,3 +109,9 @@ class InscrireUser(AbstractUser):
 		)
 	role = models.PositiveSmallIntegerField(verbose_name="rôle",
 			choices=ROLE_CHOICES)
+
+	def est_gestionnaire(self):
+		return self.role in (InscrireUser.ROLE_DIRECTION,
+				InscrireUser.ROLE_SECRETARIAT,
+				InscrireUser.ROLE_VIESCOLAIRE,
+				InscrireUser.ROLE_INTENDANCE)
