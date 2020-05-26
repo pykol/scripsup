@@ -160,6 +160,15 @@ class Fiche(PolymorphicModel):
 		"""
 		return True
 
+	def valider(self):
+		"""
+		Méthode qui indique si les données de la fiche sont complètes et
+		valides. Dans ce cas, cette méthode change la valeur du champ
+		valide de la fiche. Cette méthode doit être surchargée par les
+		classes héritées, la méthode de base ne fait rien.
+		"""
+		pass
+
 class FicheIdentite(Fiche):
 	"""
 	Informations concernant l'identité du candidat
@@ -277,6 +286,13 @@ class FicheBourse(Fiche):
 		verbose_name = "fiche bourse"
 		verbose_name_plural = "fiches bourse"
 
+	def valider(self):
+		if self.boursier:
+			self.valide = self.echelon is not None and \
+					self.attribution_bourse is not None
+		else:
+			self.valide = True
+
 class FicheReglement(Fiche):
 	"""
 	Règlement intérieur
@@ -290,6 +306,9 @@ class FicheReglement(Fiche):
 	class Meta:
 		verbose_name = "fiche règlement intérieur"
 		verbose_name_plural = "fiches règlement intérieur"
+
+	def valider(self):
+		self.valide = self.signature_reglement is not None
 
 class FicheScolarite(Fiche):
 	"""
@@ -372,4 +391,5 @@ class FicheCesure(Fiche):
 
 # Liste de toutes les fiches à essayer lors de la création d'un dossier.
 all_fiche = [FicheIdentite, FicheScolarite, FicheHebergement,
-		FicheInternat, FicheCesure, FicheReglement]
+		FicheInternat, FicheCesure, FicheReglement, FicheBourse,
+		FicheScolariteAnterieure]

@@ -25,11 +25,20 @@ de fiche associent la classe de formulaire à utiliser.
 """
 
 from django import forms
+from django.core.exceptions import ValidationError
 from dal import autocomplete
 
 from inscrire.models import fiches
 
-class IdentiteForm(forms.ModelForm):
+class FicheValiderMixin:
+	def save(self, commit=True):
+		instance = super().save(commit=False)
+		instance.valider()
+		if commit:
+			instance.save()
+		return instance
+
+class IdentiteForm(FicheValiderMixin, forms.ModelForm):
 	prefix = 'fiche-identite'
 	class Meta:
 		model = fiches.FicheIdentite
@@ -39,8 +48,26 @@ class IdentiteForm(forms.ModelForm):
 			'commune_naissance': autocomplete.ModelSelect2(url='autocomplete-commune'),
 			'pays_naissance': autocomplete.ModelSelect2(url='autocomplete-pays'),
 		}
+		labels = {
+			'commune_naissance': "Commune de naissance",
+			'commune_naissance_etranger': "Commune de naissance (étranger)",
+			'piece_identite': "Copie de votre pièce d'identité",
+			'photo': "Photo d'identité (de face, sur fond blanc)",
+			'pays_naissance': "Pays de naissance",
+		}
+		help_texts = {
+			'commune_naissance_etranger': "Si votre commune de naissance "
+				"n'est pas une commune française, remplissez ce champ en "
+				"indiquant le nom de la commune.",
+			'commune_naissance': "Si votre commune de naissance est en "
+				"France, complétez ce champ.",
+			'pays_naissance': "Sélectionnez votre pays de naissance "
+				"parmi les choix proposés dans la liste. Vous pouvez "
+				"taper les premières lettres du nom pour trouver plus "
+				"rapidement le pays."
+		}
 
-class ScolariteAnterieureForm(forms.ModelForm):
+class ScolariteAnterieureForm(FicheValiderMixin, forms.ModelForm):
 	prefix = 'fiche-scolariteanterieure'
 	class Meta:
 		model = fiches.FicheScolariteAnterieure
@@ -51,19 +78,82 @@ class ScolariteAnterieureForm(forms.ModelForm):
 			'etablissement': autocomplete.ModelSelect2(url='autocomplete-etablissement'),
 		}
 
-class BourseForm(forms.ModelForm):
+class BourseForm(FicheValiderMixin, forms.ModelForm):
 	prefix = 'fiche-bourse'
 	class Meta:
 		model = fiches.FicheBourse
-		fields = ['boursier', 'echelon', 'enfants_charge',
-				'enfants_secondaire', 'enfants_etablissement',
-				'attribution_bourse']
+		fields = ['enfants_secondaire', 'enfants_etablissement',
+				'boursier', 'echelon', 'attribution_bourse']
+		labels = {
+			'boursier': "Êtes-vous boursier de l'enseignement "
+				"supérieur ?",
+		}
+		help_texts = {
+			'boursier' : "Si vous êtes boursier, nous vous demandons "
+				"également le rang d'attribution de votre bourse et "
+				"de nous faire parvenir en pièce jointe une copie de "
+				"votre attribution conditionnelle de bourse."
+		}
 
-class ReglementForm(forms.ModelForm):
+class ReglementForm(FicheValiderMixin, forms.ModelForm):
 	prefix = 'fiche-reglement'
+	acceptation_reglement = forms.BooleanField(required=False,
+			initial=False,
+			label="Je confirme avoir lu le règlement "
+			"intérieur et j'en accepte les termes")
 	class Meta:
 		model = fiches.FicheReglement
-		fields = ['signature_reglement', 'autorisation_parents_eleves']
+		fields = ['autorisation_parents_eleves']
+		labels = {
+			'autorisation_parents_eleves': "J'autorise le lycée à "
+			"communiquer mes coordonnées aux associations de parents "
+			"d'élèves"
+		}
+
+	def save(self, commit=True):
+		fiche = super().save(commit=False)
+		if fiche.signature_reglement is None and \
+				self.cleaned_data['acceptation_reglement']:
+			fiche.signature_reglement = timezone.now()
+
+		fiche.valider()
+
+		if commit:
+			fiche.save()
+		return fiche
+
+class HebergementForm(FicheValiderMixin, forms.ModelForm):
+	prefix = 'fiche-hebergement'
+	class Meta:
+		model = fiches.FicheHebergement
+		fields = ['regime', 'iban', 'bic', 'titulaire_compte']
+		labels = {
+			'regime': "Régime",
+			'iban': "IBAN",
+			'bic': "BIC",
+			'titulaire_compte': 'Titulaire du compte',
+		}
+		help_texts = {
+			'regime': "Merci de choisir le mode d'hébergement dont "
+			"vous souhaitez bénéficier. Le choix de l'internat n'est "
+			"possible que si cette proposition vous a été faite par "
+			"Parcoursup."
+		}
+
+	def clean_regime(self):
+		if self.cleaned_data['regime'] == fiches.FicheHebergement.REGIME_INTERNE and \
+				not self.instance.candidat.voeu_actuel.internat:
+			raise ValidationError("L'internat ne vous a pas été proposé "
+				"sur Parcoursup. Vous ne pouvez pas sélectionner ici "
+				"ce mode d'hébergement", code='internat')
+		if self.cleaned_data['regime'] != fiches.FicheHebergement.REGIME_INTERNE and \
+				self.instance.candidat.voeu_actuel.internat:
+			raise ValidationError("Le vœu que vous avez accepté sur "
+				"Parcoursup est un vœu avec internat. Vous ne pouvez "
+				"pas changer de mode d'hébergement. Si vous souhaitez "
+				"renoncer à l'internat, contactez directement "
+				"l'établissement.", code='internat')
+
 
 # Dictionnaire qui à chaque modèle de fiche associe le formulaire
 # d'édition qui doit être présenté aux candidats.
@@ -72,6 +162,7 @@ candidat_form = {
 		fiches.FicheScolariteAnterieure: ScolariteAnterieureForm,
 		fiches.FicheBourse: BourseForm,
 		fiches.FicheReglement: ReglementForm,
+		fiches.FicheHebergement: HebergementForm,
 	}
 
 # Dictionnaire qui à chaque modèle de fiche associe le formulaire
