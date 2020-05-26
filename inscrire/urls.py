@@ -37,8 +37,8 @@ rest_parcoursup_urlpatterns = [
 
 auth_urlpatterns = [
 	path('login/', views.auth.LoginView.as_view(), name='login'),
-	path('bienvenue', views.auth.EnvoiBienvenue.as_view(), name='envoi_bienvenue'),
-	path('bienvenue/confirm', views.auth.EnvoiBienvenueConfirm.as_view(), name='envoi_bienvenue_confirm'),
+	path('bienvenue/', views.auth.EnvoiBienvenue.as_view(), name='envoi_bienvenue'),
+	path('bienvenue/confirm/', views.auth.EnvoiBienvenueConfirm.as_view(), name='envoi_bienvenue_confirm'),
 	path('', include('django.contrib.auth.urls')),
 ]
 
