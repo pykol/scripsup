@@ -55,3 +55,9 @@ class EtablissementAutocomplete(autocomplete.Select2QuerySetView):
 			qs = qs.filter(nom__icontains=self.q)
 
 		return qs
+
+	def get_result_label(self, item):
+		if item.commune:
+			return "{} ({})".format(item.nom, item.commune)
+		else:
+			return item.nom
