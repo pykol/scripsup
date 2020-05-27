@@ -45,3 +45,23 @@ class FicheValiderView(SingleObjectMixin, UserPassesTestMixin, View):
 
 	def get(self, request, *args, **kwargs):
 		return None
+
+class FicheTraiterView(SingleObjectMixin, UserPassesTestMixin, View):
+	model = Fiche
+
+	def test_func(self):
+		"""
+		La validation d'une fiche n'est permise que par un gestionnaire.
+		"""
+		return self.request.user.est_gestionnaire()
+
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object()
+		if self.object.etat == Fiche.ETAT_CONFIRMEE:
+			self.object.etat = Fiche.ETAT_TERMINEE
+			self.object.save()
+
+			return redirect('home')
+
+	def get(self, request, *args, **kwargs):
+		return None

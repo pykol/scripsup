@@ -77,5 +77,8 @@ urlpatterns = [
 	path('fiche/<int:pk>/valider/',
 		views.fiches.FicheValiderView.as_view(),
 		name='fiche-valider'),
+	path('fiche/<int:pk>/traiter/',
+		views.fiches.FicheTraiterView.as_view(),
+		name='fiche-traiter'),
 	path('autocomplete/', include(autocomplete_urlpatterns)),
 ]
