@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
 {% block contenu %}
+
+<section>
 <h2>Inscription en classe préparatoire</h2>
-<p>
-Bienvenue sur le service d'inscription en ligne en classe préparatoire.
+<p>Bienvenue sur le service d'inscription en ligne en classe préparatoire.
 Pour vous connecter, nous vous invitons à entrer vos identifiants
 personnels (adresse électronique et mot de passe), afin d'accéder à
 votre dossier.</p>
@@ -15,8 +16,10 @@ votre dossier.</p>
 <p>Vous avez oublié votre mot de passe ? Ce n'est pas grave,
 <a href="{% url 'password_reset' %}">réinitialisez-le en suivant ce
   lien</a>.</p>
+</section>
 
-<h3>Première connexion</h3>
+<section>
+<h2>Première connexion</h2>
 
 <p>Lorsque vous acceptez sur Parcoursup une proposition d'admission dans
 notre établissement, nous vous envoyons automatiquement un courrier
@@ -38,5 +41,6 @@ minutes.</p>
 <p>Ceci ne fonctionne que si vous avez accepté définitivement la
 proposition d'admission sur Parcoursup, et qu'il ne vous reste pas
 d'autre vœu en attente.</p>
+</section>
 
 {% endblock %}

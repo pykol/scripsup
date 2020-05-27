@@ -21,10 +21,11 @@ Ce gabarit peut utiliser les paramètres suivants de son contexte :
 Il n'est pas nécessaire d'ajouter une balise <form>, c'est déjà fait par
 le gabarit qui inclut la fiche.
 {% endcomment %}
-<section class="fiche">
-  <h3>{{ fiche.FICHE_LABEL }} − {{ fiche.get_etat_display }}</h3>
+<section class="fiche {{ fiche.get_etat_class }}">
+  <h3>{{ fiche.FICHE_LABEL }} − <span class="fiche-etat">{{ fiche.get_etat_display }}</span></h3>
   {% block fiche_content %}
   {{ fiche_form.as_p }}
   {{ fiche_form.media }}
+  <p><input type="submit" value="Enregistrer"/></p>
   {% endblock %}
 </section>
