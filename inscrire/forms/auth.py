@@ -49,7 +49,7 @@ class EnvoiBienvenueForm(forms.Form):
 			psup = ParcoursupUser.objects.get(etablissement=self.cleaned_data['etablissement'])
 			candidat = psup.get_candidat_admis(self.cleaned_data['numero_dossier'])
 			# Envoi du mail
-			candidat.email_bienvenue(request)
+			candidat.email_bienvenue(request, force=True)
 		except ParcoursupError:
 			# Pas de discussion avec Parcoursup. On tente quand même
 			# l'envoi de l'e-mail de bienvenue.
@@ -57,7 +57,7 @@ class EnvoiBienvenueForm(forms.Form):
 				candidat = Candidat.objects.get(
 						voeu__formation__etablissement=self.cleaned_data['etablissement'],
 						dossier_parcoursup=self.cleaned_data['numero_dossier'])
-				candidat.email_bienvenue(request)
+				candidat.email_bienvenue(request, force=True)
 			except Candidat.DoesNotExist:
 				pass
 		except:
