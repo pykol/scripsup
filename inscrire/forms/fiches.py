@@ -161,6 +161,7 @@ class HebergementForm(FicheValiderMixin, forms.ModelForm):
 				"pas changer de mode d'hébergement. Si vous souhaitez "
 				"renoncer à l'internat, contactez directement "
 				"l'établissement.", code='internat')
+		return self.cleaned_data['regime']
 
 
 # Dictionnaire qui à chaque modèle de fiche associe le formulaire
