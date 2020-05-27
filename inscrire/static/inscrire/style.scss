@@ -19,6 +19,9 @@ $lightGrey: #d3d3d3;
 html {
   font: 14pt 'Open Sans Condensed', Verdana, sans-serif;
 }
+input[type="text"] {
+  font: inherit;
+}
 h1 {
   font-size: 2.25rem;
 }
