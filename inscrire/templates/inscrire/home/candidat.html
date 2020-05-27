@@ -38,7 +38,7 @@ administrative.
   </ul>
 </section>
 
-<form method="post" action="{% url 'candidat_update' candidat.pk %}">
+<form method="post" action="{% url 'home' %}">
   {% csrf_token %}
 
   {% for fiche in fiches %}

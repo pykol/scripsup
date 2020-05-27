@@ -55,15 +55,19 @@ class ResponsableLegal(DetailView):
 		return super().dispatch(request, *args, **kwargs)
 
 class CandidatFicheMixin:
-	def get_context_data(self, **kwargs):
-		context = super().get_context_data()
-
+	def get_fiches(self):
 		# Ajout des fiches applicables
 		FicheTpl = namedtuple('FicheTpl', ('fiche', 'form', 'template'))
 		fiches = []
-		for fiche in self.object.fiche_set.exclude(etat=Fiche.ETAT_ANNULEE):
+		candidat = self.object
+		for fiche in candidat.fiche_set.exclude(etat=Fiche.ETAT_ANNULEE):
 			try:
-				form = candidat_form[type(fiche)](instance=fiche)
+				if self.request.method in ('POST', 'PUT'):
+					form = candidat_form[type(fiche)](instance=fiche,
+							data=self.request.POST,
+							files=self.request.FILES)
+				else:
+					form = candidat_form[type(fiche)](instance=fiche)
 			except:
 				form = None
 
@@ -77,11 +81,20 @@ class CandidatFicheMixin:
 					])
 				))
 
-		context['fiches'] = fiches
+		fiches.sort(key=lambda fiche:
+				all_fiche.index(type(fiche.fiche)))
+		return fiches
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data()
+		context['fiches'] = kwargs.get('fiches', self.get_fiches())
 		return context
 
 class CandidatUpdate(CandidatFicheMixin, UpdateView):
-	"""Permet la modification des informations personnelles"""
+	"""
+	Permet la modification des informations personnelles par le candidat
+	lui-même.
+	"""
 
 	model = Candidat
 	fields = ['adresse', 'telephone', 'telephone_mobile', 'date_naissance', 'genre']
@@ -94,3 +107,9 @@ class CandidatUpdate(CandidatFicheMixin, UpdateView):
 		if kwargs['pk'] != self.candidat.pk:
 			return redirect("/")
 		return super().dispatch(request, *args, **kwargs)
+
+	def get(self, request, *args, **kwargs):
+		return self.render_to_response(self.get_context_data())
+
+	def post(self, request, *args, **kwargs):
+		pass

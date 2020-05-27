@@ -73,3 +73,21 @@ class EtudiantHomeView(CandidatFicheMixin, DetailView):
 		context = super().get_context_data(**kwargs)
 		context['voeu'] = self.request.user.candidat.voeu_actuel
 		return context
+
+	def post(self, request, *args, **kwargs):
+		# Reconstruire les formulaires, vérifier, sauvegarder.
+		self.object = self.get_object()
+		fiches = self.get_fiches()
+
+		redirect_after_save = True
+		for fiche in fiches:
+			if fiche.form:
+				if fiche.form.is_valid():
+					fiche.form.save()
+				else:
+					redirect_after_save = False
+
+		if redirect_after_save:
+			return redirect('home')
+		else:
+			return self.render_to_response(self.get_context_data(fiches=fiches))
