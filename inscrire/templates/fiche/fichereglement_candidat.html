@@ -1,17 +1,22 @@
 {% extends 'fiche/fiche_base_candidat.html' %}
 {% block fiche_content %}
-En vous inscrivant dans cette formation, vous vous engagez à prendre
+<p>En vous inscrivant dans cette formation, vous vous engagez à prendre
 connaissance du règlement intérieur de l'établissement et à en respecter
-les termes.
+les termes.</p>
 
-Nous vous remercions de bien vouloir prendre le temps de lire ce
-règlement et de nous confirmer votre acceptation.
+<p>Nous vous remercions de bien vouloir prendre le temps de lire ce
+règlement et de nous confirmer votre acceptation.</p>
 
-De plus, des associations de parents d'élèves interviennent dans la vie
+<p>De plus, des associations de parents d'élèves interviennent dans la vie
 de l'établissement (conseil d'administration et autres instances
 représentatives). Nous souhaitons savoir si vous acceptez que nous leur
 transmettions vos coordonnées afin qu'elles puissent vous joindre
-directement.
+directement.</p>
+
+{% if fiche.signature_reglement %}
+<p>Vous avez accepté le règlement intérieur le {{ fiche.signature_reglement }}.</p>
+{% endif %}
 
 {{ block.super }}
+
 {% endblock %}

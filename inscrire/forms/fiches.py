@@ -26,6 +26,7 @@ de fiche associent la classe de formulaire à utiliser.
 
 from django import forms
 from django.core.exceptions import ValidationError
+from django.utils import timezone
 from dal import autocomplete
 
 from inscrire.models import fiches
@@ -110,11 +111,18 @@ class ReglementForm(FicheValiderMixin, forms.ModelForm):
 			"d'élèves"
 		}
 
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['acceptation_reglement'].initial = self.instance.signature_reglement is not None
+
 	def save(self, commit=True):
 		fiche = super().save(commit=False)
 		if fiche.signature_reglement is None and \
 				self.cleaned_data['acceptation_reglement']:
 			fiche.signature_reglement = timezone.now()
+		if fiche.signature_reglement is not None and \
+				not self.cleaned_data['acceptation_reglement']:
+			fiche.signature_reglement = None
 
 		fiche.valider()
 
