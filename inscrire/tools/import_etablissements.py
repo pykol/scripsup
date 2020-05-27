@@ -50,11 +50,14 @@ def main():
 
 			appellation = norm(ligne['Appellation officielle']) or denomination
 
+			code_commune = norm(ligne['Code commune'])
+
 			etablissements.append({
 				'model': 'inscrire.etablissement',
 				'pk': ligne['Code établissement'],
 				'fields': {
 					'nom': appellation,
+					'commune': code_commune,
 				}
 			})
 
