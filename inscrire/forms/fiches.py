@@ -32,6 +32,12 @@ from dal import autocomplete
 from inscrire.models import fiches
 
 class FicheValiderMixin:
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		if self.instance.etat != self.instance.ETAT_EDITION:
+			for field in self.fields.values():
+				field.disabled = True
+
 	def save(self, commit=True):
 		instance = super().save(commit=False)
 		instance.valider()

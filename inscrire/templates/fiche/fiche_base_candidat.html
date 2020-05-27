@@ -31,16 +31,19 @@ le gabarit qui inclut la fiche.
   {% block fiche_content %}
   {{ fiche_form.as_p }}
   {{ fiche_form.media }}
-  <p><input type="submit" value="Enregistrer"/>
+  {% if fiche.etat == fiche.ETAT_EDITION %}
+  <p>
+  <input type="submit" value="Enregistrer">
   {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide %}
-  <input type="submit" class="valider-fiche" value="Valider">
+  <input type="submit" form="form-valider-fiche-{{ fiche.pk }}" class="valider-fiche" value="Valider">
   {% endif %}
   </p>
+  {% endif %}
   {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide %}
   <p>Lorsque vous validez une fiche, celle-ci est transmise au
-  secrétariat de l'établissement. Vous ne pouvez plus modifier la fiche.
-  Votre dossier est complet lorsque toutes les fiches présentes sur
-  cette page sont validées.</p>
+  secrétariat de l'établissement. Vous ne pouvez alors plus modifier la
+  fiche. Votre dossier est complet lorsque toutes les fiches présentes
+  sur cette page sont validées.</p>
   {% endif %}
   {% endblock %}
 </section>
