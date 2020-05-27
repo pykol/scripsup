@@ -74,5 +74,11 @@ urlpatterns = [
 		name='candidat_update'),
 	path('responsablelegal/<int:pk>/', views.ResponsableLegal.as_view(),
 		name='responsablelegal-detail'),
+	path('fiche/<int:pk>/valider/',
+		views.fiches.FicheValiderView.as_view(),
+		name='fiche-valider'),
+	path('fiche/<int:pk>/traiter/',
+		views.fiches.FicheTraiterView.as_view(),
+		name='fiche-traiter'),
 	path('autocomplete/', include(autocomplete_urlpatterns)),
 ]

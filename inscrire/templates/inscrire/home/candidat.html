@@ -38,7 +38,8 @@ administrative.
   </ul>
 </section>
 
-<form method="post" action="{% url 'home' %}">
+{% for fiche in fiches %}{% if fiche.fiche.etat == fiche.fiche.ETAT_EDITION and fiche.fiche.valide %}<form method="post" action="{% url 'fiche-valider' fiche.fiche.pk %}" id='form-valider-fiche-{{fiche.fiche.pk}}'>{% csrf_token %}</form>{% endif %}{% endfor %}
+<form method="post" action="{% url 'home' %}" enctype="multipart/form-data">
   {% csrf_token %}
 
   {% for fiche in fiches %}

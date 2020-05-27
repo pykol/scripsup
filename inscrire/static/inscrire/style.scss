@@ -6,6 +6,8 @@ $lightBlack: #333;
 $darkGrey: #a9a9a9;
 $ghostWhite: #f8f8ff;
 $lightGrey: #d3d3d3;
+$green: #639a67;
+$orange: orange;
 
 // Mixins
 @mixin transition($property) {transition: $property .25s;}
@@ -73,10 +75,8 @@ a {
   transition: color .25s;
 }
 input[type="submit"],.button {
-  display: block;
-  padding: .75em 1.25em;
+  padding: 0.4rem 0.8rem;
   font-size: 1rem;
-  font-weight: bold;
   text-transform: uppercase;
   background: $red;
   color: #fff;
@@ -86,6 +86,17 @@ input[type="submit"],.button {
   &:hover {background: darken($red, 7%);}
   &:active {background: #c10000;}
 }
+
+input[type="submit"].valider-fiche {
+  &:focus,
+  &:hover {
+    background: darken($green, 7%);
+  }
+  &, &:active {
+    background: $green;
+  }
+}
+
 a:link, a:visited {
   font-weight: bold;
   color: $red;
@@ -276,5 +287,5 @@ footer a {
 
 /* Fiches d'inscription */
 .fiche.etat-edition .fiche-etat {
-  color: orange;
+  color: $orange;
 }
