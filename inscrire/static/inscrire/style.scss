@@ -7,6 +7,7 @@ $darkGrey: #a9a9a9;
 $ghostWhite: #f8f8ff;
 $lightGrey: #d3d3d3;
 $green: #639a67;
+$orange: orange;
 
 // Mixins
 @mixin transition($property) {transition: $property .25s;}
@@ -286,5 +287,5 @@ footer a {
 
 /* Fiches d'inscription */
 .fiche.etat-edition .fiche-etat {
-  color: orange;
+  color: $orange;
 }
