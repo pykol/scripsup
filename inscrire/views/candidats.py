@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 from django.template.loader import select_template
 
 from inscrire.models import ResponsableLegal, Candidat
-from inscrire.models.fiches import Fiche
+from inscrire.models.fiches import Fiche, all_fiche
 from inscrire.forms.fiches import candidat_form
 USER = get_user_model()
 
