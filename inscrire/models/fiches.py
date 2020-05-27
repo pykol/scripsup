@@ -401,6 +401,15 @@ class FicheCesure(Fiche):
 		verbose_name_plural = "fiches césure"
 
 # Liste de toutes les fiches à essayer lors de la création d'un dossier.
-all_fiche = [FicheIdentite, FicheScolarite, FicheHebergement,
-		FicheInternat, FicheCesure, FicheReglement, FicheBourse,
-		FicheScolariteAnterieure]
+# L'ordre dans cette liste détermine l'ordre d'affichage pour le
+# candidat.
+all_fiche = [
+		FicheIdentite,
+		FicheScolariteAnterieure,
+		FicheScolarite,
+		FicheHebergement,
+		FicheInternat,
+		FicheCesure,
+		FicheBourse,
+		FicheReglement,
+	]

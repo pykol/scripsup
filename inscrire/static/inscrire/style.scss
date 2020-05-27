@@ -19,6 +19,9 @@ $lightGrey: #d3d3d3;
 html {
   font: 14pt 'Open Sans Condensed', Verdana, sans-serif;
 }
+input[type="text"] {
+  font: inherit;
+}
 h1 {
   font-size: 2.25rem;
 }
@@ -264,6 +267,11 @@ footer a {
   display: block;
   font-size: 80%;
   color: #666;
+}
+.errorlist {
+  background-color: #d32f2f;
+  color: #eee;
+  padding: 0.1em 0.3em;
 }
 
 /* Fiches d'inscription */
