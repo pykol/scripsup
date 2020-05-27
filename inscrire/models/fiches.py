@@ -169,6 +169,17 @@ class Fiche(PolymorphicModel):
 		"""
 		pass
 
+	def get_etat_class(self):
+		"""
+		Renvoie un nom de classe HTML représentant l'état de la fiche.
+		"""
+		return {
+				Fiche.ETAT_EDITION: 'etat-edition',
+				Fiche.ETAT_CONFIRMEE: 'etat-confirmee',
+				Fiche.ETAT_TERMINEE: 'etat-terminee',
+				Fiche.ETAT_ANNULEE: 'etat-annulee',
+			}.get(self.etat, '')
+
 class FicheIdentite(Fiche):
 	"""
 	Informations concernant l'identité du candidat

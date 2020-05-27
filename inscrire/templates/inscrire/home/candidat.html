@@ -18,6 +18,7 @@ administrative.
   <ul>
     <li>INE : {{ candidat.ine }}</li>
     <li>Numéro de dossier Parcoursup : {{ candidat.dossier_parcoursup }}</li>
+    <li>Votre adresse : <address>{{ candidat.adresse }}</address></li>
     <li>Date de naissance : {{ candidat.date_naissance }}</li>
     {% if candidat.bac_date %}
     <li>Vous avez obtenu votre baccalauréat en série
@@ -42,7 +43,6 @@ administrative.
 
   {% for fiche in fiches %}
   {% include fiche.template with fiche=fiche.fiche fiche_form=fiche.form candidat=fiche.fiche.voeu.candidat voeu=fiche.fiche.voeu formation=fiche.fiche.voeu.formation %}
-    <input type="submit" value="Enregistrer"/>
   {% endfor %}
 </form>
 {% endblock %}
