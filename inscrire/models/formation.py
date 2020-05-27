@@ -33,6 +33,8 @@ class Etablissement(models.Model):
 	inscriptions = models.BooleanField(default=False,
 			help_text="Indique s'il s'agit d'un établissement dont le "
 			"site actuel gère les inscriptions")
+	commune = models.ForeignKey('Commune', on_delete=models.SET_NULL,
+			blank=True, null=True)
 
 	class Meta:
 		verbose_name = "établissement"
