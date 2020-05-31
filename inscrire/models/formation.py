@@ -39,9 +39,10 @@ class Etablissement(models.Model):
 	class Meta:
 		verbose_name = "établissement"
 		verbose_name_plural = "établissements"
+		ordering = ["numero_uai"]
 
 	def __str__(self):
-		return self.nom
+		return "{} {}".format(self.numero_uai, self.nom)
 
 class Formation(models.Model):
 	"""
