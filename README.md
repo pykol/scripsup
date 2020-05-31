@@ -45,9 +45,9 @@ Il est possible de simuler l'envoi par Parcoursup d'un candidat de
 test :
 
 ```sh
-curl -H 'Content-type: application/json \
+curl -H 'Content-type: application/json' \
      -d @inscrire/tools/candidat_test.json \
-     -d http://127.0.0.1:8000/parcoursup/admissionCandidat
+     http://127.0.0.1:8000/parcoursup/admissionCandidat
 ```
 
 Le code Parcoursup de la formation est le code 8842. Ce code doit
