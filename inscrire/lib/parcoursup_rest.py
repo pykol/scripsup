@@ -44,6 +44,13 @@ def parse_date_reponse(date_str):
 		tzinfo=paris_tz,
 	)
 
+class ParcoursupError(Exception):
+	"""
+	Exception levée quand la discussion avec Parcoursup n'est pas
+	possible.
+	"""
+	pass
+
 class ParcoursupRequest:
 	"""
 	Légère couche d'abstraction au-dessus du module requests pour gérer
@@ -264,7 +271,10 @@ class ParcoursupRest:
 
 		# Mise en forme de la réponse
 		candidats = []
-		for psup_json in request.json():
+		if request.request.status_code != 200:
+			raise ParcoursupError
+
+		for psup_json in request.request.json():
 			candidats.append(self.parse_parcoursup_admission(psup_json))
 		return candidats
 
@@ -273,7 +283,7 @@ class ParcoursupRest:
 		Recherche des informations sur un candidat admis d'après son
 		numéro de dossier.
 		"""
-		return self.get_candidats_admis(self, code_candidat=code_candidat)[0]
+		return self.get_candidats_admis(code_candidat=code_candidat)[0]
 
 	@staticmethod
 	def parse_parcoursup_admission(psup_json):

@@ -23,7 +23,8 @@ from django import forms
 from django.core.validators import RegexValidator
 
 from inscrire.models.parcoursup import ParcoursupUser
-from inscrire.models import Etablissement
+from inscrire.models import Etablissement, Candidat
+from inscrire.lib.parcoursup_rest import ParcoursupError
 
 class EnvoiBienvenueForm(forms.Form):
 	"""
@@ -39,16 +40,26 @@ class EnvoiBienvenueForm(forms.Form):
 			validators=[RegexValidator(regex=r'^\d+$',
 				message="Le numéro de dossier ne doit contenir que des chiffres")])
 
-	def envoi_bienvenue(self):
+	def envoi_bienvenue(self, request):
 		"""
 		Envoie un e-mail de bienvenue au candidat qui l'a demandé.
 		"""
+		# Synchro Parcoursup
 		try:
-			# Synchro Parcoursup
 			psup = ParcoursupUser.objects.get(etablissement=self.cleaned_data['etablissement'])
 			candidat = psup.get_candidat_admis(self.cleaned_data['numero_dossier'])
 			# Envoi du mail
-			candidat.email_bienvenue()
+			candidat.email_bienvenue(request, force=True)
+		except ParcoursupError:
+			# Pas de discussion avec Parcoursup. On tente quand même
+			# l'envoi de l'e-mail de bienvenue.
+			try:
+				candidat = Candidat.objects.get(
+						voeu__formation__etablissement=self.cleaned_data['etablissement'],
+						dossier_parcoursup=self.cleaned_data['numero_dossier'])
+				candidat.email_bienvenue(request, force=True)
+			except Candidat.DoesNotExist:
+				pass
 		except:
-			# Intercepter des erreurs pour signaler au gestionnaire
 			pass
+		# TODO Intercepter des erreurs pour signaler au gestionnaire

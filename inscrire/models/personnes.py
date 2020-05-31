@@ -217,6 +217,10 @@ class Candidat(Personne):
 				html_message=render_to_string('inscrire/email_bienvenue_candidat_message.html',
 					context=render_context).strip()
 			)
+
+		self.email_bienvenue_envoye = True
+		self.save()
+
 		self.log("E-mail d'activation du compte envoyé au candidat")
 
 	def log(self, message, date=None):

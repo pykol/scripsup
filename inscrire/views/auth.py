@@ -44,7 +44,7 @@ class EnvoiBienvenue(FormView):
 		return reverse('envoi_bienvenue_confirm')
 
 	def form_valid(self, form):
-		form.envoi_email()
+		form.envoi_bienvenue(self.request)
 		return super().form_valid(form)
 
 class EnvoiBienvenueConfirm(TemplateView):

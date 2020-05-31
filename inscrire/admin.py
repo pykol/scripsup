@@ -49,19 +49,61 @@ class InscrireUserAdmin(BaseUserAdmin):
 	search_fields = ('first_name', 'last_name', 'email')
 admin.site.register(InscrireUser, InscrireUserAdmin)
 
-admin.site.register(Candidat)
+class ResponsableLegalInline(admin.TabularInline):
+	model = ResponsableLegal
+	extra = 0
+
+class CandidatActionLogInline(admin.TabularInline):
+	model = CandidatActionLog
+	extra = 0
+
+@admin.register(Candidat)
+class CandidatAdmin(admin.ModelAdmin):
+	search_fields = ('dossier_parcoursup', 'first_name', 'last_name')
+	list_display = ('last_name', 'first_name', 'dossier_parcoursup')
+	autocomplete_fields = ('commune_naissance', 'pays_naissance',
+		'nationalite',)
+	inlines = (ResponsableLegalInline, CandidatActionLogInline)
+
 admin.site.register(ResponsableLegal)
 admin.site.register(CandidatActionLog)
-admin.site.register(Commune)
-admin.site.register(Pays)
+
+@admin.register(Commune)
+class CommuneAdmin(admin.ModelAdmin):
+	list_display = ('nom_riche', 'code_insee')
+	search_fields = ('nom_riche', 'code_insee')
+
+@admin.register(Pays)
+class PaysAdmin(admin.ModelAdmin):
+	list_display = ('libelle', 'code_iso2')
+	search_fields = ('libelle',)
+
 admin.site.register(Profession)
-admin.site.register(Etablissement)
-admin.site.register(Formation)
+
+@admin.register(Etablissement)
+class EtablissementAdmin(admin.ModelAdmin):
+	list_filter = ('inscriptions',)
+	search_fields = ('nom', 'numero_uai')
+
+@admin.register(Formation)
+class FormationAdmin(admin.ModelAdmin):
+	list_display = ('nom', 'etablissement', 'code_parcoursup')
+	list_filter = (('etablissement', admin.RelatedOnlyFieldListFilter),)
+	autocomplete_fields = ('etablissement',)
+
 admin.site.register(ParcoursupUser)
 admin.site.register(ParcoursupMessageRecuLog)
 admin.site.register(ParcoursupMessageEnvoyeLog)
-admin.site.register(Voeu)
-admin.site.register(HistoriqueVoeu)
+
+class HistoriqueVoeuInline(admin.TabularInline):
+	model = HistoriqueVoeu
+	extra = 0
+
+@admin.register(Voeu)
+class VoeuAdmin(admin.ModelAdmin):
+	list_display = ('candidat', 'formation', 'get_etat_display')
+	inlines = (HistoriqueVoeuInline,)
+
 admin.site.register(FicheIdentite)
 admin.site.register(FicheScolarite)
 admin.site.register(FicheHebergement)
