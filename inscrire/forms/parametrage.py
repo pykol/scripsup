@@ -55,7 +55,7 @@ class ImportStructuresForm(forms.Form):
 class FormationForm(forms.ModelForm):
 	class Meta:
 		model = Formation
-		fields = ['nom', 'code_parcoursup', 'groupe_parcoursup',
+		fields = ['nom', 'code_parcoursup',
 				'etablissement', 'slug', 'code_mef']
 
 	def __init__(self, *args, **kwargs):
