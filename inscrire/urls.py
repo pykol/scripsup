@@ -52,6 +52,9 @@ formation_urlpatterns = [
 	path('<slug:slug>',
 		views.formation.FormationDetailView.as_view(),
 		name='formation_detail'),
+	path('<slug:slug>/update',
+		views.formation.FormationUpdateView.as_view(),
+		name='formation_update'),
 ]
 
 autocomplete_urlpatterns = [
