@@ -24,7 +24,7 @@ import zipfile
 
 from django import forms
 
-from inscrire.models import Formation
+from inscrire.models import Formation, MefOption, Etablissement
 from inscrire.lib.siecle.fichiers import Nomenclature, Structures
 
 class ImportStructuresForm(forms.Form):
@@ -60,4 +60,11 @@ class FormationForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		self.etablissement.queryset = Etablissement.objects.filter(inscriptions=True).order_by('numero_uai')
+		self.fields['etablissement'].queryset = Etablissement.objects.filter(inscriptions=True).order_by('numero_uai')
+
+OptionActiverFormset = forms.models.inlineformset_factory(
+		Formation,
+		MefOption,
+		fields=('inscriptions',),
+		extra=0,
+		can_delete=False)

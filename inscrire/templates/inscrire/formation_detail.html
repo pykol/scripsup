@@ -14,7 +14,7 @@
     <tbody>
       {% for candidat in candidat_list %}
       <tr>
-        <td><a href="{% url 'candidat_detail' candidat.pk %}">{{ candidat }}</td>
+        <td><a href="{% url 'candidat_detail' candidat.pk %}">{{ candidat }}</a></td>
         <td></td>
       </tr>
     {% endfor %}
@@ -23,5 +23,37 @@
   {% else %}
   <p>Aucun candidat n'a pour le moment été envoyé par Parcoursup.</p>
   {% endif %}
+</section>
+
+<section>
+  <h3>Paramétrage de la formation</h3>
+  <form method="post" action="{% url 'formation_update' object.slug %}">
+    {% csrf_token %}
+    {{ formation_form.as_p }}
+
+    <h4>Options ouvertes</h4>
+    <p>Les options suivantes existent dans cette formation. Vous pouvez
+    définir lesquelles seront proposées aux étudiants lors de leur
+    inscription. Si vous activez ici des options obligatoires, les
+    étudiants devront choisir une option obligatoire pour chaque rang.
+    </p>
+    {{ option_formset.management_form }}
+    <ul>
+      {% regroup option_formset by instance.rang as option_formset_rangs %}
+      {% for rang in option_formset_rangs %}
+      <li>{% if rang.grouper == 0 %}Facultatives{% else %}Rang {{ rang.grouper }}{% endif %} :
+        <ul>
+          {% for option_form in rang.list %}
+          <li>{% for hidden in option_form.hidden_fields %}{{ hidden }}{% endfor %}{{ option_form.inscriptions }}
+            <label for="{{ option_form.inscriptions.id_for_label }}">{{ option_form.instance.matiere }} ({{ option_form.instance.get_modalite_display }}{% if option_form.instance.modalite == option_form.instance.MODALITE_OBLIGATOIRE %}, rang {{ option_form.instance.rang }}{% endif %})</label></li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <p><input type="submit" value="Enregistrer"></p>
+  </form>
+
 </section>
 {% endblock %}
