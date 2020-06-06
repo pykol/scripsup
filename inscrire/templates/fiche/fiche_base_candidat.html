@@ -23,7 +23,7 @@ le gabarit qui inclut la fiche.
 {% endcomment %}
 <section class="fiche {{ fiche.get_etat_class }}">
   <h3>{{ fiche.FICHE_LABEL }} − <span class="fiche-etat">
-      {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide %}
+      {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide and not fiche_form.errors %}
       Fiche complète, vous pouvez la valider
       {% else %}
       {{ fiche.get_etat_display }}
@@ -34,7 +34,7 @@ le gabarit qui inclut la fiche.
   {% if fiche.etat == fiche.ETAT_EDITION %}
   <p>
   <input type="submit" value="Enregistrer">
-  {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide %}
+  {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide and not fiche_form.errors %}
   <input type="submit" form="form-valider-fiche-{{ fiche.pk }}" class="valider-fiche" value="Valider">
   {% endif %}
   </p>
