@@ -1,17 +1,26 @@
 {% extends 'base.html' %}
 
 {% block contenu %}
-<h3>Dossier d'inscription pour {{ object }}</h3>
-<p>Numéro de dossier: {{object.dossier_parcoursup}}</p>
-<p>Email: {{candidat.user.email}}</p>
-<p>INE: {{candidat.ine|default_if_none:"Non renseigné"}}</p>
-<p>Date de naissance: {{candidat.date_naissance}}</p>
-<p>Responsables légaux:
-<ul>
-  {% for responsable in candidat.responsables.all %}
-  <li><a href="{% url 'responsablelegal-detail' responsable.pk %}">{{responsable}}</a></li>
-  {% endfor %}
-</ul>
+<h2>Dossier d'inscription pour {{ object }}</h2>
 
-{% include "personne.html" with personne=candidat %}
+<section>
+  <h2>Dossier Parcoursup</h2>
+  <p>Ces informations ont été obtenues automatiquement depuis le dossier
+  Parcoursup du candidat.</p>
+  <ul>
+    <li>Numéro de dossier Parcoursup : {{ object.dossier_parcoursup }}</li>
+    <li>Email : <a href="mailto:{{ object.user.email }}">{{ object.user.email }}</a></li>
+    <li><abbr title="Identifiant national élève">INE</abbr> : {{object.ine|default_if_none:"Non renseigné"}}</li>
+    <li>Date de naissance : {{ object.date_naissance }}</li>
+    <li>Responsables légaux :
+      <ul>
+      {% for responsable in candidat.responsables.all %}
+        <li><a href="{% url 'responsablelegal-detail' responsable.pk %}">{{responsable}}</a></li>
+      {% endfor %}
+      </ul>
+    </li>
+  </ul>
+  {% include "personne.html" with personne=candidat %}
+</section>
+
 {% endblock %}
