@@ -162,7 +162,8 @@ class ParcoursupUser(models.Model):
 						adresse=psup_resp.adresse).save()
 
 		# Mise à jour des fiches d'inscription
-		Fiche.objects.create_or_update_applicable(voeu)
+		Fiche.objects.create_or_update_applicable(voeu,
+				parcoursup=psup_resp)
 
 		return candidat
 

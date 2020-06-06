@@ -30,6 +30,7 @@ from django.utils import timezone
 from dal import autocomplete
 
 from inscrire.models import fiches
+from inscrire.models import MefOption
 
 class FicheValiderMixin:
 	def __init__(self, *args, **kwargs):
@@ -39,10 +40,13 @@ class FicheValiderMixin:
 				field.disabled = True
 
 	def save(self, commit=True):
-		instance = super().save(commit=False)
-		instance.valider()
 		if commit:
+			instance = super().save(commit=True)
+			instance.valider()
 			instance.save()
+		else:
+			instance = super().save(commit=False)
+
 		return instance
 
 class IdentiteForm(FicheValiderMixin, forms.ModelForm):
@@ -169,6 +173,43 @@ class HebergementForm(FicheValiderMixin, forms.ModelForm):
 				"l'établissement.", code='internat')
 		return self.cleaned_data['regime']
 
+class ScolariteForm(FicheValiderMixin, forms.ModelForm):
+	prefix = 'fiche-scolarite'
+	class Meta:
+		model = fiches.FicheScolarite
+		fields = ['options',]
+		widgets = {
+			'options': forms.CheckboxSelectMultiple,
+		}
+
+	def options_qs(self):
+		return MefOption.objects.filter(
+			formation=self.instance.candidat.voeu_actuel.formation,
+			inscriptions=True)
+	
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['options'].queryset = self.options_qs().order_by(
+			'modalite', 'rang', 'matiere__libelle_edition')
+
+	def clean_options(self):
+		errors = []
+		rangs_choisis = {}
+		for option in self.cleaned_data['options']:
+			if option.rang in rangs_choisis and \
+				option.modalite == MefOption.MODALITE_OBLIGATOIRE:
+				errors.append(ValidationError("Vous ne devez choisir "
+					"qu'une seule option parmi les choix possibles "
+					"pour le rang %(rang)d.",
+					params={'rang': option.rang},
+					code='rang-multiple-options'))
+			else:
+				rangs_choisis[option.rang] = option
+
+		if errors:
+			raise ValidationError(errors)
+
+		return self.cleaned_data['options']
 
 # Dictionnaire qui à chaque modèle de fiche associe le formulaire
 # d'édition qui doit être présenté aux candidats.
@@ -178,6 +219,7 @@ candidat_form = {
 		fiches.FicheBourse: BourseForm,
 		fiches.FicheReglement: ReglementForm,
 		fiches.FicheHebergement: HebergementForm,
+		fiches.FicheScolarite: ScolariteForm,
 	}
 
 # Dictionnaire qui à chaque modèle de fiche associe le formulaire
