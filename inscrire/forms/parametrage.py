@@ -44,13 +44,13 @@ class ImportStructuresForm(forms.Form):
 		"""
 		Renvoie la liste des classes du fichier structures
 		"""
-		return Structures(self.cleaned_data['structures'])
+		return Structures(self._open_maybe_zip(self.cleaned_data['structures']))
 
 	def lire_nomenclature(self):
 		"""
 		Construit la liste des options pour chaque formation
 		"""
-		return Nomenclature(self.cleaned_data['nomenclature'])
+		return Nomenclature(self._open_maybe_zip(self.cleaned_data['nomenclature']))
 
 class FormationForm(forms.ModelForm):
 	class Meta:

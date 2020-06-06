@@ -1,16 +1,10 @@
 from datetime import datetime
 import xml.etree.ElementTree as ElementTree
-import zipfile
 
 from .interfaces import MEF, Matiere, MEFProgramme, MEFOption
 
 class ExportSiecle:
-	def __init__(self, filename):
-		try:
-			zipfh = zipfile.ZipFile(filename)
-			fh = zipfh.open(zipfh.namelist()[0])
-		except zipfile.BadZipFile:
-			fh = open(filename)
+	def __init__(self, fh):
 		self.file_handle = fh
 		self.xml = ElementTree.parse(fh)
 
@@ -24,7 +18,7 @@ class ExportSiecle:
 				'%d/%m/%Y').date(),
 			'horodatage': datetime.strptime(
 				params.find('HORODATAGE').text,
-				'%d/%m/%Y %H-%M-%S')
+				'%d/%m/%Y %H:%M:%S')
 		}
 
 	@classmethod
@@ -51,6 +45,7 @@ class Nomenclature(ExportSiecle):
 			mefs[code_mef] = MEF(
 				code=mef_et.attrib['CODE_MEF'],
 				formation=mef_et.find('FORMATION').text,
+				libelle_long=mef_et.find('LIBELLE_LONG').text,
 				nb_opt_oblig=nb_opt_oblig,
 				nb_opt_mini=nb_opt_mini,
 			)
@@ -97,5 +92,5 @@ class Structures(ExportSiecle):
 		"""
 		codes_mefs = set()
 		for mef_et in self.xml.getroot().findall('./DONNEES/DIVISIONS/DIVISION/MEFS_APPARTENANCE/MEF_APPARTENANCE/CODE_MEF'):
-			code_mefs.add(mef_et.text)
+			codes_mefs.add(mef_et.text)
 		return codes_mefs
