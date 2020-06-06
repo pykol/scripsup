@@ -99,3 +99,11 @@ class AccesParcoursupView(UpdateView):
 	Paramétrage d'un accès à l'interface synchrone de Parcoursup
 	"""
 	pass
+
+class SynchroParcoursupView(AccessGestionnaireMixin, View):
+	"""
+	Vue qui force la synchronisation de tous les candidats en
+	interrogeant Parcoursup.
+	"""
+	def post(self):
+		pass
