@@ -336,6 +336,23 @@ class FicheScolarite(Fiche):
 		self.formation = self.candidat.voeu_actuel.formation
 		super().save(*args, **kwargs)
 
+	def valider(self):
+		# On vérifie que toutes les options obligatoires ont été
+		# choisies.
+		rangs_disponibles = set(self.formation.mefoption_set.filter(
+			modalite=MefOption.MODALITE_OBLIGATOIRE,
+			inscriptions=True).values_list('rang',
+					flat=True))
+		rangs_choisis = set()
+		for option in self.options.filter(modalite=MefOption.MODALITE_OBLIGATOIRE):
+			# Cas de deux options exclusives pour le même rang
+			if option.rang in rangs_choisis:
+				self.valide = False
+				break
+			rangs_choisis.add(option.rang)
+		else:
+			self.valide = rangs_disponibles == rangs_choisis
+
 	class Meta:
 		verbose_name = "fiche scolarité"
 		verbose_name_plural = "fiches scolarité"
