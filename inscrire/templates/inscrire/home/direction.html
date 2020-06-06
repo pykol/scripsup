@@ -20,7 +20,17 @@ l'interface synchrone de Parcoursup.</p>
 {% endif %}
 
 <section id='parametres-parcoursup'>
-  <h3>Paramétrage de l'accès à Parcoursup</h3>
+  <h3>Accès à Parcoursup</h3>
   <p>En cours de développement.</p>
+
+  <form action="{% url 'parcoursup-synchro' %}" method="post">
+    <p><input type="submit" value="Synchronisation manuelle avec Parcoursup"></p>
+  </form>
+
+  <h3>Paramétrage des formations</h3>
+  <ul>
+    <li><a href="{% url 'parametrage_import_structures' %}">Import des
+        formations depuis SIECLE</a></li>
+  </ul>
 </section>
 {% endblock %}

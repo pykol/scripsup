@@ -49,8 +49,9 @@ class Formation(models.Model):
 	Description d'une formation dispensée dans l'établissement
 	"""
 	nom = models.CharField(max_length=100)
-	code_parcoursup = models.SmallIntegerField(unique=True)
-	groupe_parcoursup = models.SmallIntegerField()
+	code_parcoursup = models.SmallIntegerField(unique=True, null=True,
+			blank=True)
+	# groupe_parcoursup = models.SmallIntegerField()
 	etablissement = models.ForeignKey(Etablissement,
 			on_delete=models.CASCADE)
 	slug = models.SlugField(unique=True)
@@ -62,6 +63,14 @@ class Formation(models.Model):
 	class Meta:
 		verbose_name = "formation"
 		verbose_name_plural = "formations"
+		constraints = [
+			models.UniqueConstraint(
+				fields=('code_mef', 'etablissement'),
+				name='code_mef_unique'),
+			models.UniqueConstraint(
+				fields=('code_parcoursup', 'etablissement'),
+				name='code_parcoursup_unique'),
+		]
 
 	def __str__(self):
 		return self.nom
@@ -71,7 +80,6 @@ class MefMatiere(models.Model):
 	Matière
 	"""
 	code = models.CharField(max_length=6, primary_key=True)
-	code_gestion = models.CharField(max_length=10)
 	libelle_court = models.CharField(max_length=100)
 	libelle_long = models.CharField(max_length=100)
 	libelle_edition = models.CharField(max_length=100)
