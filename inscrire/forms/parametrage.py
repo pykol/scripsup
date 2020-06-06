@@ -25,10 +25,11 @@ import zipfile
 from django import forms
 
 from inscrire.models import Formation
+from inscrire.lib.siecle.fichiers import Nomenclature, Structures
 
 class ImportStructuresForm(forms.Form):
 	structures = forms.FileField()
-	nomenclatures = forms.FileField()
+	nomenclature = forms.FileField()
 
 	@staticmethod
 	def _open_maybe_zip(source_file):
@@ -43,18 +44,18 @@ class ImportStructuresForm(forms.Form):
 		"""
 		Renvoie la liste des classes du fichier structures
 		"""
-		pass
+		return Structures(self.cleaned_data['structures'])
 
-	def lire_nomenclatures(self):
+	def lire_nomenclature(self):
 		"""
 		Construit la liste des options pour chaque formation
 		"""
-		pass
+		return Nomenclature(self.cleaned_data['nomenclature'])
 
 class FormationForm(forms.ModelForm):
 	class Meta:
 		model = Formation
-		fields = ['nom', 'code_parcoursup', 'groupe_parcoursup',
+		fields = ['nom', 'code_parcoursup',
 				'etablissement', 'slug', 'code_mef']
 
 	def __init__(self, *args, **kwargs):

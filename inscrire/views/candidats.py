@@ -1,3 +1,21 @@
+# -*- coding: utf8 -*-
+
+# scripsup - Inscription en ligne en CPGE
+# Copyright (c) 2020 Florian Hatat
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 from collections import namedtuple
 
 from django.contrib.auth.decorators import login_required
@@ -10,25 +28,13 @@ from django.template.loader import select_template
 from inscrire.models import ResponsableLegal, Candidat
 from inscrire.models.fiches import Fiche, all_fiche
 from inscrire.forms.fiches import candidat_form
-USER = get_user_model()
+from .permissions import AccessPersonnelMixin, AccessGestionnaireMixin
 
-def set_candidat(_dispatch):
-	"""décorateur de dispatch; vérifie que l'utilisateur est un candidat et renseigne self.candidat"""
-
-	def dispatch(self, request, *args, **kwargs):
-		user = request.user
-		try:
-			candidat = user.candidat
-			self.candidat = candidat
-		except USER.candidat.RelatedObjectDoesNotExist:
-			return redirect("/")
-		return _dispatch(self, request,*args, **kwargs)
-	return dispatch
-
-
-@method_decorator(login_required, name='dispatch')
-class CandidatDetail(DetailView):
-	"""Affiche les informations personnelles d'un candidat"""
+class CandidatDetail(AccessPersonnelMixin, DetailView):
+	"""
+	Affiche les informations personnelles d'un candidat, à destination
+	des personnels de l'établissement.
+	"""
 	model = Candidat
 
 	def get_context_data(self, *args, **kwargs):
@@ -37,25 +43,27 @@ class CandidatDetail(DetailView):
 		context["nombre_responsables"] = self.object.responsables.count()
 		return context
 
-
-@method_decorator(login_required, name='dispatch')
-class ResponsableLegal(DetailView):
-	"""Affiche les informations personnelles d'un responsable légal"""
-
+class ResponsableLegal(AccessPersonnelMixin, DetailView):
+	"""
+	Affiche les informations personnelles d'un responsable légal
+	"""
 	model = ResponsableLegal
 	template_name = "responsablelegal.html"
 	context_object_name = "responsablelegal"
 
-	@set_candidat
-	def dispatch(self, request, *args, **kwargs):
-		"""Vérifie que le responsable à afficher est lié au candidat connecté"""
-		pk_responsables = self.candidat.responsables.values_list("pk", flat = True)
-		if not kwargs["pk"] in pk_responsables:
-			return redirect("/")
-		return super().dispatch(request, *args, **kwargs)
-
 class CandidatFicheMixin:
+	"""
+	Mixin qui ajoute au contexte la liste des fiches d'inscription que
+	le candidat doit remplir.
+	"""
 	def get_fiches(self):
+		"""
+		Construction de la liste des fiches.
+
+		Ces fiches peuvent être attachées à des formulaires d'édition.
+		Chaque formulaire est initialisé, dans le cas d'une requête
+		POST, avec les données soumises.
+		"""
 		# Ajout des fiches applicables
 		FicheTpl = namedtuple('FicheTpl', ('fiche', 'form', 'template'))
 		fiches = []
@@ -86,27 +94,25 @@ class CandidatFicheMixin:
 		return fiches
 
 	def get_context_data(self, **kwargs):
+		"""
+		Ajout des fiches au contexte. Ces fiches sont créées par un
+		appel à la méthode get_fiches sauf si elles sont déjà passées en
+		paramètre (ce qui se produit par exemple lors d'un POST qui a
+		signalé des erreurs de traitement).
+		"""
 		context = super().get_context_data()
 		context['fiches'] = kwargs.get('fiches', self.get_fiches())
 		return context
 
-class CandidatUpdate(CandidatFicheMixin, UpdateView):
+class CandidatUpdate(AccessGestionnaireMixin, CandidatFicheMixin, UpdateView):
 	"""
-	Permet la modification des informations personnelles par le candidat
-	lui-même.
+	Permet la modification des informations personnelles par les
+	gestionnaires du lycée.
 	"""
-
 	model = Candidat
 	fields = ['adresse', 'telephone', 'telephone_mobile', 'date_naissance', 'genre']
 	template_name = "candidat_update.html"
 	success_url = "/candidat"
-
-	@set_candidat
-	def dispatch(self, request, *args, **kwargs):
-		"""compare le numero de dossier appelé et celui du candidat connecté"""
-		if kwargs['pk'] != self.candidat.pk:
-			return redirect("/")
-		return super().dispatch(request, *args, **kwargs)
 
 	def get(self, request, *args, **kwargs):
 		return self.render_to_response(self.get_context_data())

@@ -4,11 +4,22 @@
 <section id='candidat-list'>
   <h3>Liste des étudiants</h3>
   {% if candidat_list %}
-  <ul>
-    {% for candidat in candidat_list %}
-    <li><a href="{% url 'candidat_detail' candidat.pk %}">{{ candidat }}</a></li>
+  <table>
+    <thead>
+      <tr>
+        <th>Candidat</th>
+        <th>État du dossier</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for candidat in candidat_list %}
+      <tr>
+        <td><a href="{% url 'candidat_detail' candidat.pk %}">{{ candidat }}</td>
+        <td></td>
+      </tr>
     {% endfor %}
-  </ul>
+    </tbody>
+  </table>
   {% else %}
   <p>Aucun candidat n'a pour le moment été envoyé par Parcoursup.</p>
   {% endif %}
