@@ -2,7 +2,7 @@
 
 {% block contenu %}
 <h2>Importation des données structures de SIECLE</h2>
-<form method="post" action="">
+<form method="post" action="" enctype="multipart/form-data">
   {% csrf_token %}
   {{ form.as_p }}
   <p><input type="submit" value="Importer les structures"/></p>

@@ -22,8 +22,11 @@ Vues permettant le paramétrage des formations gérées
 from django.views.generic import FormView, UpdateView, View
 from django.urls import reverse_lazy
 from django.utils.text import slugify
+from django.db import IntegrityError
 
 import inscrire.forms.parametrage as param_forms
+from inscrire.models import Etablissement, Formation, MefMatiere, \
+		MefOption
 from .permissions import AccessGestionnaireMixin, AccessDirectionMixin
 
 class ImportStructuresView(AccessDirectionMixin, FormView):
@@ -57,18 +60,32 @@ class ImportStructuresView(AccessDirectionMixin, FormView):
 			if code_mef[0] != '3':
 				continue
 			# On crée la formation correspondante
-			formation, _ = Formation.objects.update_or_create(
-					code_mef=code_mef,
-					etablissement=etablissement,
-					defaults={
-						'nom': mefs[code_mef].libelle_long,
-						'slug': slugify(mefs[code_mef].formation),
-					}
-				)
+			formation = None
+			formation_slug = slugify(mefs[code_mef].formation)
+			formation_slug_rang = 0
+			while not formation:
+				try:
+					formation, _ = Formation.objects.update_or_create(
+						code_mef=code_mef,
+						etablissement=etablissement,
+						defaults={
+							'nom': mefs[code_mef].libelle_long,
+							'slug': formation_slug,
+						}
+					)
+				except IntegrityError:
+					# Slug pas forcément unique, on se laisse quelques
+					# tentatives.
+					formation_slug_rang += 1
+					if formation_slug_rang > 10:
+						raise IntegrityError
+					formation_slug = "{}-{}".format(
+							slugify(mefs[code_mef].formation),
+							formation_slug_rang)
 
 			def get_matiere(matiere):
 				matiere_db, _ = MefMatiere.objects.get_or_create(
-						code=matiere.code_matiere,
+						code=matiere.code,
 						libelle_court=matiere.libelle_court,
 						libelle_long=matiere.libelle_long,
 						libelle_edition=matiere.libelle_edition,

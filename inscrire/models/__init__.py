@@ -19,7 +19,7 @@
 from .user import InscrireUser
 from .personnes import Personne, Candidat, ResponsableLegal, \
 		CandidatActionLog, Commune, Pays, Profession
-from .formation import Etablissement, Formation
+from .formation import Etablissement, Formation, MefMatiere, MefOption
 from .parcoursup import ParcoursupUserManager, ParcoursupUser, \
 		ParcoursupMessageRecuLog, ParcoursupMessageEnvoyeLog, \
 		Voeu, HistoriqueVoeu, EtatVoeu
