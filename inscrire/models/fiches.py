@@ -43,9 +43,12 @@ class FicheManager(PolymorphicManager):
 		applicable).
 		"""
 		fiches = []
+		parcoursup = kwargs.pop('parcoursup', {})
 		for fiche_kls in filter(lambda kls: kls.applicable(voeu),
 				all_fiche):
-			fiche = fiche_kls(candidat=voeu.candidat, **kwargs)
+			fiche = fiche_kls(voeu, **kwargs)
+			if parcoursup:
+				fiche.update_from_parcoursup(parcoursup)
 			fiche.save()
 			fiches.append(fiche)
 		return fiches
@@ -103,9 +106,16 @@ class FicheManager(PolymorphicManager):
 		# On crée enfin les instances manquantes
 		for fiche_kls in fiches_applicables:
 			if fiches_applicables[fiche_kls] is None:
-				fiche = fiche_kls(candidat=voeu.candidat, **kwargs)
+				fiche = fiche_kls(voeu, **kwargs)
 				fiche.save()
 				fiches.append((fiche, True))
+
+		# Enfin, on met à jour les données depuis Parcoursup si
+		# nécessaire.
+		parcoursup = kwargs.pop('parcoursup', {})
+		if parcoursup:
+			for (fiche, _) in fiches:
+				fiche.update_from_parcoursup(parcoursup)
 
 		return fiches
 
@@ -179,6 +189,12 @@ class Fiche(PolymorphicModel):
 				Fiche.ETAT_TERMINEE: 'etat-terminee',
 				Fiche.ETAT_ANNULEE: 'etat-annulee',
 			}.get(self.etat, '')
+
+	def update_from_parcoursup(self, parcoursup):
+		"""
+		Mise à jour des champs à partir des données Parcoursup
+		"""
+		pass
 
 class FicheIdentite(Fiche):
 	"""
