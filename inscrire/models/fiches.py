@@ -236,6 +236,15 @@ class FicheIdentite(Fiche):
 		verbose_name = "fiche identité"
 		verbose_name_plural = "fiches identité"
 
+	def valider(self):
+		self.valide = (
+			(self.photo is not None) and
+			(self.piece_identite is not None) and
+			(self.commune_naissance is not None or
+				bool(self.commune_naissance_etranger)) and
+			(self.pays_naissance is not None)
+		)
+
 class FicheScolariteAnterieure(Fiche):
 	"""
 	Scolarité antérieure
@@ -413,6 +422,9 @@ class FicheHebergement(Fiche):
 	class Meta:
 		verbose_name = "fiche hébergement"
 		verbose_name_plural = "fiches hébergement"
+
+	def valider(self):
+		self.valide = self.regime is not None
 
 class FicheInternat(Fiche):
 	"""
