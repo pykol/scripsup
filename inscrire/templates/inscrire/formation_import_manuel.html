@@ -1,0 +1,16 @@
+<p>Grâce à ce formulaire, vous pouvez importer manuellement les
+candidats admis dans une formation. Ce formulaire est utile si
+l'interface synchrone entre Parcoursup et ce serveur d'inscription ne
+fonctionne pas correctement.</p>
+<p>Vous devez d'abord aller sur l'interface de gestion de Parcoursup
+et télécharger le fichier des candidats admis pour une formation.
+L'export standard suffit pour initialiser les comptes, mais il est
+recommandé de télécharger plutôt le fichier paramétrable, en incluant
+le plus de données possible parmi celles proposées par Parcoursup.
+Cela permettra de mieux préremplir les données des candidats et
+d'éliminer des erreurs de saisie.</p>
+<form method="post" action="{% url 'formation_import_parcoursup' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ import_manuel_form.as_p }}
+  <p><input type="submit" value="Import manuel"></p>
+</form>

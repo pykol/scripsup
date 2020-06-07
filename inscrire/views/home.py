@@ -23,6 +23,7 @@ from django.views.generic import View, TemplateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
 
 from inscrire.models import InscrireUser, Candidat, Formation
+from inscrire.forms.formation import ImportParcoursupForm
 from .candidats import CandidatFicheMixin
 
 class HomeView(AccessMixin, View):
@@ -48,6 +49,7 @@ class DirectionHomeView(TemplateView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['formation_list'] = Formation.objects.all().order_by('etablissement', 'nom')
+		context['import_manuel_form'] = ImportParcoursupForm()
 		return context
 
 class SecretariatHomeView(TemplateView):

@@ -16,17 +16,24 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, DetailView, View, FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.shortcuts import redirect
+from django.urls import reverse
 
 from inscrire.models import Formation, Candidat, Voeu, MefOption
-from .permissions import AccessDirectionMixin
+from .permissions import AccessDirectionMixin, AccessGestionnaireMixin
 from inscrire.forms.parametrage import OptionActiverFormset, \
 		FormationForm
+from inscrire.forms.formation import ImportParcoursupForm
 
 class FormationListView(AccessDirectionMixin, ListView):
 	model = Formation
+
+	def get_context_data(self, *args, **kwargs):
+		context = super().get_context_data(*args, **kwargs)
+		context['import_manuel_form'] = ImportParcoursupForm()
+		return context
 
 class FormationDetailView(AccessDirectionMixin, DetailView):
 	model = Formation
@@ -62,3 +69,17 @@ class FormationUpdateView(AccessDirectionMixin, SingleObjectMixin, View):
 			option_formset.save()
 
 		return redirect('formation_detail', slug=self.object.slug)
+
+class ImportParcoursupView(AccessGestionnaireMixin, FormView):
+	form_class = ImportParcoursupForm
+
+	def form_valid(self, form):
+		propositions = form.propositions()
+		psup_user = form.cleaned_data['formation'].etablissement.parcoursupuser
+		for proposition in propositions:
+			candidat = psup_user.import_candidat(proposition)
+			candidat.email_bienvenue(self.request)
+		return super().form_valid(form)
+
+	def get_success_url(self):
+		return reverse('formation_list')
