@@ -46,7 +46,7 @@ class FicheManager(PolymorphicManager):
 		parcoursup = kwargs.pop('parcoursup', {})
 		for fiche_kls in filter(lambda kls: kls.applicable(voeu),
 				all_fiche):
-			fiche = fiche_kls(voeu, **kwargs)
+			fiche = fiche_kls(candidat=voeu.candidat, **kwargs)
 			if parcoursup:
 				fiche.update_from_parcoursup(parcoursup)
 			fiche.save()
@@ -74,6 +74,8 @@ class FicheManager(PolymorphicManager):
 		juste été mise à jour.
 		"""
 		fiches = []
+		parcoursup = kwargs.pop('parcoursup', {})
+
 		fiches_applicables = dict([(kls, None)
 			for kls in filter(lambda kls: kls.applicable(voeu), all_fiche)])
 
@@ -106,13 +108,12 @@ class FicheManager(PolymorphicManager):
 		# On crée enfin les instances manquantes
 		for fiche_kls in fiches_applicables:
 			if fiches_applicables[fiche_kls] is None:
-				fiche = fiche_kls(voeu, **kwargs)
+				fiche = fiche_kls(candidat=voeu.candidat, **kwargs)
 				fiche.save()
 				fiches.append((fiche, True))
 
 		# Enfin, on met à jour les données depuis Parcoursup si
 		# nécessaire.
-		parcoursup = kwargs.pop('parcoursup', {})
 		if parcoursup:
 			for (fiche, _) in fiches:
 				fiche.update_from_parcoursup(parcoursup)
