@@ -204,14 +204,14 @@ class FicheIdentite(Fiche):
 
 	def _photo_upload_to(instance, filename):
 		return "photo/{psup}/{filename}".format(
-				psup=instance.candidat.numero_parcoursup,
+				psup=instance.candidat.dossier_parcoursup,
 				filename=filename)
 	photo = models.ImageField(upload_to=_photo_upload_to,
 			blank=True, null=True)
 
 	def _piece_identite_upload_to(instance, filename):
 		return "piece_identite/{psup}/{filename}".format(
-				psup=instance.candidat.numero_parcoursup,
+				psup=instance.candidat.dossier_parcoursup,
 				filename=filename)
 	piece_identite = models.FileField(upload_to=_piece_identite_upload_to,
 			blank=True, null=True)
@@ -274,7 +274,7 @@ class BulletinScolaire(models.Model):
 
 	def _bulletin_upload_to(instance, filename):
 		return "bulletin/{psup}/{filename}".format(
-				psup=instance.candidat.numero_parcoursup,
+				psup=instance.fiche_scolarite.candidat.dossier_parcoursup,
 				filename=filename)
 	bulletin = models.FileField(upload_to=_bulletin_upload_to)
 
@@ -302,7 +302,7 @@ class FicheBourse(Fiche):
 
 	def _attribution_bourse_upload_to(instance, filename):
 		return "bourse_acb/{psup}/{filename}".format(
-				psup=instance.candidat.numero_parcoursup,
+				psup=instance.candidat.dossier_parcoursup,
 				filename=filename)
 	attribution_bourse = models.FileField(
 			verbose_name="copie de l'attestation conditionnelle de bourse",
