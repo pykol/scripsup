@@ -19,6 +19,7 @@
 from django.db import models
 
 from .fields import Lettre23Field
+from .personnes import Candidat
 
 class Etablissement(models.Model):
 	"""
@@ -74,6 +75,27 @@ class Formation(models.Model):
 
 	def __str__(self):
 		return self.nom
+
+	def candidats(self):
+		from .parcoursup import Voeu
+		return Candidat.objects.filter(
+				voeu__formation=self,
+				voeu__etat__in=(Voeu.ETAT_ACCEPTE_AUTRES,
+					Voeu.ETAT_ACCEPTE_DEFINITIF))
+
+	def candidats_incomplets(self):
+		"""
+		Liste des candidats dont le dossier n'est pas encore complet
+		"""
+		from .fiches import Fiche
+		return self.candidats().filter(fiche__etat=Fiche.ETAT_EDITION).distinct()
+	
+	def candidats_complets(self):
+		"""
+		Liste des candidats dont le dossier est complet
+		"""
+		from .fiches import Fiche
+		return self.candidats().exclude(fiche__etat=Fiche.ETAT_EDITION).distinct()
 
 class MefMatiere(models.Model):
 	"""
