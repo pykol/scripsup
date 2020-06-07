@@ -257,6 +257,17 @@ class FicheScolariteAnterieure(Fiche):
 		verbose_name = "fiche scolarité antérieure"
 		verbose_name_plural = "fiches scolarité antérieure"
 
+	def valider(self):
+		self.valide = (
+				(
+					(self.etablissement is not None) or
+					bool(self.autre_formation)
+				)
+				and bool(self.classe_terminale)
+				and bool(self.specialite_terminale)
+				and bool(self.bulletinscolaire_set.all())
+			)
+
 class BulletinScolaire(models.Model):
 	"""
 	Copie d'un bulletin scolaire
