@@ -2,34 +2,14 @@
 {% block contenu %}
 <h2>Liste des formations</h2>
 <section id='formation-list'>
-  {% if formation_list %}
-  <table>
-    <thead>
-      <tr>
-        <th rowspan="2">Nom</th>
-        <th rowspan="2">Code Parcoursup</th>
-        <th>Candidats</th>
-      </tr>
-      <tr>
-        <th>Total</th>
-        <th>Complets</th>
-        <th>Incomplets</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for formation in formation_list %}
-      <tr>
-        <td><a href="{% url 'formation_detail' formation.slug %}">{{ formation.nom }}</a></td>
-        <td>{{ formation.code_parcoursup|default:"" }}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-  {% else %}
-  <p>Aucune formation n'a été paramétrée pour le moment.</p>
-  {% endif %}
+  {% include 'inscrire/formation_tableau.html' %}
+
 </section>
+
+{% if formation_list %}
+<section id='import-manuel-parcoursup'>
+  <h3>Import manuel depuis Parcoursup</h3>
+  {% include 'inscrire/formation_import_manuel.html' %}
+</section>
+{% endif %}
 {% endblock %}

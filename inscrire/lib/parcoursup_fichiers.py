@@ -21,6 +21,7 @@ Utilitaires pour lire les exports d'admis de Parcoursup
 """
 
 import csv
+from datetime import datetime
 
 from inscrire.models import Pays, Commune
 from .parcoursup_rest import ParcoursupCandidat, ParcoursupProposition
@@ -94,14 +95,14 @@ def parse_export_standard(export_fh, code_etablissement, code_formation):
 		except:
 			pass
 
-		candidat_defaults['adresse'] = ParcoursupCandidat.formate_adresse(
-				libellePaysadresse=export_ligne.get('Pays') or 'France',
-				libellecommune=export_ligne['Commune'],
-				adresse1=export_ligne['Adresse 1'],
-				adresse2=export_ligne['Adresse 2'],
-				adresse3=export_ligne['Adresse 3'],
-				codepostal=export_ligne['Code postal'],
-			)
+		candidat_defaults['adresse'] = ParcoursupCandidat.formate_adresse({
+				'libellePaysadresse': export_ligne.get('Pays') or 'France',
+				'libellecommune': export_ligne['Commune'],
+				'adresse1': export_ligne['Adresse 1'],
+				'adresse2': export_ligne['Adresse 2'],
+				'adresse3': export_ligne['Adresse 3'],
+				'codepostal': export_ligne['Code postal'],
+			})
 
 		candidat = ParcoursupCandidat(**candidat_defaults)
 		proposition = ParcoursupProposition(

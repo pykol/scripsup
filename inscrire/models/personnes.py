@@ -149,7 +149,7 @@ class Candidat(Personne):
 	# Informations concernant le baccalauréat
 	bac_date = models.DateField(blank=True,
 			null=True) # Le jour n'est pas significatif, on ne regarde que le mois et l'année
-	bac_serie = models.CharField(max_length=8, blank=True, null=True)
+	bac_serie = models.CharField(max_length=50, blank=True, null=True)
 	BAC_MENTION_PASSABLE = 0
 	BAC_MENTION_ASSEZBIEN = 1
 	BAC_MENTION_BIEN = 2

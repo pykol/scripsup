@@ -11,11 +11,10 @@ l'interface synchrone de Parcoursup.</p>
 {% if formation_list %}
 <section id='formation-list'>
   <h3>Liste des classes</h3>
-  <ul>
-    {% for formation in formation_list %}
-    <li><a href="{% url 'formation_detail' formation.slug %}">{{ formation }}</a></li>
-    {% endfor %}
-  </ul>
+  {% include 'inscrire/formation_tableau.html' %}
+
+  <h3>Import manuel depuis Parcoursup</h3>
+  {% include 'inscrire/formation_import_manuel.html' %}
 </section>
 {% endif %}
 
