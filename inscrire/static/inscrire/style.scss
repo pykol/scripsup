@@ -38,7 +38,7 @@ h4 {
 }
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
-  padding-top: 0;
+  padding-top: 0.3em;
   font-weight: normal;
 }
 p, li {
@@ -162,7 +162,7 @@ header[role="banner"] {
 }
 /*Boxes*/
 #contenu section, .box {
-  padding: 1em 1em;
+  padding: 0.3em 1em;
   border: .1em solid $lightGrey;
   @include transition(background);
   &:focus,
@@ -288,4 +288,15 @@ footer a {
 /* Fiches d'inscription */
 .fiche.etat-edition .fiche-etat {
   color: $orange;
+}
+
+/* Tableaux */
+table {
+  th {
+    font-weight: bold;
+  }
+  td, th {
+    padding: 0.3rem 0.7rem;
+    border: 1px solid #ccc;
+  }
 }
