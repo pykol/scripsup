@@ -4,7 +4,7 @@
     <tr>
       <th rowspan="2">Nom</th>
       <th rowspan="2">Code Parcoursup</th>
-      <th>Candidats</th>
+      <th colspan="3">Candidats</th>
     </tr>
     <tr>
       <th>Total</th>
@@ -17,9 +17,9 @@
     <tr>
       <td><a href="{% url 'formation_detail' formation.slug %}">{{ formation.nom }}</a></td>
       <td>{{ formation.code_parcoursup|default:"" }}</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{{ formation.candidats|length }}</td>
+      <td>{{ formation.candidats_complets|length }}</td>
+      <td>{{ formation.candidats_incomplets|length }}</td>
     </tr>
   {% endfor %}
   </tbody>
