@@ -17,7 +17,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from .home import HomeView
-from .candidats import CandidatDetail, CandidatUpdate, ResponsableLegal
+from . import candidats
 from . import parcoursup
 from . import auth
 from . import parametrage

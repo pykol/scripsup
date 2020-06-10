@@ -1,0 +1,50 @@
+@import 'reset';
+
+@page {
+  margin: 1cm;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  padding: 0.5em;
+
+  #logo-etablissement {
+    width: 4cm;
+  }
+  #titre {
+    width: auto; 
+    flex: 1 0;
+    text-align: center;
+  }
+  #photo-candidat {
+    width: 3.5cm;
+  }
+  h1 {
+    text-transform: uppercase;
+    font-size: 140%;
+    font-weight: bold;
+  }
+}
+
+body {
+  font-size: 12pt;
+  width: 100%;
+  font-family: Serif;
+}
+
+section.fiche {
+  margin-top: 1mm;
+  margin-bottom: 1mm;
+  border: 1px solid black;
+  padding: 0.5em;
+
+  h2 {
+    font-size: 110%;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 0.4em;
+    font-weight: bold;
+  }
+}

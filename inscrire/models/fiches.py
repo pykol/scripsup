@@ -218,12 +218,24 @@ class FicheIdentite(Fiche):
 			blank=True, null=True)
 	commune_naissance = models.ForeignKey(Commune,
 			on_delete=models.PROTECT,
-			blank=True, null=True)
+			blank=True, null=True, related_name='ficheidentite_naissance')
 	commune_naissance_etranger = models.CharField(max_length=200,
 			blank=True, null=False, default="")
 	pays_naissance = models.ForeignKey(Pays, on_delete=models.PROTECT,
-			blank=True, null=True)
+			blank=True, null=True,
+			related_name='ficheidentite_naissance')
 	responsables = models.ManyToManyField(ResponsableLegal)
+
+	# Adresse, possiblement différente de celle renseignée par
+	# Parcoursup dans le modèle Candidat.
+	adresse = models.TextField(blank=True, default="")
+	ville = models.ForeignKey(Commune, on_delete=models.PROTECT,
+			blank=True, null=True,
+			related_name='ficheidentite_residence')
+	pays = models.ForeignKey(Pays, on_delete=models.PROTECT, blank=True,
+			null=True, related_name='ficheidentite_residence')
+	telephone = models.CharField(max_length=20,
+			verbose_name="Téléphone personnel", blank=True, default="")
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
@@ -235,6 +247,15 @@ class FicheIdentite(Fiche):
 	class Meta:
 		verbose_name = "fiche identité"
 		verbose_name_plural = "fiches identité"
+
+	def valider(self):
+		self.valide = (
+			(self.photo is not None) and
+			(self.piece_identite is not None) and
+			(self.commune_naissance is not None or
+				bool(self.commune_naissance_etranger)) and
+			(self.pays_naissance is not None)
+		)
 
 class FicheScolariteAnterieure(Fiche):
 	"""
@@ -413,6 +434,9 @@ class FicheHebergement(Fiche):
 	class Meta:
 		verbose_name = "fiche hébergement"
 		verbose_name_plural = "fiches hébergement"
+
+	def valider(self):
+		self.valide = self.regime is not None
 
 class FicheInternat(Fiche):
 	"""

@@ -128,7 +128,7 @@ class MefOption(models.Model):
 	rang = models.PositiveSmallIntegerField()
 	matiere = models.ForeignKey(MefMatiere, on_delete=models.CASCADE)
 	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
-	inscriptions = models.BooleanField(
+	inscriptions = models.BooleanField(default=False,
 			help_text="Indique si l'option est présentée aux candidats "
 			"afin qu'ils la choisissent lors de l'inscription.")
 
