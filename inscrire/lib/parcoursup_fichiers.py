@@ -71,7 +71,7 @@ def parse_export_standard(export_fh, code_etablissement, code_formation):
 
 				'sexe': ParcoursupCandidat.GENRE_HOMME
 					if export_ligne.get('Etat civil',
-						export_ligne['Civilité']) == 'M.'
+						export_ligne.get('Civilité')) == 'M.'
 					else ParcoursupCandidat.GENRE_FEMME,
 
 				'nationalite': 'FR' if export_ligne.get('Nationalité') == 'FR' else None,
@@ -100,7 +100,7 @@ def parse_export_standard(export_fh, code_etablissement, code_formation):
 				'libellecommune': export_ligne['Commune'],
 				'adresse1': export_ligne['Adresse 1'],
 				'adresse2': export_ligne['Adresse 2'],
-				'adresse3': export_ligne['Adresse 3'],
+				'adresse3': export_ligne.get('Adresse 3'),
 				'codepostal': export_ligne['Code postal'],
 			})
 
