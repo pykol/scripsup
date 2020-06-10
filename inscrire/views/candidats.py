@@ -119,3 +119,24 @@ class CandidatUpdate(AccessGestionnaireMixin, CandidatFicheMixin, UpdateView):
 
 	def post(self, request, *args, **kwargs):
 		pass
+
+class CandidatDossier(AccessPersonnelMixin, DetailView):
+	"""
+	Affiche le dossier final du candidat.
+	"""
+	model = Candidat
+	template_name = 'inscrire/dossier/dossier.html'
+
+	def get_context_data(self, *args, **kwargs):
+		context = super().get_context_data(*args, **kwargs)
+		context["candidat"] = self.object
+		context["voeu"] = self.object.voeu_actuel
+
+		# Fiches d'inscription
+		fiches = self.object.fiche_set.filter(
+				etat__in=(Fiche.ETAT_CONFIRMEE, Fiche.ETAT_TERMINEE))
+		context['fiche_list'] = sorted(fiches,
+				key=lambda fiche: all_fiche.index(type(fiche.fiche)))
+		for fiche in fiches:
+			context[fiche._meta.model_name] = fiche
+		return context
