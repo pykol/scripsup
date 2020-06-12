@@ -87,7 +87,7 @@ class EtablissementAdmin(admin.ModelAdmin):
 
 @admin.register(Formation)
 class FormationAdmin(admin.ModelAdmin):
-	list_display = ('nom', 'etablissement', 'code_parcoursup')
+	list_display = ('nom', 'etablissement', 'email', 'code_parcoursup')
 	list_filter = (('etablissement', admin.RelatedOnlyFieldListFilter),)
 	autocomplete_fields = ('etablissement',)
 

@@ -28,7 +28,11 @@ encore sur liste d'attente.</p>
 
 <p>En cas de souci, qu'il soit d'ordre technique ou administratif, vous
 pouvez contacter le service en charge des inscriptions à l'adresse
-<a href="mailto:{{ formation.etablissement.email }}">{{ formation.etablissement.email }}</a>,
+{% if formation.email %}
+  <a href="mailto:{{ formation.email }}">{{ formation.email }}</a>,
+{% else %}
+  <a href="mailto:{{ formation.etablissement.email }}">{{ formation.etablissement.email }}</a>,
+{% endif %}
 ou simplement en répondant au message actuel.</p>
 
 <p>Veuillez agréer nos cordiales salutations.</p>
