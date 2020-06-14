@@ -259,6 +259,31 @@ class FicheIdentite(Fiche):
 			(self.pays_naissance is not None)
 		)
 
+	def update_from_parcoursup(self, parcoursup):
+		try:
+			self.commune_naissance = Commune.objects.get(
+					code_insee=parcoursup['candidat'].commune_naissance)
+		except:
+			pass
+
+		try:
+			self.pays_naissance = Pays.objects.get(
+					code_iso2=parcoursup['candidat'].pays_naissance)
+		except:
+			pass
+
+		try:
+			self.adresse = parcoursup['candidat'].adresse
+		except:
+			pass
+
+		try:
+			self.telephone = parcoursup['candidat'].telephone_mobile
+		except:
+			pass
+
+		self.save()
+
 class FicheScolariteAnterieure(Fiche):
 	"""
 	Scolarité antérieure
@@ -439,6 +464,11 @@ class FicheHebergement(Fiche):
 
 	def valider(self):
 		self.valide = self.regime is not None
+
+	def update_from_parcoursup(self, parcoursup):
+		if parcoursup['proposition'].internat:
+			self.regime = self.REGIME_INTERNE
+		self.save()
 
 class FicheInternat(Fiche):
 	"""
