@@ -25,4 +25,4 @@ from .parcoursup import ParcoursupUserManager, ParcoursupUser, \
 		Voeu, HistoriqueVoeu, EtatVoeu
 from .fiches import Fiche, FicheIdentite, FicheScolarite, \
 		FicheHebergement, FicheScolariteAnterieure, BulletinScolaire, \
-		FicheBourse, FicheReglement, FicheInternat, FicheCesure, SelectFiches
+		FicheBourse, FicheReglement, FicheInternat, FicheCesure

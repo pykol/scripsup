@@ -16,7 +16,11 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from functools import reduce
+from operator import or_
+
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
 
 from .fields import Lettre23Field
 from .personnes import Candidat
@@ -37,6 +41,14 @@ class Etablissement(models.Model):
 	commune = models.ForeignKey('Commune', on_delete=models.SET_NULL,
 			blank=True, null=True)
 
+	def fiches_limit():
+		from .fiches import all_fiche
+		return reduce(or_,
+			[Q(app_label=fiche._meta.app_label, model_name=fiche._meta.model_name)
+				for fiche in all_fiche])
+	fiches = models.ManyToManyField(ContentType,
+			limit_choices_to=fiches_limit)
+
 	class Meta:
 		verbose_name = "établissement"
 		verbose_name_plural = "établissements"
@@ -44,6 +56,13 @@ class Etablissement(models.Model):
 
 	def __str__(self):
 		return "{} {}".format(self.numero_uai, self.nom)
+
+	def fiches_demandees(self):
+		"""
+		Renvoie la liste des fiches d'inscription demandées par
+		l'établissement, selon les paramètres locaux.
+		"""
+		return [ctfiche.model_class() for ctfiche in self.fiches.all()]
 
 class Formation(models.Model):
 	"""
