@@ -32,7 +32,8 @@ import csv
 import io
 
 Pays = namedtuple('Pays',
-		('code_iso2', 'code_iso3', 'code_isonum', 'libelle_cog', 'libelle_jo',))
+		('code_iso2', 'code_iso3', 'code_isonum', 'libelle_cog',
+			'libelle_jo', 'code_insee'))
 
 def pays_list(filename):
 	pays = []
@@ -50,6 +51,7 @@ def pays_list(filename):
 			code_isonum=ligne['codenum3'],
 			libelle_cog=ligne['libcog'],
 			libelle_jo=ligne['libenr'],
+			code_insee=int(ligne['cog']) if ligne['cog'] != 'XXXXX' else None,
 		))
 
 	return pays
@@ -57,6 +59,9 @@ def pays_list(filename):
 def to_django_json(pays_list):
 	json = []
 	for pays in pays_list:
+		if not pays.code_iso2:
+			continue
+
 		json.append({
 			'model': 'inscrire.Pays',
 			'pk': pays.code_iso2,
@@ -64,6 +69,7 @@ def to_django_json(pays_list):
 				'code_iso3': pays.code_iso3,
 				'num_iso': pays.code_isonum,
 				'libelle': pays.libelle_cog,
+				'num_insee': pays.code_insee,
 				}
 			})
 	return json

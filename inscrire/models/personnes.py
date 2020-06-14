@@ -52,6 +52,7 @@ class Pays(models.Model):
 	code_iso2 = models.CharField(max_length=2, primary_key=True)
 	code_iso3 = models.CharField(max_length=3, unique=True)
 	num_iso = models.PositiveSmallIntegerField(unique=True)
+	num_insee = models.IntegerField(blank=True, null=True)
 	libelle = models.CharField(max_length=200)
 
 	class Meta:
