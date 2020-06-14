@@ -24,6 +24,7 @@ informations spécifiques à un service donné.
 """
 
 from django.db import models
+from django.db.models import Q
 from polymorphic.models import PolymorphicModel, PolymorphicManager
 import localflavor.generic.models as lfmodels
 
@@ -255,13 +256,18 @@ class FicheIdentite(Fiche):
 	def update_from_parcoursup(self, parcoursup):
 		try:
 			self.ville = Commune.objects.get(
-					code_insee=parcoursup['candidat'].commune_commune)
+					code_insee=parcoursup['candidat'].code_commune)
 		except:
 			pass
 
 		try:
+			# L'API Parcoursup dit que c'est le code ISO2 qui est
+			# renvoyé. Sauf qu'en pratique, c'est le numéro INSEE... On
+			# prend des précautions au cas où l'API change
+			# silencieusement un jour pour coller à la documentation.
 			self.pays = Pays.objects.get(
-					code_iso2=parcoursup['candidat'].code_pays)
+					Q(code_iso2=parcoursup['candidat'].code_pays)
+					| Q(num_insee=parcoursup['candidat'].code_pays))
 		except:
 			pass
 
@@ -272,8 +278,13 @@ class FicheIdentite(Fiche):
 			pass
 
 		try:
+			# L'API Parcoursup dit que c'est le code ISO2 qui est
+			# renvoyé. Sauf qu'en pratique, c'est le numéro. On prend
+			# des précautions au cas où l'API change silencieusement un
+			# jour pour coller à la documentation.
 			self.pays_naissance = Pays.objects.get(
-					code_iso2=parcoursup['candidat'].pays_naissance)
+					Q(code_iso2=parcoursup['candidat'].pays_naissance)
+					| Q(num_insee=parcoursup['candidat'].pays_naissance))
 		except:
 			pass
 
