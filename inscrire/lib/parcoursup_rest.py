@@ -141,7 +141,8 @@ class ParcoursupCandidat(ParcoursupPersonne):
 		super().__init__(**kwargs)
 		for field in ['code', 'date_naissance', 'commune_naissance',
 			'pays_naissance', 'nationalite', 'ine', 'bac_date',
-			'bac_serie', 'bac_mention']:
+			'bac_serie', 'bac_mention',
+			'etablissement_origine_uai', 'etablissement_origine_nom']:
 			setattr(self, field, kwargs.get(field))
 
 	def to_json(self):
@@ -174,6 +175,8 @@ class ParcoursupCandidat(ParcoursupPersonne):
 			'commune_naissance': donnees.get('codeCommuneNaissance'),
 			'pays_naissance': donnees.get('codePaysNaissance'),
 			'nationalite': donnees.get('codePaysNationalite'),
+			'etablissement_origine_uai': donnees.get('codeEtablissementSco'),
+			'etablissement_origine_nom': donnees.get('libelleEtablissementSco'),
 			}
 		try:
 			defaults['bac_date'] = date(int(donnees['anneeBac']),

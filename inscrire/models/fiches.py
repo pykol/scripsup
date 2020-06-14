@@ -317,6 +317,20 @@ class FicheScolariteAnterieure(Fiche):
 				and bool(self.bulletinscolaire_set.all())
 			)
 
+	def update_from_parcoursup(self, parcoursup):
+		try:
+			self.etablissement = Etablissement.objects.get(
+					numero_uai=parcoursup['candidat'].etablissement_origine_uai)
+		except:
+			pass
+
+		if self.etablissement is None and parcoursup['candidat'].etablissement_origine_nom:
+			self.autre_formation = parcoursup['candidat'].etablissement_origine_nom
+
+		self.specialite_terminale = parcoursup['candidat'].bac_serie or ''
+
+		self.save()
+
 class BulletinScolaire(models.Model):
 	"""
 	Copie d'un bulletin scolaire
