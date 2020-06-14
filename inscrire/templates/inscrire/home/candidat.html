@@ -21,7 +21,7 @@ administrative.
     <li>Votre adresse : <address>{{ candidat.adresse }}</address></li>
     <li>Date de naissance : {{ candidat.date_naissance }}</li>
     {% if candidat.bac_date %}
-    <li>Vous avez obtenu votre baccalauréat en série
+    <li>Vous êtes inscrit au baccalauréat en série
       {{ candidat.bac_serie }} lors de la session de
       {{ candidat.bac_date|date:"F Y" }}.</li>
     {% else %}
