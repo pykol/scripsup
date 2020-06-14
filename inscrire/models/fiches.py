@@ -43,6 +43,7 @@ class FicheManager(PolymorphicManager):
 		applicable).
 		"""
 		fiches = []
+		all_fiche = SelectFiches.get(voeu.formation.etablissement).all_fiche()
 		parcoursup = kwargs.pop('parcoursup', {})
 		for fiche_kls in filter(lambda kls: kls.applicable(voeu),
 				all_fiche):
@@ -74,6 +75,7 @@ class FicheManager(PolymorphicManager):
 		juste été mise à jour.
 		"""
 		fiches = []
+		all_fiche = SelectFiches.get(voeu.formation.etablissement).all_fiche()
 		parcoursup = kwargs.pop('parcoursup', {})
 
 		fiches_applicables = dict([(kls, None)
@@ -482,3 +484,34 @@ all_fiche = [
 		FicheBourse,
 		FicheReglement,
 	]
+
+
+class SelectFiches(models.Model):
+	"""Fiches sélectionnées par un établissement"""
+	etablissement = models.OneToOneField(Etablissement, on_delete = models.CASCADE)
+
+	ficheidentite = models.BooleanField(default = True, blank = True)
+	fichescolariteanterieure = models.BooleanField(default = True, blank = True)
+	fichescolarite = models.BooleanField(default = True, blank = True)
+	fichehebergement = models.BooleanField(default = True, blank = True)
+	ficheinternat =models.BooleanField(default = True, blank = True)
+	fichecesure = models.BooleanField(default = True, blank = True)
+	fichebourse = models.BooleanField(default = True, blank = True)
+	fichereglement = models.BooleanField(default = True, blank = True)
+
+	def __str__(self):
+		return self.etablissement.__str__()
+
+	def all_fiche(self):
+		"""Retourne les fiches choisies par l'établissement"""
+		return [fiche for fiche in all_fiche if getattr(self, fiche.__name__.lower())]
+
+	@staticmethod
+	def get(etablissement):
+		"""Crée, si nécessaire, et retourne l'objet selectfiches lié à un établissement"""
+		try:
+			return SelectFiches.objects.get(etablissement = etablissement)
+		except SelectFiches.DoesNotExist:
+			parametres = SelectFiches(etablissement = etablissement)
+			parametres.save()
+			return parametres
