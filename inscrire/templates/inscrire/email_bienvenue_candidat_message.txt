@@ -1,8 +1,10 @@
 Bonjour {{ candidat.civilite }} {{ candidat.first_name }} {{ candidat.last_name }}.
 
-Vous venez d'accepter sur le site Parcoursup la proposition d'admission
-en {{ formation }}. Nous tenons avant tout à vous féliciter pour votre
-admission dans notre établissement.
+Vous venez d'accepter sur le site Parcoursup une proposition d'admission
+en {{ formation }}.
+
+Nous tenons avant tout à vous féliciter pour votre admission dans notre
+établissement.
 
 Il vous reste désormais à effectuer les démarches d'inscription
 administrative. Vous devez les réaliser directement en ligne, sur le
@@ -34,5 +36,5 @@ ou simplement en répondant au message
 actuel.
 
 Veuillez agréer nos cordiales salutations.
---
+-- 
 {{ formation.etablissement }}

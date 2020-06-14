@@ -3,6 +3,9 @@
 {% block contenu %}
 <h2>Dossier d'inscription pour {{ object }}</h2>
 
+<p><a href="{% url 'candidat_dossier' object.pk %}">Version imprimable du
+  dossier</a></p>
+
 <section>
   <h2>Dossier Parcoursup</h2>
   <p>Ces informations ont été obtenues automatiquement depuis le dossier
