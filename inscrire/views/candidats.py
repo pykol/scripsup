@@ -20,13 +20,14 @@ from collections import namedtuple
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
-from django.views.generic import TemplateView, DetailView, UpdateView
+from django.views.generic import TemplateView, DetailView, UpdateView, \
+		View
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect
 from django.template.loader import select_template
 from django.contrib.contenttypes.models import ContentType
 
-from inscrire.models import ResponsableLegal, Candidat
+from inscrire.models import ResponsableLegal, Candidat, ParcoursupUser
 from inscrire.models.fiches import Fiche, SelectFiches
 from inscrire.forms.fiches import candidat_form
 from .permissions import AccessPersonnelMixin, AccessGestionnaireMixin
@@ -143,3 +144,10 @@ class CandidatDossier(AccessPersonnelMixin, DetailView):
 		for fiche in fiches:
 			context[fiche._meta.model_name] = fiche
 		return context
+
+class ParcoursupSynchroManuelle(AccessGestionnaireMixin, View):
+	def post(self, request, *args, **kwargs):
+		for psup_user in ParcoursupUser.objects.filter(
+				etablissement__inscriptions=True):
+			psup_user.get_candidats_admis()
+		return redirect('home')

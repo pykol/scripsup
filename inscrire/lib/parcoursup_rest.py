@@ -94,11 +94,10 @@ class ParcoursupRequest:
 
 		self.response = requests.post(self.get_url(), json=self.data)
 
-		if self.response.error:
-			raise ParcoursupError(self.response.error)
+		self.response.raise_for_status()
 
 		resp_json = self.response.json()
-		if resp_json.get('retour', 'OK') == 'NOK':
+		if isinstance(resp_json, dict) and resp_json.get('retour', 'OK') == 'NOK':
 			raise ParcoursupError(resp_json.get('message',
 				'Erreur Parcoursup inconnue'))
 

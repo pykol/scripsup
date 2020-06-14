@@ -28,7 +28,7 @@ parametrage_urlpatterns = [
 		views.parametrage.AccesParcoursupView.as_view(),
 		name='parametrage_parcoursup_update'),
 	path('parcoursup/synchronisation',
-		views.parametrage.AccesParcoursupView.as_view(),
+		views.candidats.ParcoursupSynchroManuelle.as_view(),
 		name='parcoursup-synchro'),
 ]
 
