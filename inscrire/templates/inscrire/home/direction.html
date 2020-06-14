@@ -23,6 +23,7 @@ l'interface synchrone de Parcoursup.</p>
   <p>En cours de développement.</p>
 
   <form action="{% url 'parcoursup-synchro' %}" method="post">
+    {% csrf_token %}
     <p><input type="submit" value="Synchronisation manuelle avec Parcoursup"></p>
   </form>
 

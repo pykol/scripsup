@@ -101,8 +101,8 @@ class ParcoursupUser(models.Model):
 		candidat.genre = Candidat.GENRE_HOMME \
 				if psup['candidat'].sexe == ParcoursupPersonne.GENRE_HOMME \
 				else Candidat.GENRE_FEMME
-		candidat.telephone = psup['candidat'].telephone_fixe
-		candidat.telephone_mobile = psup['candidat'].telephone_mobile
+		candidat.telephone = psup['candidat'].telephone_fixe or ''
+		candidat.telephone_mobile = psup['candidat'].telephone_mobile or ''
 		candidat.adresse = psup['candidat'].adresse
 		candidat.date_naissance = psup['candidat'].date_naissance
 		candidat.commune_naissance = Commune.objects.filter(code_insee=psup['candidat'].commune_naissance).first()
@@ -129,7 +129,7 @@ class ParcoursupUser(models.Model):
 
 		formation = Formation.objects.get(
 				code_parcoursup=psup['proposition'].code_formation,
-				etablissement__numero_uai=psup['proposition'].code_etablissement)
+				etablissement=self.etablissement)
 		voeu, voeu_created = Voeu.objects.get_or_create(
 				candidat=candidat,
 				formation=formation,
@@ -172,8 +172,14 @@ class ParcoursupUser(models.Model):
 		Met à jour la liste de tous les candidats admis dans
 		l'établissement.
 		"""
-		return [self.import_candidat(candidat)
-				for candidat in self.parcoursup_rest.get_candidats_admis()]
+		res = []
+		for candidat in self.parcoursup_rest.get_candidats_admis():
+			try:
+				res.append(self.import_candidat(candidat))
+			except:
+				# TODO reporting à l'admin
+				pass
+		return res
 
 	def get_candidat_admis(self, code_candidat):
 		"""
