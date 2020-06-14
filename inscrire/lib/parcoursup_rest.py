@@ -115,6 +115,9 @@ class ParcoursupPersonne:
 		self.telephone_fixe = kwargs.get('telephone_fixe')
 		self.telephone_mobile = kwargs.get('telephone_mobile')
 		self.sexe = kwargs.get('sexe')
+		self.code_commune = kwargs.get('code_commune')
+		self.code_postal = kwargs.get('code_postal')
+		self.code_pays = kwargs.get('code_pays')
 
 	@staticmethod
 	def formate_adresse(donnees):
@@ -177,6 +180,9 @@ class ParcoursupCandidat(ParcoursupPersonne):
 			'nationalite': donnees.get('codePaysNationalite'),
 			'etablissement_origine_uai': donnees.get('codeEtablissementSco'),
 			'etablissement_origine_nom': donnees.get('libelleEtablissementSco'),
+			'code_commune': donnees.get('codeCommune'),
+			'code_postal': donnees.get('codePostal'),
+			'code_pays': donnees.get('codePaysAdresse'),
 			}
 		try:
 			defaults['bac_date'] = date(int(donnees['anneeBac']),
