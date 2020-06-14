@@ -65,7 +65,11 @@ class CandidatAdmin(admin.ModelAdmin):
 		'nationalite',)
 	inlines = (ResponsableLegalInline, CandidatActionLogInline)
 
-admin.site.register(ResponsableLegal)
+@admin.register(ResponsableLegal)
+class ResponsableLegalAdmin(admin.ModelAdmin):
+	search_fields = ('last_name', 'first_name',)
+	list_display = ('candidat', 'last_name', 'first_name',)
+
 admin.site.register(CandidatActionLog)
 
 @admin.register(Commune)
@@ -104,7 +108,13 @@ class VoeuAdmin(admin.ModelAdmin):
 	list_display = ('candidat', 'formation', 'get_etat_display')
 	inlines = (HistoriqueVoeuInline,)
 
-admin.site.register(FicheIdentite)
+@admin.register(FicheIdentite)
+class FicheIdentiteAdmin(admin.ModelAdmin):
+	search_fields = ('candidat',)
+	list_display = ('candidat', 'get_etat_display')
+	autocomplete_fields = ('commune_naissance', 'pays_naissance',
+		'ville', 'pays', 'responsables',)
+
 admin.site.register(FicheScolarite)
 admin.site.register(FicheHebergement)
 admin.site.register(FicheScolariteAnterieure)
