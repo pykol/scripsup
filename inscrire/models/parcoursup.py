@@ -150,11 +150,15 @@ class ParcoursupUser(models.Model):
 		# d'inscription.
 		if not candidat.responsables.all():
 			for psup_resp in psup['responsables']:
+				if psup_resp.sexe == ParcoursupPersonne.GENRE_HOMME:
+					genre = Candidat.GENRE_HOMME
+				elif psup_resp.sexe == ParcoursupPersonne.GENRE_FEMME:
+					genre = Candidat.GENRE_FEMME
+				else:
+					genre = None
 				ResponsableLegal(
 						candidat=candidat,
-						genre=Candidat.GENRE_HOMME \
-								if psup_resp.sexe == ParcoursupPersonne.GENRE_HOMME \
-								else Candidat.GENRE_FEMME,
+						genre=genre,
 						last_name=psup_resp.nom,
 						first_name=psup_resp.prenom,
 						telephone=psup_resp.telephone_fixe or '',
