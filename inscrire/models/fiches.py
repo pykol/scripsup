@@ -265,9 +265,11 @@ class FicheIdentite(Fiche):
 			# renvoyé. Sauf qu'en pratique, c'est le numéro INSEE... On
 			# prend des précautions au cas où l'API change
 			# silencieusement un jour pour coller à la documentation.
-			self.pays = Pays.objects.get(
-					Q(code_iso2=parcoursup['candidat'].code_pays)
-					| Q(num_insee=parcoursup['candidat'].code_pays))
+			if parcoursup['candidat'].code_pays.isdigit():
+				self.pays = Pays.objects.filter(
+						num_insee=int(parcoursup['candidat'].code_pays)).first()
+			else:
+				self.pays = Pays.objects.get(code_iso2=parcoursup['candidat'].code_pays)
 		except:
 			pass
 
@@ -279,12 +281,14 @@ class FicheIdentite(Fiche):
 
 		try:
 			# L'API Parcoursup dit que c'est le code ISO2 qui est
-			# renvoyé. Sauf qu'en pratique, c'est le numéro. On prend
-			# des précautions au cas où l'API change silencieusement un
-			# jour pour coller à la documentation.
-			self.pays_naissance = Pays.objects.get(
-					Q(code_iso2=parcoursup['candidat'].pays_naissance)
-					| Q(num_insee=parcoursup['candidat'].pays_naissance))
+			# renvoyé. Sauf qu'en pratique, c'est le numéro INSEE... On
+			# prend des précautions au cas où l'API change
+			# silencieusement un jour pour coller à la documentation.
+			if parcoursup['candidat'].code_pays.isdigit():
+				self.pays_naissance = Pays.objects.filter(
+						num_insee=int(parcoursup['candidat'].pays_naissance)).first()
+			else:
+				self.pays_naissance = Pays.objects.get(code_iso2=parcoursup['candidat'].pays_naissance)
 		except:
 			pass
 
