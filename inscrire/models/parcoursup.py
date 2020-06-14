@@ -157,8 +157,8 @@ class ParcoursupUser(models.Model):
 								else Candidat.GENRE_FEMME,
 						last_name=psup_resp.nom,
 						first_name=psup_resp.prenom,
-						telephone=psup_resp.telephone_fixe,
-						telephone_mobile=psup_resp.telephone_mobile,
+						telephone=psup_resp.telephone_fixe or '',
+						telephone_mobile=psup_resp.telephone_mobile or '',
 						adresse=psup_resp.adresse).save()
 
 		# Mise à jour des fiches d'inscription
@@ -176,7 +176,7 @@ class ParcoursupUser(models.Model):
 		for candidat in self.parcoursup_rest.get_candidats_admis():
 			try:
 				res.append(self.import_candidat(candidat))
-			except:
+			except Exception as e:
 				# TODO reporting à l'admin
 				pass
 		return res

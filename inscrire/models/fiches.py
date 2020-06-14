@@ -239,13 +239,6 @@ class FicheIdentite(Fiche):
 	telephone = models.CharField(max_length=20,
 			verbose_name="Téléphone personnel", blank=True, default="")
 
-	def __init__(self, *args, **kwargs):
-		super().__init__(*args, **kwargs)
-		# TODO peupler par défaut les responsables légaux
-		# On les ajoute dans la fiche, en plus du modèle Candidat, afin
-		# de permettre la modification par les candidats, éventuellement
-		# en ajoutant/supprimant des responsables.
-
 	class Meta:
 		verbose_name = "fiche identité"
 		verbose_name_plural = "fiches identité"
@@ -260,6 +253,18 @@ class FicheIdentite(Fiche):
 		)
 
 	def update_from_parcoursup(self, parcoursup):
+		try:
+			self.ville = Commune.objects.get(
+					code_insee=parcoursup['candidat'].commune_commune)
+		except:
+			pass
+
+		try:
+			self.pays = Pays.objects.get(
+					code_iso2=parcoursup['candidat'].code_pays)
+		except:
+			pass
+
 		try:
 			self.commune_naissance = Commune.objects.get(
 					code_insee=parcoursup['candidat'].commune_naissance)
@@ -281,6 +286,9 @@ class FicheIdentite(Fiche):
 			self.telephone = parcoursup['candidat'].telephone_mobile
 		except:
 			pass
+
+		if not self.responsables.all():
+			self.responsables.set(self.candidat.responsables.all())
 
 		self.save()
 
@@ -316,6 +324,20 @@ class FicheScolariteAnterieure(Fiche):
 				and bool(self.specialite_terminale)
 				and bool(self.bulletinscolaire_set.all())
 			)
+
+	def update_from_parcoursup(self, parcoursup):
+		try:
+			self.etablissement = Etablissement.objects.get(
+					numero_uai=parcoursup['candidat'].etablissement_origine_uai)
+		except:
+			pass
+
+		if self.etablissement is None and parcoursup['candidat'].etablissement_origine_nom:
+			self.autre_formation = parcoursup['candidat'].etablissement_origine_nom
+
+		self.specialite_terminale = parcoursup['candidat'].bac_serie or ''
+
+		self.save()
 
 class BulletinScolaire(models.Model):
 	"""
