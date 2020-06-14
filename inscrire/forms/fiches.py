@@ -57,10 +57,13 @@ class IdentiteForm(FicheValiderMixin, forms.ModelForm):
 	class Meta:
 		model = fiches.FicheIdentite
 		fields = ['photo', 'piece_identite', 'commune_naissance',
-				'commune_naissance_etranger', 'pays_naissance']
+				'commune_naissance_etranger', 'pays_naissance',
+				'adresse', 'ville', 'pays', 'telephone']
 		widgets = {
 			'commune_naissance': autocomplete.ModelSelect2(url='autocomplete-commune'),
 			'pays_naissance': autocomplete.ModelSelect2(url='autocomplete-pays'),
+			'ville': autocomplete.ModelSelect2(url='autocomplete-commune'),
+			'pays': autocomplete.ModelSelect2(url='autocomplete-pays'),
 		}
 		labels = {
 			'commune_naissance': "Commune de naissance",
@@ -76,6 +79,12 @@ class IdentiteForm(FicheValiderMixin, forms.ModelForm):
 			'commune_naissance': "Si votre commune de naissance est en "
 				"France, complétez ce champ.",
 			'pays_naissance': "Sélectionnez votre pays de naissance "
+				"parmi les choix proposés dans la liste. Vous pouvez "
+				"taper les premières lettres du nom pour trouver plus "
+				"rapidement le pays.",
+			'ville': "Si votre commune de résidence est en "
+				"France, complétez ce champ.",
+			'pays': "Sélectionnez votre pays de résidence "
 				"parmi les choix proposés dans la liste. Vous pouvez "
 				"taper les premières lettres du nom pour trouver plus "
 				"rapidement le pays."
