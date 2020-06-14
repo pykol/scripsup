@@ -51,7 +51,7 @@ def pays_list(filename):
 			code_isonum=ligne['codenum3'],
 			libelle_cog=ligne['libcog'],
 			libelle_jo=ligne['libenr'],
-			code_insee=ligne['cog'] if ligne['cog'] != 'XXXXX' else None,
+			code_insee=int(ligne['cog']) if ligne['cog'] != 'XXXXX' else None,
 		))
 
 	return pays
@@ -59,6 +59,9 @@ def pays_list(filename):
 def to_django_json(pays_list):
 	json = []
 	for pays in pays_list:
+		if not pays.code_iso2:
+			continue
+
 		json.append({
 			'model': 'inscrire.Pays',
 			'pk': pays.code_iso2,

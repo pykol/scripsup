@@ -6,7 +6,7 @@
             "code_iso3": "DNK",
             "num_iso": "208",
             "libelle": "DANEMARK",
-            "num_insee": "99101"
+            "num_insee": 99101
         }
     },
     {
@@ -16,7 +16,7 @@
             "code_iso3": "FRO",
             "num_iso": "234",
             "libelle": "FEROE (ILES)",
-            "num_insee": "99101"
+            "num_insee": 99101
         }
     },
     {
@@ -26,7 +26,7 @@
             "code_iso3": "ISL",
             "num_iso": "352",
             "libelle": "ISLANDE",
-            "num_insee": "99102"
+            "num_insee": 99102
         }
     },
     {
@@ -36,7 +36,7 @@
             "code_iso3": "NOR",
             "num_iso": "578",
             "libelle": "NORVEGE",
-            "num_insee": "99103"
+            "num_insee": 99103
         }
     },
     {
@@ -46,7 +46,7 @@
             "code_iso3": "BVT",
             "num_iso": "074",
             "libelle": "BOUVET (ILE)",
-            "num_insee": "99103"
+            "num_insee": 99103
         }
     },
     {
@@ -56,7 +56,7 @@
             "code_iso3": "SJM",
             "num_iso": "744",
             "libelle": "SVALBARD et ILE JAN MAYEN",
-            "num_insee": "99103"
+            "num_insee": 99103
         }
     },
     {
@@ -66,7 +66,7 @@
             "code_iso3": "SWE",
             "num_iso": "752",
             "libelle": "SUEDE",
-            "num_insee": "99104"
+            "num_insee": 99104
         }
     },
     {
@@ -76,7 +76,7 @@
             "code_iso3": "FIN",
             "num_iso": "246",
             "libelle": "FINLANDE",
-            "num_insee": "99105"
+            "num_insee": 99105
         }
     },
     {
@@ -86,7 +86,7 @@
             "code_iso3": "EST",
             "num_iso": "233",
             "libelle": "ESTONIE",
-            "num_insee": "99106"
+            "num_insee": 99106
         }
     },
     {
@@ -96,7 +96,7 @@
             "code_iso3": "LVA",
             "num_iso": "428",
             "libelle": "LETTONIE",
-            "num_insee": "99107"
+            "num_insee": 99107
         }
     },
     {
@@ -106,7 +106,7 @@
             "code_iso3": "LTU",
             "num_iso": "440",
             "libelle": "LITUANIE",
-            "num_insee": "99108"
+            "num_insee": 99108
         }
     },
     {
@@ -116,7 +116,7 @@
             "code_iso3": "DEU",
             "num_iso": "276",
             "libelle": "ALLEMAGNE",
-            "num_insee": "99109"
+            "num_insee": 99109
         }
     },
     {
@@ -126,7 +126,7 @@
             "code_iso3": "AUT",
             "num_iso": "040",
             "libelle": "AUTRICHE",
-            "num_insee": "99110"
+            "num_insee": 99110
         }
     },
     {
@@ -136,7 +136,7 @@
             "code_iso3": "BGR",
             "num_iso": "100",
             "libelle": "BULGARIE",
-            "num_insee": "99111"
+            "num_insee": 99111
         }
     },
     {
@@ -146,7 +146,7 @@
             "code_iso3": "HUN",
             "num_iso": "348",
             "libelle": "HONGRIE",
-            "num_insee": "99112"
+            "num_insee": 99112
         }
     },
     {
@@ -156,7 +156,7 @@
             "code_iso3": "LIE",
             "num_iso": "438",
             "libelle": "LIECHTENSTEIN",
-            "num_insee": "99113"
+            "num_insee": 99113
         }
     },
     {
@@ -166,17 +166,7 @@
             "code_iso3": "ROU",
             "num_iso": "642",
             "libelle": "ROUMANIE",
-            "num_insee": "99114"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TCHECOSLOVAQUIE",
-            "num_insee": "99115"
+            "num_insee": 99114
         }
     },
     {
@@ -186,7 +176,7 @@
             "code_iso3": "CZE",
             "num_iso": "203",
             "libelle": "TCHEQUE (REPUBLIQUE)",
-            "num_insee": "99116"
+            "num_insee": 99116
         }
     },
     {
@@ -196,7 +186,7 @@
             "code_iso3": "SVK",
             "num_iso": "703",
             "libelle": "SLOVAQUIE",
-            "num_insee": "99117"
+            "num_insee": 99117
         }
     },
     {
@@ -206,7 +196,7 @@
             "code_iso3": "BIH",
             "num_iso": "070",
             "libelle": "BOSNIE-HERZEGOVINE",
-            "num_insee": "99118"
+            "num_insee": 99118
         }
     },
     {
@@ -216,7 +206,7 @@
             "code_iso3": "HRV",
             "num_iso": "191",
             "libelle": "CROATIE",
-            "num_insee": "99119"
+            "num_insee": 99119
         }
     },
     {
@@ -226,7 +216,7 @@
             "code_iso3": "MNE",
             "num_iso": "499",
             "libelle": "MONTENEGRO",
-            "num_insee": "99120"
+            "num_insee": 99120
         }
     },
     {
@@ -236,7 +226,7 @@
             "code_iso3": "SRB",
             "num_iso": "688",
             "libelle": "SERBIE",
-            "num_insee": "99121"
+            "num_insee": 99121
         }
     },
     {
@@ -246,7 +236,7 @@
             "code_iso3": "POL",
             "num_iso": "616",
             "libelle": "POLOGNE",
-            "num_insee": "99122"
+            "num_insee": 99122
         }
     },
     {
@@ -256,17 +246,7 @@
             "code_iso3": "RUS",
             "num_iso": "643",
             "libelle": "RUSSIE",
-            "num_insee": "99123"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TURQUIE D'EUROPE",
-            "num_insee": "99124"
+            "num_insee": 99123
         }
     },
     {
@@ -276,7 +256,7 @@
             "code_iso3": "ALB",
             "num_iso": "008",
             "libelle": "ALBANIE",
-            "num_insee": "99125"
+            "num_insee": 99125
         }
     },
     {
@@ -286,7 +266,7 @@
             "code_iso3": "GRC",
             "num_iso": "300",
             "libelle": "GRECE",
-            "num_insee": "99126"
+            "num_insee": 99126
         }
     },
     {
@@ -296,7 +276,7 @@
             "code_iso3": "ITA",
             "num_iso": "380",
             "libelle": "ITALIE",
-            "num_insee": "99127"
+            "num_insee": 99127
         }
     },
     {
@@ -306,7 +286,7 @@
             "code_iso3": "SMR",
             "num_iso": "674",
             "libelle": "SAINT-MARIN",
-            "num_insee": "99128"
+            "num_insee": 99128
         }
     },
     {
@@ -316,7 +296,7 @@
             "code_iso3": "VAT",
             "num_iso": "336",
             "libelle": "VATICAN, ou SAINT-SIEGE",
-            "num_insee": "99129"
+            "num_insee": 99129
         }
     },
     {
@@ -326,7 +306,7 @@
             "code_iso3": "AND",
             "num_iso": "020",
             "libelle": "ANDORRE",
-            "num_insee": "99130"
+            "num_insee": 99130
         }
     },
     {
@@ -336,7 +316,7 @@
             "code_iso3": "BEL",
             "num_iso": "056",
             "libelle": "BELGIQUE",
-            "num_insee": "99131"
+            "num_insee": 99131
         }
     },
     {
@@ -346,7 +326,7 @@
             "code_iso3": "GBR",
             "num_iso": "826",
             "libelle": "ROYAUME-UNI",
-            "num_insee": "99132"
+            "num_insee": 99132
         }
     },
     {
@@ -356,7 +336,7 @@
             "code_iso3": "GGY",
             "num_iso": "831",
             "libelle": "GUERNESEY",
-            "num_insee": "99132"
+            "num_insee": 99132
         }
     },
     {
@@ -366,7 +346,7 @@
             "code_iso3": "IMN",
             "num_iso": "833",
             "libelle": "MAN (ILE)",
-            "num_insee": "99132"
+            "num_insee": 99132
         }
     },
     {
@@ -376,7 +356,7 @@
             "code_iso3": "JEY",
             "num_iso": "832",
             "libelle": "JERSEY",
-            "num_insee": "99132"
+            "num_insee": 99132
         }
     },
     {
@@ -386,7 +366,7 @@
             "code_iso3": "GIB",
             "num_iso": "292",
             "libelle": "GIBRALTAR",
-            "num_insee": "99133"
+            "num_insee": 99133
         }
     },
     {
@@ -396,7 +376,7 @@
             "code_iso3": "ESP",
             "num_iso": "724",
             "libelle": "ESPAGNE",
-            "num_insee": "99134"
+            "num_insee": 99134
         }
     },
     {
@@ -406,7 +386,7 @@
             "code_iso3": "NLD",
             "num_iso": "528",
             "libelle": "PAYS-BAS",
-            "num_insee": "99135"
+            "num_insee": 99135
         }
     },
     {
@@ -416,7 +396,7 @@
             "code_iso3": "ABW",
             "num_iso": "533",
             "libelle": "ARUBA",
-            "num_insee": "99135"
+            "num_insee": 99135
         }
     },
     {
@@ -426,7 +406,7 @@
             "code_iso3": "IRL",
             "num_iso": "372",
             "libelle": "IRLANDE, ou EIRE",
-            "num_insee": "99136"
+            "num_insee": 99136
         }
     },
     {
@@ -436,7 +416,7 @@
             "code_iso3": "LUX",
             "num_iso": "442",
             "libelle": "LUXEMBOURG",
-            "num_insee": "99137"
+            "num_insee": 99137
         }
     },
     {
@@ -446,7 +426,7 @@
             "code_iso3": "MCO",
             "num_iso": "492",
             "libelle": "MONACO",
-            "num_insee": "99138"
+            "num_insee": 99138
         }
     },
     {
@@ -456,7 +436,7 @@
             "code_iso3": "PRT",
             "num_iso": "620",
             "libelle": "PORTUGAL",
-            "num_insee": "99139"
+            "num_insee": 99139
         }
     },
     {
@@ -466,27 +446,7 @@
             "code_iso3": "CHE",
             "num_iso": "756",
             "libelle": "SUISSE",
-            "num_insee": "99140"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "REPUBLIQUE DEMOCRATIQUE ALLEMANDE",
-            "num_insee": "99141"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "REPUBLIQUE FEDERALE D'ALLEMAGNE",
-            "num_insee": "99142"
+            "num_insee": 99140
         }
     },
     {
@@ -496,7 +456,7 @@
             "code_iso3": "MLT",
             "num_iso": "470",
             "libelle": "MALTE",
-            "num_insee": "99144"
+            "num_insee": 99144
         }
     },
     {
@@ -506,7 +466,7 @@
             "code_iso3": "SVN",
             "num_iso": "705",
             "libelle": "SLOVENIE",
-            "num_insee": "99145"
+            "num_insee": 99145
         }
     },
     {
@@ -516,7 +476,7 @@
             "code_iso3": "BLR",
             "num_iso": "112",
             "libelle": "BIELORUSSIE",
-            "num_insee": "99148"
+            "num_insee": 99148
         }
     },
     {
@@ -526,7 +486,7 @@
             "code_iso3": "MDA",
             "num_iso": "498",
             "libelle": "MOLDAVIE",
-            "num_insee": "99151"
+            "num_insee": 99151
         }
     },
     {
@@ -536,7 +496,7 @@
             "code_iso3": "UKR",
             "num_iso": "804",
             "libelle": "UKRAINE",
-            "num_insee": "99155"
+            "num_insee": 99155
         }
     },
     {
@@ -546,17 +506,7 @@
             "code_iso3": "MKD",
             "num_iso": "807",
             "libelle": "MACEDOINE DU NORD",
-            "num_insee": "99156"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "XK",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "KOSOVO",
-            "num_insee": "99157"
+            "num_insee": 99156
         }
     },
     {
@@ -566,17 +516,7 @@
             "code_iso3": "SAU",
             "num_iso": "682",
             "libelle": "ARABIE SAOUDITE",
-            "num_insee": "99201"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "YEMEN (REPUBLIQUE ARABE DU)",
-            "num_insee": "99202"
+            "num_insee": 99201
         }
     },
     {
@@ -586,7 +526,7 @@
             "code_iso3": "IRQ",
             "num_iso": "368",
             "libelle": "IRAQ",
-            "num_insee": "99203"
+            "num_insee": 99203
         }
     },
     {
@@ -596,7 +536,7 @@
             "code_iso3": "IRN",
             "num_iso": "364",
             "libelle": "IRAN",
-            "num_insee": "99204"
+            "num_insee": 99204
         }
     },
     {
@@ -606,7 +546,7 @@
             "code_iso3": "LBN",
             "num_iso": "422",
             "libelle": "LIBAN",
-            "num_insee": "99205"
+            "num_insee": 99205
         }
     },
     {
@@ -616,7 +556,7 @@
             "code_iso3": "SYR",
             "num_iso": "760",
             "libelle": "SYRIE",
-            "num_insee": "99206"
+            "num_insee": 99206
         }
     },
     {
@@ -626,7 +566,7 @@
             "code_iso3": "ISR",
             "num_iso": "376",
             "libelle": "ISRAEL",
-            "num_insee": "99207"
+            "num_insee": 99207
         }
     },
     {
@@ -636,37 +576,7 @@
             "code_iso3": "TUR",
             "num_iso": "792",
             "libelle": "TURQUIE",
-            "num_insee": "99208"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "SIBERIE",
-            "num_insee": "99209"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TURKESTAN RUSSE",
-            "num_insee": "99210"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "KAMTCHATKA",
-            "num_insee": "99211"
+            "num_insee": 99208
         }
     },
     {
@@ -676,7 +586,7 @@
             "code_iso3": "AFG",
             "num_iso": "004",
             "libelle": "AFGHANISTAN",
-            "num_insee": "99212"
+            "num_insee": 99212
         }
     },
     {
@@ -686,7 +596,7 @@
             "code_iso3": "PAK",
             "num_iso": "586",
             "libelle": "PAKISTAN",
-            "num_insee": "99213"
+            "num_insee": 99213
         }
     },
     {
@@ -696,7 +606,7 @@
             "code_iso3": "BTN",
             "num_iso": "064",
             "libelle": "BHOUTAN",
-            "num_insee": "99214"
+            "num_insee": 99214
         }
     },
     {
@@ -706,7 +616,7 @@
             "code_iso3": "NPL",
             "num_iso": "524",
             "libelle": "NEPAL",
-            "num_insee": "99215"
+            "num_insee": 99215
         }
     },
     {
@@ -716,7 +626,7 @@
             "code_iso3": "CHN",
             "num_iso": "156",
             "libelle": "CHINE",
-            "num_insee": "99216"
+            "num_insee": 99216
         }
     },
     {
@@ -726,17 +636,7 @@
             "code_iso3": "JPN",
             "num_iso": "392",
             "libelle": "JAPON",
-            "num_insee": "99217"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "MANDCHOURIE",
-            "num_insee": "99218"
+            "num_insee": 99217
         }
     },
     {
@@ -746,7 +646,7 @@
             "code_iso3": "THA",
             "num_iso": "764",
             "libelle": "THAILANDE",
-            "num_insee": "99219"
+            "num_insee": 99219
         }
     },
     {
@@ -756,17 +656,7 @@
             "code_iso3": "PHL",
             "num_iso": "608",
             "libelle": "PHILIPPINES",
-            "num_insee": "99220"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "POSSESSIONS BRITANNIQUES AU PROCHE-ORIENT",
-            "num_insee": "99221"
+            "num_insee": 99220
         }
     },
     {
@@ -776,7 +666,7 @@
             "code_iso3": "JOR",
             "num_iso": "400",
             "libelle": "JORDANIE",
-            "num_insee": "99222"
+            "num_insee": 99222
         }
     },
     {
@@ -786,17 +676,7 @@
             "code_iso3": "IND",
             "num_iso": "356",
             "libelle": "INDE",
-            "num_insee": "99223"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "GOA",
-            "num_insee": "99223"
+            "num_insee": 99223
         }
     },
     {
@@ -806,7 +686,7 @@
             "code_iso3": "MMR",
             "num_iso": "104",
             "libelle": "BIRMANIE",
-            "num_insee": "99224"
+            "num_insee": 99224
         }
     },
     {
@@ -816,7 +696,7 @@
             "code_iso3": "BRN",
             "num_iso": "096",
             "libelle": "BRUNEI",
-            "num_insee": "99225"
+            "num_insee": 99225
         }
     },
     {
@@ -826,7 +706,7 @@
             "code_iso3": "SGP",
             "num_iso": "702",
             "libelle": "SINGAPOUR",
-            "num_insee": "99226"
+            "num_insee": 99226
         }
     },
     {
@@ -836,17 +716,7 @@
             "code_iso3": "MYS",
             "num_iso": "458",
             "libelle": "MALAISIE",
-            "num_insee": "99227"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "ETATS MALAIS NON FEDERES",
-            "num_insee": "99228"
+            "num_insee": 99227
         }
     },
     {
@@ -856,17 +726,7 @@
             "code_iso3": "MDV",
             "num_iso": "462",
             "libelle": "MALDIVES",
-            "num_insee": "99229"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "HK",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "HONG-KONG",
-            "num_insee": "99230"
+            "num_insee": 99229
         }
     },
     {
@@ -876,27 +736,7 @@
             "code_iso3": "IDN",
             "num_iso": "360",
             "libelle": "INDONESIE",
-            "num_insee": "99231"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "MO",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "MACAO",
-            "num_insee": "99232"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "YEMEN DEMOCRATIQUE",
-            "num_insee": "99233"
+            "num_insee": 99231
         }
     },
     {
@@ -906,7 +746,7 @@
             "code_iso3": "KHM",
             "num_iso": "116",
             "libelle": "CAMBODGE",
-            "num_insee": "99234"
+            "num_insee": 99234
         }
     },
     {
@@ -916,7 +756,7 @@
             "code_iso3": "LKA",
             "num_iso": "144",
             "libelle": "SRI LANKA",
-            "num_insee": "99235"
+            "num_insee": 99235
         }
     },
     {
@@ -926,17 +766,7 @@
             "code_iso3": "TWN",
             "num_iso": "158",
             "libelle": "TAIWAN",
-            "num_insee": "99236"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "COREE",
-            "num_insee": "99237"
+            "num_insee": 99236
         }
     },
     {
@@ -946,7 +776,7 @@
             "code_iso3": "PRK",
             "num_iso": "408",
             "libelle": "COREE (REPUBLIQUE POPULAIRE DEMOCRATIQUE DE)",
-            "num_insee": "99238"
+            "num_insee": 99238
         }
     },
     {
@@ -956,7 +786,7 @@
             "code_iso3": "KOR",
             "num_iso": "410",
             "libelle": "COREE (REPUBLIQUE DE)",
-            "num_insee": "99239"
+            "num_insee": 99239
         }
     },
     {
@@ -966,7 +796,7 @@
             "code_iso3": "KWT",
             "num_iso": "414",
             "libelle": "KOWEIT",
-            "num_insee": "99240"
+            "num_insee": 99240
         }
     },
     {
@@ -976,7 +806,7 @@
             "code_iso3": "LAO",
             "num_iso": "418",
             "libelle": "LAOS",
-            "num_insee": "99241"
+            "num_insee": 99241
         }
     },
     {
@@ -986,7 +816,7 @@
             "code_iso3": "MNG",
             "num_iso": "496",
             "libelle": "MONGOLIE",
-            "num_insee": "99242"
+            "num_insee": 99242
         }
     },
     {
@@ -996,27 +826,7 @@
             "code_iso3": "VNM",
             "num_iso": "704",
             "libelle": "VIET NAM",
-            "num_insee": "99243"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "VIET NAM DU NORD",
-            "num_insee": "99244"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "VIET NAM DU SUD",
-            "num_insee": "99245"
+            "num_insee": 99243
         }
     },
     {
@@ -1026,7 +836,7 @@
             "code_iso3": "BGD",
             "num_iso": "050",
             "libelle": "BANGLADESH",
-            "num_insee": "99246"
+            "num_insee": 99246
         }
     },
     {
@@ -1036,7 +846,7 @@
             "code_iso3": "ARE",
             "num_iso": "784",
             "libelle": "EMIRATS ARABES UNIS",
-            "num_insee": "99247"
+            "num_insee": 99247
         }
     },
     {
@@ -1046,7 +856,7 @@
             "code_iso3": "QAT",
             "num_iso": "634",
             "libelle": "QATAR",
-            "num_insee": "99248"
+            "num_insee": 99248
         }
     },
     {
@@ -1056,7 +866,7 @@
             "code_iso3": "BHR",
             "num_iso": "048",
             "libelle": "BAHREIN",
-            "num_insee": "99249"
+            "num_insee": 99249
         }
     },
     {
@@ -1066,7 +876,7 @@
             "code_iso3": "OMN",
             "num_iso": "512",
             "libelle": "OMAN",
-            "num_insee": "99250"
+            "num_insee": 99250
         }
     },
     {
@@ -1076,7 +886,7 @@
             "code_iso3": "YEM",
             "num_iso": "887",
             "libelle": "YEMEN",
-            "num_insee": "99251"
+            "num_insee": 99251
         }
     },
     {
@@ -1086,7 +896,7 @@
             "code_iso3": "ARM",
             "num_iso": "051",
             "libelle": "ARMENIE",
-            "num_insee": "99252"
+            "num_insee": 99252
         }
     },
     {
@@ -1096,7 +906,7 @@
             "code_iso3": "AZE",
             "num_iso": "031",
             "libelle": "AZERBAIDJAN",
-            "num_insee": "99253"
+            "num_insee": 99253
         }
     },
     {
@@ -1106,7 +916,7 @@
             "code_iso3": "CYP",
             "num_iso": "196",
             "libelle": "CHYPRE",
-            "num_insee": "99254"
+            "num_insee": 99254
         }
     },
     {
@@ -1116,7 +926,7 @@
             "code_iso3": "GEO",
             "num_iso": "268",
             "libelle": "GEORGIE",
-            "num_insee": "99255"
+            "num_insee": 99255
         }
     },
     {
@@ -1126,7 +936,7 @@
             "code_iso3": "KAZ",
             "num_iso": "398",
             "libelle": "KAZAKHSTAN",
-            "num_insee": "99256"
+            "num_insee": 99256
         }
     },
     {
@@ -1136,7 +946,7 @@
             "code_iso3": "KGZ",
             "num_iso": "417",
             "libelle": "KIRGHIZISTAN",
-            "num_insee": "99257"
+            "num_insee": 99257
         }
     },
     {
@@ -1146,7 +956,7 @@
             "code_iso3": "UZB",
             "num_iso": "860",
             "libelle": "OUZBEKISTAN",
-            "num_insee": "99258"
+            "num_insee": 99258
         }
     },
     {
@@ -1156,7 +966,7 @@
             "code_iso3": "TJK",
             "num_iso": "762",
             "libelle": "TADJIKISTAN",
-            "num_insee": "99259"
+            "num_insee": 99259
         }
     },
     {
@@ -1166,7 +976,7 @@
             "code_iso3": "TKM",
             "num_iso": "795",
             "libelle": "TURKMENISTAN",
-            "num_insee": "99260"
+            "num_insee": 99260
         }
     },
     {
@@ -1176,7 +986,7 @@
             "code_iso3": "PSE",
             "num_iso": "275",
             "libelle": "PALESTINE (Etat de)",
-            "num_insee": "99261"
+            "num_insee": 99261
         }
     },
     {
@@ -1186,7 +996,7 @@
             "code_iso3": "TLS",
             "num_iso": "626",
             "libelle": "TIMOR ORIENTAL",
-            "num_insee": "99262"
+            "num_insee": 99262
         }
     },
     {
@@ -1196,7 +1006,7 @@
             "code_iso3": "EGY",
             "num_iso": "818",
             "libelle": "EGYPTE",
-            "num_insee": "99301"
+            "num_insee": 99301
         }
     },
     {
@@ -1206,7 +1016,7 @@
             "code_iso3": "LBR",
             "num_iso": "430",
             "libelle": "LIBERIA",
-            "num_insee": "99302"
+            "num_insee": 99302
         }
     },
     {
@@ -1216,7 +1026,7 @@
             "code_iso3": "ZAF",
             "num_iso": "710",
             "libelle": "AFRIQUE DU SUD",
-            "num_insee": "99303"
+            "num_insee": 99303
         }
     },
     {
@@ -1226,17 +1036,7 @@
             "code_iso3": "GMB",
             "num_iso": "270",
             "libelle": "GAMBIE",
-            "num_insee": "99304"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "CAMEROUN ET TOGO",
-            "num_insee": "99305"
+            "num_insee": 99304
         }
     },
     {
@@ -1246,27 +1046,7 @@
             "code_iso3": "SHN",
             "num_iso": "654",
             "libelle": "SAINTE HELENE, ASCENSION ET TRISTAN DA CUNHA",
-            "num_insee": "99306"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "SOUDAN ANGLO-EGYPTIEN, KENYA, OUGANDA",
-            "num_insee": "99307"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "ZANZIBAR",
-            "num_insee": "99308"
+            "num_insee": 99306
         }
     },
     {
@@ -1276,7 +1056,7 @@
             "code_iso3": "IOT",
             "num_iso": "086",
             "libelle": "OCEAN INDIEN (TERRITOIRE BRITANNIQUE DE L')",
-            "num_insee": "99308"
+            "num_insee": 99308
         }
     },
     {
@@ -1286,7 +1066,7 @@
             "code_iso3": "TZA",
             "num_iso": "834",
             "libelle": "TANZANIE",
-            "num_insee": "99309"
+            "num_insee": 99309
         }
     },
     {
@@ -1296,7 +1076,7 @@
             "code_iso3": "ZWE",
             "num_iso": "716",
             "libelle": "ZIMBABWE",
-            "num_insee": "99310"
+            "num_insee": 99310
         }
     },
     {
@@ -1306,7 +1086,7 @@
             "code_iso3": "NAM",
             "num_iso": "516",
             "libelle": "NAMIBIE",
-            "num_insee": "99311"
+            "num_insee": 99311
         }
     },
     {
@@ -1316,37 +1096,7 @@
             "code_iso3": "COD",
             "num_iso": "180",
             "libelle": "CONGO (REPUBLIQUE DEMOCRATIQUE)",
-            "num_insee": "99312"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "CANARIES (ILES)",
-            "num_insee": "99313"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "PROVINCES ESPAGNOLES D'AFRIQUE",
-            "num_insee": "99313"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "PRESIDES",
-            "num_insee": "99313"
+            "num_insee": 99312
         }
     },
     {
@@ -1356,7 +1106,7 @@
             "code_iso3": "GNQ",
             "num_iso": "226",
             "libelle": "GUINEE EQUATORIALE",
-            "num_insee": "99314"
+            "num_insee": 99314
         }
     },
     {
@@ -1366,7 +1116,7 @@
             "code_iso3": "ETH",
             "num_iso": "231",
             "libelle": "ETHIOPIE",
-            "num_insee": "99315"
+            "num_insee": 99315
         }
     },
     {
@@ -1376,7 +1126,7 @@
             "code_iso3": "LBY",
             "num_iso": "434",
             "libelle": "LIBYE",
-            "num_insee": "99316"
+            "num_insee": 99316
         }
     },
     {
@@ -1386,7 +1136,7 @@
             "code_iso3": "ERI",
             "num_iso": "232",
             "libelle": "ERYTHREE",
-            "num_insee": "99317"
+            "num_insee": 99317
         }
     },
     {
@@ -1396,27 +1146,7 @@
             "code_iso3": "SOM",
             "num_iso": "706",
             "libelle": "SOMALIE",
-            "num_insee": "99318"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "ACORES, MADERE",
-            "num_insee": "99319"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "ILES PORTUGAISES DE L'OCEAN INDIEN",
-            "num_insee": "99320"
+            "num_insee": 99318
         }
     },
     {
@@ -1426,7 +1156,7 @@
             "code_iso3": "BDI",
             "num_iso": "108",
             "libelle": "BURUNDI",
-            "num_insee": "99321"
+            "num_insee": 99321
         }
     },
     {
@@ -1436,7 +1166,7 @@
             "code_iso3": "CMR",
             "num_iso": "120",
             "libelle": "CAMEROUN",
-            "num_insee": "99322"
+            "num_insee": 99322
         }
     },
     {
@@ -1446,7 +1176,7 @@
             "code_iso3": "CAF",
             "num_iso": "140",
             "libelle": "CENTRAFRICAINE (REPUBLIQUE)",
-            "num_insee": "99323"
+            "num_insee": 99323
         }
     },
     {
@@ -1456,17 +1186,7 @@
             "code_iso3": "COG",
             "num_iso": "178",
             "libelle": "CONGO",
-            "num_insee": "99324"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TANGER",
-            "num_insee": "99325"
+            "num_insee": 99324
         }
     },
     {
@@ -1476,7 +1196,7 @@
             "code_iso3": "CIV",
             "num_iso": "384",
             "libelle": "COTE D'IVOIRE",
-            "num_insee": "99326"
+            "num_insee": 99326
         }
     },
     {
@@ -1486,7 +1206,7 @@
             "code_iso3": "BEN",
             "num_iso": "204",
             "libelle": "BENIN",
-            "num_insee": "99327"
+            "num_insee": 99327
         }
     },
     {
@@ -1496,7 +1216,7 @@
             "code_iso3": "GAB",
             "num_iso": "266",
             "libelle": "GABON",
-            "num_insee": "99328"
+            "num_insee": 99328
         }
     },
     {
@@ -1506,7 +1226,7 @@
             "code_iso3": "GHA",
             "num_iso": "288",
             "libelle": "GHANA",
-            "num_insee": "99329"
+            "num_insee": 99329
         }
     },
     {
@@ -1516,7 +1236,7 @@
             "code_iso3": "GIN",
             "num_iso": "324",
             "libelle": "GUINEE",
-            "num_insee": "99330"
+            "num_insee": 99330
         }
     },
     {
@@ -1526,7 +1246,7 @@
             "code_iso3": "BFA",
             "num_iso": "854",
             "libelle": "BURKINA",
-            "num_insee": "99331"
+            "num_insee": 99331
         }
     },
     {
@@ -1536,7 +1256,7 @@
             "code_iso3": "KEN",
             "num_iso": "404",
             "libelle": "KENYA",
-            "num_insee": "99332"
+            "num_insee": 99332
         }
     },
     {
@@ -1546,7 +1266,7 @@
             "code_iso3": "MDG",
             "num_iso": "450",
             "libelle": "MADAGASCAR",
-            "num_insee": "99333"
+            "num_insee": 99333
         }
     },
     {
@@ -1556,7 +1276,7 @@
             "code_iso3": "MWI",
             "num_iso": "454",
             "libelle": "MALAWI",
-            "num_insee": "99334"
+            "num_insee": 99334
         }
     },
     {
@@ -1566,7 +1286,7 @@
             "code_iso3": "MLI",
             "num_iso": "466",
             "libelle": "MALI",
-            "num_insee": "99335"
+            "num_insee": 99335
         }
     },
     {
@@ -1576,7 +1296,7 @@
             "code_iso3": "MRT",
             "num_iso": "478",
             "libelle": "MAURITANIE",
-            "num_insee": "99336"
+            "num_insee": 99336
         }
     },
     {
@@ -1586,7 +1306,7 @@
             "code_iso3": "NER",
             "num_iso": "562",
             "libelle": "NIGER",
-            "num_insee": "99337"
+            "num_insee": 99337
         }
     },
     {
@@ -1596,7 +1316,7 @@
             "code_iso3": "NGA",
             "num_iso": "566",
             "libelle": "NIGERIA",
-            "num_insee": "99338"
+            "num_insee": 99338
         }
     },
     {
@@ -1606,7 +1326,7 @@
             "code_iso3": "UGA",
             "num_iso": "800",
             "libelle": "OUGANDA",
-            "num_insee": "99339"
+            "num_insee": 99339
         }
     },
     {
@@ -1616,7 +1336,7 @@
             "code_iso3": "RWA",
             "num_iso": "646",
             "libelle": "RWANDA",
-            "num_insee": "99340"
+            "num_insee": 99340
         }
     },
     {
@@ -1626,7 +1346,7 @@
             "code_iso3": "SEN",
             "num_iso": "686",
             "libelle": "SENEGAL",
-            "num_insee": "99341"
+            "num_insee": 99341
         }
     },
     {
@@ -1636,7 +1356,7 @@
             "code_iso3": "SLE",
             "num_iso": "694",
             "libelle": "SIERRA LEONE",
-            "num_insee": "99342"
+            "num_insee": 99342
         }
     },
     {
@@ -1646,7 +1366,7 @@
             "code_iso3": "SDN",
             "num_iso": "729",
             "libelle": "SOUDAN",
-            "num_insee": "99343"
+            "num_insee": 99343
         }
     },
     {
@@ -1656,7 +1376,7 @@
             "code_iso3": "TCD",
             "num_iso": "148",
             "libelle": "TCHAD",
-            "num_insee": "99344"
+            "num_insee": 99344
         }
     },
     {
@@ -1666,7 +1386,7 @@
             "code_iso3": "TGO",
             "num_iso": "768",
             "libelle": "TOGO",
-            "num_insee": "99345"
+            "num_insee": 99345
         }
     },
     {
@@ -1676,7 +1396,7 @@
             "code_iso3": "ZMB",
             "num_iso": "894",
             "libelle": "ZAMBIE",
-            "num_insee": "99346"
+            "num_insee": 99346
         }
     },
     {
@@ -1686,7 +1406,7 @@
             "code_iso3": "BWA",
             "num_iso": "072",
             "libelle": "BOTSWANA",
-            "num_insee": "99347"
+            "num_insee": 99347
         }
     },
     {
@@ -1696,7 +1416,7 @@
             "code_iso3": "LSO",
             "num_iso": "426",
             "libelle": "LESOTHO",
-            "num_insee": "99348"
+            "num_insee": 99348
         }
     },
     {
@@ -1706,7 +1426,7 @@
             "code_iso3": "SSD",
             "num_iso": "728",
             "libelle": "SOUDAN DU SUD",
-            "num_insee": "99349"
+            "num_insee": 99349
         }
     },
     {
@@ -1716,7 +1436,7 @@
             "code_iso3": "MAR",
             "num_iso": "504",
             "libelle": "MAROC",
-            "num_insee": "99350"
+            "num_insee": 99350
         }
     },
     {
@@ -1726,7 +1446,7 @@
             "code_iso3": "TUN",
             "num_iso": "788",
             "libelle": "TUNISIE",
-            "num_insee": "99351"
+            "num_insee": 99351
         }
     },
     {
@@ -1736,7 +1456,7 @@
             "code_iso3": "DZA",
             "num_iso": "012",
             "libelle": "ALGERIE",
-            "num_insee": "99352"
+            "num_insee": 99352
         }
     },
     {
@@ -1746,7 +1466,7 @@
             "code_iso3": "ESH",
             "num_iso": "732",
             "libelle": "SAHARA OCCIDENTAL",
-            "num_insee": "99389"
+            "num_insee": 99389
         }
     },
     {
@@ -1756,7 +1476,7 @@
             "code_iso3": "MUS",
             "num_iso": "480",
             "libelle": "MAURICE",
-            "num_insee": "99390"
+            "num_insee": 99390
         }
     },
     {
@@ -1766,7 +1486,7 @@
             "code_iso3": "SWZ",
             "num_iso": "748",
             "libelle": "ESWATINI",
-            "num_insee": "99391"
+            "num_insee": 99391
         }
     },
     {
@@ -1776,7 +1496,7 @@
             "code_iso3": "GNB",
             "num_iso": "624",
             "libelle": "GUINEE-BISSAU",
-            "num_insee": "99392"
+            "num_insee": 99392
         }
     },
     {
@@ -1786,7 +1506,7 @@
             "code_iso3": "MOZ",
             "num_iso": "508",
             "libelle": "MOZAMBIQUE",
-            "num_insee": "99393"
+            "num_insee": 99393
         }
     },
     {
@@ -1796,7 +1516,7 @@
             "code_iso3": "STP",
             "num_iso": "678",
             "libelle": "SAO TOME-ET-PRINCIPE",
-            "num_insee": "99394"
+            "num_insee": 99394
         }
     },
     {
@@ -1806,7 +1526,7 @@
             "code_iso3": "AGO",
             "num_iso": "024",
             "libelle": "ANGOLA",
-            "num_insee": "99395"
+            "num_insee": 99395
         }
     },
     {
@@ -1816,7 +1536,7 @@
             "code_iso3": "CPV",
             "num_iso": "132",
             "libelle": "CAP-VERT",
-            "num_insee": "99396"
+            "num_insee": 99396
         }
     },
     {
@@ -1826,7 +1546,7 @@
             "code_iso3": "COM",
             "num_iso": "174",
             "libelle": "COMORES",
-            "num_insee": "99397"
+            "num_insee": 99397
         }
     },
     {
@@ -1836,7 +1556,7 @@
             "code_iso3": "SYC",
             "num_iso": "690",
             "libelle": "SEYCHELLES",
-            "num_insee": "99398"
+            "num_insee": 99398
         }
     },
     {
@@ -1846,7 +1566,7 @@
             "code_iso3": "DJI",
             "num_iso": "262",
             "libelle": "DJIBOUTI",
-            "num_insee": "99399"
+            "num_insee": 99399
         }
     },
     {
@@ -1856,27 +1576,7 @@
             "code_iso3": "CAN",
             "num_iso": "124",
             "libelle": "CANADA",
-            "num_insee": "99401"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TERRE-NEUVE",
-            "num_insee": "99402"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "LABRADOR",
-            "num_insee": "99403"
+            "num_insee": 99401
         }
     },
     {
@@ -1886,17 +1586,7 @@
             "code_iso3": "USA",
             "num_iso": "840",
             "libelle": "ETATS-UNIS",
-            "num_insee": "99404"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "ALASKA",
-            "num_insee": "99404"
+            "num_insee": 99404
         }
     },
     {
@@ -1906,7 +1596,7 @@
             "code_iso3": "MEX",
             "num_iso": "484",
             "libelle": "MEXIQUE",
-            "num_insee": "99405"
+            "num_insee": 99405
         }
     },
     {
@@ -1916,7 +1606,7 @@
             "code_iso3": "CRI",
             "num_iso": "188",
             "libelle": "COSTA RICA",
-            "num_insee": "99406"
+            "num_insee": 99406
         }
     },
     {
@@ -1926,7 +1616,7 @@
             "code_iso3": "CUB",
             "num_iso": "192",
             "libelle": "CUBA",
-            "num_insee": "99407"
+            "num_insee": 99407
         }
     },
     {
@@ -1936,7 +1626,7 @@
             "code_iso3": "DOM",
             "num_iso": "214",
             "libelle": "DOMINICAINE (REPUBLIQUE)",
-            "num_insee": "99408"
+            "num_insee": 99408
         }
     },
     {
@@ -1946,7 +1636,7 @@
             "code_iso3": "GTM",
             "num_iso": "320",
             "libelle": "GUATEMALA",
-            "num_insee": "99409"
+            "num_insee": 99409
         }
     },
     {
@@ -1956,7 +1646,7 @@
             "code_iso3": "HTI",
             "num_iso": "332",
             "libelle": "HAITI",
-            "num_insee": "99410"
+            "num_insee": 99410
         }
     },
     {
@@ -1966,7 +1656,7 @@
             "code_iso3": "HND",
             "num_iso": "340",
             "libelle": "HONDURAS",
-            "num_insee": "99411"
+            "num_insee": 99411
         }
     },
     {
@@ -1976,7 +1666,7 @@
             "code_iso3": "NIC",
             "num_iso": "558",
             "libelle": "NICARAGUA",
-            "num_insee": "99412"
+            "num_insee": 99412
         }
     },
     {
@@ -1986,7 +1676,7 @@
             "code_iso3": "PAN",
             "num_iso": "591",
             "libelle": "PANAMA",
-            "num_insee": "99413"
+            "num_insee": 99413
         }
     },
     {
@@ -1996,7 +1686,7 @@
             "code_iso3": "SLV",
             "num_iso": "222",
             "libelle": "EL SALVADOR",
-            "num_insee": "99414"
+            "num_insee": 99414
         }
     },
     {
@@ -2006,7 +1696,7 @@
             "code_iso3": "ARG",
             "num_iso": "032",
             "libelle": "ARGENTINE",
-            "num_insee": "99415"
+            "num_insee": 99415
         }
     },
     {
@@ -2016,7 +1706,7 @@
             "code_iso3": "BRA",
             "num_iso": "076",
             "libelle": "BRESIL",
-            "num_insee": "99416"
+            "num_insee": 99416
         }
     },
     {
@@ -2026,7 +1716,7 @@
             "code_iso3": "CHL",
             "num_iso": "152",
             "libelle": "CHILI",
-            "num_insee": "99417"
+            "num_insee": 99417
         }
     },
     {
@@ -2036,7 +1726,7 @@
             "code_iso3": "BOL",
             "num_iso": "068",
             "libelle": "BOLIVIE",
-            "num_insee": "99418"
+            "num_insee": 99418
         }
     },
     {
@@ -2046,7 +1736,7 @@
             "code_iso3": "COL",
             "num_iso": "170",
             "libelle": "COLOMBIE",
-            "num_insee": "99419"
+            "num_insee": 99419
         }
     },
     {
@@ -2056,7 +1746,7 @@
             "code_iso3": "ECU",
             "num_iso": "218",
             "libelle": "EQUATEUR",
-            "num_insee": "99420"
+            "num_insee": 99420
         }
     },
     {
@@ -2066,7 +1756,7 @@
             "code_iso3": "PRY",
             "num_iso": "600",
             "libelle": "PARAGUAY",
-            "num_insee": "99421"
+            "num_insee": 99421
         }
     },
     {
@@ -2076,7 +1766,7 @@
             "code_iso3": "PER",
             "num_iso": "604",
             "libelle": "PEROU",
-            "num_insee": "99422"
+            "num_insee": 99422
         }
     },
     {
@@ -2086,7 +1776,7 @@
             "code_iso3": "URY",
             "num_iso": "858",
             "libelle": "URUGUAY",
-            "num_insee": "99423"
+            "num_insee": 99423
         }
     },
     {
@@ -2096,7 +1786,7 @@
             "code_iso3": "VEN",
             "num_iso": "862",
             "libelle": "VENEZUELA",
-            "num_insee": "99424"
+            "num_insee": 99424
         }
     },
     {
@@ -2106,7 +1796,7 @@
             "code_iso3": "BMU",
             "num_iso": "060",
             "libelle": "BERMUDES",
-            "num_insee": "99425"
+            "num_insee": 99425
         }
     },
     {
@@ -2116,7 +1806,7 @@
             "code_iso3": "CYM",
             "num_iso": "136",
             "libelle": "CAIMANES (ILES)",
-            "num_insee": "99425"
+            "num_insee": 99425
         }
     },
     {
@@ -2126,17 +1816,7 @@
             "code_iso3": "MSR",
             "num_iso": "500",
             "libelle": "MONTSERRAT",
-            "num_insee": "99425"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TERRITOIRES DU ROYAUME-UNI AUX ANTILLES",
-            "num_insee": "99425"
+            "num_insee": 99425
         }
     },
     {
@@ -2146,7 +1826,7 @@
             "code_iso3": "TCA",
             "num_iso": "796",
             "libelle": "TURKS ET CAIQUES (ILES)",
-            "num_insee": "99425"
+            "num_insee": 99425
         }
     },
     {
@@ -2156,7 +1836,7 @@
             "code_iso3": "VGB",
             "num_iso": "092",
             "libelle": "VIERGES BRITANNIQUES (ILES)",
-            "num_insee": "99425"
+            "num_insee": 99425
         }
     },
     {
@@ -2166,7 +1846,7 @@
             "code_iso3": "AIA",
             "num_iso": "660",
             "libelle": "ANGUILLA",
-            "num_insee": "99425"
+            "num_insee": 99425
         }
     },
     {
@@ -2176,17 +1856,7 @@
             "code_iso3": "JAM",
             "num_iso": "388",
             "libelle": "JAMAIQUE",
-            "num_insee": "99426"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TERR. DU ROYAUME-UNI DANS L'ATLANTIQUE SUD",
-            "num_insee": "99427"
+            "num_insee": 99426
         }
     },
     {
@@ -2196,7 +1866,7 @@
             "code_iso3": "SGS",
             "num_iso": "239",
             "libelle": "GEORGIE DU SUD ET LES ILES SANDWICH DU SUD",
-            "num_insee": "99427"
+            "num_insee": 99427
         }
     },
     {
@@ -2206,7 +1876,7 @@
             "code_iso3": "FLK",
             "num_iso": "238",
             "libelle": "MALOUINES, OU FALKLAND (ILES)",
-            "num_insee": "99427"
+            "num_insee": 99427
         }
     },
     {
@@ -2216,7 +1886,7 @@
             "code_iso3": "GUY",
             "num_iso": "328",
             "libelle": "GUYANA",
-            "num_insee": "99428"
+            "num_insee": 99428
         }
     },
     {
@@ -2226,7 +1896,7 @@
             "code_iso3": "BLZ",
             "num_iso": "084",
             "libelle": "BELIZE",
-            "num_insee": "99429"
+            "num_insee": 99429
         }
     },
     {
@@ -2236,17 +1906,7 @@
             "code_iso3": "GRL",
             "num_iso": "304",
             "libelle": "GROENLAND",
-            "num_insee": "99430"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "AN",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "ANTILLES NEERLANDAISES",
-            "num_insee": "99431"
+            "num_insee": 99430
         }
     },
     {
@@ -2256,17 +1916,7 @@
             "code_iso3": "PRI",
             "num_iso": "630",
             "libelle": "PORTO RICO",
-            "num_insee": "99432"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TERR. DES ETATS-UNIS D'AMERIQUE EN AMERIQUE",
-            "num_insee": "99432"
+            "num_insee": 99432
         }
     },
     {
@@ -2276,7 +1926,7 @@
             "code_iso3": "VIR",
             "num_iso": "850",
             "libelle": "VIERGES DES ETATS-UNIS (ILES)",
-            "num_insee": "99432"
+            "num_insee": 99432
         }
     },
     {
@@ -2286,7 +1936,7 @@
             "code_iso3": "TTO",
             "num_iso": "780",
             "libelle": "TRINITE-ET-TOBAGO",
-            "num_insee": "99433"
+            "num_insee": 99433
         }
     },
     {
@@ -2296,7 +1946,7 @@
             "code_iso3": "BRB",
             "num_iso": "052",
             "libelle": "BARBADE",
-            "num_insee": "99434"
+            "num_insee": 99434
         }
     },
     {
@@ -2306,7 +1956,7 @@
             "code_iso3": "GRD",
             "num_iso": "308",
             "libelle": "GRENADE",
-            "num_insee": "99435"
+            "num_insee": 99435
         }
     },
     {
@@ -2316,7 +1966,7 @@
             "code_iso3": "BHS",
             "num_iso": "044",
             "libelle": "BAHAMAS",
-            "num_insee": "99436"
+            "num_insee": 99436
         }
     },
     {
@@ -2326,7 +1976,7 @@
             "code_iso3": "SUR",
             "num_iso": "740",
             "libelle": "SURINAME",
-            "num_insee": "99437"
+            "num_insee": 99437
         }
     },
     {
@@ -2336,7 +1986,7 @@
             "code_iso3": "DMA",
             "num_iso": "212",
             "libelle": "DOMINIQUE",
-            "num_insee": "99438"
+            "num_insee": 99438
         }
     },
     {
@@ -2346,7 +1996,7 @@
             "code_iso3": "LCA",
             "num_iso": "662",
             "libelle": "SAINTE-LUCIE",
-            "num_insee": "99439"
+            "num_insee": 99439
         }
     },
     {
@@ -2356,7 +2006,7 @@
             "code_iso3": "VCT",
             "num_iso": "670",
             "libelle": "SAINT-VINCENT-ET-LES GRENADINES",
-            "num_insee": "99440"
+            "num_insee": 99440
         }
     },
     {
@@ -2366,7 +2016,7 @@
             "code_iso3": "ATG",
             "num_iso": "028",
             "libelle": "ANTIGUA-ET-BARBUDA",
-            "num_insee": "99441"
+            "num_insee": 99441
         }
     },
     {
@@ -2376,7 +2026,7 @@
             "code_iso3": "KNA",
             "num_iso": "659",
             "libelle": "SAINT-CHRISTOPHE-ET-NIEVES",
-            "num_insee": "99442"
+            "num_insee": 99442
         }
     },
     {
@@ -2386,7 +2036,7 @@
             "code_iso3": "BES",
             "num_iso": "535",
             "libelle": "BONAIRE, SAINT EUSTACHE ET SABA",
-            "num_insee": "99443"
+            "num_insee": 99443
         }
     },
     {
@@ -2396,7 +2046,7 @@
             "code_iso3": "CUW",
             "num_iso": "531",
             "libelle": "CURA\u00c7AO",
-            "num_insee": "99444"
+            "num_insee": 99444
         }
     },
     {
@@ -2406,7 +2056,7 @@
             "code_iso3": "SXM",
             "num_iso": "534",
             "libelle": "SAINT-MARTIN (PARTIE NEERLANDAISE)",
-            "num_insee": "99445"
+            "num_insee": 99445
         }
     },
     {
@@ -2416,7 +2066,7 @@
             "code_iso3": "AUS",
             "num_iso": "036",
             "libelle": "AUSTRALIE",
-            "num_insee": "99501"
+            "num_insee": 99501
         }
     },
     {
@@ -2426,7 +2076,7 @@
             "code_iso3": "HMD",
             "num_iso": "334",
             "libelle": "HEARD ET MACDONALD (ILES)",
-            "num_insee": "99501"
+            "num_insee": 99501
         }
     },
     {
@@ -2436,7 +2086,7 @@
             "code_iso3": "CXR",
             "num_iso": "162",
             "libelle": "CHRISTMAS (ILE)",
-            "num_insee": "99501"
+            "num_insee": 99501
         }
     },
     {
@@ -2446,7 +2096,7 @@
             "code_iso3": "CCK",
             "num_iso": "166",
             "libelle": "COCOS ou KEELING (ILES)",
-            "num_insee": "99501"
+            "num_insee": 99501
         }
     },
     {
@@ -2456,7 +2106,7 @@
             "code_iso3": "NFK",
             "num_iso": "574",
             "libelle": "NORFOLK (ILE)",
-            "num_insee": "99501"
+            "num_insee": 99501
         }
     },
     {
@@ -2466,7 +2116,7 @@
             "code_iso3": "NZL",
             "num_iso": "554",
             "libelle": "NOUVELLE-ZELANDE",
-            "num_insee": "99502"
+            "num_insee": 99502
         }
     },
     {
@@ -2476,7 +2126,7 @@
             "code_iso3": "NIU",
             "num_iso": "570",
             "libelle": "NIUE",
-            "num_insee": "99502"
+            "num_insee": 99502
         }
     },
     {
@@ -2486,7 +2136,7 @@
             "code_iso3": "TKL",
             "num_iso": "772",
             "libelle": "TOKELAU",
-            "num_insee": "99502"
+            "num_insee": 99502
         }
     },
     {
@@ -2496,7 +2146,7 @@
             "code_iso3": "COK",
             "num_iso": "184",
             "libelle": "COOK (ILES)",
-            "num_insee": "99502"
+            "num_insee": 99502
         }
     },
     {
@@ -2506,27 +2156,7 @@
             "code_iso3": "PCN",
             "num_iso": "612",
             "libelle": "PITCAIRN (ILE)",
-            "num_insee": "99503"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "HAWAII (ILES)",
-            "num_insee": "99504"
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "TERR. DES ETATS-UNIS D'AMERIQUE EN OCEANIE",
-            "num_insee": "99505"
+            "num_insee": 99503
         }
     },
     {
@@ -2536,7 +2166,7 @@
             "code_iso3": "MNP",
             "num_iso": "580",
             "libelle": "MARIANNES DU NORD (ILES)",
-            "num_insee": "99505"
+            "num_insee": 99505
         }
     },
     {
@@ -2546,7 +2176,7 @@
             "code_iso3": "ASM",
             "num_iso": "016",
             "libelle": "SAMOA AMERICAINES",
-            "num_insee": "99505"
+            "num_insee": 99505
         }
     },
     {
@@ -2556,7 +2186,7 @@
             "code_iso3": "GUM",
             "num_iso": "316",
             "libelle": "GUAM",
-            "num_insee": "99505"
+            "num_insee": 99505
         }
     },
     {
@@ -2566,7 +2196,7 @@
             "code_iso3": "WSM",
             "num_iso": "882",
             "libelle": "SAMOA OCCIDENTALES",
-            "num_insee": "99506"
+            "num_insee": 99506
         }
     },
     {
@@ -2576,7 +2206,7 @@
             "code_iso3": "NRU",
             "num_iso": "520",
             "libelle": "NAURU",
-            "num_insee": "99507"
+            "num_insee": 99507
         }
     },
     {
@@ -2586,7 +2216,7 @@
             "code_iso3": "FJI",
             "num_iso": "242",
             "libelle": "FIDJI",
-            "num_insee": "99508"
+            "num_insee": 99508
         }
     },
     {
@@ -2596,7 +2226,7 @@
             "code_iso3": "TON",
             "num_iso": "776",
             "libelle": "TONGA",
-            "num_insee": "99509"
+            "num_insee": 99509
         }
     },
     {
@@ -2606,7 +2236,7 @@
             "code_iso3": "PNG",
             "num_iso": "598",
             "libelle": "PAPOUASIE-NOUVELLE-GUINEE",
-            "num_insee": "99510"
+            "num_insee": 99510
         }
     },
     {
@@ -2616,7 +2246,7 @@
             "code_iso3": "TUV",
             "num_iso": "798",
             "libelle": "TUVALU",
-            "num_insee": "99511"
+            "num_insee": 99511
         }
     },
     {
@@ -2626,7 +2256,7 @@
             "code_iso3": "SLB",
             "num_iso": "090",
             "libelle": "SALOMON (ILES)",
-            "num_insee": "99512"
+            "num_insee": 99512
         }
     },
     {
@@ -2636,7 +2266,7 @@
             "code_iso3": "KIR",
             "num_iso": "296",
             "libelle": "KIRIBATI",
-            "num_insee": "99513"
+            "num_insee": 99513
         }
     },
     {
@@ -2646,7 +2276,7 @@
             "code_iso3": "VUT",
             "num_iso": "548",
             "libelle": "VANUATU",
-            "num_insee": "99514"
+            "num_insee": 99514
         }
     },
     {
@@ -2656,7 +2286,7 @@
             "code_iso3": "MHL",
             "num_iso": "584",
             "libelle": "MARSHALL (ILES)",
-            "num_insee": "99515"
+            "num_insee": 99515
         }
     },
     {
@@ -2666,7 +2296,7 @@
             "code_iso3": "FSM",
             "num_iso": "583",
             "libelle": "MICRONESIE (ETATS FEDERES DE)",
-            "num_insee": "99516"
+            "num_insee": 99516
         }
     },
     {
@@ -2676,7 +2306,7 @@
             "code_iso3": "PLW",
             "num_iso": "585",
             "libelle": "PALAOS (ILES)",
-            "num_insee": "99517"
+            "num_insee": 99517
         }
     },
     {
@@ -2756,16 +2386,6 @@
             "code_iso3": "MYT",
             "num_iso": "175",
             "libelle": "MAYOTTE",
-            "num_insee": null
-        }
-    },
-    {
-        "model": "inscrire.Pays",
-        "pk": "",
-        "fields": {
-            "code_iso3": "",
-            "num_iso": "",
-            "libelle": "CLIPPERTON (ILE)",
             "num_insee": null
         }
     },
