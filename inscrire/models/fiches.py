@@ -287,6 +287,9 @@ class FicheIdentite(Fiche):
 		except:
 			pass
 
+		if not self.responsables.all():
+			self.responsables.set(self.candidat.responsables.all())
+
 		self.save()
 
 class FicheScolariteAnterieure(Fiche):
