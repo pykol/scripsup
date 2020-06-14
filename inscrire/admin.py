@@ -87,7 +87,7 @@ class EtablissementAdmin(admin.ModelAdmin):
 
 @admin.register(Formation)
 class FormationAdmin(admin.ModelAdmin):
-	list_display = ('nom', 'etablissement', 'code_parcoursup')
+	list_display = ('nom', 'etablissement', 'email', 'code_parcoursup')
 	list_filter = (('etablissement', admin.RelatedOnlyFieldListFilter),)
 	autocomplete_fields = ('etablissement',)
 
@@ -113,3 +113,4 @@ admin.site.register(FicheBourse)
 admin.site.register(FicheReglement)
 admin.site.register(FicheInternat)
 admin.site.register(FicheCesure)
+admin.site.register(SelectFiches)

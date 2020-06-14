@@ -209,7 +209,8 @@ class Candidat(Personne):
 					context=render_context).strip(),
 				"{email}".format(
 					etablissement=voeu_actuel.formation.etablissement,
-					email=voeu_actuel.formation.etablissement.email),
+					email=voeu_actuel.formation.email if
+						voeu_actuel.formation.email else voeu_actuel.formation.etablissement.email),
 				("{candidat_prenom} {candidat_nom} <{email}>".format(
 					candidat_prenom=str(self.user.first_name),
 					candidat_nom=str(self.user.last_name),

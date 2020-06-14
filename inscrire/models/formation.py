@@ -28,8 +28,8 @@ class Etablissement(models.Model):
 	numero_uai = Lettre23Field(length=8, unique=True,
 			verbose_name="UAI", primary_key=True)
 	nom = models.CharField(max_length=200)
-	email = models.EmailField(verbose_name="adresse e-mail",
-			help_text="Adresse de contact proposée aux candidats",
+	email = models.EmailField(verbose_name="adresse e-mail par défaut",
+			help_text="Adresse de contact proposée aux candidats si aucune adresse n'est renseignée pour une formation",
 			blank=True, null=False, default="")
 	inscriptions = models.BooleanField(default=False,
 			help_text="Indique s'il s'agit d'un établissement dont le "
@@ -55,6 +55,9 @@ class Formation(models.Model):
 	# groupe_parcoursup = models.SmallIntegerField()
 	etablissement = models.ForeignKey(Etablissement,
 			on_delete=models.CASCADE)
+	email = models.EmailField(verbose_name="adresse e-mail",
+			help_text="Adresse de contact proposée aux candidats pour cette formation",
+			blank=True, null=False, default="")
 	slug = models.SlugField(unique=True)
 
 	# Code du module élémentaire de formation correspondant dans la
