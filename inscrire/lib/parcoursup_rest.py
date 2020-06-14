@@ -92,7 +92,17 @@ class ParcoursupRequest:
 			raise ValueError("Cette API ne gère pas d'autres méthodes "
 					"HTTP que POST")
 
-		self.request = requests.post(self.get_url(), json=self.data)
+		self.response = requests.post(self.get_url(), json=self.data)
+
+		if self.response.error:
+			raise ParcoursupError(self.response.error)
+
+		resp_json = self.response.json()
+		if resp_json.get('retour', 'OK') == 'NOK':
+			raise ParcoursupError(resp_json.get('message',
+				'Erreur Parcoursup inconnue'))
+
+		return self.response
 
 class ParcoursupPersonne:
 	GENRE_HOMME = 1
@@ -267,14 +277,14 @@ class ParcoursupRest:
 		request = ParcoursupRequest(self.login, self.password,
 				method_name='getCandidatsAdmis',
 				data=request_data)
-		request.send()
+		response = request.send()
 
 		# Mise en forme de la réponse
 		candidats = []
-		if request.request.status_code != 200:
+		if response.status_code != 200:
 			raise ParcoursupError
 
-		for psup_json in request.request.json():
+		for psup_json in response.json():
 			candidats.append(self.parse_parcoursup_admission(psup_json))
 		return candidats
 
@@ -333,8 +343,7 @@ class ParcoursupRest:
 		request = ParcoursupRequest(self.login, self.password,
 				method_name='majInscriptionAdministrative',
 				data=request_data)
-		request.send()
-		return request
+		return request.send()
 
 	def requete_test(self):
 		"""
