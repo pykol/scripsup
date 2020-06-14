@@ -28,7 +28,7 @@ from django.template.loader import select_template
 from django.contrib.contenttypes.models import ContentType
 
 from inscrire.models import ResponsableLegal, Candidat, ParcoursupUser
-from inscrire.models.fiches import Fiche, SelectFiches
+from inscrire.models.fiches import Fiche, SelectFiches, all_fiche
 from inscrire.forms.fiches import candidat_form
 from .permissions import AccessPersonnelMixin, AccessGestionnaireMixin
 
@@ -138,9 +138,9 @@ class CandidatDossier(AccessPersonnelMixin, DetailView):
 
 		# Fiches d'inscription
 		fiches = self.object.fiche_set.filter(
-				etat__in=(Fiche.ETAT_CONFIRMEE, Fiche.ETAT_TERMINEE))
+				etat__in=(Fiche.ETAT_EDITION, Fiche.ETAT_CONFIRMEE, Fiche.ETAT_TERMINEE))
 		context['fiche_list'] = sorted(fiches,
-				key=lambda fiche: all_fiche.index(type(fiche.fiche)))
+				key=lambda fiche: all_fiche.index(type(fiche)))
 		for fiche in fiches:
 			context[fiche._meta.model_name] = fiche
 		return context
