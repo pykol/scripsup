@@ -91,7 +91,8 @@ class Personne(models.Model):
 			(GENRE_HOMME, "homme"),
 			(GENRE_FEMME, "femme"),
 		)
-	genre = models.PositiveSmallIntegerField(choices=GENRE_CHOICES)
+	genre = models.PositiveSmallIntegerField(choices=GENRE_CHOICES,
+			blank=True, null=True)
 	last_name = models.CharField(verbose_name="nom", max_length=100)
 	first_name = models.CharField(verbose_name="prénom", max_length=100)
 	telephone = models.CharField(verbose_name="téléphone",

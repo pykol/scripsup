@@ -207,14 +207,29 @@ class ParcoursupResponsableLegal(ParcoursupPersonne):
 		méthode renvoie None.
 		"""
 		try:
+			code_postal = donnees.get('codePostalRL{}'.format(rang),
+					donnees.get('codePostaleRL{}'.format(rang)))
+			code_pays = donnees['codePaysAdresseRL{}'.format(rang)]
 			return kls(
 				nom=donnees['nomRL{}'.format(rang)],
 				prenom=donnees['prenomRL{}'.format(rang)],
 				email=donnees['mailRL{}'.format(rang)],
 				telephone_fixe=donnees['telRL{}'.format(rang)],
 				telephone_mobile='',
-				adresse='',
-				#TODO adresse
+				sexe=None,
+				code_postal=code_postal,
+				code_commune=donnees['codeCommuneRL{}'.format(rang)],
+				code_pays=code_pays,
+				adresse=kls.formate_adresse(
+					{
+						'codepaysadresse': code_pays,
+						'libellecommune': donnees['libelleCommuneRL{}'.format(rang)],
+						'libellePaysadresse': donnees['libellePaysAdresseRL{}'.format(rang)],
+						'adresse1': donnees['adresse1RL{}'.format(rang)],
+						'adresse2': donnees['adresse2RL{}'.format(rang)],
+						'adresse3': donnees['adresse3RL{}'.format(rang)],
+						'codepostal': code_postal,
+					}),
 			)
 		except Exception as e:
 			return None
