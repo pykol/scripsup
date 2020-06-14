@@ -241,6 +241,24 @@ class ResponsableLegal(Personne):
 			on_delete=models.SET_DEFAULT,
 			default=99)
 
+	LIEN_PERE = 0
+	LIEN_MERE = 1
+	LIEN_TUTEUR = 2
+	LIEN_AUTRE = 3
+	LIEN_CHOICES = (
+		(LIEN_PERE, "père"),
+		(LIEN_MERE, "mère"),
+		(LIEN_TUTEUR, "tuteur"),
+		(LIEN_AUTRE, "autre"),
+	)
+	lien = models.PositiveSmallIntegerField(choices=LIEN_CHOICES,
+			blank=True, null=True)
+	lien_precision = models.CharField(max_length=50,
+			verbose_name="précision autre lien",
+			blank=True, null=False, default="",
+			help_text="Lorsque vous choisissez le cas « autre » en "
+			"lien de parenté, merci de préciser ici la nature de lien.")
+
 	class Meta:
 		verbose_name = "responsable légal"
 		verbose_name_plural = "responsables légaux"
