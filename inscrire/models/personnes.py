@@ -241,6 +241,7 @@ class ResponsableLegal(Personne):
 	profession = models.ForeignKey(Profession,
 			on_delete=models.SET_DEFAULT,
 			default=99)
+	email = models.EmailField(blank=True, null=True)
 
 	LIEN_PERE = 0
 	LIEN_MERE = 1
