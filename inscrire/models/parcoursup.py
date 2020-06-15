@@ -163,7 +163,9 @@ class ParcoursupUser(models.Model):
 						first_name=psup_resp.prenom,
 						telephone=psup_resp.telephone_fixe or '',
 						telephone_mobile=psup_resp.telephone_mobile or '',
-						adresse=psup_resp.adresse).save()
+						adresse=psup_resp.adresse,
+						email=psup_resp.email
+					).save()
 
 		# Mise à jour des fiches d'inscription
 		Fiche.objects.create_or_update_applicable(voeu,
