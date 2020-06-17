@@ -203,25 +203,25 @@ class Candidat(Personne):
 						default_token_generator.make_token(self.user)
 					)))
 				}
+		if settings.MODE == settings.MODE_FONCTION:
+			send_mail(
+					render_to_string('inscrire/email_bienvenue_candidat_subject.txt',
+						context=render_context).strip(),
+					render_to_string('inscrire/email_bienvenue_candidat_message.txt',
+						context=render_context).strip(),
+					"{email}".format(
+						etablissement=voeu_actuel.formation.etablissement,
+						email=voeu_actuel.formation.email if
+							voeu_actuel.formation.email else voeu_actuel.formation.etablissement.email),
+					("{candidat_prenom} {candidat_nom} <{email}>".format(
+						candidat_prenom=str(self.user.first_name),
+						candidat_nom=str(self.user.last_name),
+						email=str(self.user.email)),),
+					html_message=render_to_string('inscrire/email_bienvenue_candidat_message.html',
+						context=render_context).strip()
+				)
 
-		send_mail(
-				render_to_string('inscrire/email_bienvenue_candidat_subject.txt',
-					context=render_context).strip(),
-				render_to_string('inscrire/email_bienvenue_candidat_message.txt',
-					context=render_context).strip(),
-				"{email}".format(
-					etablissement=voeu_actuel.formation.etablissement,
-					email=voeu_actuel.formation.email if
-						voeu_actuel.formation.email else voeu_actuel.formation.etablissement.email),
-				("{candidat_prenom} {candidat_nom} <{email}>".format(
-					candidat_prenom=str(self.user.first_name),
-					candidat_nom=str(self.user.last_name),
-					email=str(self.user.email)),),
-				html_message=render_to_string('inscrire/email_bienvenue_candidat_message.html',
-					context=render_context).strip()
-			)
-
-		self.email_bienvenue_envoye = True
+			self.email_bienvenue_envoye = True
 		self.save()
 
 		self.log("E-mail d'activation du compte envoyé au candidat")
