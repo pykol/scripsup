@@ -20,6 +20,13 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 
 from inscrire.models import InscrireUser
 
+class AccessTechniqueMixin(UserPassesTestMixin):
+	"""
+	Mixin qui donne accès à des bouts techniques de l'interface
+	"""
+	def test_func(self):
+		return self.is_staff or self.is_superuser
+
 class AccessDirectionMixin(UserPassesTestMixin):
 	"""
 	Mixin qui filtre l'accès à une vue en le réservant à la direction.

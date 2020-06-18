@@ -25,8 +25,10 @@ SECRET_KEY = '{{ secret_key }}'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+MODE_TEST, MODE_FONCTION = 0, 1
+MODE = MODE_TEST
 
+ALLOWED_HOSTS = []
 
 # Application definition
 

@@ -32,5 +32,18 @@ l'interface synchrone de Parcoursup.</p>
     <li><a href="{% url 'parametrage_import_structures' %}">Import des
         formations depuis SIECLE</a></li>
   </ul>
+
+  {% if candidattest_users %}
+  <h3>Activation de l'interface synchrone Parcoursup</h3>
+  <p>Parcoursup peut envoyer les candidats en temps réel lorsqu'ils
+  acceptent définitivement la proposition d'admission dans
+  l'établissement. Pour activer cette fonction, il faut envoyer à
+  Parcoursup un candidat test.</p>
+  {% for psup_user in candidattest_users %}
+  <form action="{% url 'parametrage_parcoursup_candidattest' psup_user.pk %}" method="post">
+    <p>{% csrf_token %}<input type="submit" value="Envoi pour {{ psup_user.etablissement }}"></p>
+  </form>
+  {% endfor %}
+  {% endif %}
 </section>
 {% endblock %}
