@@ -28,7 +28,7 @@ from django.template.loader import select_template
 from django.contrib.contenttypes.models import ContentType
 
 from inscrire.models import ResponsableLegal, Candidat, ParcoursupUser
-from inscrire.models.fiches import Fiche, SelectFiches, all_fiche
+from inscrire.models.fiches import Fiche, all_fiche
 from inscrire.forms.fiches import candidat_form
 from .permissions import AccessPersonnelMixin, AccessGestionnaireMixin
 
@@ -71,9 +71,7 @@ class CandidatFicheMixin:
 		fiches = []
 		candidat = self.object
 		etablissement = candidat.voeu_actuel.formation.etablissement
-		all_fiche = SelectFiches.get(etablissement).all_fiche()
-		content_type_all_fiche = [ContentType.objects.get_for_model(fiche) for fiche in all_fiche]
-		for fiche in candidat.fiche_set.filter(polymorphic_ctype__in = content_type_all_fiche).exclude(etat=Fiche.ETAT_ANNULEE):
+		for fiche in candidat.fiche_set.filter(polymorphic_ctype__in = etablissement.fiches.all()).exclude(etat=Fiche.ETAT_ANNULEE):
 			try:
 				if self.request.method in ('POST', 'PUT'):
 					form = candidat_form[type(fiche)](instance=fiche,
