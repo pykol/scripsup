@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block contenu %}
+<h2>Candidat test Parcoursup</h2>
+{% if parcoursup_success %}
+<p>L'envoi du candidat de test à Parcoursup a réussi</p>
+{% else %}
+<p>L'envoi du candidat de test à Parcoursup a échoué pour la raison
+suivante : {{ parcoursup_error }}.</p>
+{% endif %}
+{% endblock %}
