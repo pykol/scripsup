@@ -379,5 +379,5 @@ class ParcoursupRest:
 			ine="0123456789AB")
 
 		return self.maj_inscription(candidat=candidat,
-			formation=42, code_sise=1,
-			statut_inscription=INSCRIPTION_PRINCIPALE)
+			formation=42,
+			etat_inscription=self.INSCRIPTION_PRINCIPALE)

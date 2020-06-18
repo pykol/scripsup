@@ -25,7 +25,7 @@ class AccessTechniqueMixin(UserPassesTestMixin):
 	Mixin qui donne accès à des bouts techniques de l'interface
 	"""
 	def test_func(self):
-		return self.is_staff or self.is_superuser
+		return self.request.user.is_staff or self.request.user.is_superuser
 
 class AccessDirectionMixin(UserPassesTestMixin):
 	"""

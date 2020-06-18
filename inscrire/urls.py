@@ -16,18 +16,26 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from django.urls import path, include
+from django.urls import path, include, register_converter
 
 from inscrire import views
+
+class UAIConverter:
+	regex = '[0-9]{7}[A-Z]'
+	def to_python(self, value):
+		return value
+	def to_url(self, value):
+		return value
+register_converter(UAIConverter, 'uai')
 
 parametrage_urlpatterns = [
 	path('import_structures',
 		views.parametrage.ImportStructuresView.as_view(),
 		name='parametrage_import_structures'),
-	path('parcoursup/<int:pk>',
+	path('parcoursup/<uai:pk>',
 		views.parametrage.AccesParcoursupView.as_view(),
 		name='parametrage_parcoursup_update'),
-	path('parcoursup/<int:pk>/candidat_test',
+	path('parcoursup/<uai:pk>/candidat_test',
 		views.parametrage.ParcoursupCandidatTestView.as_view(),
 		name='parametrage_parcoursup_candidattest'),
 	path('parcoursup/synchronisation',

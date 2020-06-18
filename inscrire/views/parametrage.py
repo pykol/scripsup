@@ -26,6 +26,9 @@ from django.urls import reverse_lazy
 from django.utils.text import slugify
 from django.db import IntegrityError
 
+from requests.exceptions import HTTPError
+from inscrire.lib.parcoursup_rest import ParcoursupError
+
 import inscrire.forms.parametrage as param_forms
 from inscrire.models import Etablissement, Formation, MefMatiere, \
 		MefOption, ParcoursupUser
@@ -138,7 +141,7 @@ class ParcoursupCandidatTestView(AccessTechniqueMixin,
 		try:
 			self.object.envoi_candidat_test()
 			self.parcoursup_success = True
-		except HttpError:
+		except HTTPError:
 			self.parcoursup_success = False
 			self.parcoursup_error = "Erreur HTTP"
 		except ParcoursupError as e:

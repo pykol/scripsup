@@ -52,9 +52,9 @@ class DirectionHomeView(TemplateView):
 		context['formation_list'] = Formation.objects.all().order_by('etablissement', 'nom')
 		context['import_manuel_form'] = ImportParcoursupForm()
 
-		if self.request.user.is_superuser of self.request.user.is_staff:
+		if self.request.user.is_superuser or self.request.user.is_staff:
 			context['candidattest_users'] = ParcoursupUser.objects.filter(
-				etablissement__inscriptions=True).order_by(etablissement__numero_uai)
+				etablissement__inscriptions=True).order_by('etablissement__numero_uai')
 		return context
 
 class SecretariatHomeView(TemplateView):
