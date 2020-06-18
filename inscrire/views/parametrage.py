@@ -20,14 +20,20 @@
 Vues permettant le paramétrage des formations gérées
 """
 from django.views.generic import FormView, UpdateView, View
+from django.views.generic.detail import SingleObjectTemplateResponseMixin, \
+		SingleObjectMixin
 from django.urls import reverse_lazy
 from django.utils.text import slugify
 from django.db import IntegrityError
 
+from requests.exceptions import HTTPError
+from inscrire.lib.parcoursup_rest import ParcoursupError
+
 import inscrire.forms.parametrage as param_forms
 from inscrire.models import Etablissement, Formation, MefMatiere, \
-		MefOption
-from .permissions import AccessGestionnaireMixin, AccessDirectionMixin
+		MefOption, ParcoursupUser
+from .permissions import AccessGestionnaireMixin, AccessDirectionMixin, \
+		AccessTechniqueMixin
 
 class ImportStructuresView(AccessDirectionMixin, FormView):
 	"""
@@ -38,7 +44,7 @@ class ImportStructuresView(AccessDirectionMixin, FormView):
 	fichier Nomenclatures permet de créer les listes d'options
 	disponibles pour chaque formation.
 	"""
-	template_name = 'parametrage/import_structures.html'
+	template_name = 'inscrire/parametrage/import_structures.html'
 	form_class = param_forms.ImportStructuresForm
 	success_url = reverse_lazy('formation_list')
 
@@ -124,3 +130,34 @@ class SynchroParcoursupView(AccessGestionnaireMixin, View):
 	"""
 	def post(self):
 		pass
+
+class ParcoursupCandidatTestView(AccessTechniqueMixin,
+		SingleObjectTemplateResponseMixin, SingleObjectMixin, View):
+	model = ParcoursupUser
+	template_name = 'inscrire/parametrage/parcoursup_test.html'
+
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object()
+		try:
+			self.object.envoi_candidat_test()
+			self.parcoursup_success = True
+		except HTTPError:
+			self.parcoursup_success = False
+			self.parcoursup_error = "Erreur HTTP"
+		except ParcoursupError as e:
+			self.parcoursup_success = False
+			self.parcoursup_error = "Erreur Parcoursup"
+		except:
+			self.parcoursup_success = False
+			self.parcoursup_error = "Erreur inconnue"
+
+		context = self.get_context_data(object=self.object)
+		return self.render_to_response(context)
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['parcoursup_success'] = self.parcoursup_success
+		if not self.parcoursup_success:
+			context['parcoursup_error'] = self.parcoursup_error
+
+		return context

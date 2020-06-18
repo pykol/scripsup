@@ -22,7 +22,8 @@ from django.shortcuts import redirect, render
 from django.views.generic import View, TemplateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
 
-from inscrire.models import InscrireUser, Candidat, Formation
+from inscrire.models import InscrireUser, Candidat, Formation, \
+		ParcoursupUser
 from inscrire.forms.formation import ImportParcoursupForm
 from .candidats import CandidatFicheMixin
 
@@ -50,6 +51,10 @@ class DirectionHomeView(TemplateView):
 		context = super().get_context_data(**kwargs)
 		context['formation_list'] = Formation.objects.all().order_by('etablissement', 'nom')
 		context['import_manuel_form'] = ImportParcoursupForm()
+
+		if self.request.user.is_superuser or self.request.user.is_staff:
+			context['candidattest_users'] = ParcoursupUser.objects.filter(
+				etablissement__inscriptions=True).order_by('etablissement__numero_uai')
 		return context
 
 class SecretariatHomeView(TemplateView):
