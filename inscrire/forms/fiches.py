@@ -175,7 +175,7 @@ class IdentiteForm(FicheValiderMixin):
 		return [form.cleaned_data for form in self.forms]
 
 	def get_default_prefix(cls):
-		return 'fiche-scolarite'
+		return 'fiche-identite'
 
 	def non_form_errors(self):
 		"""
