@@ -16,7 +16,11 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from operator import or_
+from functools import reduce
+
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
 
 from .fields import Lettre23Field
 from .personnes import Candidat
@@ -36,6 +40,14 @@ class Etablissement(models.Model):
 			"site actuel gère les inscriptions")
 	commune = models.ForeignKey('Commune', on_delete=models.SET_NULL,
 			blank=True, null=True)
+
+	def fiches_limit():
+		from .fiches import all_fiche
+		return reduce(or_,
+			[models.Q(app_label=fiche._meta.app_label, model=fiche._meta.model_name)
+				for fiche in all_fiche])
+
+	fiches = models.ManyToManyField(ContentType, limit_choices_to = fiches_limit)
 
 	class Meta:
 		verbose_name = "établissement"
@@ -92,7 +104,7 @@ class Formation(models.Model):
 		"""
 		from .fiches import Fiche
 		return self.candidats().filter(fiche__etat=Fiche.ETAT_EDITION).distinct()
-	
+
 	def candidats_complets(self):
 		"""
 		Liste des candidats dont le dossier est complet
