@@ -26,6 +26,7 @@ de fiche associent la classe de formulaire à utiliser.
 
 from django import forms
 from django.forms.utils import ErrorList
+from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.utils.functional import cached_property
@@ -33,7 +34,7 @@ from django.utils.safestring import mark_safe
 from dal import autocomplete
 
 from inscrire.models import fiches, ResponsableLegal, Candidat
-from inscrire.models import MefOption
+from inscrire.models import MefOption, PieceJustificative
 
 class FicheValiderMixin:
 	def __init__(self, *args, **kwargs):
@@ -595,6 +596,30 @@ class ScolariteAnterieureForm:
 		for form in self:
 			form.save(commit)
 
+class PieceJustificativeForm(FicheValiderMixin, forms.ModelForm):
+	prefix="fiche-piecejustificative"
+
+	class Meta:
+		model = fiches.FichePieceJustificative
+		fields = ['pieces_recues',]
+		widgets = {
+			'pieces_recues': forms.CheckboxSelectMultiple,
+		}
+		labels = {
+			'pieces_recues': "Pièces reçues",
+		}
+
+	def pieces_qs(self):
+		"""Pieces à envoyer"""
+		return PieceJustificative.objects.filter(
+			models.Q(formation=self.instance.candidat.voeu_actuel.formation)|
+			models.Q(etablissement=self.instance.candidat.voeu_actuel.formation.etablissement))
+
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['pieces_recues'].queryset = self.pieces_qs()
+
+
 # Dictionnaire qui à chaque modèle de fiche associe le formulaire
 # d'édition qui doit être présenté aux candidats.
 candidat_form = {
@@ -604,6 +629,7 @@ candidat_form = {
 		fiches.FicheReglement: ReglementForm,
 		fiches.FicheHebergement: HebergementForm,
 		fiches.FicheScolarite: ScolariteForm,
+		fiches.FichePieceJustificative: PieceJustificativeForm
 	}
 
 # Dictionnaire qui à chaque modèle de fiche associe le formulaire

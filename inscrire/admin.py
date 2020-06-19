@@ -115,6 +115,10 @@ class FicheIdentiteAdmin(admin.ModelAdmin):
 	autocomplete_fields = ('commune_naissance', 'pays_naissance',
 		'ville', 'pays', 'responsables',)
 
+@admin.register(PieceJustificative)
+class PieceJustificativeAdmin(admin.ModelAdmin):
+	list_display = ('nom', 'etablissement', 'formation', 'modalite')
+
 admin.site.register(FicheScolarite)
 admin.site.register(FicheHebergement)
 admin.site.register(FicheScolariteAnterieure)
@@ -123,3 +127,4 @@ admin.site.register(FicheBourse)
 admin.site.register(FicheReglement)
 admin.site.register(FicheInternat)
 admin.site.register(FicheCesure)
+admin.site.register(FichePieceJustificative)
