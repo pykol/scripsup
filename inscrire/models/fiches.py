@@ -25,6 +25,7 @@ informations spécifiques à un service donné.
 
 from django.db import models
 from django.db.models import Q
+from django.conf import settings
 from polymorphic.models import PolymorphicModel, PolymorphicManager
 import localflavor.generic.models as lfmodels
 
@@ -205,14 +206,16 @@ class FicheIdentite(Fiche):
 	FICHE_LABEL = "Identité"
 
 	def _photo_upload_to(instance, filename):
-		return "photo/{psup}/{filename}".format(
+		return "{media}photo/{psup}/{filename}".format(
+				media=settings.MEDIA_ROOT,
 				psup=instance.candidat.dossier_parcoursup,
 				filename=filename)
 	photo = models.ImageField(upload_to=_photo_upload_to,
 			blank=True, null=True)
 
 	def _piece_identite_upload_to(instance, filename):
-		return "piece_identite/{psup}/{filename}".format(
+		return "{media}piece_identite/{psup}/{filename}".format(
+				media=settings.MEDIA_ROOT,
 				psup=instance.candidat.dossier_parcoursup,
 				filename=filename)
 	piece_identite = models.FileField(upload_to=_piece_identite_upload_to,
@@ -368,7 +371,8 @@ class BulletinScolaire(models.Model):
 	classe = models.PositiveSmallIntegerField(choices=CLASSE_CHOICES)
 
 	def _bulletin_upload_to(instance, filename):
-		return "bulletin/{psup}/{filename}".format(
+		return "{media}/bulletin/{psup}/{filename}".format(
+				media=settings.MEDIA_ROOT,
 				psup=instance.fiche_scolarite.candidat.dossier_parcoursup,
 				filename=filename)
 	bulletin = models.FileField(upload_to=_bulletin_upload_to)
@@ -396,7 +400,8 @@ class FicheBourse(Fiche):
 			default=1)
 
 	def _attribution_bourse_upload_to(instance, filename):
-		return "bourse_acb/{psup}/{filename}".format(
+		return "{media}bourse_acb/{psup}/{filename}".format(
+				media=settings.MEDIA_ROOT,
 				psup=instance.candidat.dossier_parcoursup,
 				filename=filename)
 	attribution_bourse = models.FileField(
