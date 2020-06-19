@@ -22,6 +22,8 @@ Informations d'inscription des candidats dans une formation.
 Les informations sont regroupées par fiches. Chaque fiche regroupe les
 informations spécifiques à un service donné.
 """
+from operator import and_
+from functools import reduce
 
 from django.db import models
 from django.db.models import Q
@@ -30,7 +32,7 @@ from polymorphic.models import PolymorphicModel, PolymorphicManager
 import localflavor.generic.models as lfmodels
 
 from .personnes import Candidat, Commune, Pays, ResponsableLegal
-from .formation import MefOption, Formation, Etablissement
+from .formation import MefOption, Formation, Etablissement, PieceJustificative
 
 class FicheManager(PolymorphicManager):
 	"""
@@ -473,6 +475,34 @@ class FicheScolarite(Fiche):
 		verbose_name = "fiche scolarité"
 		verbose_name_plural = "fiches scolarité"
 
+
+class FichePieceJustificative(Fiche):
+	"""
+	Choix des pièces justificatives dans la formation
+	"""
+	FICHE_LABEL = "Pièces justificatives"
+	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
+	pieces_recues = models.ManyToManyField(PieceJustificative, blank = True)
+
+	def recyclable(self, voeu):
+		return voeu.formation == self.formation
+
+	def save(self, *args, **kwargs):
+		self.formation = self.candidat.voeu_actuel.formation
+		super().save(*args, **kwargs)
+
+	class Meta:
+		verbose_name = "fiche pièces justificatives"
+		verbose_name_plural = "fiches pièces justificatives"
+
+	def valider(self):
+		recues = self.pieces_recues.all()
+		OK = True
+		for piece in PieceJustificative.obligatoire(self.formation):
+			OK = OK and piece in recues
+		self.valide = OK
+
+
 class FicheHebergement(Fiche):
 	"""
 	Choix du mode d'hébergement
@@ -553,4 +583,5 @@ all_fiche = [
 		FicheCesure,
 		FicheBourse,
 		FicheReglement,
+		FichePieceJustificative,
 	]

@@ -158,3 +158,36 @@ class MefOption(models.Model):
 		else:
 			return "{} ({})".format(self.matiere,
 					self.get_modalite_display())
+
+
+class PieceJustificative(models.Model):
+	"""Pièce que le candidat peut ou doit envoyer"""
+	MODALITE_OBLIGATOIRE = 1
+	MODALITE_FACULTATIVE = 2
+	MODALITE_CHOICES = (
+			(MODALITE_OBLIGATOIRE, "obligatoire"),
+			(MODALITE_FACULTATIVE, "facultative"),
+		)
+	modalite = models.PositiveSmallIntegerField(verbose_name="modalité",
+			choices=MODALITE_CHOICES)
+	etablissement = models.ForeignKey(Etablissement, null = True, blank = True,
+			default = None,	on_delete=models.CASCADE)
+	formation = models.ForeignKey(Formation, null = True, blank = True,
+			default = None, on_delete=models.CASCADE)
+	nom = models.CharField(max_length = 100)
+
+	class Meta:
+		constraints = [
+			models.CheckConstraint(check = ~models.Q(etablissement__isnull = True, formation__isnull = True),
+			name='formation_ou_etablissement_obligatoire'),
+			models.CheckConstraint(check = models.Q(etablissement__isnull = True)|models.Q(formation__isnull = True),
+			name='formation_ou_etablissement_exclusifs'),
+		]
+
+	def __str__(self):
+		return self.nom
+
+	@classmethod
+	def obligatoire(cls, formation):
+		return cls.objects.filter(modalite = cls.MODALITE_OBLIGATOIRE).filter(
+			models.Q(etablissement = formation.etablissement)|models.Q(formation = formation))
