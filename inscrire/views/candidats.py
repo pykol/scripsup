@@ -116,9 +116,6 @@ class CandidatUpdate(AccessGestionnaireMixin, CandidatFicheMixin, UpdateView):
 	template_name = "candidat_update.html"
 	success_url = "/candidat"
 
-	def get(self, request, *args, **kwargs):
-		return self.render_to_response(self.get_context_data())
-
 	def post(self, request, *args, **kwargs):
 		pass
 
