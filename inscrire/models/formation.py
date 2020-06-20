@@ -174,7 +174,7 @@ class PieceJustificative(models.Model):
 			(MODALITE_OBLIGATOIRE, "obligatoire"),
 			(MODALITE_FACULTATIVE, "facultative"),
 		)
-	modalite = models.PositiveSmallIntegerField(verbose_name="modalité",
+	modalite = models.PositiveSmallIntegerField(default = MODALITE_OBLIGATOIRE, verbose_name="modalité",
 			choices=MODALITE_CHOICES)
 	etablissement = models.ForeignKey(Etablissement, null = True, blank = True,
 			default = None,	on_delete=models.CASCADE,
