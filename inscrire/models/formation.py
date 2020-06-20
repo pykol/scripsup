@@ -35,6 +35,9 @@ class Etablissement(models.Model):
 	email = models.EmailField(verbose_name="adresse e-mail par défaut",
 			help_text="Adresse de contact proposée aux candidats si aucune adresse n'est renseignée pour une formation",
 			blank=True, null=False, default="")
+	email_pieces_justificatives = models.EmailField(verbose_name="adresse e-mail pièces justificatives",
+			help_text="Adresse à laquelle le candidat doit envoyer les pièces justificatives",
+			blank=True, null=False, default="")
 	inscriptions = models.BooleanField(default=False,
 			help_text="Indique s'il s'agit d'un établissement dont le "
 			"site actuel gère les inscriptions")
@@ -69,6 +72,9 @@ class Formation(models.Model):
 			on_delete=models.CASCADE)
 	email = models.EmailField(verbose_name="adresse e-mail",
 			help_text="Adresse de contact proposée aux candidats pour cette formation",
+			blank=True, null=False, default="")
+	email_pieces_justificatives = models.EmailField(verbose_name="adresse e-mail pièces justificatives",
+			help_text="Adresse spécifique à cette formation à laquelle le candidat doit envoyer les pièces justificatives",
 			blank=True, null=False, default="")
 	slug = models.SlugField(unique=True)
 
@@ -171,10 +177,16 @@ class PieceJustificative(models.Model):
 	modalite = models.PositiveSmallIntegerField(verbose_name="modalité",
 			choices=MODALITE_CHOICES)
 	etablissement = models.ForeignKey(Etablissement, null = True, blank = True,
-			default = None,	on_delete=models.CASCADE)
+			default = None,	on_delete=models.CASCADE,
+			help_text = "Ne pas renseigner si la pièce est spécifique à une formation")
 	formation = models.ForeignKey(Formation, null = True, blank = True,
-			default = None, on_delete=models.CASCADE)
+			default = None, on_delete=models.CASCADE,
+			help_text = "Renseigner si la pièce est spécifique à cette formation")
 	nom = models.CharField(max_length = 100)
+	descriptif = models.TextField(default = "") # descriptif de la pièce
+	email_specifique = models.EmailField(default = "", verbose_name="adresse e-mail pour cette pièce",
+			help_text="Adresse spécifique à laquelle le candidat doit envoyer \
+cette pièce justificative")
 
 	class Meta:
 		constraints = [
@@ -191,3 +203,13 @@ class PieceJustificative(models.Model):
 	def obligatoire(cls, formation):
 		return cls.objects.filter(modalite = cls.MODALITE_OBLIGATOIRE).filter(
 			models.Q(etablissement = formation.etablissement)|models.Q(formation = formation))
+
+	@property
+	def email(self):
+		return next((email for email in [
+			self.email_specifique,
+			self.formation.email_pieces_justificatives if self.formation else "",
+			self.etablissement.email_pieces_justificatives if self.etablissement else "",
+			self.formation.email if self.formation else "",
+			self.etablissement.email if self.etablissement else ""
+			] if email))
