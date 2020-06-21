@@ -208,16 +208,14 @@ class FicheIdentite(Fiche):
 	FICHE_LABEL = "Identité"
 
 	def _photo_upload_to(instance, filename):
-		return "{media}photo/{psup}/{filename}".format(
-				media=settings.MEDIA_ROOT,
+		return "photo/{psup}/{filename}".format(
 				psup=instance.candidat.dossier_parcoursup,
 				filename=filename)
 	photo = models.ImageField(upload_to=_photo_upload_to,
 			blank=True, null=True)
 
 	def _piece_identite_upload_to(instance, filename):
-		return "{media}piece_identite/{psup}/{filename}".format(
-				media=settings.MEDIA_ROOT,
+		return "piece_identite/{psup}/{filename}".format(
 				psup=instance.candidat.dossier_parcoursup,
 				filename=filename)
 	piece_identite = models.FileField(upload_to=_piece_identite_upload_to,
@@ -373,8 +371,7 @@ class BulletinScolaire(models.Model):
 	classe = models.PositiveSmallIntegerField(choices=CLASSE_CHOICES)
 
 	def _bulletin_upload_to(instance, filename):
-		return "{media}/bulletin/{psup}/{filename}".format(
-				media=settings.MEDIA_ROOT,
+		return "bulletin/{psup}/{filename}".format(
 				psup=instance.fiche_scolarite.candidat.dossier_parcoursup,
 				filename=filename)
 	bulletin = models.FileField(upload_to=_bulletin_upload_to)
@@ -402,8 +399,7 @@ class FicheBourse(Fiche):
 			default=1)
 
 	def _attribution_bourse_upload_to(instance, filename):
-		return "{media}bourse_acb/{psup}/{filename}".format(
-				media=settings.MEDIA_ROOT,
+		return "bourse_acb/{psup}/{filename}".format(
 				psup=instance.candidat.dossier_parcoursup,
 				filename=filename)
 	attribution_bourse = models.FileField(
