@@ -28,6 +28,7 @@ from functools import reduce
 from django.db import models
 from django.db.models import Q
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from polymorphic.models import PolymorphicModel, PolymorphicManager
 import localflavor.generic.models as lfmodels
 
@@ -201,6 +202,13 @@ class Fiche(PolymorphicModel):
 		"""
 		pass
 
+	@property
+	def exclus(self):
+		"""champs exclus -> ne pas les prendre en compte dans valider()"""
+		etablissement = self.candidat.voeu_actuel.formation.etablissement
+		return etablissement.champs_exclus.filter(fiche = ContentType.objects.get_for_model(self)).values_list('champ', flat= True)
+
+
 class FicheIdentite(Fiche):
 	"""
 	Informations concernant l'identité du candidat
@@ -246,12 +254,13 @@ class FicheIdentite(Fiche):
 		verbose_name_plural = "fiches identité"
 
 	def valider(self):
+		exclus = self.exclus
 		self.valide = (
-			(self.photo is not None) and
-			(self.piece_identite is not None) and
-			(self.commune_naissance is not None or
-				bool(self.commune_naissance_etranger)) and
-			(self.pays_naissance is not None)
+			('photo' in exclus or self.photo is not None) and
+			('piece_identite' in exclus or self.piece_identite is not None) and
+			('commune_naissance' in exclus or (self.commune_naissance is not None or
+				bool(self.commune_naissance_etranger))) and
+			('pays_naissance' in exclus or self.pays_naissance is not None)
 		)
 
 	def update_from_parcoursup(self, parcoursup):
@@ -331,13 +340,16 @@ class FicheScolariteAnterieure(Fiche):
 		verbose_name_plural = "fiches scolarité antérieure"
 
 	def valider(self):
+		exclus = self.exclus
 		self.valide = (
 				(
-					(self.etablissement is not None) or
-					bool(self.autre_formation)
+					(
+					('etablissement' in exclus or self.etablissement is not None)
+					and ('classe_terminale' in exclus or bool(self.classe_terminale))
+					and ('specialite_terminale' in exclus or bool(self.specialite_terminale))
+					)
+					or bool(self.autre_formation)
 				)
-				and bool(self.classe_terminale)
-				and bool(self.specialite_terminale)
 				and bool(self.bulletinscolaire_set.all())
 			)
 

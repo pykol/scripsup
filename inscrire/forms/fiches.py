@@ -31,6 +31,7 @@ from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
+from django.contrib.contenttypes.models import ContentType
 from dal import autocomplete
 
 from inscrire.models import fiches, ResponsableLegal, Candidat
@@ -39,6 +40,11 @@ from inscrire.models import MefOption, PieceJustificative
 class FicheValiderMixin:
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
+		contenttypefiche = ContentType.objects.get_for_model(kwargs['instance'])
+		champs_exclus = kwargs['instance'].candidat.voeu_actuel.formation.etablissement.champs_exclus.filter(fiche = contenttypefiche)
+		for field in [champ_exclu.champ for champ_exclu in champs_exclus]:
+			self.fields.pop(field)
+
 		if self.instance.etat != self.instance.ETAT_EDITION:
 			for field in self.fields.values():
 				field.disabled = True

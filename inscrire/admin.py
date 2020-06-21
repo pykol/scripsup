@@ -89,6 +89,11 @@ class EtablissementAdmin(admin.ModelAdmin):
 	list_filter = ('inscriptions',)
 	search_fields = ('nom', 'numero_uai')
 
+	def get_form(self, *args, **kwargs):
+		"""Met à jour la liste des champs "excluables" """
+		ChampExclu.mise_a_jour()
+		return super().get_form(*args, **kwargs)
+
 @admin.register(Formation)
 class FormationAdmin(admin.ModelAdmin):
 	list_display = ('nom', 'etablissement', 'email', 'code_parcoursup')
@@ -128,3 +133,4 @@ admin.site.register(FicheReglement)
 admin.site.register(FicheInternat)
 admin.site.register(FicheCesure)
 admin.site.register(FichePieceJustificative)
+admin.site.register(ChampExclu)

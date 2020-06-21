@@ -25,6 +25,30 @@ from django.contrib.contenttypes.models import ContentType
 from .fields import Lettre23Field
 from .personnes import Candidat
 
+class ChampExclu(models.Model):
+	"""Champ à exclure"""
+	fiche = models.ForeignKey(ContentType, on_delete = models.CASCADE)
+	champ = models.CharField(max_length = 255)
+
+	@classmethod
+	def mise_a_jour(cls):
+		"""Peuple la table"""
+		from .fiches import all_fiche
+		ancienne_liste = cls.objects.all()
+		nouvelle_liste = []
+		for fiche in all_fiche:
+			if fiche._meta.model_name != 'fichepiecejustificative':
+				for field in fiche._meta.get_fields():
+					if not field.name in ('id', 'polymorphic_ctype', 'valide', 'fiche_ptr', 'etat', 'candidat'):
+						item, created = cls.objects.get_or_create(
+							fiche = ContentType.objects.get_for_model(fiche),
+							champ = field.name)
+						nouvelle_liste.append(item.id)
+		ancienne_liste.exclude(id__in = nouvelle_liste).delete()
+
+	def __str__(self):
+		return "{}__{}".format(self.fiche, self.champ)
+
 class Etablissement(models.Model):
 	"""
 	Établissement scolaire
@@ -50,7 +74,9 @@ class Etablissement(models.Model):
 			[models.Q(app_label=fiche._meta.app_label, model=fiche._meta.model_name)
 				for fiche in all_fiche])
 
-	fiches = models.ManyToManyField(ContentType, limit_choices_to = fiches_limit)
+	fiches = models.ManyToManyField(ContentType, limit_choices_to = fiches_limit, help_text = "Sélectionnez les fiches à inclure.</br>")
+
+	champs_exclus = models.ManyToManyField(ChampExclu, help_text = "Sélectionnez les champs dont vous ne voulez pas.</br>")
 
 	class Meta:
 		verbose_name = "établissement"
@@ -59,6 +85,7 @@ class Etablissement(models.Model):
 
 	def __str__(self):
 		return "{} {}".format(self.numero_uai, self.nom)
+
 
 class Formation(models.Model):
 	"""
