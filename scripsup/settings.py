@@ -54,6 +54,7 @@ MIDDLEWARE = [
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'inscrire.intergiciels.en_travaux',
 ]
 
 ROOT_URLCONF = 'scripsup.urls'
