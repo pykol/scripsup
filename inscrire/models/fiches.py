@@ -22,6 +22,7 @@ Informations d'inscription des candidats dans une formation.
 Les informations sont regroupées par fiches. Chaque fiche regroupe les
 informations spécifiques à un service donné.
 """
+import os
 from operator import and_
 from functools import reduce
 
@@ -29,11 +30,17 @@ from django.db import models
 from django.db.models import Q
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
+from django.utils.crypto import get_random_string
 from polymorphic.models import PolymorphicModel, PolymorphicManager
 import localflavor.generic.models as lfmodels
 
 from .personnes import Candidat, Commune, Pays, ResponsableLegal
 from .formation import MefOption, Formation, Etablissement, PieceJustificative
+
+def nouveau_nom(nom_fichier):
+	"""Ajoute 7 caractères aléatoires à un nom de fichier"""
+	file_root, file_ext = os.path.splitext(nom_fichier)
+	return "{}_{}{}".format(file_root, get_random_string(7), file_ext)
 
 class FicheManager(PolymorphicManager):
 	"""
@@ -218,14 +225,16 @@ class FicheIdentite(Fiche):
 	def _photo_upload_to(instance, filename):
 		return "photo/{psup}/{filename}".format(
 				psup=instance.candidat.dossier_parcoursup,
-				filename=filename)
+				filename=nouveau_nom(filename))
+
 	photo = models.ImageField(upload_to=_photo_upload_to,
 			blank=True, null=True)
 
 	def _piece_identite_upload_to(instance, filename):
 		return "piece_identite/{psup}/{filename}".format(
 				psup=instance.candidat.dossier_parcoursup,
-				filename=filename)
+				filename=nouveau_nom(filename))
+
 	piece_identite = models.FileField(upload_to=_piece_identite_upload_to,
 			blank=True, null=True)
 	commune_naissance = models.ForeignKey(Commune,
@@ -385,7 +394,7 @@ class BulletinScolaire(models.Model):
 	def _bulletin_upload_to(instance, filename):
 		return "bulletin/{psup}/{filename}".format(
 				psup=instance.fiche_scolarite.candidat.dossier_parcoursup,
-				filename=filename)
+				filename=nouveau_nom(filename))
 	bulletin = models.FileField(upload_to=_bulletin_upload_to)
 
 	class Meta:
@@ -413,7 +422,7 @@ class FicheBourse(Fiche):
 	def _attribution_bourse_upload_to(instance, filename):
 		return "bourse_acb/{psup}/{filename}".format(
 				psup=instance.candidat.dossier_parcoursup,
-				filename=filename)
+				filename=nouveau_nom(filename))
 	attribution_bourse = models.FileField(
 			verbose_name="copie de l'attestation conditionnelle de bourse",
 			upload_to=_attribution_bourse_upload_to,
