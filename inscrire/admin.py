@@ -60,7 +60,7 @@ class CandidatActionLogInline(admin.TabularInline):
 @admin.register(Candidat)
 class CandidatAdmin(admin.ModelAdmin):
 	search_fields = ('dossier_parcoursup', 'first_name', 'last_name')
-	list_display = ('last_name', 'first_name', 'dossier_parcoursup')
+	list_display = ('last_name', 'first_name', 'dossier_parcoursup', 'voeu_actuel')
 	autocomplete_fields = ('commune_naissance', 'pays_naissance',
 		'nationalite',)
 	inlines = (ResponsableLegalInline, CandidatActionLogInline)
