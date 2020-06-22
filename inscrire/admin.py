@@ -124,6 +124,13 @@ class FicheIdentiteAdmin(admin.ModelAdmin):
 class PieceJustificativeAdmin(admin.ModelAdmin):
 	list_display = ('nom', 'etablissement', 'formation', 'modalite')
 
+@admin.register(MefOption)
+class MefOption(admin.ModelAdmin):
+	list_display = ('formation', 'matiere', 'rang', 'modalite', 'inscriptions')
+	list_editable = ('modalite', 'inscriptions')
+	list_filter = ('formation',)
+
+
 admin.site.register(FicheScolarite)
 admin.site.register(FicheHebergement)
 admin.site.register(FicheScolariteAnterieure)
@@ -134,3 +141,4 @@ admin.site.register(FicheInternat)
 admin.site.register(FicheCesure)
 admin.site.register(FichePieceJustificative)
 admin.site.register(ChampExclu)
+admin.site.register(MefMatiere)
