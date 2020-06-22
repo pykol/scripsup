@@ -23,8 +23,6 @@ Les informations sont regroupées par fiches. Chaque fiche regroupe les
 informations spécifiques à un service donné.
 """
 import os
-from operator import and_
-from functools import reduce
 
 from django.db import models
 from django.db.models import Q
