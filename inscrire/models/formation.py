@@ -176,6 +176,8 @@ class MefOption(models.Model):
 	rang = models.PositiveSmallIntegerField()
 	matiere = models.ForeignKey(MefMatiere, on_delete=models.CASCADE)
 	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
+	detail = models.CharField(max_length = 50, default = "", blank = True,
+			help_text = "Précision éventuelle (débutant, continuant, ...)")
 	inscriptions = models.BooleanField(default=False,
 			help_text="Indique si l'option est présentée aux candidats "
 			"afin qu'ils la choisissent lors de l'inscription.")
@@ -186,10 +188,10 @@ class MefOption(models.Model):
 
 	def __str__(self):
 		if self.modalite == self.MODALITE_OBLIGATOIRE:
-			return "{} ({}, rang {})".format(self.matiere,
+			return "{} {} ({}, rang {})".format(self.matiere, self.detail,
 					self.get_modalite_display(), self.rang)
 		else:
-			return "{} ({})".format(self.matiere,
+			return "{} {} ({})".format(self.matiere, self.detail,
 					self.get_modalite_display())
 
 

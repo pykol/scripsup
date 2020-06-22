@@ -126,7 +126,7 @@ class PieceJustificativeAdmin(admin.ModelAdmin):
 
 @admin.register(MefOption)
 class MefOption(admin.ModelAdmin):
-	list_display = ('formation', 'matiere', 'rang', 'modalite', 'inscriptions')
+	list_display = ('formation', 'matiere', 'detail', 'rang', 'modalite', 'inscriptions')
 	list_editable = ('modalite', 'inscriptions')
 	list_filter = ('formation',)
 
