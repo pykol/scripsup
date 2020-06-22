@@ -67,6 +67,7 @@ class Etablissement(models.Model):
 			"site actuel gère les inscriptions")
 	commune = models.ForeignKey('Commune', on_delete=models.SET_NULL,
 			blank=True, null=True)
+	adresse = models.TextField(default = "")
 
 	def fiches_limit():
 		from .fiches import all_fiche
