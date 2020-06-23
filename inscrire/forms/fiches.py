@@ -70,12 +70,15 @@ class FicheValiderMixin:
 		etablissement =  formation.etablissement
 		try:
 			entete = EnteteFiche.objects.get(fiche = contenttypefiche, formation = formation).texte
-			return entete.format(email = href(formation.email_defaut), email_pj = href(formation.email_pj), email_etablissement = href(etablissement.email), adresse = etablissement.adresse)
 		except EnteteFiche.DoesNotExist:
 			entete = EnteteFiche.objects.get(fiche = contenttypefiche, etablissement = etablissement).texte
-			return entete.format(email = href(etablissement.email), email_formation = href(formation.email), email_pj = href(etablissement.email_pieces_justificatives), email_etablissement = href(etablissement.email), adresse = etablissement.adresse)
 		except EnteteFiche.DoesNotExist:
 			return ""
+		return entete.format(
+		email = href(formation.email_defaut),
+		email_pj = href(formation.email_pj),
+		email_etablissement = href(etablissement.email),
+		adresse = etablissement.adresse)
 
 
 class IdentiteFicheForm(FicheValiderMixin, forms.ModelForm):
