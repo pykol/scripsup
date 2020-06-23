@@ -1,0 +1,23 @@
+{% extends 'fiche/fiche_base_candidat.html' %}
+{% block fiche_content %}
+  {% if not fiche_form.entete %}
+    <p>Voici la liste des pièces justificatives que vous devez faire parvenir par mail à l'établissement. Respectez
+    impérativement les instructions. C'est l'établissement qui cochera les pièces reçues, puis validera cette fiche lorsque
+    toutes les pièces auront été reçues.</p>
+  {% endif %}
+
+  {{ fiche_form.as_p }}
+
+  {% if fiche.etat == fiche.ETAT_EDITION %}
+    <p>
+    {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide and not fiche_form.errors %}
+    {% endif %}
+    </p>
+  {% endif %}
+  {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide %}
+    <p>Lorsque vous validez une fiche, celle-ci est transmise au
+    secrétariat de l'établissement. Vous ne pouvez alors plus modifier la
+    fiche. Votre dossier est complet lorsque toutes les fiches présentes
+    sur cette page sont validées.</p>
+  {% endif %}
+{% endblock %}
