@@ -13,7 +13,7 @@
       <div id='titre'>
         <h1>Classes préparatoires aux grandes écoles<br>Dossier d'inscription</h1>
       </div>
-      <img id='photo-candidat' src="{{ ficheidentite.photo.url }}">
+        <img id='photo-candidat' src="{% if ficheidentite.photo %} {{ ficheidentite.photo.url }}{% endif %}"  alt="photo absente">      
     </header>
 
     <section class="fiche" id='ficheidentite'>
