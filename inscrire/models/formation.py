@@ -223,6 +223,12 @@ class PieceJustificative(models.Model):
 			help_text = "Renseigner si la pièce est spécifique à cette formation")
 	nom = models.CharField(max_length = 100)
 
+
+	@classmethod
+	def obligatoire(cls, formation):
+		return cls.objects.filter(modalite = cls.MODALITE_OBLIGATOIRE).filter(
+			models.Q(etablissement = formation.etablissement)|models.Q(formation = formation))
+
 	class Meta:
 		constraints = [
 			models.CheckConstraint(check = ~models.Q(etablissement__isnull = True, formation__isnull = True),
