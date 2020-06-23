@@ -23,6 +23,8 @@ Les informations sont regroupées par fiches. Chaque fiche regroupe les
 informations spécifiques à un service donné.
 """
 import os
+from operator import or_
+from functools import reduce
 
 from django.db import models
 from django.db.models import Q
@@ -600,3 +602,20 @@ all_fiche = [
 		FicheReglement,
 		FichePieceJustificative,
 	]
+
+
+class EnteteFiche(models.Model):
+	"""Texte à afficher en entête d'une fiche.
+	Le champ formation prime sur le champ etablissement."""
+	def fiches_limit():
+		from .fiches import all_fiche
+		return reduce(or_,
+			[models.Q(app_label=fiche._meta.app_label, model=fiche._meta.model_name)
+				for fiche in all_fiche])
+
+	fiche = models.ForeignKey(ContentType, limit_choices_to = fiches_limit, on_delete = models.CASCADE)
+	etablissement = models.ForeignKey(Etablissement, null = True, blank = True,
+			on_delete = models.CASCADE)
+	formation = models.ForeignKey(Formation, null = True, blank = True,
+			on_delete = models.CASCADE)
+	texte = models.TextField(default = "")

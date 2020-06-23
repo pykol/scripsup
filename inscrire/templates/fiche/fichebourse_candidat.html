@@ -1,18 +1,19 @@
 {% extends 'fiche/fiche_base_candidat.html' %}
 {% block fiche_content %}
-<p>Les éléments suivants concernent votre situation familiale et votre
-éventuel statut de boursier. Nous vous demandons d'indiquer, dans tous
-les cas, les nombres de frères et sœurs scolarisés en même temps que
-vous.</p>
+{% if not fiche_form.entete %}
+  <p>Les éléments suivants concernent votre situation familiale et votre
+  éventuel statut de boursier. Nous vous demandons d'indiquer, dans tous
+  les cas, les nombres de frères et sœurs scolarisés en même temps que
+  vous.</p>
 
-<p>Les informations concernant les bourses du supérieur ne sont à
-remplir que si vous avez le statut de boursier. Si vous ne savez pas si
-vous pouvez bénéficier d'une bourse, nous vous recommandons vivement
-d'utiliser le simulateur disponible en ligne et de
-<a href="https://www.messervices.etudiant.gouv.fr/"
-   target="_blank">constituer votre dossier social étudiant</a> sur le
-portail du gouvernement.</p>
-
+  <p>Les informations concernant les bourses du supérieur ne sont à
+  remplir que si vous avez le statut de boursier. Si vous ne savez pas si
+  vous pouvez bénéficier d'une bourse, nous vous recommandons vivement
+  d'utiliser le simulateur disponible en ligne et de
+  <a href="https://www.messervices.etudiant.gouv.fr/"
+     target="_blank">constituer votre dossier social étudiant</a> sur le
+  portail du gouvernement.</p>
+{% endif %}
 <p>Les critères d'attribution des bourses ne sont pas les mêmes qu'au
 lycée. Vous pouvez être boursier du supérieur alors que vous n'étiez pas
 boursier au lycée. Le statut de boursier peut vous apporter une

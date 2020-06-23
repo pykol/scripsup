@@ -125,6 +125,14 @@ class Formation(models.Model):
 	def __str__(self):
 		return self.nom
 
+	@property
+	def email_defaut(self):
+		return self.email or self.etablissement.email
+
+	@property
+	def email_pj(self):
+		return self.email_pieces_justificatives or self.etablissement.email_pieces_justificatives or self.email or self.etablissement.email
+
 	def candidats(self):
 		from .parcoursup import Voeu
 		return Candidat.objects.filter(
@@ -197,7 +205,8 @@ class MefOption(models.Model):
 
 
 class PieceJustificative(models.Model):
-	"""Pièce que le candidat peut ou doit envoyer"""
+	"""Pièce que le candidat peut ou doit envoyer. Les précisions éventuelles
+	seront apportées au candidat via l'entête de chaque fiche (modèle EnteteFiche)"""
 	MODALITE_OBLIGATOIRE = 1
 	MODALITE_FACULTATIVE = 2
 	MODALITE_CHOICES = (
@@ -213,10 +222,6 @@ class PieceJustificative(models.Model):
 			default = None, on_delete=models.CASCADE,
 			help_text = "Renseigner si la pièce est spécifique à cette formation")
 	nom = models.CharField(max_length = 100)
-	descriptif = models.TextField(default = "") # descriptif de la pièce
-	email_specifique = models.EmailField(default = "", verbose_name="adresse e-mail pour cette pièce",
-			help_text="Adresse spécifique à laquelle le candidat doit envoyer \
-cette pièce justificative")
 
 	class Meta:
 		constraints = [
@@ -228,18 +233,3 @@ cette pièce justificative")
 
 	def __str__(self):
 		return self.nom
-
-	@classmethod
-	def obligatoire(cls, formation):
-		return cls.objects.filter(modalite = cls.MODALITE_OBLIGATOIRE).filter(
-			models.Q(etablissement = formation.etablissement)|models.Q(formation = formation))
-
-	@property
-	def email(self):
-		return next((email for email in [
-			self.email_specifique,
-			self.formation.email_pieces_justificatives if self.formation else "",
-			self.etablissement.email_pieces_justificatives if self.etablissement else "",
-			self.formation.email if self.formation else "",
-			self.etablissement.email if self.etablissement else ""
-			] if email))

@@ -98,6 +98,7 @@ class EtablissementAdmin(admin.ModelAdmin):
 class FormationAdmin(admin.ModelAdmin):
 	list_display = ('nom', 'etablissement', 'email', 'code_parcoursup')
 	list_filter = (('etablissement', admin.RelatedOnlyFieldListFilter),)
+	list_editable = ('email',)
 	autocomplete_fields = ('etablissement',)
 
 admin.site.register(ParcoursupUser)
@@ -125,11 +126,15 @@ class PieceJustificativeAdmin(admin.ModelAdmin):
 	list_display = ('nom', 'etablissement', 'formation', 'modalite')
 
 @admin.register(MefOption)
-class MefOption(admin.ModelAdmin):
+class MefOptionAdmin(admin.ModelAdmin):
 	list_display = ('formation', 'matiere', 'detail', 'rang', 'modalite', 'inscriptions')
 	list_editable = ('modalite', 'inscriptions')
 	list_filter = ('formation',)
 
+@admin.register(EnteteFiche)
+class EnteteFicheAdmin(admin.ModelAdmin):
+	list_display = ['fiche', 'etablissement', 'formation', 'texte',]
+	list_editable = ['texte',]
 
 admin.site.register(FicheScolarite)
 admin.site.register(FicheHebergement)
