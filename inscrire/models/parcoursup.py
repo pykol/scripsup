@@ -277,6 +277,9 @@ class Voeu(EtatVoeu):
 		verbose_name = "vœu"
 		verbose_name_plural = "vœux"
 
+	def __str__(self):
+		return self.formation.__str__()
+
 class HistoriqueVoeu(EtatVoeu):
 	"""
 	Historique des réponses d'un candidat à un vœu donné

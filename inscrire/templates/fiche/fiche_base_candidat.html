@@ -28,6 +28,7 @@ le gabarit qui inclut la fiche.
       {% else %}
       {{ fiche.get_etat_display }}
       {% endif %}</span></h3>
+  {{fiche_form.entete|safe|linebreaks}}
   {% block fiche_content %}
   {{ fiche_form.as_p }}
   {{ fiche_form.media }}

@@ -60,7 +60,7 @@ class CandidatActionLogInline(admin.TabularInline):
 @admin.register(Candidat)
 class CandidatAdmin(admin.ModelAdmin):
 	search_fields = ('dossier_parcoursup', 'first_name', 'last_name')
-	list_display = ('last_name', 'first_name', 'dossier_parcoursup')
+	list_display = ('last_name', 'first_name', 'dossier_parcoursup', 'voeu_actuel')
 	autocomplete_fields = ('commune_naissance', 'pays_naissance',
 		'nationalite',)
 	inlines = (ResponsableLegalInline, CandidatActionLogInline)
@@ -89,10 +89,16 @@ class EtablissementAdmin(admin.ModelAdmin):
 	list_filter = ('inscriptions',)
 	search_fields = ('nom', 'numero_uai')
 
+	def get_form(self, *args, **kwargs):
+		"""Met à jour la liste des champs "excluables" """
+		ChampExclu.mise_a_jour()
+		return super().get_form(*args, **kwargs)
+
 @admin.register(Formation)
 class FormationAdmin(admin.ModelAdmin):
-	list_display = ('nom', 'etablissement', 'email', 'code_parcoursup')
+	list_display = ('nom', 'etablissement', 'email', 'email_pieces_justificatives', 'code_parcoursup')
 	list_filter = (('etablissement', admin.RelatedOnlyFieldListFilter),)
+	list_editable = ('email', 'email_pieces_justificatives', )
 	autocomplete_fields = ('etablissement',)
 
 admin.site.register(ParcoursupUser)
@@ -119,6 +125,17 @@ class FicheIdentiteAdmin(admin.ModelAdmin):
 class PieceJustificativeAdmin(admin.ModelAdmin):
 	list_display = ('nom', 'etablissement', 'formation', 'modalite')
 
+@admin.register(MefOption)
+class MefOptionAdmin(admin.ModelAdmin):
+	list_display = ('formation', 'matiere', 'detail', 'rang', 'modalite', 'inscriptions')
+	list_editable = ('modalite', 'inscriptions')
+	list_filter = ('formation',)
+
+@admin.register(EnteteFiche)
+class EnteteFicheAdmin(admin.ModelAdmin):
+	list_display = ['fiche', 'etablissement', 'formation', 'texte',]
+	list_editable = ['texte',]
+
 admin.site.register(FicheScolarite)
 admin.site.register(FicheHebergement)
 admin.site.register(FicheScolariteAnterieure)
@@ -128,3 +145,5 @@ admin.site.register(FicheReglement)
 admin.site.register(FicheInternat)
 admin.site.register(FicheCesure)
 admin.site.register(FichePieceJustificative)
+admin.site.register(ChampExclu)
+admin.site.register(MefMatiere)

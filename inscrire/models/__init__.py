@@ -20,11 +20,11 @@ from .user import InscrireUser
 from .personnes import Personne, Candidat, ResponsableLegal, \
 		CandidatActionLog, Commune, Pays, Profession
 from .formation import Etablissement, Formation, MefMatiere, MefOption, \
-		PieceJustificative
+		PieceJustificative, ChampExclu
 from .parcoursup import ParcoursupUserManager, ParcoursupUser, \
 		ParcoursupMessageRecuLog, ParcoursupMessageEnvoyeLog, \
 		Voeu, HistoriqueVoeu, EtatVoeu
 from .fiches import Fiche, FicheIdentite, FicheScolarite, \
 		FicheHebergement, FicheScolariteAnterieure, BulletinScolaire, \
 		FicheBourse, FicheReglement, FicheInternat, FicheCesure, \
-		FichePieceJustificative
+		FichePieceJustificative, EnteteFiche

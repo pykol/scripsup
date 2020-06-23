@@ -31,14 +31,20 @@ from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
+from django.contrib.contenttypes.models import ContentType
 from dal import autocomplete
 
 from inscrire.models import fiches, ResponsableLegal, Candidat
-from inscrire.models import MefOption, PieceJustificative
+from inscrire.models import MefOption, PieceJustificative, EnteteFiche
 
 class FicheValiderMixin:
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
+		contenttypefiche = ContentType.objects.get_for_model(kwargs['instance'])
+		champs_exclus = kwargs['instance'].candidat.voeu_actuel.formation.etablissement.champs_exclus.filter(fiche = contenttypefiche)
+		for field in [champ_exclu.champ for champ_exclu in champs_exclus]:
+			self.fields.pop(field)
+
 		if self.instance.etat != self.instance.ETAT_EDITION:
 			for field in self.fields.values():
 				field.disabled = True
@@ -52,6 +58,28 @@ class FicheValiderMixin:
 			instance = super().save(commit=False)
 
 		return instance
+
+	def entete(self, *args, **kwargs):
+		"""Renvoie l'entete d'une fiche."""
+
+		def href(email):
+			return "<a href = 'mailto:{email}'>{email}</a>".format(email = email)
+
+		contenttypefiche = ContentType.objects.get_for_model(self.instance)
+		formation = self.instance.candidat.voeu_actuel.formation
+		etablissement =  formation.etablissement
+		try:
+			entete = EnteteFiche.objects.get(fiche = contenttypefiche, formation = formation).texte
+		except EnteteFiche.DoesNotExist:
+			entete = EnteteFiche.objects.get(fiche = contenttypefiche, etablissement = etablissement).texte
+		except EnteteFiche.DoesNotExist:
+			return ""
+		return entete.format(
+		email = href(formation.email_defaut),
+		email_pj = href(formation.email_pj),
+		email_etablissement = href(etablissement.email),
+		adresse = etablissement.adresse)
+
 
 class IdentiteFicheForm(FicheValiderMixin, forms.ModelForm):
 	prefix = 'fiche-identite'
@@ -390,7 +418,7 @@ class ScolariteForm(FicheValiderMixin, forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.fields['options'].queryset = self.options_qs().order_by(
-			'modalite', 'rang', 'matiere__libelle_edition')
+			'rang', 'modalite', 'matiere__libelle_edition')
 
 	def clean_options(self):
 		errors = []

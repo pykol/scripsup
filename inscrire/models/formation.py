@@ -25,6 +25,30 @@ from django.contrib.contenttypes.models import ContentType
 from .fields import Lettre23Field
 from .personnes import Candidat
 
+class ChampExclu(models.Model):
+	"""Champ à exclure"""
+	fiche = models.ForeignKey(ContentType, on_delete = models.CASCADE)
+	champ = models.CharField(max_length = 255)
+
+	@classmethod
+	def mise_a_jour(cls):
+		"""Peuple la table"""
+		from .fiches import all_fiche
+		ancienne_liste = cls.objects.all()
+		nouvelle_liste = []
+		for fiche in all_fiche:
+			if fiche._meta.model_name != 'fichepiecejustificative':
+				for field in fiche._meta.get_fields():
+					if not field.name in ('id', 'polymorphic_ctype', 'valide', 'fiche_ptr', 'etat', 'candidat'):
+						item, created = cls.objects.get_or_create(
+							fiche = ContentType.objects.get_for_model(fiche),
+							champ = field.name)
+						nouvelle_liste.append(item.id)
+		ancienne_liste.exclude(id__in = nouvelle_liste).delete()
+
+	def __str__(self):
+		return "{}__{}".format(self.fiche, self.champ)
+
 class Etablissement(models.Model):
 	"""
 	Établissement scolaire
@@ -43,6 +67,7 @@ class Etablissement(models.Model):
 			"site actuel gère les inscriptions")
 	commune = models.ForeignKey('Commune', on_delete=models.SET_NULL,
 			blank=True, null=True)
+	adresse = models.TextField(default = "")
 
 	def fiches_limit():
 		from .fiches import all_fiche
@@ -50,7 +75,9 @@ class Etablissement(models.Model):
 			[models.Q(app_label=fiche._meta.app_label, model=fiche._meta.model_name)
 				for fiche in all_fiche])
 
-	fiches = models.ManyToManyField(ContentType, limit_choices_to = fiches_limit)
+	fiches = models.ManyToManyField(ContentType, limit_choices_to = fiches_limit, help_text = "Sélectionnez les fiches à inclure.</br>")
+
+	champs_exclus = models.ManyToManyField(ChampExclu, help_text = "Sélectionnez les champs dont vous ne voulez pas.</br>")
 
 	class Meta:
 		verbose_name = "établissement"
@@ -59,6 +86,7 @@ class Etablissement(models.Model):
 
 	def __str__(self):
 		return "{} {}".format(self.numero_uai, self.nom)
+
 
 class Formation(models.Model):
 	"""
@@ -96,6 +124,14 @@ class Formation(models.Model):
 
 	def __str__(self):
 		return self.nom
+
+	@property
+	def email_defaut(self):
+		return self.email or self.etablissement.email
+
+	@property
+	def email_pj(self):
+		return self.email_pieces_justificatives or self.etablissement.email_pieces_justificatives or self.email or self.etablissement.email
 
 	def candidats(self):
 		from .parcoursup import Voeu
@@ -149,6 +185,8 @@ class MefOption(models.Model):
 	rang = models.PositiveSmallIntegerField()
 	matiere = models.ForeignKey(MefMatiere, on_delete=models.CASCADE)
 	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
+	detail = models.CharField(max_length = 50, default = "", blank = True,
+			help_text = "Précision éventuelle (débutant, continuant, ...)")
 	inscriptions = models.BooleanField(default=False,
 			help_text="Indique si l'option est présentée aux candidats "
 			"afin qu'ils la choisissent lors de l'inscription.")
@@ -159,15 +197,16 @@ class MefOption(models.Model):
 
 	def __str__(self):
 		if self.modalite == self.MODALITE_OBLIGATOIRE:
-			return "{} ({}, rang {})".format(self.matiere,
+			return "{} {} ({}, rang {})".format(self.matiere, self.detail,
 					self.get_modalite_display(), self.rang)
 		else:
-			return "{} ({})".format(self.matiere,
+			return "{} {} ({})".format(self.matiere, self.detail,
 					self.get_modalite_display())
 
 
 class PieceJustificative(models.Model):
-	"""Pièce que le candidat peut ou doit envoyer"""
+	"""Pièce que le candidat peut ou doit envoyer. Les précisions éventuelles
+	seront apportées au candidat via l'entête de chaque fiche (modèle EnteteFiche)"""
 	MODALITE_OBLIGATOIRE = 1
 	MODALITE_FACULTATIVE = 2
 	MODALITE_CHOICES = (
@@ -183,10 +222,12 @@ class PieceJustificative(models.Model):
 			default = None, on_delete=models.CASCADE,
 			help_text = "Renseigner si la pièce est spécifique à cette formation")
 	nom = models.CharField(max_length = 100)
-	descriptif = models.TextField(default = "") # descriptif de la pièce
-	email_specifique = models.EmailField(default = "", verbose_name="adresse e-mail pour cette pièce",
-			help_text="Adresse spécifique à laquelle le candidat doit envoyer \
-cette pièce justificative")
+
+
+	@classmethod
+	def obligatoire(cls, formation):
+		return cls.objects.filter(modalite = cls.MODALITE_OBLIGATOIRE).filter(
+			models.Q(etablissement = formation.etablissement)|models.Q(formation = formation))
 
 	class Meta:
 		constraints = [
@@ -198,18 +239,3 @@ cette pièce justificative")
 
 	def __str__(self):
 		return self.nom
-
-	@classmethod
-	def obligatoire(cls, formation):
-		return cls.objects.filter(modalite = cls.MODALITE_OBLIGATOIRE).filter(
-			models.Q(etablissement = formation.etablissement)|models.Q(formation = formation))
-
-	@property
-	def email(self):
-		return next((email for email in [
-			self.email_specifique,
-			self.formation.email_pieces_justificatives if self.formation else "",
-			self.etablissement.email_pieces_justificatives if self.etablissement else "",
-			self.formation.email if self.formation else "",
-			self.etablissement.email if self.etablissement else ""
-			] if email))
