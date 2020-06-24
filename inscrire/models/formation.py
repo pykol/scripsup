@@ -68,6 +68,14 @@ class Etablissement(models.Model):
 	commune = models.ForeignKey('Commune', on_delete=models.SET_NULL,
 			blank=True, null=True)
 	adresse = models.TextField(default = "")
+	photo_size_max = models.PositiveSmallIntegerField(default = 200,
+		help_text = "Poids maximal des photos d'identités en ko.")
+	photo_largeur = models.PositiveSmallIntegerField(default = 35,
+		help_text = "Largeur de la photo d'identité; seul le ratio hauteur/largeur est pris en compte.")
+	photo_hauteur = models.PositiveSmallIntegerField(default = 45,
+		help_text = "Hauteur de la photo d'identité; seul le ratio hauteur/largeur est pris en compte.")
+	tolerance_ratio = models.PositiveSmallIntegerField(default = 10,
+		help_text = "Pourcentage de tolérance sur le ratio hauteur/largeur.")
 
 	def fiches_limit():
 		from .fiches import all_fiche

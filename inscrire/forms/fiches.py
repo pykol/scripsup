@@ -75,10 +75,10 @@ class FicheValiderMixin:
 		except EnteteFiche.DoesNotExist:
 			return ""
 		return entete.format(
-		email = href(formation.email_defaut),
-		email_pj = href(formation.email_pj),
-		email_etablissement = href(etablissement.email),
-		adresse = etablissement.adresse)
+			email = href(formation.email_defaut),
+			email_pj = href(formation.email_pj),
+			email_etablissement = href(etablissement.email),
+			adresse = etablissement.adresse)
 
 
 class IdentiteFicheForm(FicheValiderMixin, forms.ModelForm):
@@ -118,6 +118,28 @@ class IdentiteFicheForm(FicheValiderMixin, forms.ModelForm):
 				"taper les premières lettres du nom pour trouver plus "
 				"rapidement le pays."
 		}
+
+	def clean_photo(self, *args, **kwargs):
+		photo = self.cleaned_data['photo']
+		if photo:
+			etablissement =  self.instance.candidat.voeu_actuel.formation.etablissement
+			if photo.content_type != 'image/jpeg':
+				raise forms.ValidationError("Le fichier photo doit être au format .jpg")
+			if photo.size > 1024*etablissement.photo_size_max:
+				raise forms.ValidationError(
+					"Le poids maximal du fichier photo est de {}ko. Le vôtre fait {}ko.".format(
+						etablissement.photo_size_max, int(photo.size/1024)))
+			largeur, hauteur = photo.image.size
+			try:
+				ratio = hauteur/largeur
+			except:
+				raise forms.ValidationError("Fichier non valide")
+			ratio_etablissement = etablissement.photo_hauteur/etablissement.photo_largeur
+			if abs(ratio - ratio_etablissement) > ratio_etablissement*etablissement.tolerance_ratio/100:
+				raise forms.ValidationError(
+					"Le rapport largeur/hauteur de votre fichier photo doit être environ {}/{}".format(
+						etablissement.photo_largeur, etablissement.photo_hauteur))
+		return photo
 
 ResponsablesForm = forms.inlineformset_factory(
 		Candidat, ResponsableLegal,
