@@ -62,6 +62,9 @@ class Etablissement(models.Model):
 	email_pieces_justificatives = models.EmailField(verbose_name="adresse e-mail pièces justificatives",
 			help_text="Adresse à laquelle le candidat doit envoyer les pièces justificatives",
 			blank=True, null=False, default="")
+	email_technique = models.EmailField(verbose_name="email à contacter en cas de problème technique",
+			help_text="Adresse à contacter en cas de problème technique",
+			blank = True, null = False, default = "")
 	inscriptions = models.BooleanField(default=False,
 			help_text="Indique s'il s'agit d'un établissement dont le "
 			"site actuel gère les inscriptions")
