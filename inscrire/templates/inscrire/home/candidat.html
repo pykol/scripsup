@@ -38,12 +38,17 @@ administrative.
   </ul>
 </section>
 
-{% for fiche in fiches %}{% if fiche.fiche.etat == fiche.fiche.ETAT_EDITION and fiche.fiche.valide %}<form method="post" action="{% url 'fiche-valider' fiche.fiche.pk %}" id='form-valider-fiche-{{fiche.fiche.pk}}'>{% csrf_token %}</form>{% endif %}{% endfor %}
+{% for fiche in fiches %}
+  {% if fiche.fiche.etat == fiche.fiche.ETAT_EDITION and fiche.fiche.valide %}
+    <form method="post" action="{% url 'fiche-valider' fiche.fiche.pk %}" id='form-valider-fiche-{{fiche.fiche.pk}}'>
+      {% csrf_token %}
+    </form>
+  {% endif %}
+{% endfor %}
 <form method="post" action="{% url 'home' %}" enctype="multipart/form-data">
   {% csrf_token %}
-
   {% for fiche in fiches %}
-  {% include fiche.template with fiche=fiche.fiche fiche_form=fiche.form candidat=fiche.fiche.voeu.candidat voeu=fiche.fiche.voeu formation=fiche.fiche.voeu.formation %}
+    {% include fiche.template with fiche=fiche.fiche fiche_form=fiche.form candidat=fiche.fiche.voeu.candidat voeu=fiche.fiche.voeu formation=fiche.fiche.voeu.formation %}
   {% endfor %}
 </form>
 {% endblock %}
