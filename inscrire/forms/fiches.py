@@ -318,7 +318,7 @@ class IdentiteForm(FicheValiderMixin):
 
 	def as_p(self):
 		"Return this formset rendered as HTML <p>s."
-		return mark_safe(' '.join(form.as_p() for form in self))
+		return mark_safe('<hr>'.join(form.as_p() for form in self))
 
 	def as_ul(self):
 		"Return this formset rendered as HTML <li>s."
