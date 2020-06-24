@@ -143,7 +143,7 @@ class IdentiteFicheForm(FicheValiderMixin, forms.ModelForm):
 
 ResponsablesForm = forms.inlineformset_factory(
 		Candidat, ResponsableLegal,
-		fields=('genre', 'last_name', 'first_name',
+		fields=('last_name', 'first_name', 'genre',
 			'lien', 'lien_precision',
 			'adresse', 'telephone', 'telephone_mobile',
 			'email',
