@@ -656,6 +656,30 @@ class PieceJustificativeForm(FicheValiderMixin, forms.ModelForm):
 			'pieces_recues': forms.CheckboxSelectMultiple,
 		}
 		labels = {
+			'pieces_recues': "Pièces envoyées",
+		}
+
+	def pieces_qs(self):
+		"""Pieces à envoyer"""
+		return PieceJustificative.objects.filter(
+			models.Q(formation=self.instance.candidat.voeu_actuel.formation)|
+			models.Q(etablissement=self.instance.candidat.voeu_actuel.formation.etablissement))
+
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['pieces_recues'].queryset = self.pieces_qs()
+
+
+class PieceJustificativeSuiviForm(FicheValiderMixin, forms.ModelForm):
+	prefix="fiche-piecejustificativesuivi"
+
+	class Meta:
+		model = fiches.FichePieceJustificativeSuivi
+		fields = ['pieces_recues',]
+		widgets = {
+			'pieces_recues': forms.CheckboxSelectMultiple,
+		}
+		labels = {
 			'pieces_recues': "Pièces reçues",
 		}
 
@@ -670,6 +694,8 @@ class PieceJustificativeForm(FicheValiderMixin, forms.ModelForm):
 		self.fields['pieces_recues'].queryset = self.pieces_qs()
 
 
+
+
 # Dictionnaire qui à chaque modèle de fiche associe le formulaire
 # d'édition qui doit être présenté aux candidats.
 candidat_form = {
@@ -679,7 +705,8 @@ candidat_form = {
 		fiches.FicheReglement: ReglementForm,
 		fiches.FicheHebergement: HebergementForm,
 		fiches.FicheScolarite: ScolariteForm,
-		fiches.FichePieceJustificative: PieceJustificativeForm
+		fiches.FichePieceJustificative: PieceJustificativeForm,
+		fiches.FichePieceJustificativeSuivi: PieceJustificativeSuiviForm
 	}
 
 # Dictionnaire qui à chaque modèle de fiche associe le formulaire

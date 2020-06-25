@@ -88,7 +88,7 @@ class EtudiantHomeView(CandidatFicheMixin, DetailView):
 
 		redirect_after_save = True
 		for fiche in fiches:
-			if fiche.form:
+			if fiche.fiche.validation_candidat and fiche.form:
 				if fiche.form.is_valid():
 					fiche.form.save()
 				else:

@@ -27,4 +27,4 @@ from .parcoursup import ParcoursupUserManager, ParcoursupUser, \
 from .fiches import Fiche, FicheIdentite, FicheScolarite, \
 		FicheHebergement, FicheScolariteAnterieure, BulletinScolaire, \
 		FicheBourse, FicheReglement, FicheInternat, FicheCesure, \
-		FichePieceJustificative, EnteteFiche
+		FichePieceJustificative, FichePieceJustificativeSuivi, EnteteFiche

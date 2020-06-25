@@ -1,0 +1,18 @@
+{% extends 'fiche/fiche_base_candidat.html' %}
+{% block fiche_content %}
+  {% if not fiche_form.entete %}
+    <p>Cette fiche sera remplie par le secrétariat de l'établissement, vous ne pouvez pas la
+    modifier. Elle lui permettra d'accuser réception de vos pièces justificatives.</p>
+  {% endif %}
+
+  {{ fiche_form.as_p }}
+
+  {% if fiche.etat == fiche.ETAT_EDITION %}
+    <p>
+    {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide and not fiche_form.errors %}
+    {% endif %}
+    </p>
+  {% endif %}
+  {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide %}
+  {% endif %}
+{% endblock %}

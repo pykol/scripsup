@@ -37,7 +37,7 @@ class ChampExclu(models.Model):
 		ancienne_liste = cls.objects.all()
 		nouvelle_liste = []
 		for fiche in all_fiche:
-			if fiche._meta.model_name != 'fichepiecejustificative':
+			if not fiche._meta.model_name in ('fichepiecejustificative', 'fichepiecejustificativesuivi'):
 				for field in fiche._meta.get_fields():
 					if not field.name in ('id', 'polymorphic_ctype', 'valide', 'fiche_ptr', 'etat', 'candidat'):
 						item, created = cls.objects.get_or_create(

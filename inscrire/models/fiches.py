@@ -145,6 +145,7 @@ class Fiche(PolymorphicModel):
 	utilisateur.
 	"""
 	FICHE_LABEL = "Données d'inscription"
+	validation_candidat = True # si False, seule l'administration peut valider la fiche
 	valide = models.BooleanField(default=False)
 	candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
 
@@ -519,6 +520,11 @@ class FichePieceJustificative(Fiche):
 			OK = OK and piece in recues
 		self.valide = OK
 
+class FichePieceJustificativeSuivi(FichePieceJustificative):
+	"""Suivi des pièces justificatives par l'administration"""
+	FICHE_LABEL = "Pièces justificatives -- Suivi"
+	validation_candidat = False
+
 
 class FicheHebergement(Fiche):
 	"""
@@ -601,6 +607,7 @@ all_fiche = [
 		FicheBourse,
 		FicheReglement,
 		FichePieceJustificative,
+		FichePieceJustificativeSuivi,
 	]
 
 
