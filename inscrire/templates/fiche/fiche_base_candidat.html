@@ -34,7 +34,6 @@ le gabarit qui inclut la fiche.
   {{ fiche_form.media }}
   {% if fiche.etat == fiche.ETAT_EDITION %}
   <p>
-  <input type="submit" value="Enregistrer">
   {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide and not fiche_form.errors %}
   <input type="submit" form="form-valider-fiche-{{ fiche.pk }}" class="valider-fiche" value="Valider">
   {% endif %}

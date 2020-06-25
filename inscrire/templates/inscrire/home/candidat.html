@@ -50,5 +50,6 @@ administrative.
   {% for fiche in fiches %}
     {% include fiche.template with fiche=fiche.fiche fiche_form=fiche.form candidat=fiche.fiche.voeu.candidat voeu=fiche.fiche.voeu formation=fiche.fiche.voeu.formation %}
   {% endfor %}
+  <input type="submit" value="Enregistrer">
 </form>
 {% endblock %}
