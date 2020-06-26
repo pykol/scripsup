@@ -9,10 +9,14 @@ proposition d'admission en {{ voeu.formation }}. Ce site va vous
 permettre de compléter en ligne votre dossier d'inscription
 administrative. Pour commencer, lisez attentivement les instructions qui suivent:</p>
 <p>Le formulaire est divisé en fiches. Pour enregistrer des informations
-dans une ou plusieurs fiches, il faut cliquer sur le bouton ENREGISTRER, tout en bas de la page.
-Lorsqu'une fiche est complète, un bouton rouge CONFIRMER apparaît. Si vous cliquez
-dessus, la fiche est confirmée: vous ne pourrez plus la modifier (mais les
-fiches non confirmée restent modifiables). Votre inscription
+dans une ou plusieurs fiches, cliquer sur l'un des boutons ENREGISTRER.
+Ces boutons sont équivalents: si vous modifiez les données de plusieurs fiches,
+cliquer sur le bouton ENREGISTRER de l'une d'entre elles enregistrera les modifications
+de toutes les fiches.
+Lorsqu'une fiche est complète, un bouton CONFIRMER apparaît.
+En cliquant dessus, vous confirmez la fiche: vous ne pourrez plus la modifier (mais les
+fiches non confirmée restent modifiables: les boutons CONFIRMER sont, eux, spécifiques
+à chaque fiche). Votre inscription
 sera complète lorsque toutes les fiches seront confirmées.
 </p>
 
@@ -56,6 +60,5 @@ sera complète lorsque toutes les fiches seront confirmées.
   {% for fiche in fiches %}
     {% include fiche.template with fiche=fiche.fiche fiche_form=fiche.form candidat=fiche.fiche.voeu.candidat voeu=fiche.fiche.voeu formation=fiche.fiche.voeu.formation %}
   {% endfor %}
-  <input type="submit" value="Enregistrer">
 </form>
 {% endblock %}
