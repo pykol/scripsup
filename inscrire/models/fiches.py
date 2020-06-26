@@ -498,7 +498,7 @@ class FichePieceJustificative(Fiche):
 	"""
 	Choix des pièces justificatives dans la formation
 	"""
-	FICHE_LABEL = "Pièces justificatives"
+	FICHE_LABEL = "Pièces justificatives -- Envoi"
 	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
 	pieces_recues = models.ManyToManyField(PieceJustificative, blank = True)
 
@@ -510,8 +510,8 @@ class FichePieceJustificative(Fiche):
 		super().save(*args, **kwargs)
 
 	class Meta:
-		verbose_name = "fiche pièces justificatives"
-		verbose_name_plural = "fiches pièces justificatives"
+		verbose_name = "fiche pièces justificatives -- envoi"
+		verbose_name_plural = "fiches pièces justificatives -- envoi"
 
 	def valider(self):
 		recues = self.pieces_recues.all()
@@ -520,10 +520,31 @@ class FichePieceJustificative(Fiche):
 			OK = OK and piece in recues
 		self.valide = OK
 
-class FichePieceJustificativeSuivi(FichePieceJustificative):
+class FichePieceJustificativeSuivi(Fiche):
 	"""Suivi des pièces justificatives par l'administration"""
 	FICHE_LABEL = "Pièces justificatives -- Suivi"
 	validation_candidat = False
+
+	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
+	pieces_recues = models.ManyToManyField(PieceJustificative, blank = True)
+
+	def recyclable(self, voeu):
+		return voeu.formation == self.formation
+
+	def save(self, *args, **kwargs):
+		self.formation = self.candidat.voeu_actuel.formation
+		super().save(*args, **kwargs)
+
+	class Meta:
+		verbose_name = "fiche pièces justificatives -- suivi"
+		verbose_name_plural = "fiches pièces justificatives -- suivi"
+
+	def valider(self):
+		recues = self.pieces_recues.all()
+		OK = True
+		for piece in PieceJustificative.obligatoire(self.formation):
+			OK = OK and piece in recues
+		self.valide = OK
 
 
 class FicheHebergement(Fiche):
