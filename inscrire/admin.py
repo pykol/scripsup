@@ -136,14 +136,35 @@ class EnteteFicheAdmin(admin.ModelAdmin):
 	list_display = ['fiche', 'etablissement', 'formation', 'texte',]
 	list_editable = ['texte',]
 
-admin.site.register(FicheScolarite)
-admin.site.register(FicheHebergement)
-admin.site.register(FicheScolariteAnterieure)
+@admin.register(FicheScolarite)
+class FicheScolariteAdmin(admin.ModelAdmin):
+	list_display = ('candidat',)
+
+@admin.register(FicheHebergement)
+class FicheHebergementAdmin(admin.ModelAdmin):
+	list_display = ('candidat',)
+
+@admin.register(FicheScolariteAnterieure)
+class FicheScolariteAnterieureAdmin(admin.ModelAdmin):
+	list_display = ('candidat',)
+
+@admin.register(FicheBourse)
+class FicheBourseAdmin(admin.ModelAdmin):
+	list_display = ('candidat',)
+
+@admin.register(FicheReglement)
+class FicheReglementAdmin(admin.ModelAdmin):
+	list_display = ('candidat',)
+
+@admin.register(FicheInternat)
+class FicheInternatAdmin(admin.ModelAdmin):
+	list_display = ('candidat',)
+
+@admin.register(FicheCesure)
+class FicheCesureAdmin(admin.ModelAdmin):
+	list_display = ('candidat',)
+
 admin.site.register(BulletinScolaire)
-admin.site.register(FicheBourse)
-admin.site.register(FicheReglement)
-admin.site.register(FicheInternat)
-admin.site.register(FicheCesure)
 admin.site.register(FichePieceJustificative)
 admin.site.register(FichePieceJustificativeSuivi)
 admin.site.register(ChampExclu)
