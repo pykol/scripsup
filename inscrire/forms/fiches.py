@@ -121,7 +121,7 @@ class IdentiteFicheForm(FicheValiderMixin, forms.ModelForm):
 
 	def clean_photo(self, *args, **kwargs):
 		photo = self.cleaned_data['photo']
-		if 'file' in photo.__dict__:
+		if photo and 'file' in photo.__dict__:
 			etablissement =  self.instance.candidat.voeu_actuel.formation.etablissement
 			if photo.content_type != 'image/jpeg':
 				raise forms.ValidationError("Le fichier photo doit être au format .jpg")

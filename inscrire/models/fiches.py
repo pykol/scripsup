@@ -266,7 +266,7 @@ class FicheIdentite(Fiche):
 	def valider(self):
 		exclus = self.exclus
 		self.valide = (
-			('photo' in exclus or self.photo is not None) and
+			('photo' in exclus or bool(self.photo)) and
 			('piece_identite' in exclus or self.piece_identite is not None) and
 			('commune_naissance' in exclus or (self.commune_naissance is not None or
 				bool(self.commune_naissance_etranger))) and
