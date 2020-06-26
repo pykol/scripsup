@@ -35,7 +35,7 @@ le gabarit qui inclut la fiche.
   {% if fiche.etat == fiche.ETAT_EDITION %}
   <p>
   {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide and not fiche_form.errors %}
-  <input type="submit" form="form-valider-fiche-{{ fiche.pk }}" class="valider-fiche" value="Valider">
+  <input type="submit" form="form-valider-fiche-{{ fiche.pk }}" class="valider-fiche" value="Confirmer">
   {% endif %}
   </p>
   {% endif %}
