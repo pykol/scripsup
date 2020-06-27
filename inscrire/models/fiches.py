@@ -148,6 +148,7 @@ class Fiche(PolymorphicModel):
 	validation_candidat = True # si False, seule l'administration peut valider la fiche
 	valide = models.BooleanField(default=False)
 	candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
+	date_modification = models.DateTimeField(auto_now=True)
 
 	ETAT_EDITION = 1
 	ETAT_CONFIRMEE = 2

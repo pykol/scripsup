@@ -147,6 +147,7 @@ class Candidat(Personne):
 			max_length=11, verbose_name="INE (numéro d'étudiant)",
 			unique=True)
 	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	date_creation = models.DateTimeField(auto_now_add=True)
 
 	# Informations concernant le baccalauréat
 	bac_date = models.DateField(blank=True,
