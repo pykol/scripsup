@@ -100,6 +100,11 @@ class Etablissement(models.Model):
 	def __str__(self):
 		return "{} {}".format(self.numero_uai, self.nom)
 
+	@cached_property
+	def fiches_a_valider(self):
+		from .fiches import all_fiche_validation_candidat
+		return [fiche for fiche in all_fiche_validation_candidat if ContentType.objects.get_for_model(fiche) in self.fiches.all()]
+
 
 class Formation(models.Model):
 	"""
@@ -157,10 +162,10 @@ class Formation(models.Model):
 	def fiches_incompletes(self):
 		"""Queryset des fiches que le candidat
 		doit compléter et non complètes"""
-		from .fiches import Fiche, all_fiche_validation_candidat
+		from .fiches import Fiche
 		return Fiche.objects.filter(reduce(or_,
 			[models.Q(**{"{}__etat".format(fiche._meta.model_name):Fiche.ETAT_EDITION})
-				for fiche in all_fiche_validation_candidat]))
+				for fiche in self.etablissement.fiches_a_valider]))
 
 	def candidats_incomplets(self):
 		"""
