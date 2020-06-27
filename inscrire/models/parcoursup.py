@@ -281,6 +281,10 @@ class Voeu(EtatVoeu):
 	class Meta:
 		verbose_name = "vœu"
 		verbose_name_plural = "vœux"
+		constraints = [models.UniqueConstraint(fields=['candidat',],
+			condition=models.Q(etat__in=(EtatVoeu.ETAT_ACCEPTE_AUTRES,
+				EtatVoeu.ETAT_ACCEPTE_DEFINITIF)),
+			name='unique_voeu_accepte'),]
 
 	def __str__(self):
 		return self.formation.__str__()
