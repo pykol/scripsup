@@ -98,6 +98,7 @@ class InscrireUser(AbstractUser):
 	ROLE_INTENDANCE = 5
 	ROLE_ETUDIANT = 6
 	ROLE_PARCOURSUP = 7
+	ROLE_ADMINISTRATEUR = 8
 	ROLE_CHOICES = (
 			(ROLE_DIRECTION, "direction"),
 			(ROLE_SECRETARIAT, "secrétariat"),
@@ -114,4 +115,8 @@ class InscrireUser(AbstractUser):
 		return self.role in (InscrireUser.ROLE_DIRECTION,
 				InscrireUser.ROLE_SECRETARIAT,
 				InscrireUser.ROLE_VIESCOLAIRE,
-				InscrireUser.ROLE_INTENDANCE)
+				InscrireUser.ROLE_INTENDANCE,
+				InscrireUser.ROLE_ADMINISTRATEUR)
+
+	def est_administrateur(self):
+		return self.role==InscrireUser.ROLE_ADMINISTRATEUR
