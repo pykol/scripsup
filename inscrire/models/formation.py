@@ -21,9 +21,11 @@ from functools import reduce
 
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
+from django.utils.functional import cached_property
 
 from .fields import Lettre23Field
 from .personnes import Candidat
+
 
 class ChampExclu(models.Model):
 	"""Champ à exclure"""
@@ -98,6 +100,11 @@ class Etablissement(models.Model):
 	def __str__(self):
 		return "{} {}".format(self.numero_uai, self.nom)
 
+	@cached_property
+	def fiches_a_valider(self):
+		from .fiches import all_fiche_validation_candidat
+		return [fiche for fiche in all_fiche_validation_candidat if ContentType.objects.get_for_model(fiche) in self.fiches.all()]
+
 
 class Formation(models.Model):
 	"""
@@ -151,19 +158,26 @@ class Formation(models.Model):
 				voeu__etat__in=(Voeu.ETAT_ACCEPTE_AUTRES,
 					Voeu.ETAT_ACCEPTE_DEFINITIF))
 
+	@cached_property
+	def fiches_incompletes(self):
+		"""Queryset des fiches que le candidat
+		doit compléter et non complètes"""
+		from .fiches import Fiche
+		return Fiche.objects.filter(reduce(or_,
+			[models.Q(**{"{}__etat".format(fiche._meta.model_name):Fiche.ETAT_EDITION})
+				for fiche in self.etablissement.fiches_a_valider]))
+
 	def candidats_incomplets(self):
 		"""
 		Liste des candidats dont le dossier n'est pas encore complet
 		"""
-		from .fiches import Fiche
-		return self.candidats().filter(fiche__etat=Fiche.ETAT_EDITION).distinct()
+		return self.candidats().filter(fiche__in=self.fiches_incompletes).distinct()
 
 	def candidats_complets(self):
 		"""
 		Liste des candidats dont le dossier est complet
 		"""
-		from .fiches import Fiche
-		return self.candidats().exclude(fiche__etat=Fiche.ETAT_EDITION).distinct()
+		return self.candidats().exclude(fiche__in = self.fiches_incompletes).distinct()
 
 class MefMatiere(models.Model):
 	"""

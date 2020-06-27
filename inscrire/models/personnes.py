@@ -147,6 +147,7 @@ class Candidat(Personne):
 			max_length=11, verbose_name="INE (numéro d'étudiant)",
 			unique=True)
 	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	date_creation = models.DateTimeField(auto_now_add=True)
 
 	# Informations concernant le baccalauréat
 	bac_date = models.DateField(blank=True,
@@ -183,6 +184,12 @@ class Candidat(Personne):
 		from .parcoursup import Voeu # Import ici, sinon dépendance circulaire
 		return self.voeu_set.get(etat__in=(Voeu.ETAT_ACCEPTE_AUTRES,
 			Voeu.ETAT_ACCEPTE_DEFINITIF))
+
+	@property
+	def date_modification(self):
+		from .fiches import Fiche
+		return Fiche.objects.filter(candidat = self).aggregate(
+				date=models.Max('date_modification'))['date']
 
 	def email_bienvenue(self, request, force=False):
 		"""

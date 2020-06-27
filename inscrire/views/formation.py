@@ -20,6 +20,8 @@ from django.views.generic import ListView, DetailView, View, FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.db.models import Value
+from django.db import models
 
 from inscrire.models import Formation, Candidat, Voeu, MefOption
 from .permissions import AccessDirectionMixin, AccessGestionnaireMixin
@@ -40,11 +42,11 @@ class FormationDetailView(AccessDirectionMixin, DetailView):
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['candidat_list'] = Candidat.objects.filter(
-				voeu__etat__in=(Voeu.ETAT_ACCEPTE_AUTRES,
-					Voeu.ETAT_ACCEPTE_DEFINITIF),
-				voeu__formation=self.object,
-			).order_by('last_name', 'first_name')
+		candidats_complets = self.object.candidats_complets().annotate(
+			complet = Value(True, output_field = models.BooleanField()))
+		candidats_incomplets = self.object.candidats_incomplets().annotate(
+			complet = Value(False, output_field = models.BooleanField()))
+		context["candidat_list"] = candidats_complets.union(candidats_incomplets).order_by('last_name', 'first_name')
 		context['formation_form'] = FormationForm(prefix='formation',
 				instance=self.object)
 		context['option_formset'] = OptionActiverFormset(prefix='options',

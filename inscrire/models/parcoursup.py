@@ -16,7 +16,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from django.db import models
+import logging
+
+from django.db import models, transaction
 from django.conf import settings
 
 from inscrire.lib.parcoursup_rest import ParcoursupCandidat, \
@@ -24,6 +26,8 @@ from inscrire.lib.parcoursup_rest import ParcoursupCandidat, \
 from .personnes import Candidat, Pays, Commune, ResponsableLegal
 from .formation import Etablissement, Formation
 from .fiches import Fiche
+
+logger = logging.getLogger(__name__)
 
 class ParcoursupUserManager(models.Manager):
 	def authenticate(self, username, password):
@@ -181,10 +185,11 @@ class ParcoursupUser(models.Model):
 		res = []
 		for candidat in self.parcoursup_rest.get_candidats_admis():
 			try:
-				res.append(self.import_candidat(candidat))
+				with transaction.atomic():
+					res.append(self.import_candidat(candidat))
 			except Exception as e:
-				# TODO reporting à l'admin
-				pass
+				logger.exception("Erreur à l'importation d'un candidat "
+					"depuis Parcoursup")
 		return res
 
 	def get_candidat_admis(self, code_candidat):
