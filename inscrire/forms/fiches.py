@@ -75,10 +75,10 @@ class FicheValiderMixin:
 		except EnteteFiche.DoesNotExist:
 			return ""
 		return entete.format(
-		email = href(formation.email_defaut),
-		email_pj = href(formation.email_pj),
-		email_etablissement = href(etablissement.email),
-		adresse = etablissement.adresse)
+			email = href(formation.email_defaut),
+			email_pj = href(formation.email_pj),
+			email_etablissement = href(etablissement.email),
+			adresse = etablissement.adresse)
 
 
 class IdentiteFicheForm(FicheValiderMixin, forms.ModelForm):
@@ -119,9 +119,31 @@ class IdentiteFicheForm(FicheValiderMixin, forms.ModelForm):
 				"rapidement le pays."
 		}
 
+	def clean_photo(self, *args, **kwargs):
+		photo = self.cleaned_data['photo']
+		if photo and 'file' in photo.__dict__:
+			etablissement =  self.instance.candidat.voeu_actuel.formation.etablissement
+			if photo.content_type != 'image/jpeg':
+				raise forms.ValidationError("Le fichier photo doit être au format .jpg")
+			if photo.size > 1024*etablissement.photo_size_max:
+				raise forms.ValidationError(
+					"Le poids maximal du fichier photo est de {}ko. Le vôtre fait {}ko.".format(
+						etablissement.photo_size_max, int(photo.size/1024)))
+			largeur, hauteur = photo.image.size
+			try:
+				ratio = hauteur/largeur
+			except:
+				raise forms.ValidationError("Fichier non valide")
+			ratio_etablissement = etablissement.photo_hauteur/etablissement.photo_largeur
+			if abs(ratio - ratio_etablissement) > ratio_etablissement*etablissement.tolerance_ratio/100:
+				raise forms.ValidationError(
+					"Le rapport largeur/hauteur de votre fichier photo doit être environ {}/{}".format(
+						etablissement.photo_largeur, etablissement.photo_hauteur))
+		return photo
+
 ResponsablesForm = forms.inlineformset_factory(
 		Candidat, ResponsableLegal,
-		fields=('genre', 'last_name', 'first_name',
+		fields=('last_name', 'first_name',
 			'lien', 'lien_precision',
 			'adresse', 'telephone', 'telephone_mobile',
 			'email',
@@ -296,7 +318,7 @@ class IdentiteForm(FicheValiderMixin):
 
 	def as_p(self):
 		"Return this formset rendered as HTML <p>s."
-		return mark_safe(' '.join(form.as_p() for form in self))
+		return mark_safe('<hr>'.join(form.as_p() for form in self))
 
 	def as_ul(self):
 		"Return this formset rendered as HTML <li>s."
@@ -634,6 +656,30 @@ class PieceJustificativeForm(FicheValiderMixin, forms.ModelForm):
 			'pieces_recues': forms.CheckboxSelectMultiple,
 		}
 		labels = {
+			'pieces_recues': "Pièces envoyées",
+		}
+
+	def pieces_qs(self):
+		"""Pieces à envoyer"""
+		return PieceJustificative.objects.filter(
+			models.Q(formation=self.instance.candidat.voeu_actuel.formation)|
+			models.Q(etablissement=self.instance.candidat.voeu_actuel.formation.etablissement))
+
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['pieces_recues'].queryset = self.pieces_qs()
+
+
+class PieceJustificativeSuiviForm(FicheValiderMixin, forms.ModelForm):
+	prefix="fiche-piecejustificativesuivi"
+
+	class Meta:
+		model = fiches.FichePieceJustificativeSuivi
+		fields = ['pieces_recues',]
+		widgets = {
+			'pieces_recues': forms.CheckboxSelectMultiple,
+		}
+		labels = {
 			'pieces_recues': "Pièces reçues",
 		}
 
@@ -648,6 +694,8 @@ class PieceJustificativeForm(FicheValiderMixin, forms.ModelForm):
 		self.fields['pieces_recues'].queryset = self.pieces_qs()
 
 
+
+
 # Dictionnaire qui à chaque modèle de fiche associe le formulaire
 # d'édition qui doit être présenté aux candidats.
 candidat_form = {
@@ -657,7 +705,8 @@ candidat_form = {
 		fiches.FicheReglement: ReglementForm,
 		fiches.FicheHebergement: HebergementForm,
 		fiches.FicheScolarite: ScolariteForm,
-		fiches.FichePieceJustificative: PieceJustificativeForm
+		fiches.FichePieceJustificative: PieceJustificativeForm,
+		fiches.FichePieceJustificativeSuivi: PieceJustificativeSuiviForm
 	}
 
 # Dictionnaire qui à chaque modèle de fiche associe le formulaire

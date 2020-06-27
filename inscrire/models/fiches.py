@@ -145,6 +145,7 @@ class Fiche(PolymorphicModel):
 	utilisateur.
 	"""
 	FICHE_LABEL = "Données d'inscription"
+	validation_candidat = True # si False, seule l'administration peut valider la fiche
 	valide = models.BooleanField(default=False)
 	candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
 
@@ -265,7 +266,7 @@ class FicheIdentite(Fiche):
 	def valider(self):
 		exclus = self.exclus
 		self.valide = (
-			('photo' in exclus or self.photo is not None) and
+			('photo' in exclus or bool(self.photo)) and
 			('piece_identite' in exclus or self.piece_identite is not None) and
 			('commune_naissance' in exclus or (self.commune_naissance is not None or
 				bool(self.commune_naissance_etranger))) and
@@ -497,7 +498,7 @@ class FichePieceJustificative(Fiche):
 	"""
 	Choix des pièces justificatives dans la formation
 	"""
-	FICHE_LABEL = "Pièces justificatives"
+	FICHE_LABEL = "Pièces justificatives -- Envoi"
 	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
 	pieces_recues = models.ManyToManyField(PieceJustificative, blank = True)
 
@@ -509,8 +510,34 @@ class FichePieceJustificative(Fiche):
 		super().save(*args, **kwargs)
 
 	class Meta:
-		verbose_name = "fiche pièces justificatives"
-		verbose_name_plural = "fiches pièces justificatives"
+		verbose_name = "fiche pièces justificatives -- envoi"
+		verbose_name_plural = "fiches pièces justificatives -- envoi"
+
+	def valider(self):
+		recues = self.pieces_recues.all()
+		OK = True
+		for piece in PieceJustificative.obligatoire(self.formation):
+			OK = OK and piece in recues
+		self.valide = OK
+
+class FichePieceJustificativeSuivi(Fiche):
+	"""Suivi des pièces justificatives par l'administration"""
+	FICHE_LABEL = "Pièces justificatives -- Suivi"
+	validation_candidat = False
+
+	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
+	pieces_recues = models.ManyToManyField(PieceJustificative, blank = True)
+
+	def recyclable(self, voeu):
+		return voeu.formation == self.formation
+
+	def save(self, *args, **kwargs):
+		self.formation = self.candidat.voeu_actuel.formation
+		super().save(*args, **kwargs)
+
+	class Meta:
+		verbose_name = "fiche pièces justificatives -- suivi"
+		verbose_name_plural = "fiches pièces justificatives -- suivi"
 
 	def valider(self):
 		recues = self.pieces_recues.all()
@@ -601,6 +628,7 @@ all_fiche = [
 		FicheBourse,
 		FicheReglement,
 		FichePieceJustificative,
+		FichePieceJustificativeSuivi,
 	]
 
 

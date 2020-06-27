@@ -26,14 +26,23 @@ votre inscription dans les délais fixés par Parcoursup, nous serons
 obligés de libérer votre place pour la proposer à un autre candidat
 encore sur liste d'attente.</p>
 
-<p>En cas de souci, qu'il soit d'ordre technique ou administratif, vous
-pouvez contacter le service en charge des inscriptions à l'adresse
-{% if formation.email %}
-  <a href="mailto:{{ formation.email }}">{{ formation.email }}</a>,
-{% else %}
-  <a href="mailto:{{ formation.etablissement.email }}">{{ formation.etablissement.email }}</a>,
-{% endif %}
-ou simplement en répondant au message actuel.</p>
+{% with etablissement=formation.etablissement %}
+  {% if etablissement.email_technique %}
+    <p>En cas de souci d'ordre technique, vous
+      pouvez contacter le service technique à l'adresse
+      <a href="mailto:{{ etablissement.email_technique }}">{{ etablissement.email_technique }}</a>.
+    </p>
+    <p>En cas de problème d'ordre pédagogique, vous
+      pouvez vous adresser à <a href="mailto:{{ formation.email_defaut }}">{{ formation.email_defaut }}</a>,
+    </p>
+  {% else %}
+    <p>En cas de souci, qu'il soit d'ordre technique ou administratif, vous
+      pouvez contacter le service en charge des inscriptions à l'adresse
+      <a href="mailto:{{ formation.email_defaut }}">{{ formation.email_defaut }}</a>
+    ou simplement en répondant au message actuel.
+    </p>
+  {% endif %}
 
-<p>Veuillez agréer nos cordiales salutations.</p>
-<p><em>{{ formation.etablissement }}</em></p>
+  <p>Veuillez agréer nos cordiales salutations.</p>
+  <p><em>{{ etablissement }}</em></p>
+{% endwith %}

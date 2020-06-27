@@ -25,16 +25,21 @@ votre inscription dans les délais fixés par Parcoursup, nous serons
 obligés de libérer votre place pour la proposer à un autre candidat
 encore sur liste d'attente.
 
+
+{% with etablissement=formation.etablissement %}
+  {% if etablissement.email_technique %}
+En cas de souci d'ordre technique, vous pouvez contacter le service
+technique à l'adresse {{ etablissement.email_technique }}.
+
+En cas de problème d'ordre pédagogique, vous pouvez vous adresser
+à {{ formation.email_defaut }}.
+  {% else %}
 En cas de souci, qu'il soit d'ordre technique ou administratif, vous
 pouvez contacter le service en charge des inscriptions à l'adresse
-{% if formation.email %}
-  {{ formation.email}},
-{% else %}
-  {{ formation.etablissement.email }},
-{% endif %}
-ou simplement en répondant au message
-actuel.
+{{ formation.email_defaut }},
+ou simplement en répondant au message actuel.</p>
+  {% endif %}
 
-Veuillez agréer nos cordiales salutations.
--- 
-{{ formation.etablissement }}
+  <p>Veuillez agréer nos cordiales salutations.</p>
+  <p><em>{{ etablissement }}</em></p>
+{% endwith %}

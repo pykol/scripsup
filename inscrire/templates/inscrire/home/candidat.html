@@ -7,7 +7,17 @@
 Bienvenue sur le service d'inscription en ligne. Vous avez accepté une
 proposition d'admission en {{ voeu.formation }}. Ce site va vous
 permettre de compléter en ligne votre dossier d'inscription
-administrative.
+administrative. Pour commencer, lisez attentivement les instructions qui suivent:</p>
+<p>Le formulaire est divisé en fiches. Pour enregistrer des informations
+dans une ou plusieurs fiches, cliquer sur l'un des boutons ENREGISTRER.
+Ces boutons sont équivalents: si vous modifiez les données de plusieurs fiches,
+cliquer sur le bouton ENREGISTRER de l'une d'entre elles enregistrera les modifications
+de toutes les fiches.
+Lorsqu'une fiche est complète, un bouton CONFIRMER apparaît.
+En cliquant dessus, vous confirmez la fiche: vous ne pourrez plus la modifier (mais les
+fiches non confirmée restent modifiables: les boutons CONFIRMER sont, eux, spécifiques
+à chaque fiche). Votre inscription
+sera complète lorsque toutes les fiches seront confirmées.
 </p>
 
 <section id='infos-parcoursup'>
@@ -38,12 +48,17 @@ administrative.
   </ul>
 </section>
 
-{% for fiche in fiches %}{% if fiche.fiche.etat == fiche.fiche.ETAT_EDITION and fiche.fiche.valide %}<form method="post" action="{% url 'fiche-valider' fiche.fiche.pk %}" id='form-valider-fiche-{{fiche.fiche.pk}}'>{% csrf_token %}</form>{% endif %}{% endfor %}
+{% for fiche in fiches %}
+  {% if fiche.fiche.etat == fiche.fiche.ETAT_EDITION and fiche.fiche.valide %}
+    <form method="post" action="{% url 'fiche-valider' fiche.fiche.pk %}" id='form-valider-fiche-{{fiche.fiche.pk}}'>
+      {% csrf_token %}
+    </form>
+  {% endif %}
+{% endfor %}
 <form method="post" action="{% url 'home' %}" enctype="multipart/form-data">
   {% csrf_token %}
-
   {% for fiche in fiches %}
-  {% include fiche.template with fiche=fiche.fiche fiche_form=fiche.form candidat=fiche.fiche.voeu.candidat voeu=fiche.fiche.voeu formation=fiche.fiche.voeu.formation %}
+    {% include fiche.template with fiche=fiche.fiche fiche_form=fiche.form candidat=fiche.fiche.voeu.candidat voeu=fiche.fiche.voeu formation=fiche.fiche.voeu.formation %}
   {% endfor %}
 </form>
 {% endblock %}

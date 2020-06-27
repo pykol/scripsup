@@ -23,7 +23,7 @@ from django.views.generic import View, TemplateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
 
 from inscrire.models import InscrireUser, Candidat, Formation, \
-		ParcoursupUser
+		ParcoursupUser, Fiche
 from inscrire.forms.formation import ImportParcoursupForm
 from .candidats import CandidatFicheMixin
 
@@ -85,10 +85,9 @@ class EtudiantHomeView(CandidatFicheMixin, DetailView):
 		# Reconstruire les formulaires, vérifier, sauvegarder.
 		self.object = self.get_object()
 		fiches = self.get_fiches()
-
 		redirect_after_save = True
 		for fiche in fiches:
-			if fiche.form:
+			if fiche.fiche.validation_candidat and fiche.fiche.etat == Fiche.ETAT_EDITION and fiche.form:
 				if fiche.form.is_valid():
 					fiche.form.save()
 				else:

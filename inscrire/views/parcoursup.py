@@ -182,13 +182,7 @@ class AdmissionView(ParcoursupClientView):
 	def parcoursup(self, msg_log=None):
 		donnees = self.json.get('donneesCandidat', self.json) # Bug 2019 Parcoursup
 		psup = ParcoursupRest.parse_parcoursup_admission(donnees)
-		candidat = ParcoursupUser.objects.get(etablissement__numero_uai=psup['proposition'].code_etablissement).import_candidat(psup)
+		candidat = self.user.import_candidat(psup)
 		# Envoi de l'e-mail de bienvenue
-		try:
-			candidat.email_bienvenue(self.request)
-		except Exception as e:
-			import traceback
-			traceback.print_exception(type(e), e, None)
-			raise e
-
+		candidat.email_bienvenue(self.request)
 		return self.json_response(True, msg_log=msg_log)

@@ -78,22 +78,22 @@ input[type="submit"],.button {
   padding: 0.4rem 0.8rem;
   font-size: 1rem;
   text-transform: uppercase;
-  background: $red;
+  background: $green;
   color: #fff;
   border: 0;
   cursor: pointer;
   &:focus,
-  &:hover {background: darken($red, 7%);}
+  &:hover {background: darken($green, 7%);}
   &:active {background: #c10000;}
 }
 
 input[type="submit"].valider-fiche {
   &:focus,
   &:hover {
-    background: darken($green, 7%);
+    background: darken($red, 7%);
   }
   &, &:active {
-    background: $green;
+    background: $red;
   }
 }
 
