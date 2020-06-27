@@ -185,6 +185,12 @@ class Candidat(Personne):
 		return self.voeu_set.get(etat__in=(Voeu.ETAT_ACCEPTE_AUTRES,
 			Voeu.ETAT_ACCEPTE_DEFINITIF))
 
+	@property
+	def date_modification(self):
+		from .fiches import Fiche
+		return Fiche.objects.filter(candidat = self).aggregate(
+				date=models.Max('date_modification'))['date']
+
 	def email_bienvenue(self, request, force=False):
 		"""
 		Envoyer au candidat l'e-mail de bienvenue qui lui permet
