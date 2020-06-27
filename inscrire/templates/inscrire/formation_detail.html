@@ -8,15 +8,19 @@
     <thead>
       <tr>
         <th>Candidat</th>
-        <th>État du dossier</th>
+        <th>Dossier complet</th>
+        <th>Date modification</th>
+        <th>Date création</th>
       </tr>
     </thead>
     <tbody>
       {% for candidat in candidat_list %}
       <tr>
         <td><a href="{% url 'candidat_detail' candidat.pk %}">{{ candidat }}</a></td>
-        <td></td>
-      </tr>
+        {% if candidat.complet %}<td class="complet">OUI{% else %}<td class="incomplet">NON{% endif %}</td>
+      <td>{{candidat.date_modification}}</td>
+      <td>{{candidat.date_creation}}</td>
+    </tr>
     {% endfor %}
     </tbody>
   </table>
@@ -25,6 +29,7 @@
   {% endif %}
 </section>
 
+{% if user.est_administrateur %}
 <section>
   <h3>Paramétrage de la formation</h3>
   <form method="post" action="{% url 'formation_update' object.slug %}">
@@ -54,6 +59,6 @@
 
     <p><input type="submit" value="Enregistrer"></p>
   </form>
-
 </section>
+{% endif %}
 {% endblock %}

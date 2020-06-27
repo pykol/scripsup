@@ -8,6 +8,7 @@ $ghostWhite: #f8f8ff;
 $lightGrey: #d3d3d3;
 $green: #639a67;
 $orange: orange;
+$blue: blue;
 
 // Mixins
 @mixin transition($property) {transition: $property .25s;}
@@ -298,5 +299,12 @@ table {
   td, th {
     padding: 0.3rem 0.7rem;
     border: 1px solid #ccc;
+  }
+  td.complet {
+    color: $blue
+  }
+
+  td.incomplet {
+    color: $orange
   }
 }
