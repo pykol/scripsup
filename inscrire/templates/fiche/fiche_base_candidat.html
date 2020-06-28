@@ -22,12 +22,22 @@ Il n'est pas nécessaire d'ajouter une balise <form>, c'est déjà fait par
 le gabarit qui inclut la fiche.
 {% endcomment %}
 <section class="fiche {{ fiche.get_etat_class }}">
-  <h3>{{ fiche.FICHE_LABEL }} − <span class="fiche-etat">
-      {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide and not fiche_form.errors %}
-      Fiche complète, vous pouvez la valider
+  <h3>{{ fiche.FICHE_LABEL }} −
+    <span class="fiche-etat">
+      {% if fiche.validation_candidat %}
+        {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide and not fiche_form.errors %}
+          Fiche complète, vous pouvez la valider
+        {% else %}
+          {{ fiche.get_etat_display }}
+        {% endif %}
       {% else %}
-      {{ fiche.get_etat_display }}
-      {% endif %}</span></h3>
+        {% if fiche.etat == fiche.ETAT_CONFIRMEE or fiche.ETAT_TERMINEE and fiche.valide and not fiche_form.errors %}
+            Fiche traitée
+        {% else %}
+            Fiche en attente de traitement
+        {% endif %}
+      {% endif %}
+    </span></h3>
   {{fiche_form.entete|safe|linebreaks}}
   {% block fiche_content %}
   {{ fiche_form.as_p }}
