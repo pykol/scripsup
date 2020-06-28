@@ -62,8 +62,8 @@ class FicheValiderMixin:
 	def entete(self, *args, **kwargs):
 		"""Renvoie l'entete d'une fiche."""
 
-		def href(email):
-			return "<a href = 'mailto:{email}'>{email}</a>".format(email = email)
+		def href(email, sujet=""):
+			return "<a href = 'mailto:{email}?subject={sujet}'>{email}</a>".format(email = email, sujet=sujet)
 
 		contenttypefiche = ContentType.objects.get_for_model(self.instance)
 		formation = self.instance.candidat.voeu_actuel.formation
@@ -76,7 +76,7 @@ class FicheValiderMixin:
 			return ""
 		return entete.format(
 			email = href(formation.email_defaut),
-			email_pj = href(formation.email_pj),
+			email_pj = href(formation.email_pj, formation.sujet_email_pieces_justificatives),
 			email_etablissement = href(etablissement.email),
 			adresse = etablissement.adresse)
 

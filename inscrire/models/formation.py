@@ -130,6 +130,7 @@ class Formation(models.Model):
 	email_pieces_justificatives = models.EmailField(verbose_name="adresse e-mail pièces justificatives",
 			help_text="Adresse spécifique à cette formation à laquelle le candidat doit envoyer les pièces justificatives",
 			blank=True, null=False, default="")
+	sujet_email_pieces_justificatives = models.CharField(max_length = 100, default = "", blank = True)
 	slug = models.SlugField(unique=True)
 
 	# Code du module élémentaire de formation correspondant dans la
