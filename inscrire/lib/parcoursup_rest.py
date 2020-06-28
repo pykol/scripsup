@@ -210,9 +210,14 @@ class ParcoursupResponsableLegal(ParcoursupPersonne):
 			code_postal = donnees.get('codePostalRL{}'.format(rang),
 					donnees.get('codePostaleRL{}'.format(rang)))
 			code_pays = donnees['codePaysAdresseRL{}'.format(rang)]
+			nom = donnees['nomRL{}'.format(rang)]
+			prenom = donnees['prenomRL{}'.format(rang)]
+			if nom is None or prenom is None:
+				return None
+
 			return kls(
-				nom=donnees['nomRL{}'.format(rang)],
-				prenom=donnees['prenomRL{}'.format(rang)],
+				nom=nom,
+				prenom=prenom,
 				email=donnees['mailRL{}'.format(rang)],
 				telephone_fixe=donnees['telRL{}'.format(rang)],
 				telephone_mobile='',
