@@ -24,6 +24,7 @@ from django.views.generic import TemplateView, DetailView, UpdateView, \
 		View
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect
+from django.urls import reverse
 from django.template.loader import select_template
 from django.contrib.contenttypes.models import ContentType
 
@@ -32,18 +33,6 @@ from inscrire.models.fiches import Fiche, all_fiche
 from inscrire.forms.fiches import candidat_form
 from .permissions import AccessPersonnelMixin, AccessGestionnaireMixin
 
-class CandidatDetail(AccessPersonnelMixin, DetailView):
-	"""
-	Affiche les informations personnelles d'un candidat, à destination
-	des personnels de l'établissement.
-	"""
-	model = Candidat
-
-	def get_context_data(self, *args, **kwargs):
-		context = super().get_context_data(*args, **kwargs)
-		context["candidat"] = self.object
-		context["nombre_responsables"] = self.object.responsables.count()
-		return context
 
 class ResponsableLegal(AccessPersonnelMixin, DetailView):
 	"""
@@ -82,14 +71,18 @@ class CandidatFicheMixin:
 			except:
 				form = None
 
+
+			templates = [
+				'fiche/{}_gestionnaire.html'.format(fiche._meta.model_name),
+				'fiche/fiche_base_gestionnaire.html'
+						] if self.request.user.est_gestionnaire() else [
+				'fiche/{}_candidat.html'.format(fiche._meta.model_name),
+									'fiche/fiche_base_candidat.html'
+								]
 			fiches.append(FicheTpl(
 				fiche=fiche,
 				form=form,
-				template=select_template(
-					[
-						'fiche/{}_candidat.html'.format(fiche._meta.model_name),
-						'fiche/fiche_base_candidat.html'
-					])
+				template=select_template(templates)
 				))
 		fiches.sort(key=lambda fiche:
 				all_fiche.index(type(fiche.fiche)))
@@ -105,6 +98,54 @@ class CandidatFicheMixin:
 		context = super().get_context_data()
 		context['fiches'] = kwargs.get('fiches', self.get_fiches())
 		return context
+
+class CandidatDetail(AccessPersonnelMixin, CandidatFicheMixin, DetailView):
+	"""
+	Affiche les informations personnelles d'un candidat, à destination
+	des personnels de l'établissement.
+	"""
+	model = Candidat
+	context_object_name = 'candidat'
+
+	def get_context_data(self, *args, **kwargs):
+		context = super().get_context_data(*args, **kwargs)
+		context["nombre_responsables"] = self.object.responsables.count()
+		context['voeu'] = self.object.voeu_actuel
+		return context
+
+	def post(self, request, *args, **kwargs):
+		"""- Il y a un formulaire par fiche plus, le cas échéant, un formulaire
+		 	permettant de valider d'un coup toutes les fiches.
+			Les différents formulaires sont identifiés par la valeur du bouton
+			(Valider toutes les fiches, Valider, Editer, Enregistrer) et le champ
+			caché 'fiche'.
+		   - Editer remet la fiche dans l'état ETAT_EDITION
+		   - Valider met  la fiche dans l'état ETAT_TERMINEE
+		   - Enregistrer enregistre les données du formulaire
+		"""
+		candidat = self.get_object()
+		data = request.POST
+		if data['fonction'] == 'Valider toutes les fiches':
+			Fiche.objects.filter(candidat=candidat, etat=Fiche.ETAT_CONFIRMEE,
+				polymorphic_ctype__in = candidat.voeu_actuel.formation.etablissement.fiches.all()).update(etat=Fiche.ETAT_TERMINEE)
+			return redirect(reverse('candidat_detail',
+				args=[candidat.dossier_parcoursup]))
+		fiche = Fiche.objects.get(pk=int(data['fiche']))
+		if data['fonction'] == 'Valider':
+			fiche.etat = fiche.ETAT_TERMINEE
+			fiche.save()
+		elif data['fonction'] == 'Éditer':
+			fiche.etat = fiche.ETAT_EDITION
+			fiche.save()
+		elif data['fonction'] == 'Enregistrer':
+			form = candidat_form[type(fiche)](instance=fiche,
+							data=data,
+							files=self.request.FILES)
+			if form.is_valid():
+				form.save()
+		return redirect(reverse('candidat_detail',
+			args=[candidat.dossier_parcoursup])+'#fiche_{}'.format(fiche.pk))
+
 
 class CandidatUpdate(AccessGestionnaireMixin, CandidatFicheMixin, UpdateView):
 	"""

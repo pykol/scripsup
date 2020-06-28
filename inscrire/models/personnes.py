@@ -186,6 +186,14 @@ class Candidat(Personne):
 			Voeu.ETAT_ACCEPTE_DEFINITIF))
 
 	@property
+	def toutes_fiches_valides(self):
+		"""Indique si toutes les fiches du candidat sont valides
+		(y compris celles que l'établissement doit traiter)"""
+		from . import Fiche
+		return not Fiche.objects.filter(candidat=self, etat = Fiche.ETAT_EDITION,
+			polymorphic_ctype__in = self.voeu_actuel.formation.etablissement.fiches.all()).exists()
+
+	@property
 	def date_modification(self):
 		from .fiches import Fiche
 		return Fiche.objects.filter(candidat = self).aggregate(

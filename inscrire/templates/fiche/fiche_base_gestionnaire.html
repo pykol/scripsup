@@ -18,10 +18,28 @@ Ce gabarit peut utiliser les paramètres suivants de son contexte :
          à fiche.voeu)
 * formation : identique à fiche.voeu.formation
 
-Il n'est pas nécessaire d'ajouter une balise <form>, c'est déjà fait par
-le gabarit qui inclut la fiche.
 {% endcomment %}
-<section class="fiche">
-  <h3>{{ fiche.FICHE_LABEL }}</h3>
-  {{ fiche_form.as_p }}
+<section class="fiche {{ fiche.get_etat_class }}" id="fiche_{{fiche.pk}}">
+  <h3>{{ fiche.FICHE_LABEL }} − <span class="fiche-etat">
+      {{ fiche.get_etat_display }}</span></h3>
+      {% block fiche_content %}
+      <form method="post" action="" enctype="multipart/form-data" id="form-fiche-{{fiche.pk}}">
+        {% csrf_token %}
+        {{ fiche_form.as_p }}
+        {{ fiche_form.media }}
+        <input type="hidden" name="fiche" value={{fiche.pk}}>
+        {% if fiche.etat == fiche.ETAT_CONFIRMEE %}
+          <input type="submit" name = "fonction" value="Valider">
+        {% endif %}
+        {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide and not fiche_form.errors %}
+          <input type="submit" name = "fonction" value="Valider">
+        {% endif %}
+        {% if fiche.etat == fiche.ETAT_EDITION %}
+          <input type="submit" name = "fonction" value="Enregistrer">
+        {% endif %}
+        {% if fiche.etat == fiche.ETAT_TERMINEE or fiche == fiche.ETAT_CONFIRMEE %}
+          <input type="submit" name = "fonction" value="Éditer">
+        {% endif %}
+      </form>
+      {% endblock %}
 </section>

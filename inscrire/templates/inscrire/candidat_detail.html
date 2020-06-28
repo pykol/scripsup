@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block contenu %}
-<h2>Dossier d'inscription pour {{ object }}</h2>
+<h2>Dossier d'inscription pour {{ candidat }}</h2>
 
 <p><a href="{% url 'candidat_dossier' object.pk %}">Version imprimable du
   dossier</a></p>
@@ -25,5 +25,17 @@
   </ul>
   {% include "personne.html" with personne=candidat %}
 </section>
+
+  {% if candidat.toutes_fiches_valides %}
+  <p>Toutes les fiches du candidat sont confirmées.</p>
+    <form method="post" action="">
+      {% csrf_token %}
+      <input type="submit" name="fonction" Value = "Valider toutes les fiches">
+    </form>
+  {% endif %}
+
+{% for fiche in fiches %}
+    {% include fiche.template with fiche=fiche.fiche fiche_form=fiche.form voeu=fiche.fiche.voeu formation=fiche.fiche.voeu.formation %}
+{% endfor %}
 
 {% endblock %}

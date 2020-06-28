@@ -102,8 +102,16 @@ class Etablissement(models.Model):
 
 	@cached_property
 	def fiches_a_valider(self):
+		"""liste des types de fiches à valider par les candidats"""
 		from .fiches import all_fiche_validation_candidat
 		return [fiche for fiche in all_fiche_validation_candidat if ContentType.objects.get_for_model(fiche) in self.fiches.all()]
+
+	@cached_property
+	def fiches_a_valider_toutes(self):
+		"""liste des types de fiches à valider par les candidats ou l"établissement"""
+		from .fiches import all_fiche
+		return [fiche for fiche in all_fiche if ContentType.objects.get_for_model(fiche) in self.fiches.all()]
+
 
 
 class Formation(models.Model):
@@ -160,12 +168,20 @@ class Formation(models.Model):
 
 	@cached_property
 	def fiches_incompletes(self):
-		"""Queryset des fiches que le candidat
-		doit compléter et non complètes"""
+		"""Queryset des fiches de l'établissement que les candidats
+		doivent compléter et non complètes"""
 		from .fiches import Fiche
 		return Fiche.objects.filter(reduce(or_,
 			[models.Q(**{"{}__etat".format(fiche._meta.model_name):Fiche.ETAT_EDITION})
 				for fiche in self.etablissement.fiches_a_valider]))
+
+	@property
+	def fiches_incompletes_toutes(self):
+		"""Queryset des fiches de l'établissement non complètes"""
+		from .fiches import Fiche
+		return Fiche.objects.filter(reduce(or_,
+			[models.Q(**{"{}__etat".format(fiche._meta.model_name):Fiche.ETAT_EDITION})
+				for fiche in self.etablissement.fiches_a_valider_toutes]))
 
 	def candidats_incomplets(self):
 		"""
