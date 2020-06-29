@@ -418,7 +418,7 @@ class FicheBourse(Fiche):
 			verbose_name="nombre d'enfants en lycée ou en collège",
 			default=0)
 	enfants_etablissement = models.PositiveSmallIntegerField(
-			verbose_name="nombre d'enfants dans l'établissement",
+			verbose_name="nombre d'enfants dans l'établissement (y compris l'étudiant)",
 			default=1)
 
 	def _attribution_bourse_upload_to(instance, filename):
