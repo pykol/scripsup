@@ -171,8 +171,8 @@ class ParcoursupCandidat(ParcoursupPersonne):
 			'code': donnees['codeCandidat'],
 			'ine': donnees['ine'],
 			'adresse': kls.formate_adresse(donnees),
-			'telephone_fixe': donnees['telfixe'],
-			'telephone_mobile': donnees['telmobile'],
+			'telephone_fixe': donnees.get('telfixe', ''),
+			'telephone_mobile': donnees.get('telmobile',''),
 			'sexe': ParcoursupCandidat.GENRE_HOMME if donnees['sexe'] == 'M'
 				else ParcoursupCandidat.GENRE_FEMME,
 			'commune_naissance': donnees.get('codeCommuneNaissance'),
