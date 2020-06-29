@@ -169,7 +169,7 @@ class ParcoursupCandidat(ParcoursupPersonne):
 			'email': donnees['mail'],
 			'date_naissance': parse_french_date(donnees['dateNaissance']),
 			'code': donnees['codeCandidat'],
-			'ine': donnees['ine'],
+			'ine': donnees.get('ine',''),
 			'adresse': kls.formate_adresse(donnees),
 			'telephone_fixe': donnees.get('telfixe', ''),
 			'telephone_mobile': donnees.get('telmobile',''),
