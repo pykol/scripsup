@@ -11,6 +11,7 @@
         <th>Dossier complet</th>
         <th>Date modification</th>
         <th>Date création</th>
+        <th>Mail bienvenue</th>
       </tr>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
         {% if candidat.complet %}<td class="complet">OUI{% else %}<td class="incomplet">NON{% endif %}</td>
       <td>{{candidat.date_modification}}</td>
       <td>{{candidat.date_creation}}</td>
+      <td>{{candidat.email_bienvenue_envoye|yesno:"Oui, Non, Non"}}</td>
     </tr>
     {% endfor %}
     </tbody>
