@@ -21,6 +21,7 @@ Vues gérant les appels de l'API REST de Parcoursup
 """
 
 import json
+import logging
 
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
@@ -35,6 +36,8 @@ from inscrire.models import ParcoursupUser, ParcoursupMessageRecuLog, \
 		HistoriqueVoeu, Commune, Pays
 import inscrire.lib.utils as utils
 from inscrire.lib.parcoursup_rest import ParcoursupRest
+
+logger = logging.getLogger(__name__)
 
 class ParcoursupClientView(View):
 	"""
@@ -132,7 +135,7 @@ class ParcoursupClientView(View):
 		except:
 			return self.request.META['REMOTE_ADDR']
 
-	def post(self, request):
+	def post(self, request, *args, **kwargs):
 		"""
 		Traitement des données issues d'une requête POST provenant de
 		Parcoursup.
@@ -166,7 +169,11 @@ class ParcoursupClientView(View):
 
 		try:
 			response = self.parcoursup(msg_log=msg_log)
-		except:
+		except Exception as e:
+			logger.exception("Erreur de traitement Parcoursup",
+					exc_info=e)
+			msg_log.succes = False
+			msg_log.message = "Ce message a généré une exception chez nous"
 			response = self.json_response(False, msg_log=msg_log)
 
 		msg_log.save()
