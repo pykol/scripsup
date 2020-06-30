@@ -37,7 +37,7 @@ Ce gabarit peut utiliser les paramètres suivants de son contexte :
         {% if fiche.etat == fiche.ETAT_EDITION %}
           <input type="submit" name = "fonction" value="Enregistrer">
         {% endif %}
-        {% if fiche.etat == fiche.ETAT_TERMINEE or fiche == fiche.ETAT_CONFIRMEE %}
+        {% if fiche.etat == fiche.ETAT_TERMINEE or fiche.etat == fiche.ETAT_CONFIRMEE %}
           <input type="submit" name = "fonction" value="Éditer">
         {% endif %}
       </form>
