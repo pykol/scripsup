@@ -123,6 +123,8 @@ class CandidatDetail(AccessPersonnelMixin, CandidatFicheMixin, DetailView):
 		   - Valider met  la fiche dans l'état ETAT_TERMINEE
 		   - Enregistrer enregistre les données du formulaire
 		"""
+		if not request.user.is_authenticated:
+			return self.handle_no_permission() # capturer une connexion interrompue
 		candidat = self.get_object()
 		data = request.POST
 		if data['fonction'] == 'Valider toutes les fiches':

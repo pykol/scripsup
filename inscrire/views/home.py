@@ -60,6 +60,8 @@ class DirectionHomeView(TemplateView):
 
 	def post(self, request, *args, **kwargs):
 		"""Réponse au formulaire de recherche"""
+		if not request.user.is_authenticated:
+			return self.handle_no_permission() # capturer une connexion interrompue
 		a_rechercher = request.POST["a_rechercher"]
 		try:
 			a_rechercher = int(a_rechercher)
