@@ -18,7 +18,8 @@
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.db import models
+from django.shortcuts import redirect, render, reverse
 from django.views.generic import View, TemplateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
 
@@ -56,6 +57,20 @@ class DirectionHomeView(TemplateView):
 			context['candidattest_users'] = ParcoursupUser.objects.filter(
 				etablissement__inscriptions=True).order_by('etablissement__numero_uai')
 		return context
+
+	def post(self, request, *args, **kwargs):
+		"""Réponse au formulaire de recherche"""
+		a_rechercher = request.POST["a_rechercher"]
+		try:
+			a_rechercher = int(a_rechercher)
+			candidats = Candidat.objects.filter(dossier_parcoursup = a_rechercher)
+		except ValueError:
+			candidats = Candidat.objects.filter(models.Q(user__last_name__icontains = a_rechercher)|models.Q(ine=a_rechercher))
+		if candidats.count()==1:
+			return redirect(reverse('candidat_detail', args=[candidats[0].dossier_parcoursup]))
+		context = self.get_context_data(**kwargs)
+		context['candidats_trouves'] = candidats
+		return self.render_to_response(context)
 
 class SecretariatHomeView(TemplateView):
 	pass

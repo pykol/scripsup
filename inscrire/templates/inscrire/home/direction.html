@@ -19,6 +19,24 @@ l'interface synchrone de Parcoursup.{% endif %}</p>
 </section>
 {% endif %}
 
+<section id='recherche-candidat'>
+  <h3>Recherche d'un candidat</h3>
+    <p>Pour accèder directement au dossier d'un candidat,
+      indiquez son numéro pacoursup, son  numéro INE ou (une partie de) son nom.</p>
+    <form method="post" action="">
+      {% csrf_token %}
+      <p><input name="a_rechercher"></input></p>
+      <p><input type="submit" value="Rechercher"></p>
+    </form>
+{% if candidats_trouves %}
+{% for candidat in candidats_trouves %}
+<p><a href="{% url 'candidat_detail' candidat.dossier_parcoursup %}">{{candidat.nom_prenom}}</a></p>
+{% empty %}
+<p>Aucun candidat trouvé</p>
+{% endfor %}
+{% endif %}
+</section>
+
 {% if user.is_staff %}
 <section id='parametres-parcoursup'>
   <h3>Accès à Parcoursup</h3>
