@@ -26,7 +26,6 @@ from django.utils.functional import cached_property
 from .fields import Lettre23Field
 from .personnes import Candidat
 
-
 class ChampExclu(models.Model):
 	"""Champ à exclure"""
 	fiche = models.ForeignKey(ContentType, on_delete = models.CASCADE)
@@ -101,17 +100,68 @@ class Etablissement(models.Model):
 		return "{} {}".format(self.numero_uai, self.nom)
 
 	@cached_property
-	def fiches_a_valider(self):
+	def types_fiches_a_valider_candidats(self):
 		"""liste des types de fiches à valider par les candidats"""
 		from .fiches import all_fiche_validation_candidat
 		return [fiche for fiche in all_fiche_validation_candidat if ContentType.objects.get_for_model(fiche) in self.fiches.all()]
 
 	@cached_property
-	def fiches_a_valider_toutes(self):
+	def fiches_a_valider_candidats(self):
+		"""listes des fiches à valider par les candidats"""
+		from .fiches import Fiche, all_fiche
+		fiches = Fiche.objects.all()
+		for type_fiche in all_fiche:
+			if not type_fiche in self.types_fiches_a_valider_candidats:
+				fiches = fiches.not_instance_of(type_fiche)
+		return fiches
+
+	@cached_property
+	def types_fiches_a_valider_lycee(self):
 		"""liste des types de fiches à valider par les candidats ou l"établissement"""
 		from .fiches import all_fiche
 		return [fiche for fiche in all_fiche if ContentType.objects.get_for_model(fiche) in self.fiches.all()]
 
+
+	@cached_property
+	def fiches_a_valider_lycee(self):
+		"""listes des fiches à valider par les candidats"""
+		from .fiches import Fiche, all_fiche
+		fiches = Fiche.objects.all()
+		for type_fiche in all_fiche:
+			if not type_fiche in self.types_fiches_a_valider_lycee:
+				fiches = fiches.not_instance_of(type_fiche)
+		return fiches
+
+	@cached_property
+	def fiches_edition_candidats(self):
+		"""Queryset des fiches de l'établissement que les candidats
+		doivent compléter et non complètes"""
+		from .fiches import Fiche
+		return self.fiches_a_valider_candidats.filter(reduce(or_,
+			[models.Q(**{"{}__etat".format(type_fiche._meta.model_name):Fiche.ETAT_EDITION})
+				for type_fiche in self.types_fiches_a_valider_candidats]))
+
+	@cached_property
+	def fiches_edition_lycee(self):
+		"""Queryset des fiches non complètes"""
+		return self.fiches_a_valider_lycee.filter(reduce(or_,
+			[models.Q(**{"{}__etat".format(type_fiche._meta.model_name):Fiche.ETAT_EDITION})
+				for type_fiche in self.types_fiches_a_valider_lycee]))
+
+	@cached_property
+	def fiches_terminees_lycee(self):
+		"""Queryset des fiches terminées"""
+		return self.fiches_a_valider_lycee.filter(reduce(or_,
+			[models.Q(**{"{}__etat".format(fiche._meta.model_name):Fiche.ETAT_TERMINEE})
+				for fiche in self.types_fiches_a_valider_lycee]))
+
+	@cached_property
+	def fiches_non_terminees_lycee(self):
+		"""Queryset des fiches non terminées"""
+		from .fiches import Fiche
+		return self.fiches_a_valider_lycee.exclude(reduce(or_,
+			[models.Q(**{"{}__etat".format(fiche._meta.model_name):Fiche.ETAT_TERMINEE})
+				for fiche in self.types_fiches_a_valider_lycee]))
 
 
 class Formation(models.Model):
@@ -167,34 +217,21 @@ class Formation(models.Model):
 				voeu__etat__in=(Voeu.ETAT_ACCEPTE_AUTRES,
 					Voeu.ETAT_ACCEPTE_DEFINITIF))
 
-	@cached_property
-	def fiches_incompletes(self):
-		"""Queryset des fiches de l'établissement que les candidats
-		doivent compléter et non complètes"""
-		from .fiches import Fiche
-		return Fiche.objects.filter(reduce(or_,
-			[models.Q(**{"{}__etat".format(fiche._meta.model_name):Fiche.ETAT_EDITION})
-				for fiche in self.etablissement.fiches_a_valider]))
+	def candidats_etat_edition(self):
+		"""Candidats dont au moins une fiche à valider
+		par leurs soins est en etat édition"""
+		return self.candidats().filter(fiche__in=self.etablissement.fiches_edition_candidats).distinct()
 
-	@property
-	def fiches_incompletes_toutes(self):
-		"""Queryset des fiches de l'établissement non complètes"""
-		from .fiches import Fiche
-		return Fiche.objects.filter(reduce(or_,
-			[models.Q(**{"{}__etat".format(fiche._meta.model_name):Fiche.ETAT_EDITION})
-				for fiche in self.etablissement.fiches_a_valider_toutes]))
+	def candidats_etat_complet(self):
+		"""Candidats dont
+		- aucune fiche qu'il doit valider n'est en etat édition
+		- au moins une fiche (editable par le candidat ou non) n'est pas terminée."""
+		return self.candidats().exclude(fiche__in=self.etablissement.fiches_edition_candidats).filter(
+			fiche__in=self.etablissement.fiches_non_terminees_lycee).distinct()
 
-	def candidats_incomplets(self):
-		"""
-		Liste des candidats dont le dossier n'est pas encore complet
-		"""
-		return self.candidats().filter(fiche__in=self.fiches_incompletes).distinct()
-
-	def candidats_complets(self):
-		"""
-		Liste des candidats dont le dossier est complet
-		"""
-		return self.candidats().exclude(fiche__in = self.fiches_incompletes).distinct()
+	def candidats_etat_termine(self):
+		"""Candidats dont toutes les fiches sont dans l'état terminé"""
+		return self.candidats().exclude(models.Q(fiche__in=self.etablissement.fiches_non_terminees_lycee)).distinct()
 
 class MefMatiere(models.Model):
 	"""

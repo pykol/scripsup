@@ -42,11 +42,19 @@ class FormationDetailView(AccessDirectionMixin, DetailView):
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		candidats_complets = self.object.candidats_complets().annotate(
-			complet = Value(True, output_field = models.BooleanField()))
-		candidats_incomplets = self.object.candidats_incomplets().annotate(
-			complet = Value(False, output_field = models.BooleanField()))
-		context["candidat_list"] = candidats_complets.union(candidats_incomplets).order_by('last_name', 'first_name')
+		candidats_etat_edition = self.object.candidats_etat_edition().annotate(
+			etat_dossier=Value("Edition", output_field=models.CharField()))
+		candidats_etat_complet = self.object.candidats_etat_complet().annotate(
+			etat_dossier=Value("Complet", output_field=models.CharField()))
+		candidat_etat_termine = self.object.candidats_etat_termine().annotate(
+			etat_dossier=Value("Termine", output_field=models.CharField()))
+		context["candidat_list"] = candidats_etat_edition.union(candidats_etat_complet, candidat_etat_termine).order_by('last_name', 'first_name')
+
+		# candidats_complets = self.object.candidats_complets().annotate(
+		# 	complet = Value(True, output_field = models.BooleanField()))
+		# candidats_incomplets = self.object.candidats_incomplets().annotate(
+		# 	complet = Value(False, output_field = models.BooleanField()))
+		# context["candidat_list"] = candidats_complets.union(candidats_incomplets).order_by('last_name', 'first_name')
 		context['formation_form'] = FormationForm(prefix='formation',
 				instance=self.object)
 		context['option_formset'] = OptionActiverFormset(prefix='options',

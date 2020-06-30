@@ -8,7 +8,7 @@
     <thead>
       <tr>
         <th>Candidat</th>
-        <th>Dossier complet</th>
+        <th>Etat Dossier</th>
         <th>Date modification</th>
         <th>Date création</th>
         <th>Mail bienvenue</th>
@@ -17,12 +17,12 @@
     <tbody>
       {% for candidat in candidat_list %}
       <tr>
-        <td><a href="{% url 'candidat_detail' candidat.pk %}">{{ candidat }}</a></td>
-        {% if candidat.complet %}<td class="complet">OUI{% else %}<td class="incomplet">NON{% endif %}</td>
-      <td>{{candidat.date_modification}}</td>
-      <td>{{candidat.date_creation}}</td>
-      <td>{{candidat.email_bienvenue_envoye|yesno:"Oui, Non, Non"}}</td>
-    </tr>
+        <td><a href="{% url 'candidat_detail' candidat.pk %}">{{ candidat.nom_prenom }}</a></td>
+        <td>{{candidat.etat_dossier}}</td>
+        <td>{{candidat.date_modification}}</td>
+        <td>{{candidat.date_creation}}</td>
+        <td>{{candidat.email_bienvenue_envoye|yesno:"Oui, Non, Non"}}</td>
+      </tr>
     {% endfor %}
     </tbody>
   </table>

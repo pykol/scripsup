@@ -4,12 +4,13 @@
     <tr>
       <th rowspan="2">Nom</th>
       <th rowspan="2">Code Parcoursup</th>
-      <th colspan="3">Candidats</th>
+      <th colspan="4">Candidats</th>
     </tr>
     <tr>
       <th>Total</th>
-      <th>Complets</th>
-      <th>Incomplets</th>
+      <th>Edition</th>
+      <th>Complets<//th>
+      <th>Terminés</th>
     </tr>
   </thead>
   <tbody>
@@ -18,8 +19,9 @@
       <td><a href="{% url 'formation_detail' formation.slug %}">{{ formation.nom }}</a></td>
       <td>{{ formation.code_parcoursup|default:"" }}</td>
       <td>{{ formation.candidats|length }}</td>
-      <td>{{ formation.candidats_complets|length }}</td>
-      <td>{{ formation.candidats_incomplets|length }}</td>
+      <td>{{formation.candidats_etat_edition|length}}</td>
+      <td>{{formation.candidats_etat_complet|length}}</td>
+      <td>{{formation.candidats_etat_termine|length}}</td>
     </tr>
   {% endfor %}
   </tbody>

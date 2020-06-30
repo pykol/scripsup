@@ -104,6 +104,9 @@ class Personne(models.Model):
 	def __str__(self):
 		return "{} {}".format(self.first_name, self.last_name)
 
+	def nom_prenom(self):
+		return "{} {}".format(self.last_name, self.first_name)
+
 class CandidatManager(models.Manager):
 	def bienvenue(self, first_name, last_name, email,
 			dossier_parcoursup, **kwargs):
