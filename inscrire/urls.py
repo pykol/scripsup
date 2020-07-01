@@ -94,6 +94,7 @@ urlpatterns = [
 		name='candidat_dossier'),
 	path('candidat/<int:pk>/miseajour/', views.candidats.CandidatUpdate.as_view(),
 		name='candidat_update'),
+	path('candidat/<int:pk>/photo_inexploitable/', views.candidats.PhotoInexploitable.as_view(), name="photo_inexploitable"),
 	path('responsablelegal/<int:pk>/', views.candidats.ResponsableLegal.as_view(),
 		name='responsablelegal-detail'),
 	path('fiche/<int:pk>/valider/',
