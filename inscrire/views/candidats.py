@@ -20,13 +20,16 @@ from collections import namedtuple
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
+from django.contrib import messages
 from django.views.generic import TemplateView, DetailView, UpdateView, \
 		View
 from django.utils.decorators import method_decorator
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.template.loader import select_template
+from django.template.loader import select_template, render_to_string
 from django.contrib.contenttypes.models import ContentType
+from django.views.generic.detail import SingleObjectMixin
+from django.core.mail import send_mail
 
 from inscrire.models import ResponsableLegal, Candidat, ParcoursupUser
 from inscrire.models.fiches import Fiche, all_fiche
@@ -132,7 +135,11 @@ class CandidatDetail(AccessPersonnelMixin, CandidatFicheMixin, DetailView):
 				polymorphic_ctype__in = candidat.voeu_actuel.formation.etablissement.fiches.all()).update(etat=Fiche.ETAT_TERMINEE)
 			return redirect(reverse('candidat_detail',
 				args=[candidat.dossier_parcoursup]))
+
+		if data['fonction'] == 'Photo inexploitable':
+			return render(request, 'inscrire/photo_inexploitable_confirm.html', {'candidat': candidat})
 		fiche = Fiche.objects.get(pk=int(data['fiche']))
+
 		if data['fonction'] == 'Valider':
 			fiche.etat = fiche.ETAT_TERMINEE
 			fiche.save()
@@ -189,3 +196,39 @@ class ParcoursupSynchroManuelle(AccessGestionnaireMixin, View):
 				etablissement__inscriptions=True):
 			psup_user.get_candidats_admis()
 		return redirect('home')
+
+class PhotoInexploitable(AccessGestionnaireMixin, View):
+	def post(self, request, *args, **kwargs):
+		candidat = Candidat.objects.get(pk = kwargs['pk'])
+		fiche_identite = candidat.get_fiche('ficheidentite')
+		fiche_identite.photo = None
+		fiche_identite.etat=fiche_identite.ETAT_EDITION
+		fiche_identite.save()
+		message = "Photographie supprimée"
+		voeu_actuel = candidat.voeu_actuel
+		render_context = {
+				'candidat': candidat,
+				'etablissement': voeu_actuel.formation.etablissement,
+				'voeu': voeu_actuel,
+				}
+		ok=send_mail(
+				render_to_string('inscrire/email_photographie_inexploitable_subject.txt',
+					context=render_context).strip(),
+				render_to_string('inscrire/email_photographie_inexploitable_message.txt',
+					context=render_context).strip(),
+				"{email}".format(
+					email=voeu_actuel.formation.etablissement.email_technique),
+				("{candidat_prenom} {candidat_nom} <{email}>".format(
+					candidat_prenom=str(candidat.user.first_name),
+					candidat_nom=str(candidat.user.last_name),
+					email=str(candidat.user.email)),),
+				html_message=render_to_string('inscrire/email_photographie_inexploitable_message.html',
+					context=render_context).strip()
+			)
+		if ok:
+			message += " et mail envoyé."
+			messages.success(request, message)
+		else:
+			message += " mais le mail n'a pas pu être envoyé. Contactez le candidat."
+			messages.error(request, message)
+		return redirect(reverse('candidat_detail', args=[candidat.dossier_parcoursup]))

@@ -10,6 +10,15 @@
   {% endblock %}
 </head>
 <body>
+  {% block messages %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+  {% endblock %}
   <header role="banner">
     <h1><a href="{% url 'home' %}">Inscription <span class="subtitle">en
           CPGE</span></a></h1>

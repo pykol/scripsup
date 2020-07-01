@@ -26,6 +26,18 @@
   {% include "personne.html" with personne=candidat %}
 </section>
 
+  {% if candidat.photo %}
+  <p>
+    Si vous cliquez sur ce bouton, la photo est supprimée et un mail
+    est envoyé au candidat lui indiquant que sa photo est inexploitable et doit être
+    remplacée:
+    <form method="post" action="">
+      {% csrf_token %}
+      <input type = "submit" name="fonction" Value= "Photo inexploitable">
+    </form>
+  </p>
+  {% endif %}
+
   {% if candidat.toutes_fiches_valides %}
   <p>Toutes les fiches du candidat sont confirmées.</p>
     <form method="post" action="">
