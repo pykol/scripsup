@@ -25,7 +25,9 @@ from django.urls import reverse
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
+from django.contrib.contenttypes.models import ContentType
 from django.utils import timezone
+from django.utils.functional import cached_property
 
 User = get_user_model()
 
@@ -248,6 +250,24 @@ class Candidat(Personne):
 			date = timezone.now()
 		CandidatActionLog(candidat=self, message=message,
 				date=date).save()
+
+	def get_fiche(self, model):
+		"""Renvoie la fiche model (ex: 'ficheidentite') du candidat
+		si elle est définie"""
+		from .fiches import Fiche
+		model_type = ContentType.objects.get(model = model)
+		try:
+			return model_type.get_object_for_this_type(candidat=self)
+		except model_type.model_class().DoesNotExist:
+			return None
+
+	@cached_property
+	def photo(self):
+		"""renvoie la photo si elle a été enregistrée"""
+		fiche_identite = self.get_fiche('ficheidentite')
+		if bool(fiche_identite.photo):
+			return fiche_identite.photo
+		return None
 
 class ResponsableLegal(Personne):
 	"""
