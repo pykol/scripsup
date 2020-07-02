@@ -30,7 +30,7 @@ class FicheValiderView(SingleObjectMixin, UserPassesTestMixin, View):
 		La validation d'une fiche n'est permise que par un gestionnaire
 		ou par le candidat lui-même.
 		"""
-		if not self.user.is_authenticated:
+		if not self.request.user.is_authenticated:
 			return False
 		if self.request.user.est_gestionnaire():
 			return True
