@@ -2,6 +2,7 @@
 
 {% block contenu %}
 <h2>Dossier d'inscription pour {{ candidat }}</h2>
+<h3><a href="{% url 'formation_detail' candidat.voeu_actuel.formation.slug %}" >{{ candidat.voeu_actuel.formation}}</a></h3>
 
 <p><a href="{% url 'candidat_dossier' object.pk %}">Version imprimable du
   dossier</a></p>

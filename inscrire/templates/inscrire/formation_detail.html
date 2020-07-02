@@ -23,7 +23,7 @@
         <td>{{candidat.date_modification}}</td>
         <td>{{candidat.date_creation}}</td>
         <td>{{candidat.email_bienvenue_envoye|yesno:"Oui, Non, Non"}}</td>
-        <td><img id='photo-candidat' src="{% if candidat.photo %} {{ candidat.photo.url }}{% endif %}" height="45" width="35" alt="photo absente"></td>
+        <td><a href="{{candidat.photo.url}}"><img id='photo-candidat' src="{% if candidat.photo %} {{ candidat.photo.url }}{% endif %}" height="45" width="35" alt="photo absente"></a></td>
       </tr>
     {% endfor %}
     </tbody>
