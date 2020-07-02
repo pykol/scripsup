@@ -25,14 +25,16 @@ class AccessTechniqueMixin(UserPassesTestMixin):
 	Mixin qui donne accès à des bouts techniques de l'interface
 	"""
 	def test_func(self):
-		return self.request.user.is_staff or self.request.user.is_superuser
+		user = self.request.user
+		return user.is_authenticated and (self.request.user.is_staff or self.request.user.is_superuser)
 
 class AccessDirectionMixin(UserPassesTestMixin):
 	"""
 	Mixin qui filtre l'accès à une vue en le réservant à la direction.
 	"""
 	def test_func(self):
-		return self.request.user.role == InscrireUser.ROLE_DIRECTION
+		user = self.request.user
+		return user.is_authenticated and user.role == InscrireUser.ROLE_DIRECTION
 
 class AccessGestionnaireMixin(UserPassesTestMixin):
 	"""
@@ -40,7 +42,8 @@ class AccessGestionnaireMixin(UserPassesTestMixin):
 	gestionnaires du lycée.
 	"""
 	def test_func(self):
-		return self.request.user.est_gestionnaire()
+		user = self.request.user
+		return user.is_authenticated and user.est_gestionnaire()
 
 class AccessPersonnelMixin(UserPassesTestMixin):
 	"""
@@ -48,5 +51,6 @@ class AccessPersonnelMixin(UserPassesTestMixin):
 	personnels du lycée.
 	"""
 	def test_func(self):
-		return self.request.user.est_gestionnaire() or \
-				self.request.user.role == InscrireUser.ROLE_PROFESSEUR
+		user = self.request.user
+		return user.is_authenticated and (user.est_gestionnaire() or \
+				user.role == InscrireUser.ROLE_PROFESSEUR)

@@ -30,6 +30,8 @@ class FicheValiderView(SingleObjectMixin, UserPassesTestMixin, View):
 		La validation d'une fiche n'est permise que par un gestionnaire
 		ou par le candidat lui-même.
 		"""
+		if not self.user.is_authenticated:
+			return False
 		if self.request.user.est_gestionnaire():
 			return True
 		return self.get_object().candidat.user == self.request.user
@@ -53,7 +55,7 @@ class FicheTraiterView(SingleObjectMixin, UserPassesTestMixin, View):
 		"""
 		La validation d'une fiche n'est permise que par un gestionnaire.
 		"""
-		return self.request.user.est_gestionnaire()
+		return self.request.is_authenticated and self.request.user.est_gestionnaire()
 
 	def post(self, request, *args, **kwargs):
 		self.object = self.get_object()
