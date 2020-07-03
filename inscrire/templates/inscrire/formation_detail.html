@@ -7,21 +7,21 @@
   <table>
     <thead>
       <tr>
-        <th>Candidat</th>
-        <th>Etat Dossier</th>
-        <th>Date modification</th>
-        <th>Date création</th>
+        <th>Candidat <span id="nom_croissant" style="cursor: pointer;">&#9650;</span><span id="nom_decroissant" style="cursor: pointer;">&#9660;</span></th>
+        <th>Etat Dossier <span id="etat_croissant" style="cursor: pointer;">&#9650;</span><span id="etat_decroissant" style="cursor: pointer;">&#9660;</span></th>
+        <th>Date modification <span id="date_modification_croissant" style="cursor: pointer;">&#9650;</span><span id="date_modification_decroissant" style="cursor: pointer;">&#9660;</span></th>
+        <th>Date création <span id="date_creation_croissant" style="cursor: pointer;">&#9650;</span><span id="creation_decroissant" style="cursor: pointer;">&#9660;</span></th>
         <th>Mail bienvenue</th>
         <th>Photo</th>
       </tr>
     </thead>
     <tbody>
       {% for candidat in candidat_list %}
-      <tr>
-        <td><a href="{% url 'candidat_detail' candidat.pk %}">{{ candidat.nom_prenom }}</a></td>
-        <td>{{candidat.etat_dossier}}</td>
-        <td>{{candidat.date_modification}}</td>
-        <td>{{candidat.date_creation}}</td>
+      <tr id="tr_{{forloop.counter}}" numero={{forloop.counter}}>
+        <td class="nom"><a href="{% url 'candidat_detail' candidat.pk %}">{{ candidat.nom_prenom }}</a></td>
+        <td class="etat">{{candidat.etat_dossier}}</td>
+        <td class="date_modification" date="{{candidat.date_modification|date:"ymjHis"}}">{{candidat.date_modification}}</td>
+        <td class="date_creation"  date="{{candidat.date_creation|date:"ymjHis"}}">{{candidat.date_creation}}</td>
         <td>{{candidat.email_bienvenue_envoye|yesno:"Oui, Non, Non"}}</td>
         <td><a href="{{candidat.photo.url}}"><img id='photo-candidat' src="{% if candidat.photo %} {{ candidat.photo.url }}{% endif %}" height="45" width="35" alt="photo absente"></a></td>
       </tr>
@@ -65,4 +65,91 @@
   </form>
 </section>
 {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function(){
+  function swap(i){
+    tr1 = $("#tr_"+i.toString()).detach();
+    tr2 = $("#tr_"+(i+1).toString());
+    tr2.after(tr1);
+    tr2.attr("numero", i);
+    tr2.attr("id", "tr_"+i.toString());
+    tr1.attr("numero", i+1);
+    tr1.attr("id", "tr_"+(i+1).toString())
+  };
+
+  var nom = function(i){
+  return $("#tr_"+i.toString()).children(".nom").first().text()
+  };
+
+  var etat = function(i){
+  return $("#tr_"+i.toString()).children(".etat").first().text()
+  };
+
+  var date_modification = function(i){
+  return $("#tr_"+i.toString()).children(".date_modification").first().attr("date")
+  };
+
+  var date_creation = function(i){
+  return $("#tr_"+i.toString()).children(".date_creation").first().attr("date")
+  };
+
+  var tri_bulle = function(fonction, sens){
+  max = {{candidat_list.count}};
+  if (sens == "croissant"){
+    for (i=max; i > 1; i--){
+      for (j=1; j < i; j++){
+        if (fonction(j)>fonction(j+1)){
+          swap(j);
+        };
+      };
+    };
+  } else {
+    for (i=max; i > 1; i--){
+      for (j=1; j < i; j++){
+        if (fonction(j)<fonction(j+1)){
+          swap(j);
+        };
+      };
+    };
+  };
+};
+
+$("#nom_croissant").click(function(){
+  tri_bulle(nom, "croissant");
+});
+
+$("#nom_decroissant").click(function(){
+  tri_bulle(nom, "decroissant");
+});
+
+$("#etat_croissant").click(function(){
+  tri_bulle(etat, "croissant");
+});
+
+$("#etat_decroissant").click(function(){
+  tri_bulle(etat, "decroissant");
+});
+
+$("#date_modification_croissant").click(function(){
+  tri_bulle(date_modification, "croissant");
+});
+
+$("#date_modification_decroissant").click(function(){
+  tri_bulle(date_modification, "decroissant");
+});
+
+$("#date_creation_croissant").click(function(){
+  tri_bulle(date_creation, "croissant");
+});
+
+$("#date_creation_decroissant").click(function(){
+  tri_bulle(date_creation, "decroissant");
+});
+
+});
+
+</script>
 {% endblock %}
