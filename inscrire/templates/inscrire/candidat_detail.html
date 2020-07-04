@@ -2,7 +2,7 @@
 
 {% block contenu %}
 <h2>Dossier d'inscription pour {{ candidat }}</h2>
-<h3><a href="{% url 'formation_detail' candidat.voeu_actuel.formation.slug %}" >{{ candidat.voeu_actuel.formation}}</a></h3>
+<h3><a href="{% url 'formation_detail' candidat.voeu_actuel.formation.slug %}" >{{ candidat.voeu_actuel.formation}} {% if candidat.voeu_actuel.internat %}avec{% else %}sans{% endif %} internat</a></h3>
 
 <p><a href="{% url 'candidat_dossier' object.pk %}">Version imprimable du
   dossier</a></p>
@@ -13,6 +13,7 @@
   Parcoursup du candidat.</p>
   <ul>
     <li>Numéro de dossier Parcoursup : {{ object.dossier_parcoursup }}</li>
+    <li>Établissement d'origine : {{etablissement_origine}}</li>
     <li>Email : <a href="mailto:{{ object.user.email }}">{{ object.user.email }}</a></li>
     <li><abbr title="Identifiant national élève">INE</abbr> : {{object.ine|default_if_none:"Non renseigné"}}</li>
     <li>Date de naissance : {{ object.date_naissance }}</li>

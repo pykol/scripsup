@@ -114,6 +114,7 @@ class CandidatDetail(AccessPersonnelMixin, CandidatFicheMixin, DetailView):
 		context = super().get_context_data(*args, **kwargs)
 		context["nombre_responsables"] = self.object.responsables.count()
 		context['voeu'] = self.object.voeu_actuel
+		context['etablissement_origine'] = self.get_object().get_fiche('fichescolariteanterieure').etablissement
 		return context
 
 	def post(self, request, *args, **kwargs):
