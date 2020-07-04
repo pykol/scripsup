@@ -245,6 +245,7 @@ class MefMatiere(models.Model):
 	class Meta:
 		verbose_name = "matière MEF"
 		verbose_name_plural = "matières MEF"
+		ordering = ['libelle_edition']
 
 	def __str__(self):
 		return self.libelle_edition
@@ -273,6 +274,7 @@ class MefOption(models.Model):
 	class Meta:
 		verbose_name = "option MEF"
 		verbose_name_plural = "options MEF"
+		ordering = ['rang', 'matiere']
 
 	def __str__(self):
 		if self.modalite == self.MODALITE_OBLIGATOIRE:
