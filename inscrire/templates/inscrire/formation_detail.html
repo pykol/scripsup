@@ -12,6 +12,7 @@
         <th>Date modification <span id="date_modification_croissant" style="cursor: pointer;">&#9650;</span><span id="date_modification_decroissant" style="cursor: pointer;">&#9660;</span></th>
         <th>Date création <span id="date_creation_croissant" style="cursor: pointer;">&#9650;</span><span id="date_creation_decroissant" style="cursor: pointer;">&#9660;</span></th>
         <th>Mail bienvenue</th>
+        <th>Internat <span id="internat_croissant" style="cursor: pointer;">&#9650;</span><span id="internat_decroissant" style="cursor: pointer;">&#9660;</span></th>
         <th>Photo</th>
       </tr>
     </thead>
@@ -23,6 +24,7 @@
         <td class="date_modification" date="{{candidat.date_modification|date:"ymjHis"}}">{{candidat.date_modification}}</td>
         <td class="date_creation"  date="{{candidat.date_creation|date:"ymjHis"}}">{{candidat.date_creation}}</td>
         <td>{{candidat.email_bienvenue_envoye|yesno:"Oui, Non, Non"}}</td>
+        <td class="internat">{{candidat.voeu_actuel.internat|yesno:"OUI, NON, ''"}}</td>
         <td><a href="{{candidat.photo.url}}"><img id='photo-candidat' src="{% if candidat.photo %} {{ candidat.photo.url }}{% endif %}" height="45" width="35" alt="photo absente"></a></td>
       </tr>
     {% endfor %}
@@ -96,6 +98,11 @@ $(document).ready(function(){
   return $("#tr_"+i.toString()).children(".date_creation").first().attr("date")
   };
 
+  var internat = function(i){
+  return $("#tr_"+i.toString()).children(".internat").first().text()
+  };
+
+
   var tri_bulle = function(fonction, sens){
   max = {{candidat_list.count}};
   if (sens == "croissant"){
@@ -147,6 +154,15 @@ $("#date_creation_croissant").click(function(){
 
 $("#date_creation_decroissant").click(function(){
   tri_bulle(date_creation, "decroissant");
+});
+
+
+$("#internat_croissant").click(function(){
+  tri_bulle(internat, "croissant");
+});
+
+$("#internat_decroissant").click(function(){
+  tri_bulle(internat, "decroissant");
 });
 
 });
