@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import logging
+
 from django.db import models
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -30,6 +32,8 @@ from django.utils import timezone
 from django.utils.functional import cached_property
 
 User = get_user_model()
+
+logger=logging.getLogger(__name__)
 
 class Commune(models.Model):
 	"""
@@ -116,19 +120,23 @@ class CandidatManager(models.Manager):
 		Crée un candidat la première fois que Parcoursup nous signale
 		son admission dans une formation.
 		"""
-		candidat_user = User.objects.create_user(
-				email=email,
-				first_name=first_name,
-				last_name=last_name,
-				role=User.ROLE_ETUDIANT)
-		candidat_user.save()
+		try:
+			candidat_user = User.objects.create_user(
+					email=email,
+					first_name=first_name,
+					last_name=last_name,
+					role=User.ROLE_ETUDIANT)
+			candidat_user.save()
 
-		candidat = Candidat(
-				first_name=first_name,
-				last_name=last_name,
-				dossier_parcoursup=dossier_parcoursup,
-				user=candidat_user, **kwargs)
-
+			candidat = Candidat(
+					first_name=first_name,
+					last_name=last_name,
+					dossier_parcoursup=dossier_parcoursup,
+					user=candidat_user, **kwargs)
+		except Exception as e:
+			logger.exception("Erreur à l'enregistrement d'un candidat ",
+				exc_info=e)
+			raise e
 		return candidat
 
 class Candidat(Personne):
