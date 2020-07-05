@@ -137,13 +137,11 @@ class ParcoursupUser(models.Model):
 		voeu, voeu_created = Voeu.objects.get_or_create(
 				candidat=candidat,
 				formation=formation,
-				internat=psup['proposition'].internat,
-				cesure=psup['proposition'].cesure,
-				defaults={'etat': etat_voeu})
-		if voeu.etat != etat_voeu:
+				defaults={'etat': etat_voeu, 'internat': psup['proposition'].internat, 'cesure': psup['proposition'].cesure})
+		if voeu.etat != etat_voeu or voeu.internat != psup['proposition'].internat or voeu.cesure != psup['proposition'].cesure:
 			HistoriqueVoeu(voeu=voeu, etat=etat_voeu,
 					date=timezone.now()).save()
-			voeu.etat = etat_voeu
+			voeu.etat, voeu.internat, voeu.cesure = etat_voeu, psup['proposition'].internat, psup['proposition'].cesure
 			voeu.save()
 
 		# Import des responsables légaux
