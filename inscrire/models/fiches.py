@@ -98,10 +98,16 @@ class FicheManager(PolymorphicManager):
 					fiches_applicables[type(fiche)] = fiche
 
 					# On remet la fiche en mode édition
-					if fiche.etat in (Fiche.ETAT_CONFIRMEE,
-							Fiche.ETAT_ANNULEE):
-						fiche.etat = Fiche.ETAT_EDITION
-						fiche.save()
+					# CORRECTIF : il ne faut pas remettre la fiche en mode édition
+					# car PS est susceptible de renvoyer le même voeu
+					# lorsque qu'on utilise "Relancer" (ce qui est parfois nécessaire
+					# pour quand certain candidats en Oui définitif
+					# ne sont pas "spontanément ajoutés" à l'interface synchrone)
+					# un candidat qui a complété son dossier
+					#if fiche.etat in (Fiche.ETAT_CONFIRMEE,
+					#		Fiche.ETAT_ANNULEE):
+					#	fiche.etat = Fiche.ETAT_EDITION
+					#	fiche.save()
 
 					fiches.append((fiche, False))
 				else:
@@ -503,9 +509,6 @@ class FichePieceJustificative(Fiche):
 	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
 	pieces_recues = models.ManyToManyField(PieceJustificative, blank = True)
 
-	def recyclable(self, voeu):
-		return voeu.formation == self.formation
-
 	def save(self, *args, **kwargs):
 		self.formation = self.candidat.voeu_actuel.formation
 		super().save(*args, **kwargs)
@@ -528,9 +531,6 @@ class FichePieceJustificativeSuivi(Fiche):
 
 	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
 	pieces_recues = models.ManyToManyField(PieceJustificative, blank = True)
-
-	def recyclable(self, voeu):
-		return voeu.formation == self.formation
 
 	def save(self, *args, **kwargs):
 		self.formation = self.candidat.voeu_actuel.formation
