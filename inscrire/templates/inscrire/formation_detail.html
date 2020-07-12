@@ -22,9 +22,9 @@
       <tr id="tr_{{forloop.counter}}" numero={{forloop.counter}}>
         <td class="nom"><a href="{% url 'candidat_detail' candidat.pk %}">{{ candidat.nom_prenom }}</a></td>
         <td class="etat">{{candidat.etat_dossier}}</td>
-        <td class="date_modification" date="{{candidat.date_modification|date:"ymjHis"}}">{{candidat.date_modification}}</td>
-        <td class="date_creation"  date="{{candidat.date_creation|date:"ymjHis"}}">{{candidat.date_creation}}</td>
-        <td class="date_connexion" date="{{candidat.user.last_login|date:"ymjHis"}}">{{candidat.user.last_login}}</td>
+        <td class="date_modification" date="{{candidat.date_modification|date:"ymdHis"}}">{{candidat.date_modification}}</td>
+        <td class="date_creation"  date="{{candidat.date_creation|date:"ymdHis"}}">{{candidat.date_creation}}</td>
+        <td class="date_connexion" date="{{candidat.user.last_login|date:"ymdHis"}}">{{candidat.user.last_login|default_if_none:""}}</td>
         <td>{{candidat.email_bienvenue_envoye|yesno:"Oui, Non, Non"}}</td>
         <td class="internat">{{candidat.voeu_actuel.internat|yesno:"OUI, NON, ''"}}</td>
         <td><a href="{{candidat.photo.url}}"><img id='photo-candidat' src="{% if candidat.photo %} {{ candidat.photo.url }}{% endif %}" height="45" width="35" alt="photo absente"></a></td>
