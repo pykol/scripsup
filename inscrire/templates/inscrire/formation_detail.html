@@ -11,6 +11,7 @@
         <th>Etat Dossier <span id="etat_croissant" style="cursor: pointer;">&#9650;</span><span id="etat_decroissant" style="cursor: pointer;">&#9660;</span></th>
         <th>Date modification <span id="date_modification_croissant" style="cursor: pointer;">&#9650;</span><span id="date_modification_decroissant" style="cursor: pointer;">&#9660;</span></th>
         <th>Date création <span id="date_creation_croissant" style="cursor: pointer;">&#9650;</span><span id="date_creation_decroissant" style="cursor: pointer;">&#9660;</span></th>
+        <th>Dernière connexion <span id="date_connexion_croissant" style="cursor: pointer;">&#9650;</span><span id="date_connexion_decroissant" style="cursor: pointer;">&#9660;</span></th>
         <th>Mail bienvenue</th>
         <th>Internat <span id="internat_croissant" style="cursor: pointer;">&#9650;</span><span id="internat_decroissant" style="cursor: pointer;">&#9660;</span></th>
         <th>Photo</th>
@@ -23,6 +24,7 @@
         <td class="etat">{{candidat.etat_dossier}}</td>
         <td class="date_modification" date="{{candidat.date_modification|date:"ymjHis"}}">{{candidat.date_modification}}</td>
         <td class="date_creation"  date="{{candidat.date_creation|date:"ymjHis"}}">{{candidat.date_creation}}</td>
+        <td class="date_connexion" date="{{candidat.user.last_login|date:"ymjHis"}}">{{candidat.user.last_login}}</td>
         <td>{{candidat.email_bienvenue_envoye|yesno:"Oui, Non, Non"}}</td>
         <td class="internat">{{candidat.voeu_actuel.internat|yesno:"OUI, NON, ''"}}</td>
         <td><a href="{{candidat.photo.url}}"><img id='photo-candidat' src="{% if candidat.photo %} {{ candidat.photo.url }}{% endif %}" height="45" width="35" alt="photo absente"></a></td>
@@ -98,6 +100,10 @@ $(document).ready(function(){
   return $("#tr_"+i.toString()).children(".date_creation").first().attr("date")
   };
 
+  var date_connexion = function(i){
+  return $("#tr_"+i.toString()).children(".date_connexion").first().attr("date")
+  };
+
   var internat = function(i){
   return $("#tr_"+i.toString()).children(".internat").first().text()
   };
@@ -156,6 +162,13 @@ $("#date_creation_decroissant").click(function(){
   tri_bulle(date_creation, "decroissant");
 });
 
+$("#date_connexion_croissant").click(function(){
+  tri_bulle(date_connexion, "croissant");
+});
+
+$("#date_connexion_decroissant").click(function(){
+  tri_bulle(date_connexion, "decroissant");
+});
 
 $("#internat_croissant").click(function(){
   tri_bulle(internat, "croissant");
