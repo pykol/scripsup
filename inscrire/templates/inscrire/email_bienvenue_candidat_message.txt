@@ -31,7 +31,7 @@ encore sur liste d'attente.
 En cas de souci d'ordre technique, vous pouvez contacter le service
 technique à l'adresse {{ etablissement.email_technique }}.
 
-En cas de problème d'ordre pédagogique, vous pouvez vous adresser
+En cas de problème d'ordre pédagogique ou administratif, vous pouvez vous adresser
 à {{ formation.email_defaut }}.
   {% else %}
 En cas de souci, qu'il soit d'ordre technique ou administratif, vous
