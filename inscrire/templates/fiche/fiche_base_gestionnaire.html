@@ -33,6 +33,9 @@ Ce gabarit peut utiliser les paramètres suivants de son contexte :
         {% endif %}
         {% if fiche.etat == fiche.ETAT_EDITION and fiche.valide and not fiche_form.errors %}
           <input type="submit" name = "fonction" value="Valider">
+          {% if user.is_staff %}
+          <input type="submit" name = "fonction" value="Confirmer">
+          {% endif %}
         {% endif %}
         {% if fiche.etat == fiche.ETAT_EDITION %}
           <input type="submit" name = "fonction" value="Enregistrer">

@@ -144,6 +144,9 @@ class CandidatDetail(AccessPersonnelMixin, CandidatFicheMixin, DetailView):
 		if data['fonction'] == 'Valider':
 			fiche.etat = fiche.ETAT_TERMINEE
 			fiche.save()
+		elif data['fonction'] == 'Confirmer':
+			fiche.etat = fiche.ETAT_CONFIRMEE
+			fiche.save()
 		elif data['fonction'] == 'Éditer':
 			fiche.etat = fiche.ETAT_EDITION
 			fiche.save()
