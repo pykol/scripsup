@@ -11,6 +11,11 @@
 </head>
 <body>
   {% block messages %}
+  {% if avertissement_maintenance %}
+  <div class = "avertissement_maintenance">
+    {{avertissement_maintenance}}
+  </div>
+  {% endif %}
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
