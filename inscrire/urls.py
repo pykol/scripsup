@@ -83,6 +83,18 @@ autocomplete_urlpatterns = [
 		name='autocomplete-etablissement'),
 ]
 
+mailing_patterns = [
+	path('',
+		views.mailing.MailingView.as_view(),
+		name="mailing"),
+	path('<int:pk>',
+		views.mailing.MailingView.as_view(),
+		name="mailing"),
+	path('liste',
+		views.mailing.MailingList.as_view(),
+		name='mailing_list'),
+]
+
 urlpatterns = [
 	path('', views.HomeView.as_view(), name='home'),
 	path('accounts/', include(auth_urlpatterns)),
@@ -104,4 +116,5 @@ urlpatterns = [
 		views.fiches.FicheTraiterView.as_view(),
 		name='fiche-traiter'),
 	path('autocomplete/', include(autocomplete_urlpatterns)),
+	path('mailing/', include(mailing_patterns)),
 ]

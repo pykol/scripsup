@@ -100,6 +100,14 @@ class Etablissement(models.Model):
 		return "{} {}".format(self.numero_uai, self.nom)
 
 	@cached_property
+	def candidats(self):
+		from .parcoursup import Voeu
+		return Candidat.objects.filter(
+				voeu__formation__etablissement=self,
+				voeu__etat__in=(Voeu.ETAT_ACCEPTE_AUTRES,
+					Voeu.ETAT_ACCEPTE_DEFINITIF))
+
+	@cached_property
 	def types_fiches_a_valider_candidats(self):
 		"""liste des types de fiches à valider par les candidats"""
 		from .fiches import all_fiche_validation_candidat
@@ -163,6 +171,21 @@ class Etablissement(models.Model):
 			[models.Q(**{"{}__etat".format(fiche._meta.model_name):Fiche.ETAT_TERMINEE})
 				for fiche in self.types_fiches_a_valider_lycee]))
 
+	def candidats_etat_edition(self):
+		"""Candidats dont au moins une fiche à valider
+		par leurs soins est en etat édition"""
+		return self.candidats.filter(fiche__in=self.fiches_edition_candidats).distinct()
+
+	def candidats_etat_complet(self):
+		"""Candidats dont
+		- aucune fiche qu'il doit valider n'est en etat édition
+		- au moins une fiche (editable par le candidat ou non) n'est pas terminée."""
+		return self.candidats.exclude(fiche__in=self.fiches_edition_candidats).filter(
+			fiche__in=self.fiches_non_terminees_lycee).distinct()
+
+	def candidats_etat_termine(self):
+		"""Candidats dont toutes les fiches sont dans l'état terminé"""
+		return self.candidats.exclude(models.Q(fiche__in=self.fiches_non_terminees_lycee)).distinct()
 
 class Formation(models.Model):
 	"""

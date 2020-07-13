@@ -28,3 +28,4 @@ from .fiches import Fiche, FicheIdentite, FicheScolarite, \
 		FicheHebergement, FicheScolariteAnterieure, BulletinScolaire, \
 		FicheBourse, FicheReglement, FicheInternat, FicheCesure, \
 		FichePieceJustificative, FichePieceJustificativeSuivi, EnteteFiche
+from .mailing import Mailing, Envoi

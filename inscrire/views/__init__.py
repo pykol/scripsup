@@ -24,3 +24,4 @@ from . import parametrage
 from . import formation
 from . import autocomplete
 from . import fiches
+from . import mailing

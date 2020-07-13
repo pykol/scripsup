@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block contenu %}
+<h2>Liste Mailing</h2>
+<p>Pour initialiser un nouveau mailing, cliquez ici: <a href="{% url 'mailing' %}">Nouveau mailing</a></p>
+<table>
+  <tr>
+    <th>Sujet</th>
+    <th>De</th>
+    <th>Envoyé à</th>
+  </tr>
+{% for mailing in mailings %}
+  <tr>
+    <td><a href="{% url 'mailing' mailing.pk %}">{{mailing.sujet}}</a></td>
+    <td>{{mailing.de}}</td>
+    <td>{{mailing.envoi_set.all.count}} candidat(s)</td>      
+  </tr>
+{% endfor %}
+</table>
+{% endblock %}

@@ -37,6 +37,12 @@ l'interface synchrone de Parcoursup.{% endif %}</p>
 {% endif %}
 </section>
 
+<section id='mailing'>
+  <h3>Mailing</h3>
+  <p>Pour envoyer un nouveau mailing: <a href="{% url 'mailing' %}">Nouveau mailing</a></p>
+  <p>Liste des mailings: <a href="{% url 'mailing_list' %}">Liste mailings</a></p>
+</section>
+
 {% if user.is_staff %}
 <section id='parametres-parcoursup'>
   <h3>Accès à Parcoursup</h3>
