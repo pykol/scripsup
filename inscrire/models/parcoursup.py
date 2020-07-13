@@ -94,8 +94,10 @@ class ParcoursupUser(models.Model):
 		ParcoursupRest.parse_parcoursup_admission.
 		"""
 		# Création ou mise à jour du candidat
+		creation = True
 		try:
 			candidat = Candidat.objects.get(dossier_parcoursup=psup['candidat'].code)
+			creation = False
 		except Candidat.DoesNotExist:
 			candidat = Candidat.objects.bienvenue(
 					first_name=psup['candidat'].prenom,
@@ -103,16 +105,17 @@ class ParcoursupUser(models.Model):
 					email=psup['candidat'].email,
 					dossier_parcoursup=psup['candidat'].code,
 				)
-		candidat.genre = Candidat.GENRE_HOMME \
-				if psup['candidat'].sexe == ParcoursupPersonne.GENRE_HOMME \
-				else Candidat.GENRE_FEMME
-		candidat.telephone = psup['candidat'].telephone_fixe or ''
-		candidat.telephone_mobile = psup['candidat'].telephone_mobile or ''
-		candidat.adresse = psup['candidat'].adresse
-		candidat.date_naissance = psup['candidat'].date_naissance
-		candidat.commune_naissance = Commune.objects.filter(code_insee=psup['candidat'].commune_naissance).first()
-		candidat.pays_naissance = Pays.objects.filter(code_iso2=psup['candidat'].pays_naissance).first()
-		candidat.nationalite = Pays.objects.filter(code_iso2=psup['candidat'].nationalite).first()
+		if creation: # évite d'écraser des données que le candidat peut avoir modifiées
+			candidat.genre = Candidat.GENRE_HOMME \
+					if psup['candidat'].sexe == ParcoursupPersonne.GENRE_HOMME \
+					else Candidat.GENRE_FEMME
+			candidat.telephone = psup['candidat'].telephone_fixe or ''
+			candidat.telephone_mobile = psup['candidat'].telephone_mobile or ''
+			candidat.adresse = psup['candidat'].adresse
+			candidat.date_naissance = psup['candidat'].date_naissance
+			candidat.commune_naissance = Commune.objects.filter(code_insee=psup['candidat'].commune_naissance).first()
+			candidat.pays_naissance = Pays.objects.filter(code_iso2=psup['candidat'].pays_naissance).first()
+			candidat.nationalite = Pays.objects.filter(code_iso2=psup['candidat'].nationalite).first()
 		candidat.ine = psup['candidat'].ine
 		candidat.bac_date = psup['candidat'].bac_date
 		candidat.bac_serie = psup['candidat'].bac_serie
