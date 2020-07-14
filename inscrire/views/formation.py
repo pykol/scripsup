@@ -47,10 +47,13 @@ class FormationDetailView(AccessDirectionMixin, DetailView):
 			etat_dossier=Value("Edition", output_field=models.CharField()))
 		candidats_etat_complet = self.object.candidats_etat_complet().annotate(
 			etat_dossier=Value("Complet", output_field=models.CharField()))
-		candidat_etat_termine = self.object.candidats_etat_termine().annotate(
+		candidats_etat_termine = self.object.candidats_etat_termine().annotate(
 			etat_dossier=Value("Termine", output_field=models.CharField()))
-		context["candidat_list"] = candidats_etat_edition.union(candidats_etat_complet, candidat_etat_termine).order_by('last_name', 'first_name')
+		candidats_etat_demission = self.object.candidats_etat_demission().annotate(
+			etat_dossier=Value("Démission", output_field=models.CharField()))
 
+		context["candidat_list"] = candidats_etat_edition.union(candidats_etat_complet,
+			candidats_etat_termine, candidats_etat_demission).order_by('last_name', 'first_name')
 		context['formation_form'] = FormationForm(prefix='formation',
 				instance=self.object)
 		context['option_formset'] = OptionActiverFormset(prefix='options',

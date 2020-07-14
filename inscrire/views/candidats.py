@@ -201,6 +201,14 @@ class ParcoursupSynchroManuelle(AccessGestionnaireMixin, View):
 			psup_user.get_candidats_admis()
 		return redirect('home')
 
+class ParcoursupDemissions(AccessGestionnaireMixin, View):
+	def post(self, request, *args, **kwargs):
+		for psup_user in ParcoursupUser.objects.filter(
+				etablissement__inscriptions=True):
+			psup_user.demissions()
+		return redirect('home')
+
+
 class PhotoInexploitable(AccessGestionnaireMixin, View):
 	def post(self, request, *args, **kwargs):
 		candidat = Candidat.objects.get(pk = kwargs['pk'])

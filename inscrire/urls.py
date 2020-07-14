@@ -41,6 +41,9 @@ parametrage_urlpatterns = [
 	path('parcoursup/synchronisation',
 		views.candidats.ParcoursupSynchroManuelle.as_view(),
 		name='parcoursup-synchro'),
+	path('parcoursup/demissions',
+		views.candidats.ParcoursupDemissions.as_view(),
+		name='parcoursup-demissions'),
 ]
 
 rest_parcoursup_urlpatterns = [

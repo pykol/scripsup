@@ -256,6 +256,11 @@ class Formation(models.Model):
 		"""Candidats dont toutes les fiches sont dans l'état terminé"""
 		return self.candidats().exclude(models.Q(fiche__in=self.etablissement.fiches_non_terminees_lycee)).distinct()
 
+	def candidats_etat_demission(self):
+		from .parcoursup import Voeu
+		voeux_demissionnes=Voeu.objects.filter(formation=self, etat=Voeu.ETAT_REFUSE)
+		return Candidat.objects.filter(voeu__in = voeux_demissionnes)
+
 class MefMatiere(models.Model):
 	"""
 	Matière

@@ -217,6 +217,30 @@ class ParcoursupUser(models.Model):
 				candidat.voeu_actuel.formation.code_parcoursup,
 				ParcoursupRest.INSCRIPTION_PRINCIPALE)
 
+	def demissions(self):
+		"""
+		Change en ETAT_REFUSE les voeux en ETAT_ACCEPTE_DEFINITIF qui
+		ne sont plus listés dans ParcourSup.
+		"""
+		voeux = Voeu.objects.filter(formation__etablissement = self.etablissement, etat=Voeu.ETAT_ACCEPTE_DEFINITIF)
+		etats = {voeu: False for voeu in voeux}
+		candidats_ps = self.parcoursup_rest.get_candidats_admis()
+		for candidat_ps in candidats_ps:
+			try:
+				candidat=Candidat.objects.get(dossier_parcoursup=candidat_ps['candidat'].code)
+				formation=Formation.objects.get(etablissement=self.etablissement, code_parcoursup=candidat_ps['proposition'].code_formation)
+				voeu = voeux.get(candidat=candidat, formation=formation)
+				etats[voeu]=True
+			except (Candidat.DoesNotExist, Voeu.DoesNotExist):
+				pass
+		for voeu in etats:
+			if not etats[voeu]:
+				voeu.etat=Voeu.ETAT_REFUSE
+				voeu.save()
+
+
+
+
 	def envoi_candidat_test(self):
 		"""
 		Active les push de Parcoursup en envoyant un candidat de test.
