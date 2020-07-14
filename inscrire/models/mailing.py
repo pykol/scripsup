@@ -4,8 +4,8 @@ from django.core.mail import EmailMessage
 from inscrire.models import Formation, Etablissement, Candidat, ResponsableLegal, Voeu
 
 class Mailing(models.Model):
-    EDITION, COMPLET, TERMINE = 1, 2, 3
-    CHOIX_ETAT_DOSSIER = [(EDITION, "Édition"), (COMPLET, "Complet"), (TERMINE, "Terminé")]
+    EDITION, COMPLET, TERMINE, DEMISSION = 1, 2, 3, 4
+    CHOIX_ETAT_DOSSIER = [(EDITION, "Édition"), (COMPLET, "Complet"), (TERMINE, "Terminé"), (DEMISSION, "Démission")]
 
     brouillon = models.BooleanField(default = True)
     de = models.EmailField()
@@ -44,8 +44,10 @@ class Mailing(models.Model):
                 candidats=formation.candidats_etat_complet()
             elif self.etat_dossier==self.TERMINE:
                 candidats=formation.candidats_etat_termine()
+            elif self.etat_dossier==self.DEMISSION:
+                candidats=formation.candidats_etat_demission()
             else:
-                voeux = Voeu.objects.filter(formation = self.formation)
+                voeux = Voeu.objects.filter(formation = self.formation, etat=Voeu.ETAT_ACCEPTE_DEFINITIF)
                 candidats=Candidat.objects.filter(voeu__in = voeux)
         else:
             etablissement=self.etablissement
@@ -55,8 +57,10 @@ class Mailing(models.Model):
                 candidats=etablissement.candidats_etat_complet()
             elif self.etat_dossier==self.TERMINE:
                 candidats=etablissement.candidats_etat_termine()
+            elif self.etat_dossier==self.DEMISSION:
+                candidats=etablissement.candidats_etat_demission()
             else:
-                voeux = Voeu.objects.filter(formation__etablissement = self.etablissement)
+                voeux = Voeu.objects.filter(formation__etablissement = self.etablissement, etat=Voeu.ETAT_ACCEPTE_DEFINITIF)
                 candidats=Candidat.objects.filter(voeu__in = voeux)
         if self.internat != None:
             voeux = voeux.filter(internat = self.internat)

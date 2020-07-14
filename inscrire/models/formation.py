@@ -187,6 +187,11 @@ class Etablissement(models.Model):
 		"""Candidats dont toutes les fiches sont dans l'état terminé"""
 		return self.candidats.exclude(models.Q(fiche__in=self.fiches_non_terminees_lycee)).distinct()
 
+	def candidats_etat_demission(self):
+		from .parcoursup import Voeu
+		voeux_demissionnes=Voeu.objects.filter(formation__etablissement=self, etat=Voeu.ETAT_REFUSE)
+		return Candidat.objects.filter(voeu__in = voeux_demissionnes)
+
 class Formation(models.Model):
 	"""
 	Description d'une formation dispensée dans l'établissement

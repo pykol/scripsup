@@ -23,5 +23,5 @@ class MailingForm(forms.ModelForm):
         formation =cd['formation']
         if not etablissement and not formation:
             raise forms.ValidationError("Indiquez l'établissement ou la formation")
-        if cd['derniere_connexion_apres'] > cd['derniere_connexion_avant']:
+        if cd['derniere_connexion_apres'] and cd['derniere_connexion_avant'] and cd['derniere_connexion_apres'] > cd['derniere_connexion_avant']:
             raise forms.ValidationError("Vos dates de connexion sont incohérentes")
