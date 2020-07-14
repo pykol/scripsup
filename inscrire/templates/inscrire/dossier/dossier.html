@@ -13,7 +13,7 @@
       <div id='titre'>
         <h1>Classes préparatoires aux grandes écoles<br>Dossier d'inscription</h1>
       </div>
-        <img id='photo-candidat' src="{% if ficheidentite.photo %} {{ ficheidentite.photo.url }}{% endif %}"  alt="photo absente">      
+        <img id='photo-candidat' src="{% if ficheidentite.photo %} {{ ficheidentite.photo.url }}{% endif %}"  alt="photo absente">
     </header>
 
     <section class="fiche" id='ficheidentite'>
@@ -24,12 +24,18 @@
       </p>
 
       <p>
+        <span><em>Parcoursup n°</em> : {{candidat.dossier_parcoursup }} <em>INE</em> : {{candidat.ine}}</span>
+      </p>
+
+
+
+      <p>
         <span><em>Sexe</em> : {{ candidat.get_genre_display }}</span>
       </p>
 
       <p>
-        <span><em>Né le</em> : {{ candidat.date_naissance }}</span>
-        <span><em>À</em> :
+        <span><em>Né{% if candidat.genre == 2 %}e{% endif %} le</em> : {{ candidat.date_naissance }}</span>
+        <span><em>à</em>
           {{ ficheidentite.commune_naissance }}
           {{ ficheidentite.commune_naissance_etranger }}</span>
       </p>
@@ -53,33 +59,74 @@
         <span><em>Adresse postale de l'élève à Grenoble</em> :
           {{ ficheidentite.adresse }}</span>
       </p>
+      <p>
+        <span><em>Établissement d'origine</em> :
+        {{fichescolariteanterieure.etablissement}}</span>
     </section>
 
     <section class="fiche" id='fichescolarite'>
       <h2>Scolarité demandée</h2>
-
       <p>
         <span><em>Classe</em> : {{ voeu.formation }}</span>
       </p>
+      <p>
+        <span><em>Options demandées</em>:
+          <ul>
+          {% for option in fichescolarite.options.all %}
+            <li>{{option}}</li>
+          {% endfor %}
+        </ul>
+      </p>
     </section>
 
+    {% if FicheScolariteAnterieure %}
     <section class="fiche" id='fichescolariteanterieure'>
       <h2>Scolarité pendant l'année précédente</h2>
     </section>
+    {% endif %}
 
-    {% for responsable in candidat.responsables.all %}
     <section class="fiche" class='responsablelegal'>
+      <h2>Responsables légaux</h2>
+      {% for responsable in candidat.responsables.all %}
+      <p>
+        <span><em>{{ responsable.get_lien_display|capfirst }} {% if responsable.get_lien_precision %}({{ responsable.get_lien_precision_display|capfirst }}){% endif %}</em> :
+          <span><em>Nom</em> : {{ responsable.last_name }}</span>
+        <span><em>Prénom</em> : {{ responsable.first_name }}</span>
+      </p>
+      <p>
+        <span><em>Email</em> :  {{ responsable.email }}</span>
+        {% if responsable.telephone %}<span><em>Téléphone</em> :  {{ responsable.telephone }}</span>{% endif %}
+        {% if responsable.telephone_mobile %}<span><em>Téléphone mobile</em> :  {{ responsable.telephone_mobile }}</span>{% endif %}
+      </p>
+      <p>
+        <span><em>Adresse</em> :  {{ responsable.adresse }}</span>
+      </p>
+      <p>
+        <span><em>Profession</em> :  {{ responsable.profession }}</span>
+      </p>
+      <br/>
+      {% endfor %}
     </section>
-    {% endfor %}
 
-    <section class="fiche" id='fratrie'>
+    <section class="fiche" id='complement'>
+      <h2> Informations complémentaires</h2>
+      <p>
+        <span><em>Boursier:</em>  {{fichebourse.boursier|yesno:"Oui, Non, ?"}} {% if fichebourse.boursier %}(<em>échelon</em> {{fichebourse.echelon}}){% endif %}</span>
+      </p>
+      <p>
+        <span><em>Autorise commun. assoc. parents</em> : {{fichebourse.autorisation_parents_eleves|yesno:"Oui, Non, ?"}}  </span>
+      </p>
+      <p>
+        <span><em></em> Internat:  {{ candidat.voeu_actuel.internat|yesno:"Oui, Non, ?" }}</span>
+      </p>
+    </section>
+    <!-- <section class="fiche" id='fratrie'>
     </section>
 
     <section class="fiche" id='fichereglement'>
     </section>
 
     <section class="fiche" id='pieces-a-fournir'>
-      <h2>Pièces à joindre à ce dossier</h2>
-    </section>
+    </section> -->
   </body>
 </html>
