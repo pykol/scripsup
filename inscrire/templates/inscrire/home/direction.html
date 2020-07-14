@@ -43,6 +43,17 @@ l'interface synchrone de Parcoursup.{% endif %}</p>
   <p>Liste des mailings: <a href="{% url 'mailing_list' %}">Liste mailings</a></p>
 </section>
 
+<section id="demissions">
+  <h3>Démissions</h3>
+  <p>Parcoursup n'informe pas automatiquement des démissions. Cliquez
+    ici pour les mettre à jour.
+  </p>
+  <form action="{% url 'parcoursup-demissions' %}" method="post">
+    {% csrf_token %}
+    <p><input type="submit" value="Mise à jour démissions"></p>
+  </form>
+</section>
+
 {% if user.is_staff %}
 <section id='parametres-parcoursup'>
   <h3>Accès à Parcoursup</h3>
