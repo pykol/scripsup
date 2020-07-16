@@ -204,7 +204,7 @@ class Etablissement(models.Model):
 				dict_reponse=ast.literal_eval(str_reponse)
 				if dict_reponse['retour']=="OK":
 					candidat.inscription_administrative_confirmee=True
-					candidat.inscription_administrative_message==dict_reponse['message']
+					candidat.inscription_administrative_message=dict_reponse['message']
 					candidat.save()
 
 
