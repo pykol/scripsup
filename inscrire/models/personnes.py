@@ -182,6 +182,8 @@ class Candidat(Personne):
 	email_bienvenue_envoye = models.BooleanField(
 			verbose_name="message de bienvenue envoyé",
 			default=False)
+	inscription_administrative_confirmee=models.BooleanField(default=False)
+	inscription_administrative_message=models.CharField(max_length=200, default="")
 
 	objects = CandidatManager()
 
@@ -197,6 +199,7 @@ class Candidat(Personne):
 		from .parcoursup import Voeu # Import ici, sinon dépendance circulaire
 		return self.voeu_set.get(etat__in=(Voeu.ETAT_ACCEPTE_AUTRES,
 			Voeu.ETAT_ACCEPTE_DEFINITIF))
+
 
 	@property
 	def toutes_fiches_valides(self):

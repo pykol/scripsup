@@ -15,7 +15,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
+import ast
 from operator import or_
 from functools import reduce
 
@@ -191,6 +191,22 @@ class Etablissement(models.Model):
 		from .parcoursup import Voeu
 		voeux_demissionnes=Voeu.objects.filter(formation__etablissement=self, etat=Voeu.ETAT_REFUSE)
 		return Candidat.objects.filter(voeu__in = voeux_demissionnes)
+
+	def confirme_inscription_administrative(self):
+		"""Confirme à Parcoursup l'inscription administrative des candidats
+		de l'établissement dans l'état terminé"""
+		parcoursupuser = self.parcoursupuser
+		for candidat in self.candidats_etat_termine().filter(
+			inscription_administrative_confirmee=False):
+			reponse=parcoursupuser.set_inscription(candidat)
+			if reponse.status_code==200:
+				str_reponse=reponse.content.decode("UTF-8")
+				dict_reponse=ast.literal_eval(str_reponse)
+				if dict_reponse['retour']=="OK":
+					candidat.inscription_administrative_confirmee=True
+					candidat.inscription_administrative_message==dict_reponse['message']
+					candidat.save()
+
 
 class Formation(models.Model):
 	"""

@@ -50,6 +50,7 @@ rest_parcoursup_urlpatterns = [
 	path('admissionCandidat', views.parcoursup.AdmissionView.as_view()),
 	# Blague de Parcoursup qui ne respectait pas toujours la spec en 2019
 	path('admissionCandidat/admissionCandidat', views.parcoursup.AdmissionView.as_view()),
+	# TODO écrire la vue appelant la fonction etablissement.confirme_inscription_administrative
 ]
 
 auth_urlpatterns = [
