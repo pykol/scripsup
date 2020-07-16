@@ -212,7 +212,7 @@ class ParcoursupUser(models.Model):
 				nom=candidat.last_name,
 				prenom=candidat.first_name,
 				date_naissance=candidat.date_naissance)
-		self.parcoursup_rest.maj_inscription(
+		return self.parcoursup_rest.maj_inscription(
 				psup_candidat,
 				candidat.voeu_actuel.formation.code_parcoursup,
 				ParcoursupRest.INSCRIPTION_PRINCIPALE)
