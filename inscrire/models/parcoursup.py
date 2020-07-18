@@ -17,6 +17,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import logging
+import sleep
 
 from django.utils import timezone
 from django.db import models, transaction
@@ -233,6 +234,7 @@ class ParcoursupUser(models.Model):
 				etats[voeu]=True
 			except (Candidat.DoesNotExist, Voeu.DoesNotExist):
 				pass
+			sleep(0.01) # petite pause pour que PS ne rejete pas un nombre trop grand de connexions en un temps trop court
 		for voeu in etats:
 			if not etats[voeu]:
 				voeu.etat=Voeu.ETAT_REFUSE
