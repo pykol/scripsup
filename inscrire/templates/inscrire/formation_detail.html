@@ -37,6 +37,10 @@
   {% endif %}
 </section>
 
+<section>
+  <p><a href="{% url 'formation_export' formation.slug %}">Export csv</a>
+</section>
+
 {% if user.est_administrateur %}
 <section>
   <h3>Paramétrage de la formation</h3>

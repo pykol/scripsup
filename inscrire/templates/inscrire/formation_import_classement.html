@@ -1,0 +1,11 @@
+<p>Ce formulaire vous permet d'importer le classement d'une formation, en vue
+de le mentionner ultérieurement dans l'export des candidats admis.
+L'import d'un fichier de classement supprimera tout classement pré-éxistant
+pour cette formation.</p>
+<p>Envoyer un ficher csv (séparateur ;) comportant deux colonnes et la ligne d'entêtes
+"Classement;Numéro".</p>
+<form method="post" action="{% url 'formation_import_classement' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{import_classement_form.as_p }}
+  <p><input type="submit" value="Import classement"></p>
+</form>

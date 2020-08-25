@@ -34,3 +34,9 @@ class ImportParcoursupForm(forms.Form):
 					'utf-8'),
 				self.cleaned_data['formation'].etablissement.pk,
 				self.cleaned_data['formation'].code_parcoursup)
+
+class ImportClassementForm(forms.Form):
+	fichier = forms.FileField()
+	formation = forms.ModelChoiceField(
+			queryset=Formation.objects.filter(code_parcoursup__isnull=False
+				).order_by('etablissement', 'pk'))

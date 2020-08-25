@@ -15,6 +15,10 @@ l'interface synchrone de Parcoursup.{% endif %}</p>
 {% if user.is_staff %}
   <h3>Import manuel depuis Parcoursup</h3>
   {% include 'inscrire/formation_import_manuel.html' %}
+
+  <h3>Import classement</h3>
+  {% include 'inscrire/formation_import_classement.html' %}
+
 {% endif %}
 </section>
 {% endif %}

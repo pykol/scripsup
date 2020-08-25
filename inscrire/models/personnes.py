@@ -113,6 +113,10 @@ class Personne(models.Model):
 	def nom_prenom(self):
 		return "{} {}".format(self.last_name, self.first_name)
 
+	def genre_court(self):
+		return "M" if self.genre==self.GENRE_HOMME else "F"
+
+
 class CandidatManager(models.Manager):
 	def bienvenue(self, first_name, last_name, email,
 			dossier_parcoursup, **kwargs):
@@ -200,6 +204,8 @@ class Candidat(Personne):
 		return self.voeu_set.get(etat__in=(Voeu.ETAT_ACCEPTE_AUTRES,
 			Voeu.ETAT_ACCEPTE_DEFINITIF))
 
+	def voeu(self, formation):
+		return self.voeu_set.get(formation=formation)
 
 	@property
 	def toutes_fiches_valides(self):
@@ -279,6 +285,13 @@ class Candidat(Personne):
 		if bool(fiche_identite.photo):
 			return fiche_identite.photo
 		return None
+
+	def bac_mention_court(self):
+		return {self.BAC_MENTION_PASSABLE:"P",
+			self.BAC_MENTION_ASSEZBIEN:"AB",
+			self.BAC_MENTION_BIEN:"B",
+			self.BAC_MENTION_TRESBIEN:"TB"}.get(self.bac_mention)
+		return
 
 class ResponsableLegal(Personne):
 	"""

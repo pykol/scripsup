@@ -369,3 +369,11 @@ class PieceJustificative(models.Model):
 
 	def __str__(self):
 		return self.nom
+
+class Classement(models.Model):
+	"""Mémorise le classement envoyé à Parcoursup en vue de
+	l'inclure dans le fichier final pour faciliter la composition
+	des classes"""
+	formation=models.ForeignKey(Formation, on_delete=models.CASCADE)
+	dossier_parcoursup=models.IntegerField()
+	classement=models.PositiveSmallIntegerField()

@@ -26,7 +26,7 @@ from django.conf import settings
 from inscrire.lib.parcoursup_rest import ParcoursupCandidat, \
 		ParcoursupRest, ParcoursupPersonne, ParcoursupProposition
 from .personnes import Candidat, Pays, Commune, ResponsableLegal
-from .formation import Etablissement, Formation
+from .formation import Etablissement, Formation, Classement
 from .fiches import Fiche
 
 logger = logging.getLogger(__name__)
@@ -305,6 +305,7 @@ class Voeu(EtatVoeu):
 	formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
 	internat = models.BooleanField()
 	cesure = models.BooleanField()
+	_classement = models.PositiveSmallIntegerField(null=True, default=None)
 
 	class Meta:
 		verbose_name = "vœu"
@@ -316,6 +317,18 @@ class Voeu(EtatVoeu):
 
 	def __str__(self):
 		return self.formation.__str__()
+
+	@property
+	def classement(self):
+		if self._classement != None:
+			return self._classement
+		try:
+			classement=Classement.objects.get(formation=self.formation, dossier_parcoursup=self.candidat.dossier_parcoursup).classement
+			self._classement=classement
+			self.save()
+			return classement
+		except Classement.DoesNotExist:
+			return None
 
 class HistoriqueVoeu(EtatVoeu):
 	"""

@@ -67,12 +67,18 @@ formation_urlpatterns = [
 	path('import_parcoursup',
 		views.formation.ImportParcoursupView.as_view(),
 		name='formation_import_parcoursup'),
+	path('import_classement',
+		views.formation.ImportClassementView.as_view(),
+		name='formation_import_classement'),
 	path('<slug:slug>',
 		views.formation.FormationDetailView.as_view(),
 		name='formation_detail'),
 	path('<slug:slug>/update',
 		views.formation.FormationUpdateView.as_view(),
 		name='formation_update'),
+	path('<slug:slug>/export',
+		views.formation.ExportCandidatsAdmisView.as_view(),
+		name='formation_export'),
 ]
 
 autocomplete_urlpatterns = [
