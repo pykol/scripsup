@@ -25,7 +25,7 @@ from django.urls import reverse
 from django.db.models import Value
 from django.db import models
 
-from inscrire.models import Formation, Candidat, Voeu, MefOption, Classement
+from inscrire.models import Formation, Candidat, Voeu, MefOption, Classement, FicheScolarite, Fiche
 from .permissions import AccessDirectionMixin, AccessGestionnaireMixin
 from inscrire.forms.parametrage import OptionActiverFormset, \
 		FormationForm
@@ -191,8 +191,9 @@ class ExportCandidatsAdmisView(AccessDirectionMixin, DetailView):
 					candidat.bac_serie,
 					candidat.bac_mention_court()
 				]
-			fichescolarite=candidat.get_fiche('fichescolarite', etat=FICHE.ETAT_CONFIRMEE)
-			if fichescolarite:
+			fichescolarite=FicheScolarite.objects.filter(candidat=candidat, formation=formation).exclude(etat=Fiche.ETAT_ANNULEE)
+			if fichescolarite.exists():
+				fichescolarite=fichescolarite[0]
 				for r in rangs_obligatoires:
 					try:
 						mefoption=fichescolarite.options.get(formation=formation, rang=r)
