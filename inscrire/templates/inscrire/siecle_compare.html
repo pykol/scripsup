@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block contenu %}
+<h2>Comparaison</h2>
+<section>
+  <h3>Elèves dans SIECLE sans correspondance dans scripsup</h3>
+  <ul>
+    {% for eleve, dic in eleves_sans_candidat.items %}
+      <li>{{eleve}}: {{dic}}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section>
+  <h3>Candidats sans correspondance dans SIECLE</h3>
+  <ul>
+    {% for candidat in candidats_sans_eleve %}
+      <li>{{candidat}}: {{candidat.voeu_actuel}}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section>
+  <h3>Candidats ayant une option dans SIECLE sans correspondance dans scripsup</h3>
+  <ul>
+    {% for candidat in divergences_siecle_scripsup %}
+      <li>{{candidat}}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+{% endblock %}

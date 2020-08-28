@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block contenu %}
+<h3>Comparaison SIECLE</h3>
+<p>Ce formulaire vous permet de comparer certaines données enregistrées ici
+  avec celle enregistrées dans SIECLE.
+  Fournissez au moins l'un des deux fichiers élèves. Les données
+  envoyées serviront à la comparaison mais ne seront pas enregistrées.
+</p>
+<form method="post" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form.as_p }}
+  <p><input type="submit" value="Envoyer"></p>
+</form>
+
+{% endblock %}

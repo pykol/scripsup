@@ -127,4 +127,5 @@ urlpatterns = [
 		name='fiche-traiter'),
 	path('autocomplete/', include(autocomplete_urlpatterns)),
 	path('mailing/', include(mailing_patterns)),
+	path('siecle/compare', views.siecle_compare.CompareView.as_view(), name="siecle_compare"),
 ]

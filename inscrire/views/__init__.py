@@ -25,3 +25,4 @@ from . import formation
 from . import autocomplete
 from . import fiches
 from . import mailing
+from . import siecle_compare
