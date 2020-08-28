@@ -274,7 +274,7 @@ class Candidat(Personne):
 		from .fiches import Fiche
 		model_type = ContentType.objects.get(model = model)
 		try:
-			return model_type.get_object_for_this_type(candidat=self)
+			return model_type.get_object_for_this_type(candidat=self, etat__in=[Fiche.ETAT_EDITION, Fiche.ETAT_CONFIRMEE, Fiche.ETAT_TERMINEE])
 		except model_type.model_class().DoesNotExist:
 			return None
 
